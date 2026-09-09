@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An interactive guide to per-sequence layer dropout in Don't Drop Dropout: shared attention/FFN masks, residual bypasses, scaling, and a decreasing training schedule.">
+  <title>How layer dropout works · Gradient dissent</title>
+  <link rel="stylesheet" href="style.css"><script defer src="math.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#lab">Skip to animation</a>
+<header><a class="brand" href="../">GRADIENT DISSENT <span>/ INTERACTIVE NOTES 01</span></a><nav aria-label="Related reports"><a href="../significance/">The significance</a><a href="https://arxiv.org/pdf/2609.05275v1">Original paper ↗</a></nav></header>
+<main>
+  <section class="intro">
+    <p class="eyebrow"><span class="dot"></span> Inside “Don’t Drop Dropout”</p>
+    <h1>Same network.<br><em>Different paths.</em></h1>
+    <p class="lead">During training, each sequence randomly skips whole transformer blocks. Deeper blocks disappear more often. As training ends, every block comes back.</p>
+    <p class="intro-note">Explore the paper’s preferred recipe below. These are sampled masks and schematic activations, not a trained model or a timing benchmark.</p>
+  </section>
+
+  <section class="lab" id="lab" aria-labelledby="lab-title">
+    <div class="lab-heading"><div><p class="eyebrow">The path explorer</p><h2 id="lab-title">One model. Four sequences. Twelve blocks.</h2></div><span class="live-tag" id="mode-tag">TRAINING</span></div>
+    <div class="workspace">
+      <aside class="controls" aria-label="Animation controls">
+        <fieldset class="modes"><legend>01 / Choose a phase</legend><button data-mode="train" aria-pressed="true">Training <span>Random masks</span></button><button data-mode="dense" aria-pressed="false">Full-depth inference <span>Every block, scale 1</span></button><button data-mode="exit" aria-pressed="false">Early-exit inference <span>A fixed prefix, scale 1</span></button></fieldset>
+        <div id="training-controls">
+          <label for="maximum">Maximum dropout <output id="maximum-value">80%</output></label><input type="range" id="maximum" min="0" max="99" value="80" aria-describedby="maximum-help"><p class="hint" id="maximum-help">The last block’s drop probability at the start of training.</p>
+          <label for="progress">Training progress <output id="progress-value">0%</output></label><input type="range" id="progress" min="0" max="100" value="0">
+          <div class="range-ends"><span>Start</span><span>Finish dense</span></div>
+          <button class="schedule-button" id="schedule" aria-pressed="false">▶ Run training schedule</button>
+        </div>
+        <div id="exit-controls" hidden><label for="retained">Blocks retained <output id="retained-value">8 / 12</output></label><input type="range" id="retained" min="1" max="12" value="8"><p class="hint">A deliberate inference choice. Reduced depth can change predictions; robustness does not mean identical quality.</p></div>
+        <p class="hint" id="dense-explanation" hidden>Dropout is switched off. Use all twelve blocks, with no inverse-survival amplification.</p>
+        <div class="divider"></div>
+        <p class="control-label">02 / Follow the activations</p>
+        <button class="primary" id="animate" aria-pressed="false">▶ Animate paths</button><button class="secondary" id="sample">↻ New masks</button>
+        <p class="hint" id="motion-help">Animation replays this batch. New masks draws another batch at the same training progress.</p>
+      </aside>
+      <div class="explorer">
+        <div class="legend"><span><i class="key kept"></i>Execute attention + FFN</span><span><i class="key skipped"></i>Identity bypass</span><span class="select-hint">Select any block to inspect it ↓</span></div>
+        <div class="network-scroll" tabindex="0" role="region" aria-label="Scrollable network diagram"><svg id="network" viewBox="0 0 1040 445" role="group" aria-labelledby="network-title network-desc"><title id="network-title">Per-sequence paths through twelve shared transformer blocks</title><desc id="network-desc">Each row is a sequence. Filled cells execute both branches; dashed cells pass the residual stream through unchanged. Select a cell for its probability and scaling.</desc></svg></div>
+        <p class="network-caption" id="network-caption">Each row gets its own mask. All tokens within that sequence share it. Columns use the same model weights.</p>
+        <div class="metrics"><div><span id="actual-label">Active blocks in this batch</span><strong id="actual">—</strong><small id="actual-note">Realized Bernoulli sample</small></div><div><span id="expected-label">Expected active depth / sequence</span><strong id="expected">—</strong><small id="expected-note">An expectation, not a fixed count</small></div><div><span id="average-label">Average masks omitted over training</span><strong id="average">20%</strong><small id="average-note">80% ÷ 2 across depth ÷ 2 across time</small></div></div>
+      </div>
+    </div>
+    <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="details-grid">
+    <article class="panel inspector" aria-labelledby="inspector-title">
+      <div class="panel-heading"><div><p class="eyebrow">Zoom into one block</p><h2 id="inspector-title">Sequence A · Block 12</h2></div><span id="selection-state" class="state-tag">BYPASS</span></div>
+      <div class="block-stats"><span>Drop <strong id="selected-p">—</strong></span><span>Survive <strong id="selected-survival">—</strong></span><span>Mask M <strong id="selected-mask">—</strong></span><span>Branch multiplier <strong id="selected-scale">—</strong></span></div>
+      <div class="block-scroll" tabindex="0" role="region" aria-label="Scrollable residual block detail"><svg id="block-detail" viewBox="0 0 620 174" role="img" aria-label="Two residual additions with one shared mask: attention first, then feed-forward."></svg></div>
+      <p id="block-description" class="detail-description"></p>
+      <div class="equations"><div>z = h + <b id="factor-a">M / ρ</b> · Attention(h)</div><div>h′ = z + <b id="factor-f">M / ρ</b> · FFN(z)</div></div>
+      <p class="hint">ρ = 1 − p. The <strong>same M</strong> multiplies both branches. Layer normalization and the paper’s additional CompleteP depth scaling are omitted from this schematic; the displayed multiplier isolates dropout.</p>
+    </article>
+    <article class="panel schedule-panel" aria-labelledby="schedule-title">
+      <p class="eyebrow">The depth × time recipe</p><h2 id="schedule-title">Start shallower. End at full depth.</h2>
+      <div class="schedule-formula">p<sub>ℓ,t</sub> = p<sub>max</sub> × <span>ℓ / (L − 1)</span> × <span>(1 − t / (T − 1))</span></div>
+      <svg id="schedule-chart" viewBox="0 0 460 207" role="img" aria-label="Expected active depth increases linearly toward all twelve blocks as training proceeds."></svg>
+      <p class="hint">Block labels are 1–12; the formula uses ℓ = 0–11. So block 1 is always kept. The cursor shows training progress; inference settings do not change the training recipe.</p>
+      <p class="schedule-takeaway" id="schedule-takeaway"></p>
+    </article>
+  </section>
+
+  <section class="takeaways" aria-label="How to read the animation">
+    <article><span class="number">01</span><h3>A whole block, per sequence.</h3><p>The three moving dots stand for token activations in one sequence. They share every keep/drop decision. Attention and FFN are retained or bypassed together; individual neurons are not being erased.</p></article>
+    <article><span class="number">02</span><h3>The residual stream survives.</h3><p>A dropped block is an identity map: h′ = h. A retained block adds two scaled updates. Each sequence trains a sampled subnetwork of the same shared model, with newly drawn masks in each batch.</p></article>
+    <article><span class="number">03</span><h3>Missing neighbors become familiar.</h3><p>This gives blocks practice working without some other blocks. It motivates depth robustness at inference, but does not guarantee that every smaller subnetwork works well. <a href="../significance/">See what our experiments found →</a></p></article>
+  </section>
+
+  <details class="caveat"><summary>Why scaling is not a guarantee of the same expected output</summary><div class="caveat-content"><p>Inverse survival makes a single mask multiplier have mean 1. But here the FFN’s input already depends on the attention branch’s shared mask. The expected output of the whole block can differ from dense inference.</p><p>For a scalar example with h = 1, Attention(h) = h, FFN(z) = z, and survival ρ = ½: a dropped block outputs <strong>1</strong>; a kept block uses multiplier 2 and outputs <strong>9</strong>. Their equally likely average is <strong>5</strong>. Dense inference uses multiplier 1 and outputs <strong>4</strong>.</p><a href="../#counterexample">Read the exact counterexample in the review →</a></div></details>
+  <div class="scope"><strong>Paths are not performance measurements.</strong> Avoiding block arithmetic requires an implementation that actually skips it. Computing a branch and then multiplying it by zero saves no branch work. Animation speed is illustrative; block counts do not measure end-to-end FLOPs, latency, or energy.</div>
+  <footer><div><strong>Based on the original PDF</strong><p><a href="https://arxiv.org/pdf/2609.05275v1#page=4">Elhoushi et al., Don’t Drop Dropout (2026), §§4–7</a><br>Shared masks and scaling: Eqs. 6–7, §6.1. Depth/time schedule: §7, Eqs. 8–9.</p></div><div><a href="../">Critical review</a><a href="../a100-transfer/">A100 experiments</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/docs/dropout-animation">Animation source ↗</a></div></footer>
+  <noscript><p class="scope">JavaScript is needed to sample and animate paths. The text and equations above describe the mechanism: sample a whole-block mask per sequence, scale each retained residual branch by inverse survival, and decrease dropout to zero by the end of training.</p></noscript>
+</main>
+</body></html>

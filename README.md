@@ -3,6 +3,7 @@
 An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity for Efficient LLM Training and Inference** (arXiv:2609.05275v1), with exact counterexamples, locally executed toy experiments, and connections to Sutro's energy-efficient learning agenda.
 
 - [Interactive report and 16-chapter slide view](https://yaroslavvb.github.io/gradient-dissent/)
+- [How layer dropout works](https://yaroslavvb.github.io/gradient-dissent/dropout-animation/): animated per-sequence paths, shared attention/FFN masks, inverse-survival scaling, depth/time scheduling, and fixed inference modes.
 - [Extended review](https://yaroslavvb.github.io/gradient-dissent/review.html)
 - [Separate depth-robustness experiment report](https://yaroslavvb.github.io/gradient-dissent/depth-robustness/): a tiny causal transformer and 8×8 digit classifier, five seeds per treatment, exact layer-subset enumeration, and $0 cloud spend.
 - [Larger A100 transfer experiment report](https://yaroslavvb.github.io/gradient-dissent/a100-transfer/): 124M-parameter nanoGPT-style language model, 85M-parameter vision transformer, and 28M-parameter ConvNeXt on WikiText-103 and CIFAR-100. Three paired final seeds, nine fixed pruning interventions, and a $50 experiment ceiling.
@@ -53,5 +54,7 @@ Review date: 9 September 2026. The full 27-page PDF, including appendices, was r
 Reported paper values, independent derivations, synthetic simulations, and measured toy results are labeled separately. The repository includes original plots and analysis, not redistributed paper figures. Vendored KaTeX assets retain their MIT license. Reproducing timing will yield different numbers on different machines; the saved run includes exact environment metadata.
 
 The significance overview uses the verified saved A100 summary: `npm run build:significance` and `npm run check:significance`. It performs no training.
+
+The standalone dropout animation is authored in `docs/dropout-animation/`. Run `npm run check:dropout` to check the exact schedule, sampling/scaling, inference settings, and interactive controls. Its four sequences and twelve blocks are schematic; it performs no training or paid calls.
 
 Build the independent paper from saved results with `python3 scripts/build_paper.py` (TeX Live 2026). See `paper/README.md` for figure regeneration and rendering.
