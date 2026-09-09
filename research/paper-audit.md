@@ -1,10 +1,10 @@
 # Critical technical review: Don't Drop Dropout
 
-**Paper:** Mostafa Elhoushi et al., *Don't Drop Dropout: Optimizing Layer Sparsity for Efficient LLM Training and Inference*, arXiv:2609.05275v1, 4 September 2026. [PDF](https://www.alphaxiv.org/pdf/2609.05275), [paper page](https://www.alphaxiv.org/abs/2609.05275). Reviewed 9 September 2026. Page references below are printed PDF pages; all 27 pages, including the appendix, were read. Key equations and tables were also checked in rendered pages.
+**Paper:** Mostafa Elhoushi et al., *Don't Drop Dropout: Optimizing Layer Sparsity for Efficient LLM Training and Inference*, arXiv:2609.05275v1, 4 September 2026. [PDF](https://www.alphaxiv.org/pdf/2609.05275), [paper page](https://www.alphaxiv.org/abs/2609.05275). The [arXiv record](https://arxiv.org/abs/2609.05275) identifies this as a slightly extended version of an ICML 2026 paper. Reviewed 9 September 2026. Page references below are printed PDF pages; all 27 pages, including the appendix, were read. Key equations and tables were also checked in rendered pages.
 
 **Assessment:** A useful empirical recipe study with credible evidence for better training/inference tradeoffs in its tested model family. The most valuable result is that structured depth noise can be annealed away while leaving useful pruning robustness. The evidence does **not** establish a general prescription for frontier LLMs, an across-the-board accuracy improvement, or 25% end-to-end training acceleration. Several mathematical and reporting statements need correction. The empirical results can remain useful despite those problems.
 
-This audit separates **reported measurements**, **exact consequences of the printed equations**, and **hypotheses requiring new experiments**. Local toy experiments elsewhere in this repository are mechanism checks, not reproductions of the authors' 2400+ proprietary-scale runs.
+This audit separates **reported measurements**, **exact consequences of the printed equations**, and **hypotheses requiring new experiments**. Local toy experiments elsewhere in this repository are mechanism checks, not reproductions of the authors' 2400+ LLM-scale runs.
 
 ## What the recipe actually is
 
