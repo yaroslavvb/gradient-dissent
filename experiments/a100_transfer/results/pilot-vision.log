@@ -1,0 +1,41 @@
+✓ Initialized. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-8rBXwPCm5MMshM5WyEqkF
+7
+✓ Created objects.
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p
+│   y
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer
+├── 🔨 Created function prepare.
+└── 🔨 Created function train.
+RESERVED aggregate $0.9040; absolute ceiling $50.00
+/opt/a100_transfer/train.py:205: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  point={'step':step+1,'train_ce':float(loss),'lr':lr,'nominal_mean_dropout':float(p.mean()),
+pilot-v1-vit_cifar100 step 1 loss 4.7415 seconds 0.6
+pilot-v1-vit_cifar100 step 10 loss 4.5142 seconds 1.5
+pilot-v1-vit_cifar100 step 20 loss 4.3234 seconds 2.4
+pilot-v1-vit_cifar100 step 30 loss 4.199 seconds 3.2
+FAILED pilot-v1-vit_cifar100 DeserializationError Deserialization failed because the 'torch' module is not available in the local environment.
+/opt/a100_transfer/train.py:205: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  point={'step':step+1,'train_ce':float(loss),'lr':lr,'nominal_mean_dropout':float(p.mean()),
+pilot-v1-convnext_cifar100 step 1 loss 4.7185 seconds 13.2
+pilot-v1-convnext_cifar100 step 10 loss 4.6074 seconds 13.5
+pilot-v1-convnext_cifar100 step 20 loss 4.3752 seconds 13.8
+pilot-v1-convnext_cifar100 step 30 loss 4.2623 seconds 14.2
+FAILED pilot-v1-convnext_cifar100 DeserializationError Deserialization failed because the 'torch' module is not available in the local environment.
+STAGE COMPLETE pilot jobs 2 errors 2
+Stopping app - uncaught exception raised locally: RuntimeError('2 failed jobs; results and reservations retained, no automatic retries.').
+Runner terminated.
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p │
+│ y:157 in launch                                                              │
+│                                                                              │
+│   156 │   print('STAGE COMPLETE', stage, 'jobs', len(jobs), 'errors', errors │
+│ ❱ 157 │   if errors: raise RuntimeError(f'{errors} failed jobs; results and  │
+│   158                                                                        │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: 2 failed jobs; results and reservations retained, no automatic 
+retries.

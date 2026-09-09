@@ -1,0 +1,5 @@
+WAITING for all 27 locked tuning runs
+SELECTED {"convnext_cifar100/dense": 0.0003, "convnext_cifar100/constant_ild": 0.0003, "convnext_cifar100/decreasing_ild": 0.0003, "gpt_wikitext103/dense": 0.0012, "gpt_wikitext103/constant_ild": 0.0012, "gpt_wikitext103/decreasing_ild": 0.0012, "vit_cifar100/dense": 0.0001, "vit_cifar100/constant_ild": 0.0003, "vit_cifar100/decreasing_ild": 0.0001}
+STARTING 27 final runs; selected manifest is frozen.
+PASS: 27 final runs verified; summary.json, paired.csv, REPORT.md written
+ALL EXPERIMENTS AND INDEPENDENT DATA AUDIT COMPLETE

@@ -1,0 +1,457 @@
+{
+  "source": "experiments/a100_transfer/results/summary.json",
+  "summary_sha256": "57614ac19dacc9ee90db9b0f2b7cf5f6a1315398e7cee2ec5128fa174a446f09",
+  "scientific_input_sha256": "5bad33d925dd3eb17e43351a69239f8a661df59c0a61a2916a1079dbd3c7d64f",
+  "scientific_findings": {
+    "file": "findings.json",
+    "source": "experiments/a100_transfer/FINDINGS.json",
+    "sha256": "c3d15ba3ede6134c493193664040ea45f6c6c24f66b3b2dd6c58fab135a3c060",
+    "scientific_input_sha256": "5bad33d925dd3eb17e43351a69239f8a661df59c0a61a2916a1079dbd3c7d64f"
+  },
+  "synthetic_fixture": false,
+  "complete_final_runs": 27,
+  "primary_endpoint": "Within each architecture, paired treatment-minus-dense differences across independently trained seeds. Primary difference is (CEprimary\u2212CEfull)treatment\u2212(CEprimary\u2212CEfull)dense.95% Student-t intervals with df=n\u22121; no mask/example pseudoreplication and no multiple-comparison adjustment.",
+  "evaluation_manifest_sha256": "8130bac3dfea34bd0d26d6a2bcd88b196d2ab82d8cdd0c3ac49401268b426179",
+  "core_source_sha256": {
+    "train.py": "50915ffcb0e0d0b40c55db02b31d3e91e9ad2013c127d187b8d2f96b033ebe4e",
+    "language.py": "9aaa1230aa655fca3d18716f65885c67a545a51ba6991ab0310ab4c58215b42b",
+    "vision.py": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0"
+  },
+  "initialization_numerical_audit": {
+    "passed": true,
+    "posthoc_verification_adjustment": true,
+    "task": "convnext_cifar100",
+    "audited_seeds": [
+      1000,
+      2000,
+      2001,
+      2002
+    ],
+    "torch": "2.8.0+cu128",
+    "vision_source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "thresholds": {
+      "max_absolute_difference": 1e-07,
+      "relative_l2_difference": 1e-06
+    },
+    "max_absolute_difference": 7.450580596923828e-09,
+    "max_relative_l2_difference": 5.362363754206486e-09,
+    "evidence_files": [
+      {
+        "file": "initialization-numerical-audit.json",
+        "sha256": "e2e8b144d47e7c465e7c178994b239dd2ccd523276025ab1628bdd191fd0a7e8"
+      },
+      {
+        "file": "initialization-variant-manifests.json",
+        "sha256": "64bd44b980b7d204be439208d007194713c9f152ca27a83642183d423ce28fe4"
+      },
+      {
+        "file": "initialization-worker-probes.json",
+        "sha256": "cc55ae7133d1e2f8434490e1220be68b12983326e7e53a3890bd4c6d7ae94489"
+      }
+    ],
+    "seed_audits": [
+      {
+        "seed": 1000,
+        "state_hashes": [
+          "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183867,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.3558964638539205e-09,
+        "rng_sha256": "6ac28af157c9ea4f15d8d48c2f641e24a866cbfa683740327121a80d0e388c33"
+      },
+      {
+        "seed": 2000,
+        "state_hashes": [
+          "779fb93eab45b3be10560e4ea5284fbcf4a3720743c4bf26ff434148ea8acc1a",
+          "4aa96a3d184a042bf0599a2a4e9953a15ab04c99f2f6c00d677fbe8d7bf939e5"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183638,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.352809309482752e-09,
+        "rng_sha256": "2c9a8bafc7c37a4f931430b665a1919be5ae3ee5f6c75f56167e185a15a1c8da"
+      },
+      {
+        "seed": 2001,
+        "state_hashes": [
+          "88bb29bc604531546ffba0538c2613605dca544fc9fc18349e5a6b0ce2d8b9e1",
+          "b01dcf0da2b2e4b28c746d3b541771bb93dfc9fd47782eacf66177229d44e283"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183534,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.362363754206486e-09,
+        "rng_sha256": "f67e03f026d3967f7b54bc211111cf31f3e0b2ee1af426fab5e62361e2cec556"
+      },
+      {
+        "seed": 2002,
+        "state_hashes": [
+          "62e4cf6632275a306c622c0fb7c8f09c15d09d563d6d8a4d1437430148df41b8",
+          "bf54efd51c77baa142139a5fb4f8f40fc00256565ec0f5a73ab3bc1803874bbe"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183059,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.360915287664752e-09,
+        "rng_sha256": "c4d23481cc1991b1a43eddc35e4bd22480fe64b8ca467c8715e998f240130eac"
+      }
+    ],
+    "interpretation": "Post hoc verification adjustment based only on reconstructed, untrained CPU states, independent of test outcomes. ConvNeXt permits only the two exact recorded hashes per audited seed, whose complete tensors are numerically close and whose post-init RNG states match. GPT requires bit-identical paired initialization; ViT is covered by a separate architecture-specific numerical audit. This does not establish identical training trajectories or eliminate host-dependent numerical variation."
+  },
+  "vit_initialization_numerical_audit": {
+    "passed": true,
+    "posthoc_verification_adjustment": true,
+    "task": "vit_cifar100",
+    "audited_seeds": [
+      1000,
+      2000,
+      2001,
+      2002
+    ],
+    "torch": "2.8.0+cu128",
+    "vision_source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "thresholds": {
+      "max_absolute_difference": 1e-07,
+      "relative_l2_difference": 1e-06
+    },
+    "max_absolute_difference": 7.450580596923828e-09,
+    "max_relative_l2_difference": 5.63526372929607e-09,
+    "evidence_files": [
+      {
+        "file": "vit-initialization-numerical-audit.json",
+        "sha256": "3d5e8ec53622ac28bd753c20e6a11a5fc74043fb70df027c535f95c1bbc0e2de"
+      },
+      {
+        "file": "vit-initialization-variant-manifests.json",
+        "sha256": "7051a1bdbc77372f6689b8ed2c3045292174771196f19f81b73236cade78ec44"
+      },
+      {
+        "file": "vit-initialization-cpu-probes.json",
+        "sha256": "2d2150c601fd8a1ff448ad572796d66ee44d584991beb4823651d25461207756"
+      }
+    ],
+    "seed_audits": [
+      {
+        "seed": 1000,
+        "state_hashes": [
+          "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "0ed156a680238964ebd18ba1403394069e934b8f27f3b6aa2cc0ec51747aba70"
+        ],
+        "parameters": 85219684,
+        "changed_elements": 559735,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.616721625855676e-09,
+        "rng_sha256": "a97688355aab8b61216aae9d9cb052f08555eddb14dd95f390823ea711324165"
+      },
+      {
+        "seed": 2000,
+        "state_hashes": [
+          "6ef65e5e226647b6d6182da1a4b2847c57b160203d66a8d4169fdf9b68bb4239",
+          "45c46c9d400fa4c09c80cfd3b966610b8bd5cba3438b29031831263f76ff26c0"
+        ],
+        "parameters": 85219684,
+        "changed_elements": 560246,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.629164180512621e-09,
+        "rng_sha256": "9fff5c30c1e9ed9878ee1293ff223d1ff85a4a09de7f8b952a8f029fdb5fccba"
+      },
+      {
+        "seed": 2001,
+        "state_hashes": [
+          "78b9cccc8b55e3b16b761b720b93402d8956e437fafe1cb0cfe02d0d88c7420c",
+          "3532faee4bf1ee344fbf236b36dd0e4dbd6bbb6d6b5ed05f7b4cb287a9285c5d"
+        ],
+        "parameters": 85219684,
+        "changed_elements": 559424,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.619966670274604e-09,
+        "rng_sha256": "7a6eac2a44112100f1d3e8863e77791f7e81533e1343505cda196d40fecbc307"
+      },
+      {
+        "seed": 2002,
+        "state_hashes": [
+          "fa0d5c5cbc1cd7cab4129a16fff2f9aded19c7e03481d530a5f91628a26a9c55",
+          "e0dce01ff146be028eebf4a7d658956c717eef3d2ea1a263b061dccbc4b71b69"
+        ],
+        "parameters": 85219684,
+        "changed_elements": 560663,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.63526372929607e-09,
+        "rng_sha256": "efa818dd67f0bec3ba609ca148978ed7b919dcd3a3312ffa2952b12cbf46ffc7"
+      }
+    ],
+    "interpretation": "Separate post hoc ViT initialization verification based on reconstructed untrained states, with thresholds fixed before tensor comparisons. Only exact state hashes covered by the complete numerical audit are permitted; matching RNG and small weight differences do not establish identical subsequent training trajectories."
+  },
+  "raw_files": [
+    {
+      "run_id": "eval-convnext_cifar100-dense-s2000",
+      "file": "eval-convnext_cifar100-dense-s2000.json",
+      "sha256": "00d9b261110cf9473b26563a946fe6e5b24e585c30a43d308b1bd3d7cd473fc3"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-dense-s2000",
+      "file": "eval-gpt_wikitext103-dense-s2000.json",
+      "sha256": "c152c31a2a0b7d554965369476353e62607c00d26f0d1437b1232be5ee53cf8c"
+    },
+    {
+      "run_id": "eval-vit_cifar100-dense-s2000",
+      "file": "eval-vit_cifar100-dense-s2000.json",
+      "sha256": "594e74051a0a42661e43308e7bd47c43fefd35808426c32ee5c26df9da461916"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-constant_ild-s2000",
+      "file": "eval-convnext_cifar100-constant_ild-s2000.json",
+      "sha256": "53396dea973cda8b97f72a37058b3c80713a22d202350bc4011d6dee3b30e64b"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-constant_ild-s2000",
+      "file": "eval-gpt_wikitext103-constant_ild-s2000.json",
+      "sha256": "381d2eaebc1ce9e5b1b625ade557f2d089f4ac10cad5f9108f534eea5131c276"
+    },
+    {
+      "run_id": "eval-vit_cifar100-constant_ild-s2000",
+      "file": "eval-vit_cifar100-constant_ild-s2000.json",
+      "sha256": "dc11933fc2fb8f70dcbd0d96a728d280f10dfc788651bf46b9c3eb9027619b44"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-decreasing_ild-s2000",
+      "file": "eval-convnext_cifar100-decreasing_ild-s2000.json",
+      "sha256": "6b02beb3ff066e56697385efceea760c817a0bf039e82b38d6b5d597a200786b"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-decreasing_ild-s2000",
+      "file": "eval-gpt_wikitext103-decreasing_ild-s2000.json",
+      "sha256": "2f468242894cf134e8931e26f6a1115032a12ba6ae48fb5305876329b42e0cd4"
+    },
+    {
+      "run_id": "eval-vit_cifar100-decreasing_ild-s2000",
+      "file": "eval-vit_cifar100-decreasing_ild-s2000.json",
+      "sha256": "21aefcee6043f7f83c34c2085adaf9787a69381c5513e843eab4e50a86f04bc8"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-dense-s2001",
+      "file": "eval-convnext_cifar100-dense-s2001.json",
+      "sha256": "3319656f25dc3d41a32bb726a62bfa05b5cc126b04889e143a201b86cf0ece10"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-dense-s2001",
+      "file": "eval-gpt_wikitext103-dense-s2001.json",
+      "sha256": "254b57b7ceacbc1098b4ca5ecd1b2747429fce89e41677894a6da95a6e3f42df"
+    },
+    {
+      "run_id": "eval-vit_cifar100-dense-s2001",
+      "file": "eval-vit_cifar100-dense-s2001.json",
+      "sha256": "4cc15d4c570b4fef05a0596305d9cc93a07ce4559ff14b5166d99c8f88c69b0c"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-constant_ild-s2001",
+      "file": "eval-convnext_cifar100-constant_ild-s2001.json",
+      "sha256": "f987774173fda112fcb3ddb9176820f4ddaa3d6e2ea8bc245cad1c3f3cd7be06"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-constant_ild-s2001",
+      "file": "eval-gpt_wikitext103-constant_ild-s2001.json",
+      "sha256": "538313ef62f5b302dc0bccff832842e56f7d640854eabaf59f54c62e3f8ff345"
+    },
+    {
+      "run_id": "eval-vit_cifar100-constant_ild-s2001",
+      "file": "eval-vit_cifar100-constant_ild-s2001.json",
+      "sha256": "4a889edb77ecdc7b852e1b1188183ce27d1eaa9e96b4954b998877c4ad9d828a"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-decreasing_ild-s2001",
+      "file": "eval-convnext_cifar100-decreasing_ild-s2001.json",
+      "sha256": "e80d2c84bace7acdae3d02961a4d7ed4c9f6d38291eda8bdfb7789c1bcac662a"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-decreasing_ild-s2001",
+      "file": "eval-gpt_wikitext103-decreasing_ild-s2001.json",
+      "sha256": "6ce1030e070f0caa94385920db470fa72dfe62befb2a2a731f01c0da03734a99"
+    },
+    {
+      "run_id": "eval-vit_cifar100-decreasing_ild-s2001",
+      "file": "eval-vit_cifar100-decreasing_ild-s2001.json",
+      "sha256": "6fc742ee37f0468c9664228c4bdede1ac4892d6eb1408e60955204ffe39f239e"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-dense-s2002",
+      "file": "eval-convnext_cifar100-dense-s2002.json",
+      "sha256": "928356f257b1093bd6ec958ce11b36fb3bfa849681cbe4996b9819a9e45094cc"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-dense-s2002",
+      "file": "eval-gpt_wikitext103-dense-s2002.json",
+      "sha256": "aee3952a0ce5bde72bf3db45abc6402b98f0ed09c58f08fa6bca4b7e23dd98fb"
+    },
+    {
+      "run_id": "eval-vit_cifar100-dense-s2002",
+      "file": "eval-vit_cifar100-dense-s2002.json",
+      "sha256": "a26daa51fa01c541b09591b0b7f54b5896f7250a398e0907df7a4b272d71b56c"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-constant_ild-s2002",
+      "file": "eval-convnext_cifar100-constant_ild-s2002.json",
+      "sha256": "1e85358d2357788deb5bbf92b12fb247194e92217ba5994f6d1998542d5382fa"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-constant_ild-s2002",
+      "file": "eval-gpt_wikitext103-constant_ild-s2002.json",
+      "sha256": "7e85650bdbe29d4849732cb2f23b2f05d0197b0e33ee6c0e728e5ca230138109"
+    },
+    {
+      "run_id": "eval-vit_cifar100-constant_ild-s2002",
+      "file": "eval-vit_cifar100-constant_ild-s2002.json",
+      "sha256": "5ffe0ef2a4755a679ee757cd2680e2439968782a6a7efcfbf1e0ad3fec30b2c0"
+    },
+    {
+      "run_id": "eval-convnext_cifar100-decreasing_ild-s2002",
+      "file": "eval-convnext_cifar100-decreasing_ild-s2002.json",
+      "sha256": "98459a4881f1e71470e3e27a15ef8760f9ea8c3c45fc5e5f016bd917f246192f"
+    },
+    {
+      "run_id": "eval-gpt_wikitext103-decreasing_ild-s2002",
+      "file": "eval-gpt_wikitext103-decreasing_ild-s2002.json",
+      "sha256": "4a4a2070992810b5a55f8c98b62b15e37257cc233fc9aa556d6c66bf4539b2aa"
+    },
+    {
+      "run_id": "eval-vit_cifar100-decreasing_ild-s2002",
+      "file": "eval-vit_cifar100-decreasing_ild-s2002.json",
+      "sha256": "792de8e11bc42fb851c42331650508a33676c5fd90830c040457959a1b68915c"
+    }
+  ],
+  "figures": {
+    "convnext_cifar100-accuracy.png": {
+      "sha256": "1bc5a8e012139c8edb318301f028b9729316cc05045bc3725d77e01fd6dd7e22",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-accuracy.svg": {
+      "sha256": "16351cf84c77e84bba1a525cf0f3b26ec843dc128709f9d685a53aff2ab14e71",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-accuracy_change.png": {
+      "sha256": "b56b03fa3a35e9dbd37a83b96992799d38ea75135f760a3bcb4feb056972b6c3",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-accuracy_change.svg": {
+      "sha256": "99680de2e7026bc847d996613c41df7446940eff4533833728c28953c0713d3b",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-ce.png": {
+      "sha256": "8cb3a8c64a8360b998fcad36543599466fe8ef860f85d5f22e43599a3c8d5752",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-ce.svg": {
+      "sha256": "d11d40a7607a8c91aad87221fc427a714390dccc9f870a27fac534ec5ff73b01",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-excess_ce.png": {
+      "sha256": "cd27e59182b9f234cad8cf1546770f3cc03e91a6002d4f80f9a447461558a2f0",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "convnext_cifar100-excess_ce.svg": {
+      "sha256": "f99bf00a914cd2748da4faf4a20238c47975ffe0b206263eacd99c43ed574950",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-accuracy.png": {
+      "sha256": "dc7c2472a4b473089c0730c3d370dc43af6bc7ed0e16892400cb20dd91aaffa1",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-accuracy.svg": {
+      "sha256": "294cd15a37813b2c1c7e40b002737e308e4f84d9842bac2bfe488dc58bdb8372",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-accuracy_change.png": {
+      "sha256": "c32e2c9ce0764f95c9befea96749b0a6596068f72859fe46a8368a1307ec4877",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-accuracy_change.svg": {
+      "sha256": "f7d444f35c27be556f1d4ab9a89791b32bc09b1497ce4a760c6e351610302da7",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-ce.png": {
+      "sha256": "dc2ca5b604003e2d4d7dc9af6901ed7f75306db5e00e2b7bf74034c73d162d34",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-ce.svg": {
+      "sha256": "4eb6160c4ff1e75a213ba70c24b9b3c69a32fd9a4c91d013ac8a4ceb4f39d058",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-excess_ce.png": {
+      "sha256": "0e82ca55dc7b4ae246ce132d79994fc6bb4e52c77c912d2b1206a53496467ca4",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "gpt_wikitext103-excess_ce.svg": {
+      "sha256": "7eb2c1eeff7aaecec266d80ba7e051c499b54d005b572b5366cd1bcad880eb71",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "primary-effects.png": {
+      "sha256": "fb252aeb5902a6ac671653c5515a3eaa87f7d5be6c4c3f01d757d0009cfe2d26",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "primary-effects.svg": {
+      "sha256": "b6b39349b034d14a55c49fbe6ac1670fbcec54970b3738c4d4006453f6ab937b",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-accuracy.png": {
+      "sha256": "d0a2c908691e06bc690f7db004a1dd28210ffafe7d3dae50b4bd2d102f665957",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-accuracy.svg": {
+      "sha256": "8917cd5c5e5b83ffd340ba4db65327f268af30e20997769aa390647949dc666e",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-accuracy_change.png": {
+      "sha256": "5b8a40ea98af9ac95858d5626b0d6afeaaf448f691436cf765a0361e3a9216c5",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-accuracy_change.svg": {
+      "sha256": "ec1d4f4ab61c3c49e86bc32bbf75ef922d178175f636cdf0724c5c47dadfb8bf",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-ce.png": {
+      "sha256": "bbafbbb2268afcc7e40c7f50eca6a45ee6e1e64d5747a563453b33cea50d41c8",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-ce.svg": {
+      "sha256": "75db8701137499ab2abc90cdc30ea587e2eceb04916518fcccdc0fb6018e7f15",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-excess_ce.png": {
+      "sha256": "ccc1253c5f3ce9ed99dcdc4153d3fbd5a4d09b3f5394b5a9af3eaca4c35bcf72",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    },
+    "vit_cifar100-excess_ce.svg": {
+      "sha256": "ed7dfa124765f08bc4d19d3a57286dba4101e11446ae1ca96c5293bcc9daa151",
+      "backing_data": "data.json",
+      "interval": "95% Student-t across 3 training seeds"
+    }
+  }
+}

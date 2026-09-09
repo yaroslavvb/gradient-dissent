@@ -1,0 +1,23 @@
+✓ Initialized. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-QxxzYsuPSlLWSkM5g6w99
+D
+✓ Created objects.
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p
+│   y
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer
+├── 🔨 Created function prepare.
+└── 🔨 Created function train.
+RESERVED aggregate $1.4090; absolute ceiling $50.00
+SUBMITTED pilot-v3-convnext-b512 fc-01M23QZEWYAJ2GC0DT5MMQPM83
+pilot-v3-convnext-b512 step 1 loss 4.7556 seconds 9.9
+pilot-v3-convnext-b512 step 10 loss 4.4854 seconds 10.3
+pilot-v3-convnext-b512 step 20 loss 4.2752 seconds 10.7
+pilot-v3-convnext-b512 step 30 loss 4.147 seconds 11.1
+COMPLETED pilot-v3-convnext-b512 seconds 29.2
+STAGE COMPLETE pilot jobs 1 errors 0
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-QxxzYsuPSlLWSkM5g6w99
+D

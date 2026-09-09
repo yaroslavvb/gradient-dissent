@@ -5,6 +5,7 @@ An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity 
 - [Interactive report and 16-chapter slide view](https://yaroslavvb.github.io/gradient-dissent/)
 - [Extended review](https://yaroslavvb.github.io/gradient-dissent/review.html)
 - [Separate depth-robustness experiment report](https://yaroslavvb.github.io/gradient-dissent/depth-robustness/): a tiny causal transformer and 8×8 digit classifier, five seeds per treatment, exact layer-subset enumeration, and $0 cloud spend.
+- [Larger A100 transfer experiment report](https://yaroslavvb.github.io/gradient-dissent/a100-transfer/): 124M-parameter nanoGPT-style language model, 85M-parameter vision transformer, and 28M-parameter ConvNeXt on WikiText-103 and CIFAR-100. Three paired final seeds, nine fixed pruning interventions, and a $50 experiment ceiling.
 - [Original paper PDF](https://arxiv.org/pdf/2609.05275v1)
 - [Experiments and reproduction instructions](experiments/README.md)
 
@@ -38,6 +39,8 @@ Open `http://localhost:8765`. The interactive edition needs HTTP to fetch its lo
 `npm run build` regenerates `docs/review.html` from the three research Markdown files and renders equations into local HTML/MathML. `docs/index.html`, `docs/style.css`, and `docs/app.js` are authored static sources. GitHub Pages publishes the committed `docs/` directory from `main`.
 
 The separate depth report is built from saved measurements with `python3 -m pip install -r requirements-depth-report.txt`, then `npm run build:depth` and `npm run check:depth`. Its source template is `scripts/depth-report-template.html`; the builder regenerates HTML, Markdown, plot data, and standalone scientific figures without retraining. See the [transformer](experiments/depth_lm/README.md) and [digits](experiments/depth_digits/README.md) protocols to repeat training. Final sweeps contain 90 tuning and 45 evaluation runs; earlier boundary-search runs are archived and disclosed separately.
+
+The larger GPU study has its own [frozen protocol, execution instructions, and cost ledger](experiments/a100_transfer/README.md). Run `python3 experiments/a100_transfer/analyze.py` to audit all saved tuning and final results, then `npm run build:a100` and `npm run check:a100` to rebuild its report without training or paid calls. The A100 study evaluates a fixed panel of masks rather than every layer subset.
 
 ## Provenance
 

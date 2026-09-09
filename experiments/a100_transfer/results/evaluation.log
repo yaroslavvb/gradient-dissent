@@ -1,0 +1,368 @@
+✓ Initialized. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-OVwjt5Dic53VuvpIsBP4T
+F
+✓ Created objects.
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p
+│   y
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer
+├── 🔨 Created function prepare.
+└── 🔨 Created function train.
+RESERVED aggregate $39.6661; absolute ceiling $50.00
+SUBMITTED eval-convnext_cifar100-decreasing_ild-s2000 fc-01M23TVFWA3FMZDXQVCDVQNJP7
+SUBMITTED eval-gpt_wikitext103-decreasing_ild-s2000 fc-01M23TVFWBND0NYDX57TMJQT1Y
+SUBMITTED eval-vit_cifar100-constant_ild-s2000 fc-01M23TVFWSFJSK00QH4VKZRPJ6
+SUBMITTED eval-gpt_wikitext103-constant_ild-s2000 fc-01M23TVFWCS391XD5DVA6DC8F5
+SUBMITTED eval-vit_cifar100-dense-s2000 fc-01M23TVFWDB5WRPGKNEP9GTQ47
+SUBMITTED eval-convnext_cifar100-constant_ild-s2000 fc-01M23TVFWC3ERD1AQZ5AJHK9TM
+SUBMITTED eval-gpt_wikitext103-dense-s2000 fc-01M23TVFWMXHXKKZ2295NNJTZ1
+SUBMITTED eval-convnext_cifar100-dense-s2000 fc-01M23TVFWE2JF9MV64VSHQB2S3
+SUBMITTED eval-vit_cifar100-decreasing_ild-s2000 fc-01M23TVFWRV7E63994HDCP66W4
+eval-gpt_wikitext103-decreasing_ild-s2000 step 1 loss 10.9808 seconds 1.0
+eval-gpt_wikitext103-constant_ild-s2000 step 1 loss 10.9608 seconds 1.6
+eval-vit_cifar100-constant_ild-s2000 step 1 loss 4.6315 seconds 0.7
+eval-vit_cifar100-dense-s2000 step 1 loss 4.6476 seconds 1.2
+eval-convnext_cifar100-decreasing_ild-s2000 step 1 loss 4.76 seconds 13.2
+eval-gpt_wikitext103-dense-s2000 step 1 loss 10.9446 seconds 1.2
+eval-vit_cifar100-decreasing_ild-s2000 step 1 loss 4.7075 seconds 1.0
+eval-convnext_cifar100-dense-s2000 step 1 loss 4.76 seconds 10.9
+eval-convnext_cifar100-constant_ild-s2000 step 1 loss 4.7601 seconds 14.8
+eval-convnext_cifar100-decreasing_ild-s2000 step 1000 loss 2.9296 seconds 57.7
+eval-convnext_cifar100-dense-s2000 step 1000 loss 2.7741 seconds 53.5
+eval-gpt_wikitext103-decreasing_ild-s2000 step 320 loss 5.7062 seconds 94.8
+eval-gpt_wikitext103-constant_ild-s2000 step 320 loss 5.6628 seconds 95.2
+eval-vit_cifar100-constant_ild-s2000 step 1024 loss 3.0086 seconds 97.7
+eval-vit_cifar100-dense-s2000 step 1024 loss 2.7299 seconds 99.0
+eval-convnext_cifar100-constant_ild-s2000 step 1000 loss 2.8599 seconds 64.0
+eval-convnext_cifar100-decreasing_ild-s2000 step 2000 loss 2.079 seconds 104.4
+eval-gpt_wikitext103-dense-s2000 step 320 loss 5.6263 seconds 95.2
+eval-convnext_cifar100-dense-s2000 step 2000 loss 1.7137 seconds 96.0
+eval-vit_cifar100-decreasing_ild-s2000 step 1024 loss 2.9543 seconds 99.0
+eval-convnext_cifar100-decreasing_ild-s2000 step 3000 loss 1.5909 seconds 149.5
+eval-convnext_cifar100-constant_ild-s2000 step 2000 loss 1.993 seconds 114.2
+eval-convnext_cifar100-dense-s2000 step 3000 loss 0.7406 seconds 138.9
+eval-gpt_wikitext103-decreasing_ild-s2000 step 640 loss 5.1557 seconds 188.9
+eval-gpt_wikitext103-constant_ild-s2000 step 640 loss 5.0715 seconds 189.1
+eval-vit_cifar100-constant_ild-s2000 step 2048 loss 2.4055 seconds 194.4
+eval-convnext_cifar100-decreasing_ild-s2000 step 4000 loss 0.9893 seconds 193.9
+eval-vit_cifar100-dense-s2000 step 2048 loss 2.1616 seconds 197.5
+eval-convnext_cifar100-constant_ild-s2000 step 3000 loss 1.2993 seconds 161.0
+eval-convnext_cifar100-dense-s2000 step 4000 loss 0.2546 seconds 181.4
+eval-gpt_wikitext103-dense-s2000 step 640 loss 4.9351 seconds 189.4
+eval-vit_cifar100-decreasing_ild-s2000 step 2048 loss 2.4542 seconds 196.4
+eval-convnext_cifar100-decreasing_ild-s2000 step 5000 loss 0.4852 seconds 238.6
+eval-convnext_cifar100-constant_ild-s2000 step 4000 loss 0.8034 seconds 207.7
+eval-convnext_cifar100-dense-s2000 step 5000 loss 0.0806 seconds 224.0
+eval-gpt_wikitext103-decreasing_ild-s2000 step 960 loss 4.7794 seconds 283.4
+eval-gpt_wikitext103-constant_ild-s2000 step 960 loss 4.6882 seconds 283.1
+eval-convnext_cifar100-decreasing_ild-s2000 step 6000 loss 0.2352 seconds 283.1
+eval-vit_cifar100-constant_ild-s2000 step 3072 loss 1.954 seconds 291.5
+eval-vit_cifar100-dense-s2000eval-convnext_cifar100-dense-s2000 step 6000 loss 0.0342 seconds 267.2
+ step 3072 loss 1.6727 seconds 296.0
+eval-convnext_cifar100-constant_ild-s2000 step 5000 loss 0.4848 seconds 259.0
+eval-gpt_wikitext103-dense-s2000 step 960 loss 4.4954 seconds 283.8
+eval-vit_cifar100-decreasing_ild-s2000 step 3072 loss 1.9857 seconds 294.7
+eval-convnext_cifar100-decreasing_ild-s2000 step 7000 loss 0.075 seconds 329.8
+eval-convnext_cifar100-dense-s2000 step 7000 loss 0.016 seconds 310.0
+eval-convnext_cifar100-constant_ild-s2000 step 6000 loss 0.2664 seconds 307.8
+eval-gpt_wikitext103-decreasing_ild-s2000 step 1280 loss 4.5678 seconds 377.6
+eval-gpt_wikitext103-constant_ild-s2000 step 1280 loss 4.4396 seconds 377.1
+eval-convnext_cifar100-decreasing_ild-s2000 step 8000 loss 0.0312 seconds 374.8
+eval-convnext_cifar100-dense-s2000 step 8000 loss 0.0045 seconds 352.8
+eval-vit_cifar100-constant_ild-s2000 step 4096 loss 1.7262 seconds 388.4
+eval-vit_cifar100-dense-s2000 step 4096 loss 1.1253 seconds 394.4
+eval-convnext_cifar100-constant_ild-s2000 step 7000 loss 0.2206 seconds 356.5
+eval-gpt_wikitext103-dense-s2000 step 1280 loss 4.2311 seconds 378.3
+eval-convnext_cifar100-decreasing_ild-s2000 step 9000 loss 0.0193 seconds 419.2
+eval-vit_cifar100-decreasing_ild-s2000 step 4096 loss 1.7382 seconds 392.6
+eval-convnext_cifar100-dense-s2000 step 9000 loss 0.0037 seconds 395.8
+eval-convnext_cifar100-constant_ild-s2000 step 8000 loss 0.1339 seconds 405.8
+eval-convnext_cifar100-decreasing_ild-s2000 step 10000 loss 0.0037 seconds 463.1
+eval-gpt_wikitext103-decreasing_ild-s2000 step 1600 loss 4.322 seconds 471.9
+eval-gpt_wikitext103-constant_ild-s2000 step 1600 loss 4.1668 seconds 471.0
+eval-convnext_cifar100-dense-s2000 step 10000 loss 0.0014 seconds 439.1
+COMPLETED eval-convnext_cifar100-dense-s2000 seconds 506.1
+SUBMITTED eval-convnext_cifar100-dense-s2001 fc-01M23VAXY6JF904S4HTD4KXAG8
+eval-vit_cifar100-constant_ild-s2000 step 5120 loss 1.3054 seconds 485.2
+eval-convnext_cifar100-dense-s2001 step 1 loss 4.7258 seconds 0.1
+COMPLETED eval-convnext_cifar100-decreasing_ild-s2000 seconds 511.9
+SUBMITTED eval-gpt_wikitext103-dense-s2001 fc-01M23VB3KHH4S77R0EDWCF3S72
+eval-gpt_wikitext103-dense-s2000 step 1600 loss 3.9902 seconds 472.6
+eval-vit_cifar100-dense-s2000 step 5120 loss 0.734 seconds 495.2
+eval-convnext_cifar100-constant_ild-s2000 step 9000 loss 0.1167 seconds 453.5
+eval-gpt_wikitext103-dense-s2001 step 1 loss 11.0112 seconds 1.1
+eval-vit_cifar100-decreasing_ild-s2000 step 5120 loss 1.3742 seconds 490.2
+eval-convnext_cifar100-dense-s2001 step 1000 loss 2.582 seconds 42.9
+eval-convnext_cifar100-constant_ild-s2000 step 10000 loss 0.0879 seconds 501.2
+COMPLETED eval-convnext_cifar100-constant_ild-s2000 seconds 588.1
+SUBMITTED eval-vit_cifar100-dense-s2001 fc-01M23VDDYHNW2Q0NXSCDM1PN6Y
+eval-gpt_wikitext103-decreasing_ild-s2000 step 1920 loss 4.0806 seconds 566.2
+eval-gpt_wikitext103-constant_ild-s2000 step 1920 loss 3.9525 seconds 565.0
+eval-convnext_cifar100-dense-s2001 step 2000 loss 1.5007 seconds 85.6
+eval-vit_cifar100-dense-s2001 step 1 loss 4.753 seconds 0.5
+eval-vit_cifar100-constant_ild-s2000 step 6144 loss 0.8745 seconds 581.8
+eval-gpt_wikitext103-dense-s2000 step 1920 loss 3.7848 seconds 566.9
+eval-vit_cifar100-dense-s2000 step 6144 loss 0.4134 seconds 592.8
+eval-gpt_wikitext103-dense-s2001 step 320 loss 5.6347 seconds 94.7
+eval-convnext_cifar100-dense-s2001 step 3000 loss 0.7382 seconds 128.2
+eval-vit_cifar100-decreasing_ild-s2000 step 6144 loss 1.0266 seconds 589.1
+eval-convnext_cifar100-dense-s2001 step 4000 loss 0.2241 seconds 170.9
+eval-gpt_wikitext103-constant_ild-s2000 eval-gpt_wikitext103-decreasing_ild-s2000 step 2240 loss 3.8836 seconds 659.0
+step 2240 loss 4.0 seconds 660.5
+eval-vit_cifar100-dense-s2001 step 1024 loss 2.3517 seconds 93.6
+eval-vit_cifar100-constant_ild-s2000 step 7168 loss 0.5547 seconds 678.7
+eval-gpt_wikitext103-dense-s2000 step 2240 loss 3.7239 seconds 661.3
+eval-vit_cifar100-dense-s2000 step 7168 loss 0.2161 seconds 690.9
+eval-gpt_wikitext103-dense-s2001 step 640 loss 4.8207 seconds 188.8
+eval-convnext_cifar100-dense-s2001 step 5000 loss 0.0841 seconds 213.9
+eval-vit_cifar100-decreasing_ild-s2000 step 7168 loss 0.8058 seconds 687.6
+eval-convnext_cifar100-dense-s2001 step 6000 loss 0.0371 seconds 256.5
+eval-gpt_wikitext103-constant_ild-s2000 step 2560 loss 3.8352 seconds 752.9
+eval-gpt_wikitext103-decreasing_ild-s2000 step 2560 loss 3.934 seconds 754.9
+eval-vit_cifar100-dense-s2001 step 2048 loss 2.0062 seconds 186.9
+eval-vit_cifar100-constant_ild-s2000 step 8192 loss 0.3385 seconds 775.3
+eval-gpt_wikitext103-dense-s2000 step 2560 loss 3.68 seconds 755.6
+eval-convnext_cifar100-dense-s2001 step 7000 loss 0.0584 seconds 299.1
+eval-vit_cifar100-dense-s2000 step 8192 loss 0.1282 seconds 788.1
+eval-gpt_wikitext103-dense-s2001 step 960 loss 4.5232 seconds 282.9
+eval-vit_cifar100-decreasing_ild-s2000 step 8192 loss 0.6096 seconds 785.9
+eval-convnext_cifar100-dense-s2001 step 8000 loss 0.0075 seconds 341.9
+eval-gpt_wikitext103-constant_ild-s2000 step 2880 loss 3.6519 seconds 846.9
+eval-gpt_wikitext103-decreasing_ild-s2000 step 2880 loss 3.7258 seconds 849.3
+eval-vit_cifar100-dense-s2001 step 3072 loss 1.6019 seconds 280.2
+eval-convnext_cifar100-dense-s2001 step 9000 loss 0.0091 seconds 384.7
+eval-vit_cifar100-constant_ild-s2000 step 9216 loss 0.1933 seconds 872.1
+eval-gpt_wikitext103-dense-s2000 step 2880 loss 3.477 seconds 850.2
+eval-gpt_wikitext103-dense-s2001 step 1280 loss 4.2015 seconds 377.1
+eval-vit_cifar100-dense-s2000 step 9216 loss 0.0456 seconds 885.7
+eval-convnext_cifar100-dense-s2001 step 10000 loss 0.0025 seconds 427.9
+eval-vit_cifar100-decreasing_ild-s2000 step 9216 loss 0.4672 seconds 883.6
+COMPLETED eval-convnext_cifar100-dense-s2001 seconds 439.4
+SUBMITTED eval-convnext_cifar100-constant_ild-s2001 fc-01M23VRB2M84VGVMHCZPH3K4FR
+eval-gpt_wikitext103-constant_ild-s2000 step 3200 loss 3.8028 seconds 941.0
+eval-gpt_wikitext103-decreasing_ild-s2000 step 3200 loss 3.8753 seconds 943.9
+eval-vit_cifar100-dense-s2001 step 4096 loss 1.1188 seconds 373.8
+COMPLETED eval-gpt_wikitext103-decreasing_ild-s2000 seconds 989.5
+SUBMITTED eval-gpt_wikitext103-constant_ild-s2001 fc-01M23VSNXH4QRG939X7NJ12HHZ
+eval-vit_cifar100-constant_ild-s2000 step 10240 loss 0.1457 seconds 968.7
+eval-gpt_wikitext103-dense-s2000 step 3200 loss 3.6544 seconds 944.8
+eval-gpt_wikitext103-constant_ild-s2001 step 1 loss 11.0066 seconds 0.3
+eval-gpt_wikitext103-dense-s2001 step 1600 loss 4.0055 seconds 471.1
+COMPLETED eval-vit_cifar100-constant_ild-s2000 seconds 1008.6
+SUBMITTED eval-vit_cifar100-constant_ild-s2001 fc-01M23VT8MBG9EGAN6BFEG11HW0
+COMPLETED eval-gpt_wikitext103-constant_ild-s2000 seconds 1011.7
+eval-vit_cifar100-dense-s2000 step 10240 loss 0.0411 seconds 983.6
+SUBMITTED eval-convnext_cifar100-decreasing_ild-s2001 fc-01M23VTBNMN95VM7GWKFFMFWDH
+eval-vit_cifar100-constant_ild-s2001 step 1 loss 4.7414 seconds 0.1
+COMPLETED eval-gpt_wikitext103-dense-s2000 seconds 1019.6
+SUBMITTED eval-gpt_wikitext103-decreasing_ild-s2001 fc-01M23VTKCG4PHPQ0KJEYXV2XDX
+eval-gpt_wikitext103-decreasing_ild-s2001 step 1 loss 10.9934 seconds 0.3
+COMPLETED eval-vit_cifar100-dense-s2000 seconds 1031.2
+SUBMITTED eval-vit_cifar100-decreasing_ild-s2001 fc-01M23VTYMCKWGCBTZNFG8MQ2X8
+eval-convnext_cifar100-constant_ild-s2001 step 1 loss 4.7259 seconds 9.9
+eval-vit_cifar100-decreasing_ild-s2000 step 10240 loss 0.3304 seconds 981.8
+eval-convnext_cifar100-decreasing_ild-s2001 step 1 loss 4.7257 seconds 9.4
+eval-vit_cifar100-decreasing_ild-s2001 step 1 loss 4.7713 seconds 0.3
+COMPLETED eval-vit_cifar100-decreasing_ild-s2000 seconds 1058.9
+SUBMITTED eval-convnext_cifar100-dense-s2002 fc-01M23VVSR1P0P210NWD1A7103D
+eval-vit_cifar100-dense-s2001 step 5120 loss 0.5948 seconds 467.2
+eval-convnext_cifar100-constant_ild-s2001 step 1000 loss 2.7131 seconds 52.7
+eval-convnext_cifar100-decreasing_ild-s2001 step 1000 loss 2.791 seconds 51.6
+eval-gpt_wikitext103-constant_ild-s2001 step 320 loss 5.6691 seconds 94.3
+eval-gpt_wikitext103-dense-s2001 step 1920 loss 3.8497 seconds 565.2
+eval-vit_cifar100-constant_ild-s2001 step 1024 loss 2.6098 seconds 97.0
+eval-convnext_cifar100-dense-s2002 step 1 loss 4.7469 seconds 9.5
+eval-convnext_cifar100-constant_ild-s2001 step 2000 loss 1.8534 seconds 95.3
+eval-gpt_wikitext103-decreasing_ild-s2001 step 320 loss 5.7035 seconds 93.9
+eval-convnext_cifar100-decreasing_ild-s2001 step 2000 loss 2.0231 seconds 94.0
+eval-vit_cifar100-decreasing_ild-s2001 step 1024 loss 2.4353 seconds 97.3
+eval-convnext_cifar100-dense-s2002 step 1000 loss 2.5721 seconds 51.8
+eval-convnext_cifar100-constant_ild-s2001 step 3000 loss 1.3169 seconds 138.1
+eval-vit_cifar100-dense-s2001 step 6144 loss 0.4187 seconds 560.8
+eval-convnext_cifar100-decreasing_ild-s2001 step 3000 loss 1.5712 seconds 136.3
+eval-gpt_wikitext103-constant_ild-s2001 step 640 loss 4.9075 seconds 188.6
+eval-gpt_wikitext103-dense-s2001 step 2240 loss 3.802 seconds 659.3
+eval-convnext_cifar100-dense-s2002 step 2000 loss 1.6797 seconds 93.7
+eval-convnext_cifar100-constant_ild-s2001 step 4000 loss 0.7231 seconds 180.8
+eval-convnext_cifar100-decreasing_ild-s2001 step 4000 loss 0.9208 seconds 178.4
+eval-vit_cifar100-constant_ild-s2001 step 2048 loss 2.341 seconds 194.0
+eval-gpt_wikitext103-decreasing_ild-s2001 step 640 loss 4.9859 seconds 187.8
+eval-vit_cifar100-decreasing_ild-s2001 step 2048 loss 2.2833 seconds 194.5
+eval-convnext_cifar100-dense-s2002 step 3000 loss 0.879 seconds 135.6
+eval-convnext_cifar100-constant_ild-s2001 step 5000 loss 0.3949 seconds 223.3
+eval-convnext_cifar100-decreasing_ild-s2001 step 5000 loss 0.405 seconds 220.4
+eval-vit_cifar100-dense-s2001 step 7168 loss 0.2183 seconds 654.1
+eval-gpt_wikitext103-constant_ild-s2001 step 960 loss 4.6855 seconds 283.0
+eval-convnext_cifar100-dense-s2002 step 4000 loss 0.2384 seconds 177.8
+eval-gpt_wikitext103-dense-s2001 step 2560 loss 3.6982 seconds 753.3
+eval-convnext_cifar100-constant_ild-s2001 step 6000 loss 0.1732 seconds 265.6
+eval-convnext_cifar100-decreasing_ild-s2001 step 6000 loss 0.1349 seconds 262.6
+eval-gpt_wikitext103-decreasing_ild-s2001 step 960 loss 4.7851 seconds 281.9
+eval-vit_cifar100-constant_ild-s2001 step 3072 loss 2.0497 seconds 291.0
+eval-convnext_cifar100-dense-s2002 step 5000 loss 0.0788 seconds 220.0
+eval-convnext_cifar100-constant_ild-s2001 step 7000 loss 0.1311 seconds 308.0
+eval-convnext_cifar100-decreasing_ild-s2001 step 7000 loss 0.0809 seconds 304.9
+eval-vit_cifar100-decreasing_ild-s2001 step 3072 loss 1.8672 seconds 291.5
+eval-vit_cifar100-dense-s2001 step 8192 loss 0.1172 seconds 747.7
+eval-convnext_cifar100-dense-s2002 step 6000 loss 0.0759 seconds 262.0
+eval-gpt_wikitext103-constant_ild-s2001 step 1280 loss 4.417 seconds 377.4
+eval-convnext_cifar100-constant_ild-s2001 step 8000 loss 0.1259 seconds 350.4
+eval-convnext_cifar100-decreasing_ild-s2001 step 8000 loss 0.0321 seconds 347.4
+eval-gpt_wikitext103-dense-s2001 step 2880 loss 3.5257 seconds 847.4
+eval-gpt_wikitext103-decreasing_ild-s2001 step 1280 loss 4.537 seconds 376.0
+eval-vit_cifar100-constant_ild-s2001 step 4096 loss 1.4869 seconds 388.3
+eval-convnext_cifar100-dense-s2002 step 7000 loss 0.0165 seconds 304.0
+eval-convnext_cifar100-constant_ild-s2001 step 9000 loss 0.1125 seconds 393.8
+eval-convnext_cifar100-decreasing_ild-s2001 step 9000 loss 0.0133 seconds 389.9
+eval-vit_cifar100-decreasing_ild-s2001 step 4096 loss 1.5025 seconds 388.5
+eval-vit_cifar100-dense-s2001 step 9216 loss 0.0655 seconds 841.2
+eval-convnext_cifar100-dense-s2002 step 8000 loss 0.0118 seconds 346.1
+eval-convnext_cifar100-constant_ild-s2001 step 10000 loss 0.0704 seconds 436.1
+eval-convnext_cifar100-decreasing_ild-s2001 step 10000 loss 0.0034 seconds 432.3
+eval-gpt_wikitext103-constant_ild-s2001 step 1600 loss 4.2103 seconds 471.8
+COMPLETED eval-convnext_cifar100-constant_ild-s2001 seconds 525.9
+SUBMITTED eval-gpt_wikitext103-dense-s2002 fc-01M23W8CPFA8YA7QF4H64EEMCS
+COMPLETED eval-convnext_cifar100-decreasing_ild-s2001 seconds 461.8
+SUBMITTED eval-vit_cifar100-dense-s2002 fc-01M23W8EMY0WDY2AE7T2XCH8A3
+eval-gpt_wikitext103-dense-s2001 step 3200 loss 3.5297 seconds 941.5
+eval-convnext_cifar100-dense-s2002 step 9000 loss 0.0022 seconds 388.2
+eval-gpt_wikitext103-decreasing_ild-s2001 step 1600 loss 4.3386 seconds 470.0
+COMPLETED eval-gpt_wikitext103-dense-s2001 seconds 987.7
+SUBMITTED eval-convnext_cifar100-constant_ild-s2002 fc-01M23W9854DZYNFD824T0951BF
+eval-vit_cifar100-constant_ild-s2001 step 5120 loss 1.1469 seconds 485.5
+eval-gpt_wikitext103-dense-s2002 step 1 loss 11.0093 seconds 0.6
+eval-vit_cifar100-dense-s2002 step 1 loss 4.7283 seconds 0.5
+eval-vit_cifar100-decreasing_ild-s2001 step 5120 loss 1.1978 seconds 486.2
+eval-vit_cifar100-dense-s2001 step 10240 loss 0.0415 seconds 934.5
+eval-convnext_cifar100-dense-s2002 step 10000 loss 0.0008 seconds 430.2
+eval-convnext_cifar100-constant_ild-s2002 step 1 loss 4.7469 seconds 13.5
+COMPLETED eval-convnext_cifar100-dense-s2002 seconds 488.7
+SUBMITTED eval-gpt_wikitext103-constant_ild-s2002 fc-01M23WAPZK72YTRKSX1ZJ2Y3G0
+COMPLETED eval-vit_cifar100-dense-s2001 seconds 961.2
+SUBMITTED eval-vit_cifar100-constant_ild-s2002 fc-01M23WARJMY3HCSYSANMGH0NXT
+eval-gpt_wikitext103-constant_ild-s2002 step 1 loss 11.0122 seconds 0.6
+eval-gpt_wikitext103-constant_ild-s2001 step 1920 loss 4.0566 seconds 566.2
+eval-vit_cifar100-constant_ild-s2002 step 1 loss 4.7462 seconds 0.7
+eval-convnext_cifar100-constant_ild-s2002 step 1000 loss 2.7031 seconds 60.2
+eval-gpt_wikitext103-decreasing_ild-s2001 step 1920 loss 4.1695 seconds 564.1
+eval-vit_cifar100-constant_ild-s2001 step 6144 loss 0.894 seconds 582.4
+eval-gpt_wikitext103-dense-s2002 step 320 loss 5.5522 seconds 93.9
+eval-vit_cifar100-dense-s2002 step 1024 loss 2.538 seconds 96.6
+eval-vit_cifar100-decreasing_ild-s2001 step 6144 loss 0.9993 seconds 583.3
+eval-convnext_cifar100-constant_ild-s2002 step 2000 loss 2.013 seconds 106.6
+eval-gpt_wikitext103-constant_ild-s2002 step 320 loss 5.5798 seconds 93.4
+eval-gpt_wikitext103-constant_ild-s2001 step 2240 loss 4.0091 seconds 660.6
+eval-convnext_cifar100-constant_ild-s2002 step 3000 loss 1.4068 seconds 153.2
+eval-vit_cifar100-constant_ild-s2002 step 1024 loss 2.754 seconds 97.6
+eval-gpt_wikitext103-decreasing_ild-s2001 step 2240 loss 4.0994 seconds 658.5
+eval-vit_cifar100-constant_ild-s2001 step 7168 loss 0.6211 seconds 679.5
+eval-gpt_wikitext103-dense-s2002 step 640 loss 4.9661 seconds 187.7
+eval-vit_cifar100-dense-s2002 step 2048 loss 2.2435 seconds 192.6
+eval-vit_cifar100-decreasing_ild-s2001 step 7168 loss 0.6589 seconds 680.4
+eval-convnext_cifar100-constant_ild-s2002 step 4000 loss 0.8711 seconds 201.3
+eval-gpt_wikitext103-constant_ild-s2002 step 640 loss 5.0849 seconds 186.6
+eval-gpt_wikitext103-constant_ild-s2001 step 2560 loss 3.9154 seconds 755.0
+eval-gpt_wikitext103-decreasing_ild-s2001 step 2560 loss 3.9831 seconds 752.7
+eval-vit_cifar100-constant_ild-s2002 step 2048 loss 2.4866 seconds 195.8
+eval-convnext_cifar100-constant_ild-s2002 step 5000 loss 0.4991 seconds 252.6
+eval-vit_cifar100-constant_ild-s2001eval-gpt_wikitext103-dense-s2002 step 960 loss 4.6215 seconds 281.6
+ step 8192 loss 0.3565 seconds 777.2
+eval-vit_cifar100-dense-s2002 step 3072 loss 1.5419 seconds 289.5
+eval-vit_cifar100-decreasing_ild-s2001 step 8192 loss 0.531 seconds 777.4
+eval-convnext_cifar100-constant_ild-s2002 step 6000 loss 0.3231 seconds 300.3
+eval-gpt_wikitext103-constant_ild-s2002 step 960 loss 4.7898 seconds 279.9
+eval-gpt_wikitext103-constant_ild-s2001 step 2880 loss 3.7234 seconds 849.9
+eval-gpt_wikitext103-decreasing_ild-s2001 step 2880 loss 3.78 seconds 847.1
+eval-convnext_cifar100-constant_ild-s2002 step 7000 loss 0.2241 seconds 348.1
+eval-vit_cifar100-constant_ild-s2002 step 3072 loss 1.9835 seconds 293.6
+eval-gpt_wikitext103-dense-s2002 step 1280 loss 4.2528 seconds 375.3
+eval-vit_cifar100-constant_ild-s2001 step 9216 loss 0.2344 seconds 876.8
+eval-vit_cifar100-dense-s2002 step 4096 loss 1.1082 seconds 385.5
+eval-vit_cifar100-decreasing_ild-s2001 step 9216 loss 0.2626 seconds 874.2
+eval-convnext_cifar100-constant_ild-s2002 step 8000 loss 0.1473 seconds 398.2
+eval-gpt_wikitext103-constant_ild-s2002 step 1280 loss 4.4295 seconds 373.2
+eval-gpt_wikitext103-constant_ild-s2001 step 3200 loss 3.7687 seconds 944.4
+COMPLETED eval-gpt_wikitext103-constant_ild-s2001 seconds 973.5
+SUBMITTED eval-convnext_cifar100-decreasing_ild-s2002 fc-01M23WQCKRWZANV2KGXY5B6NSE
+eval-gpt_wikitext103-decreasing_ild-s2001 step 3200 loss 3.7913 seconds 941.6
+eval-convnext_cifar100-constant_ild-s2002 step 9000 loss 0.1025 seconds 446.7
+eval-vit_cifar100-constant_ild-s2002 step 4096 loss 1.677 seconds 391.9
+eval-gpt_wikitext103-dense-s2002 step 1600 loss 4.0189 seconds 469.2
+COMPLETED eval-gpt_wikitext103-decreasing_ild-s2001 seconds 972.5
+SUBMITTED eval-gpt_wikitext103-decreasing_ild-s2002 fc-01M23WR9294Z69S6XKGJBRHMQP
+eval-convnext_cifar100-decreasing_ild-s2002 step 1 loss 4.7471 seconds 9.5
+eval-vit_cifar100-constant_ild-s2001 step 10240 loss 0.2041 seconds 973.8
+eval-gpt_wikitext103-decreasing_ild-s2002 step 1 loss 11.0017 seconds 0.3
+eval-vit_cifar100-dense-s2002 step 5120 loss 0.6553 seconds 481.2
+COMPLETED eval-vit_cifar100-constant_ild-s2001 seconds 998.2
+SUBMITTED eval-vit_cifar100-decreasing_ild-s2002 fc-01M23WRQEQZVEBJ9WM4ZY4JJ7D
+eval-vit_cifar100-decreasing_ild-s2002 step 1 loss 4.7346 seconds 0.1
+eval-vit_cifar100-decreasing_ild-s2001 step 10240 loss 0.2544 seconds 970.8
+eval-convnext_cifar100-constant_ild-s2002 step 10000 loss 0.0904 seconds 494.4
+eval-gpt_wikitext103-constant_ild-s2002 step 1600 loss 4.2151 seconds 466.6
+eval-convnext_cifar100-decreasing_ild-s2002 step 1000 loss 2.7549 seconds 51.7
+COMPLETED eval-vit_cifar100-decreasing_ild-s2001 seconds 1007.6
+COMPLETED eval-convnext_cifar100-constant_ild-s2002 seconds 544.9
+eval-vit_cifar100-constant_ild-s2002 step 5120 loss 1.1699 seconds 490.0
+eval-convnext_cifar100-decreasing_ild-s2002 step 2000 loss 2.1009 seconds 94.1
+eval-gpt_wikitext103-dense-s2002 step 1920 loss 3.8927 seconds 563.1
+eval-gpt_wikitext103-decreasing_ild-s2002 step 320 loss 5.6238 seconds 94.1
+eval-vit_cifar100-dense-s2002 step 6144 loss 0.3483 seconds 576.8
+eval-vit_cifar100-decreasing_ild-s2002 step 1024 loss 2.6708 seconds 97.0
+eval-gpt_wikitext103-constant_ild-s2002 step 1920 loss 4.0882 seconds 560.1
+eval-convnext_cifar100-decreasing_ild-s2002 step 3000 loss 1.5151 seconds 136.8
+eval-convnext_cifar100-decreasing_ild-s2002 step 4000 loss 1.0175 seconds 179.3
+eval-gpt_wikitext103-dense-s2002 step 2240 loss 4.0361 seconds 657.0
+eval-vit_cifar100-constant_ild-s2002 step 6144 loss 0.6725 seconds 588.6
+eval-gpt_wikitext103-decreasing_ild-s2002 step 640 loss 5.1498 seconds 188.6
+eval-vit_cifar100-dense-s2002 step 7168 loss 0.2004 seconds 672.4
+eval-convnext_cifar100-decreasing_ild-s2002 step 5000 loss 0.4445 seconds 222.3
+eval-vit_cifar100-decreasing_ild-s2002 step 2048 loss 2.4723 seconds 194.6
+eval-gpt_wikitext103-constant_ild-s2002 step 2240 loss 4.23 seconds 653.9
+eval-convnext_cifar100-decreasing_ild-s2002 step 6000 loss 0.2128 seconds 265.1
+eval-gpt_wikitext103-dense-s2002 step 2560 loss 3.7447 seconds 750.9
+eval-vit_cifar100-constant_ild-s2002 step 7168 loss 0.548 seconds 687.7
+eval-gpt_wikitext103-decreasing_ild-s2002 step 960 loss 4.8845 seconds 282.9
+eval-vit_cifar100-dense-s2002 step 8192 loss 0.0804 seconds 768.0
+eval-convnext_cifar100-decreasing_ild-s2002 step 7000 loss 0.0943 seconds 308.3
+eval-gpt_wikitext103-constant_ild-s2002 step 2560 loss 3.9564 seconds 747.6
+eval-vit_cifar100-decreasing_ild-s2002 step 3072 loss 1.8077 seconds 291.8
+eval-convnext_cifar100-decreasing_ild-s2002 step 8000 loss 0.0694 seconds 351.1
+eval-gpt_wikitext103-dense-s2002 step 2880 loss 3.5887 seconds 844.7
+eval-vit_cifar100-constant_ild-s2002 step 8192 loss 0.3172 seconds 788.7
+eval-convnext_cifar100-decreasing_ild-s2002 step 9000 loss 0.0089 seconds 393.8
+eval-gpt_wikitext103-decreasing_ild-s2002 step 1280 loss 4.597 seconds 377.2
+eval-vit_cifar100-dense-s2002 step 9216 loss 0.0741 seconds 865.7
+eval-gpt_wikitext103-constant_ild-s2002 step 2880 loss 3.8008 seconds 840.8
+eval-vit_cifar100-decreasing_ild-s2002 step 4096 loss 1.6326 seconds 389.1
+eval-convnext_cifar100-decreasing_ild-s2002 step 10000 loss 0.0089 seconds 436.2
+COMPLETED eval-convnext_cifar100-decreasing_ild-s2002 seconds 467.8
+eval-gpt_wikitext103-dense-s2002 step 3200 loss 3.5174 seconds 938.5
+eval-gpt_wikitext103-decreasing_ild-s2002 step 1600 loss 4.3715 seconds 471.5
+eval-vit_cifar100-constant_ild-s2002 step 9216 loss 0.1834 seconds 887.9
+COMPLETED eval-gpt_wikitext103-dense-s2002 seconds 1003.0
+eval-vit_cifar100-dense-s2002 step 10240 loss 0.0225 seconds 963.2
+eval-gpt_wikitext103-constant_ild-s2002 step 3200 loss 3.7111 seconds 934.2
+eval-vit_cifar100-decreasing_ild-s2002 step 5120 loss 1.3649 seconds 486.9
+COMPLETED eval-vit_cifar100-dense-s2002 seconds 1032.3
+COMPLETED eval-gpt_wikitext103-constant_ild-s2002 seconds 959.6
+eval-gpt_wikitext103-decreasing_ild-s2002 step 1920 loss 4.216 seconds 565.9
+eval-vit_cifar100-constant_ild-s2002 step 10240 loss 0.1204 seconds 985.4
+COMPLETED eval-vit_cifar100-constant_ild-s2002 seconds 1040.3
+eval-vit_cifar100-decreasing_ild-s2002 step 6144 loss 0.9236 seconds 586.0
+eval-gpt_wikitext103-decreasing_ild-s2002 step 2240 loss 4.3174 seconds 660.4
+eval-vit_cifar100-decreasing_ild-s2002 step 7168 loss 0.7615 seconds 683.2
+eval-gpt_wikitext103-decreasing_ild-s2002 step 2560 loss 4.0216 seconds 754.9
+eval-vit_cifar100-decreasing_ild-s2002 step 8192 loss 0.5718 seconds 780.3
+eval-gpt_wikitext103-decreasing_ild-s2002 step 2880 loss 3.8583 seconds 849.6
+eval-vit_cifar100-decreasing_ild-s2002 step 9216 loss 0.2934 seconds 878.4
+eval-gpt_wikitext103-decreasing_ild-s2002 step 3200 loss 3.7422 seconds 944.2
+COMPLETED eval-gpt_wikitext103-decreasing_ild-s2002 seconds 973.7
+eval-vit_cifar100-decreasing_ild-s2002 step 10240 loss 0.1645 seconds 975.5
+COMPLETED eval-vit_cifar100-decreasing_ild-s2002 seconds 1003.6
+STAGE COMPLETE evaluate jobs 27 errors 0
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-OVwjt5Dic53VuvpIsBP4T
+F

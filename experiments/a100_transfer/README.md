@@ -2,6 +2,10 @@
 
 This extends the [local toy study](https://yaroslavvb.github.io/gradient-dissent/depth-robustness/) to three larger models, trained from scratch on Modal A100 GPUs. It tests the **depth-robustness mechanism** in [Don't Drop Dropout](https://arxiv.org/pdf/2609.05275v1), especially whether it transfers to image classifiers.
 
+**Completed report:** [interactive results and interpretation](https://yaroslavvb.github.io/gradient-dissent/a100-transfer/). All 27 tuning and 27 final runs completed. GPT shows a large pruning-robustness gain with a full-model quality cost. ConvNeXt shows large observed pruned-accuracy benefits, but its primary CE intervals include zero. ViT's conclusion changes with the mask and metric: early exit improves dense CE most, while pruned accuracy and random deletion favor ILD. See [verified statistics](results/REPORT.md) and the [source interpretation](FINDINGS.json).
+
+The [execution-completion inventory](results/execution-completion.json) records all experiment apps stopped, no active GPU containers, all 27 final checkpoints present, and a final saved metered-usage snapshot of **$27.81**. This snapshot may lag and is not an invoice; the authorization ceiling was $50.
+
 ## Frozen design
 
 | Family | Parameters | Data / input | Training per run | Pruning intervention |

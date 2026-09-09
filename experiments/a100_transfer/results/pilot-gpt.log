@@ -1,0 +1,32 @@
+✓ Initialized. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-BCOEArZEBp6TXa3PBfYgm
+m
+✓ Created objects.
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p
+│   y
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer
+├── 🔨 Created function prepare.
+└── 🔨 Created function train.
+RESERVED aggregate $0.3579; absolute ceiling $50.00
+/opt/a100_transfer/train.py:195: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  point={'step':step+1,'train_ce':float(loss),'lr':lr,'nominal_mean_dropout':float(p.mean()),
+pilot-v1-gpt_wikitext103 step 1 loss 10.9706 seconds 1.2
+pilot-v1-gpt_wikitext103 step 10 loss 7.6877 seconds 3.7
+pilot-v1-gpt_wikitext103 step 20 loss 7.3259 seconds 6.5
+pilot-v1-gpt_wikitext103 step 30 loss 7.0983 seconds 9.3
+FAILED pilot-v1-gpt_wikitext103 DeserializationError Deserialization failed because the 'torch' module is not available in the local environment.
+STAGE COMPLETE pilot jobs 1 errors 1
+Stopping app - uncaught exception raised locally: RuntimeError('1 failed jobs; results and reservations retained, no automatic retries.').
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p │
+│ y:157 in launch                                                              │
+│                                                                              │
+│   156 │   │   results = list(pool.map(execute, jobs))                        │
+│ ❱ 157 │   stop_monitor.set()                                                 │
+│   158 │   monitor.join(timeout=2)                                            │
+╰──────────────────────────────────────────────────────────────────────────────╯
+RuntimeError: 1 failed jobs; results and reservations retained, no automatic 
+retries.

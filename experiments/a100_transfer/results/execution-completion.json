@@ -1,0 +1,241 @@
+{
+  "queried_unix": 1788985917.8039758,
+  "environment": "gradient-dissent-a100",
+  "volume": "gradient-dissent-a100-20260909",
+  "all_apps_stopped": true,
+  "active_containers": [],
+  "apps": [
+    {
+      "app_id": "ap-OVwjt5Dic53VuvpIsBP4TF",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 12:38:23-07:00",
+      "stopped_at": "2026-09-09 13:28:39-07:00"
+    },
+    {
+      "app_id": "ap-lucFYc5CbOaKKymn7NHT7r",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 11:49:42-07:00",
+      "stopped_at": "2026-09-09 12:38:18-07:00"
+    },
+    {
+      "app_id": "ap-QxxzYsuPSlLWSkM5g6w99D",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 11:48:08-07:00",
+      "stopped_at": "2026-09-09 11:48:41-07:00"
+    },
+    {
+      "app_id": "ap-BCOEArZEBp6TXa3PBfYgmm",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 11:40:59-07:00",
+      "stopped_at": "2026-09-09 11:46:33-07:00"
+    },
+    {
+      "app_id": "ap-vs7tg3xGaC66jLJq6IWxZx",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 11:45:50-07:00",
+      "stopped_at": "2026-09-09 11:46:20-07:00"
+    },
+    {
+      "app_id": "ap-8rBXwPCm5MMshM5WyEqkF7",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 11:44:34-07:00",
+      "stopped_at": "2026-09-09 11:45:28-07:00"
+    },
+    {
+      "app_id": "ap-Llxo3R6hwo9LbLUO7vd99p",
+      "description": "gradient-dissent-a100-transfer",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 11:35:05-07:00",
+      "stopped_at": "2026-09-09 11:44:43-07:00"
+    }
+  ],
+  "checkpoint_inventory_matches_final_manifest": true,
+  "checkpoint_count": 27,
+  "checkpoints": [
+    {
+      "filename": "checkpoints/eval-vit_cifar100-decreasing_ild-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:28 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-decreasing_ild-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:27 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-constant_ild-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:21 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-constant_ild-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:20 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-dense-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:19 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-dense-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:19 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-decreasing_ild-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:18 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-constant_ild-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:12 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-decreasing_ild-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:12 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-constant_ild-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:11 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-decreasing_ild-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:11 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-constant_ild-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:10 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-dense-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:04 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-dense-s2002.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:04 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-dense-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:03 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-decreasing_ild-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:02 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-constant_ild-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 13:02 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-decreasing_ild-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:55 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-dense-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:55 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-dense-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:55 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-constant_ild-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:54 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-vit_cifar100-constant_ild-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:55 PDT",
+      "size": "325.1 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-gpt_wikitext103-decreasing_ild-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:54 PDT",
+      "size": "474.8 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-dense-s2001.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:54 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-constant_ild-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:48 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-decreasing_ild-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:46 PDT",
+      "size": "106.5 MiB"
+    },
+    {
+      "filename": "checkpoints/eval-convnext_cifar100-dense-s2000.pt",
+      "type": "file",
+      "created_modified": "2026-09-09 12:46 PDT",
+      "size": "106.5 MiB"
+    }
+  ],
+  "checkpoint_verification_scope": "Presence and listed sizes only; source/result integrity is checked separately. Saved model tensors were not re-evaluated by this inventory.",
+  "metered_usage": {
+    "metered_cost_usd": 27.80917224,
+    "queried_unix": 1788985916.025095
+  },
+  "billing_breakdown": {
+    "llm_tokens": "0E-8",
+    "ephemeral_apps": "27.80917224",
+    "volumes": "0E-8"
+  }
+}

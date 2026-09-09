@@ -6,8 +6,10 @@
   "scripts": {
     "build": "python3 scripts/build_report.py && node scripts/render_math.cjs",
     "build:depth": "python3 scripts/build_depth_report.py",
+    "build:a100": "python3 scripts/build_a100_report.py",
     "check": "node --check docs/app.js && node scripts/check_site.cjs",
     "check:depth": "node --check docs/depth-robustness/app.js && node scripts/check_depth_report.cjs",
+    "check:a100": "node --check docs/a100-transfer/app.js && node scripts/check_a100_report.cjs",
     "serve": "python3 -m http.server 8765 --directory docs"
   },
   "devDependencies": {
