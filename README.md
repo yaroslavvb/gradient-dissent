@@ -9,6 +9,8 @@ An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity 
 - [Original paper PDF](https://arxiv.org/pdf/2609.05275v1)
 - [Experiments and reproduction instructions](experiments/README.md)
 
+- [High-level significance report](https://yaroslavvb.github.io/gradient-dissent/significance/): what the paper and independent experiments establish, with an interactive explanation of metric and mask dependence.
+
 ## Findings
 
 The paper offers a useful empirical recipe, with strong depth-robustness results. Its unqualified mean-preservation argument fails under the preferred shared-mask equations. The largest 8.2B row lacks a dense same-size control, and nonembedding FLOPs savings are not measured end-to-end time or energy savings. Progressive random subnetworks also have an important predecessor in RaPTr.
@@ -47,3 +49,5 @@ The larger GPU study has its own [frozen protocol, execution instructions, and c
 Review date: 9 September 2026. The full 27-page PDF, including appendices, was read and key equations/tables were visually checked. Source PDFs and raw meeting/document text stay in ignored `research/sources/`; use `scripts/fetch-paper.sh` to retrieve the public paper. The linked Google document was read only for research context, and its raw contents are not republished.
 
 Reported paper values, independent derivations, synthetic simulations, and measured toy results are labeled separately. The repository includes original plots and analysis, not redistributed paper figures. Vendored KaTeX assets retain their MIT license. Reproducing timing will yield different numbers on different machines; the saved run includes exact environment metadata.
+
+The significance overview uses the verified saved A100 summary: `npm run build:significance` and `npm run check:significance`. It performs no training.
