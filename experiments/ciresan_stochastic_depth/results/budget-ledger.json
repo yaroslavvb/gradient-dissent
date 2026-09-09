@@ -1119,7 +1119,51 @@
       "reserved_usd": 0.1943576,
       "created_unix": 1788994368.913881,
       "spec_sha256": "b2b571f32a50248c815a5d1030c0b90c352cfd36dfcaac405ea9a278afacbcbd"
+    },
+    {
+      "id": "hypothesis-audit-s101-v1",
+      "kind": "pilot",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1788996080.8688068,
+      "spec_sha256": "20d3a013577c2750409daf9bc42262d524c67ebf8058314e2af5e7f964910648"
+    },
+    {
+      "id": "hypothesis-audit-s102-v1",
+      "kind": "pilot",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1788996080.8688588,
+      "spec_sha256": "8f8bec0b18638b0dae5e931648a3ebd5b8671826fae35ad2e9dc8511e1d9facd"
+    },
+    {
+      "id": "hypothesis-audit-s103-v1",
+      "kind": "pilot",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1788996080.8688781,
+      "spec_sha256": "c3d871d5d6d5a258bcf6d5b2c8741c09b1d522161167795452aa6d5447baa06d"
+    },
+    {
+      "id": "hypothesis-routing-v1",
+      "kind": "pilot",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1788996332.7461739,
+      "spec_sha256": "92d15fd627eb75c6abd0d4c067d8eed1fe3d3a9d25f5cf15220cbc0eb69ce784"
     }
   ],
-  "reserved_upper_usd": 23.103569999999998
+  "reserved_upper_usd": 23.881000399999998
 }

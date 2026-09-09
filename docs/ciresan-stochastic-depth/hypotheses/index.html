@@ -1,0 +1,817 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Which digits can skip layers? · MNIST layer dropout</title><meta name="description" content="An exact 16-mask audit of stochastic depth on fully connected MNIST networks: class resilience, nonlinear interactions, and measured input-dependent routing."><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="style.css"><script defer src="data.js"></script><script defer src="app.js"></script></head><body>
+<a class="skip" href="#main">Skip to report</a><header><a class="brand" href="../../">GRADIENT DISSENT</a><nav><a href="../">Training experiment</a><a href="../optimization/">A100 optimization</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses">Code &amp; protocol</a></nav></header>
+<main id="main"><p class="eyebrow">Fable’s hypotheses, tested · fully connected MNIST · September 9, 2026</p><h1>Which digits can<br><em>skip the computation?</em></h1><div id="findings"><p>Stochastic depth makes missing layers less damaging. At the validation-selected checkpoints, the fraction of nonconstant logit interaction energy in higher-order terms falls from <strong>13.31% to about 2.3%</strong>. At epoch 100, keeping two of four body branches still gives <strong>98.34–98.35% accuracy</strong>.</p><p>A fixed reduced network is fast. This image-dependent router adds enough grouping overhead to become slower than the full network, despite using fewer nominal MACs.</p></div>
+<div class="stats"><div><strong>16</strong><span>Every possible body-layer mask</span></div><div><strong>30</strong><span>Checkpoint states, three seeds</span></div><div><strong>10,000</strong><span>Test digits per state</span></div><div><strong>5</strong><span>Hypotheses fixed before the audit</span></div></div>
+<p class="note">We reuse frozen checkpoints from the optimized training codebase. No neural retraining. Selected checkpoints are primary; epoch 100 is secondary. The dataset and seeds have been used before, so these results are exploratory. “Two layers kept” below averages all six ways to retain two of the four eligible branches.</p>
+<section class="explorer" aria-labelledby="explore-title"><h2 id="explore-title">Remove a layer. Follow a real digit.</h2><p>The colored branch performs an affine transformation. Removing it leaves the cropped bypass and ReLU. The stem and classifier always run.</p><div class="controls"><label>Training method<select id="recipe"><option value="sd_constant">Stochastic depth · constant</option><option value="sd_annealed">Stochastic depth · decreasing</option><option value="residual">Residual · no dropout</option><option value="residual_unit_dropout">Residual · unit dropout</option><option value="plain">Plain MLP · forced crop surgery</option></select></label><label>Checkpoint<select id="state"><option value="selected">Validation-selected · primary</option><option value="final">Epoch 100 · secondary</option></select></label><label>Seed<select id="seed"><option>101</option><option>102</option><option>103</option></select></label></div><p id="model-note" class="note"></p>
+<div class="mask-controls" id="mask-controls"></div><div class="animation-toolbar"><button id="play" type="button" aria-pressed="false">Play all 16 masks</button><button id="restore" type="button">Keep all layers</button><span id="mask-status" aria-live="polite"></span></div>
+<svg id="network" viewBox="0 0 1000 210" role="img" aria-label="Cropped residual network with four optional affine branches"></svg>
+<div class="example-focus"><canvas id="digit" width="140" height="140" aria-label="Selected MNIST digit"></canvas><div><p class="eyebrow" id="example-id"></p><p class="prediction" id="prediction" aria-live="polite"></p><p id="example-note"></p></div><div class="mask-score"><strong id="mask-accuracy"></strong><span>accuracy across all test images</span><strong id="mask-macs"></strong><span>nominal affine work retained</span></div></div>
+<div class="chart-heading"><h3>Every mask has its own cost</h3><p>Click a point to inspect its mask</p></div><svg id="frontier" viewBox="0 0 1000 330" role="img" aria-label="Accuracy versus nominal affine compute for all16 masks"></svg><p class="note">One point = one fixed mask on 10,000 images. MACs exclude routing, indexing, activations and memory. Later branches are cheaper: dropping a 5M-MAC branch differs from dropping a 0.5M-MAC branch.</p>
+<details><summary>Accessible mask results</summary><div class="table-wrap"><table id="mask-table"></table></div></details>
+<h3>Which digits lose accuracy?</h3><div class="table-wrap"><table id="class-table"><caption>Each column is one mask; each row is one true digit. Cell values are test accuracy.</caption></table></div><p class="note">Mask bits run shallow → deep; 1 means kept. Digit identity is used for analysis, never supplied to the router. Raw class differences can reflect confidence; the report below also matches full-model margin.</p>
+<div class="controls"><label>Inspect digit<select id="class"><option value="all">All digits</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></label><label>Two-layer resilience<select id="category"><option value="all">All categories</option><option value="preserved">Preserved by all six masks</option><option value="mixed">Some masks succeed</option><option value="lost">All six masks fail</option></select></label></div><div id="gallery" class="gallery"></div><p class="note">Examples follow a fixed selection rule: among full-model-correct test images, take the first two original test indices per digit in each category. Categories use all six masks retaining two branches. Missing categories are left empty. Click a digit to follow its predictions above.</p></section>
+<section id="verdicts"><h2>Five hypotheses. Five different answers.</h2><div class="verdict-grid"><div><p class="badge">H1 · partly supported</p><h3>Training with omissions buys tolerance</h3><p>Decreasing SD reduces selected-checkpoint deletion loss by 0.0588 nats versus residual training; the three-seed interval excludes zero. Constant SD has the same direction, with an interval crossing zero.</p></div><div><p class="badge">H2 · unresolved</p><h3>There is no stable “easy digit” rule</h3><p>Digit 1’s apparent advantage weakens after margin adjustment. All primary adjusted intervals include zero; final decreasing SD reverses the ordering.</p></div><div><p class="badge">H3 · local support</p><h3>Direction predicts more than size</h3><p>At selected checkpoints, gradient-based sensitivity tracks damage better than increment norm or angle. Final-checkpoint rank correlations deteriorate; finite-difference Gaussian controls are numerically unresolved.</p></div><div><p class="badge">H4 · supported, with limits</p><h3>Layer effects become more additive</h3><p>Exact binary-mask interactions fall sharply under SD. Real fractional-gain interpolation still has error, so this does not establish an affine network or an “if and only if” theorem.</p></div><div><p class="badge">H5 · no practical win here</p><h3>The cheap router is not cheap enough</h3><p>Only 4 of 9 primary routers keep the test error increase within 0.2 percentage points. All nine run 2.07–3.25× slower than full inference with this implementation.</p></div></div></section><section class="theory"><h2>What survives Fable’s argument?</h2><p>Stochastic depth trains the model to cope with missing computation. That is a useful operational idea. A residual addition alone does not guarantee interchangeable layers: <code>h + (A − I)h = Ah</code> can rotate or completely change the representation.</p><div class="theory-grid"><div><h3>Measure the deleted direction</h3><p>A small residual norm helps only relative to the downstream decision boundary. We test the actual post-ReLU change, its downstream gradient, and norm-matched random directions.</p></div><div><h3>Separate logits from loss</h3><p>Cross-entropy can create interactions even when logits are additive. We measure both spectra and actually evaluate fractional layer gains, rather than treating exact interpolation of binary corners as proof of linear behavior.</p></div><div><h3>Distinguish training and deletion</h3><p>During training, a surviving SD branch is divided by its survival probability. This audit deletes branches at inference while keeping surviving gains at one. Those subnetworks have different scales.</p></div></div><p>These networks taper from 2500 to 500 hidden units. A bypass crops coordinates; it is not an equal-width identity or a clean ODE time step. Removing layers also changes the amount of computation, unlike merely using a coarser discretization of the same time horizon.</p><p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/fable-layerdrop-audit.md">Read the mathematical audit and numerical counterexamples</a> · <a href="https://arxiv.org/abs/1603.09382">Original stochastic-depth paper</a> · <a href="https://arxiv.org/abs/1605.06431">Residual networks as ensembles</a></p></section>
+<details class="audit" open><summary>Complete experimental report, uncertainty and reproducibility</summary><article id="full-report"><h1>What makes a layer droppable? An exact-mask MNIST test of the Fable hypotheses</h1>
+<p><strong>Completed exploratory checkpoint audit, 9 September 2026.</strong> We evaluated every combination of four removable branches in 30 existing checkpoint states, then fitted and froze inexpensive image-based routing policies before opening their test outcomes. No neural networks were retrained for this audit.</p>
+<p>The evidence supports a specific claim: stochastic-depth training can create functional redundancy in these tapered residual MLPs. At the primary, validation-selected checkpoint, decreasing SD reduced deletion-induced cross-entropy by <strong>0.0588 nats</strong> relative to residual-dense training, with a three-seed paired 95% interval of <strong>[−0.1036, −0.0140]</strong>. The higher-order fraction of centered-logit mask interactions fell from <strong>13.31% to 2.33%</strong>. Neither result establishes better full-model accuracy.</p>
+<p>The broader story is less favorable. The apparent advantage of digit 1 over digits 4 and 9 became uncertain after margin adjustment. Direct gradient predictions ranked deletion damage well at selected checkpoints, but their ranking deteriorated at the final checkpoint and the finite-difference directional probes had substantial numerical error. A shallow input router saved nominal MACs, yet exceeded its test error tolerance in five of nine primary cases and ran slower than dense inference. These distinctions matter when translating an appealing geometric explanation into an actual inference policy.</p>
+<h2>What was tested</h2>
+<p>The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">frozen protocol</a> specifies five tests: deletion resilience, class differences after margin adjustment, directional sensitivity, mask interactions, and adaptive routing. The starting checkpoints come from the <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/ciresan-stochastic-depth.md">controlled stochastic-depth study</a>, with seeds 101–103. Residual dense, constant SD, and decreasing SD supply the central 18 checkpoint states: three recipes × three seeds × two endpoints. Residual plus unit dropout supplies six secondary states; six plain-MLP states supply a deliberately disruptive surgery diagnostic.</p>
+<p>The <strong>primary endpoint</strong> is the checkpoint selected by validation cross-entropy. Epoch 100 is a separately reported <strong>secondary endpoint</strong>. These are repeated measurements of the same training runs, not six independent seeds. Each interval below uses three seed-level estimates or same-seed differences, Student's t with two degrees of freedom. Masks and test images are not counted as independent model replications. The intervals are descriptive, unadjusted for the many reported comparisons, and can be wide; an interval including zero does not establish equivalence.</p>
+<p>The network has widths 784→2500→2000→1500→1000→500→10 and 11,972,510 parameters. Its four eligible middle transitions have a prefix-crop shortcut followed by ReLU. The learned stem and classifier remain compulsory. Cropping loses coordinates and widths change, so this architecture is not an invertible, equal-dimensional flow. The main models use normalized inputs and linear output logits; original raw-input/ReLU-output fidelity runs are outside this audit.</p>
+<p>A four-bit integer identifies the retained branches, shallowest first: mask 15 keeps all four and mask 0 removes all four. Retained branches have gain <strong>one at inference</strong>. SD training used inverse-survival gains, so an unscaled deletion network is not exactly the corresponding conditional training network. The primary deletion panel is the six masks retaining exactly two branches: 3, 5, 6, 9, 10, and 12, equally weighted. Half the eligible branches does not mean half the network or half the work.</p>
+<p>Nominal affine MACs are <code>1,965,000 + 5,000,000*b0 + 3,000,000*b1 + 1,500,000*b2 + 500,000*b3</code>, versus 11,965,000 for the full model. The primary panel averages 58.21% of full affine MACs. Biases, ReLU, memory traffic, routing, and indexing are outside that count.</p>
+<p>The official MNIST test set and these seeds were already used in earlier experiments, including <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/ciresan-optimization.md">test-targeted baseline optimization</a>. The original validation set also selected learning rates and checkpoints. The new policy split and frozen choices protect this particular routing comparison from direct test fitting; they cannot make the overall investigation an untouched confirmatory evaluation.</p>
+<h2>H1: stochastic depth reduces deletion damage, but quality must be measured separately</h2>
+<p>For each mask, excess CE is its loss minus the same checkpoint's full-model loss. Negative values are retained. Harmful flips are full-correct predictions made incorrect by deletion, with all image/mask pairs as the denominator; repaired full-model mistakes are recorded separately. The following are three-seed means over the six two-branch masks. Accuracy columns are percentages; CE is nats per image.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Endpoint</th>
+<th>Full accuracy %</th>
+<th>Two-branch accuracy %</th>
+<th>Full CE</th>
+<th>Two-branch CE</th>
+<th>Excess CE</th>
+<th>Harmful flips %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>selected</td>
+<td>98.373</td>
+<td>97.536</td>
+<td>0.0738</td>
+<td>0.1387</td>
+<td>+0.0650</td>
+<td>1.087</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>selected</td>
+<td>97.803</td>
+<td>97.387</td>
+<td>0.0790</td>
+<td>0.0905</td>
+<td>+0.0115</td>
+<td>0.760</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>selected</td>
+<td>97.997</td>
+<td>97.665</td>
+<td>0.0725</td>
+<td>0.0787</td>
+<td>+0.0062</td>
+<td>0.619</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>final</td>
+<td>98.400</td>
+<td>97.498</td>
+<td>0.0972</td>
+<td>0.0953</td>
+<td>-0.0019</td>
+<td>1.156</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>final</td>
+<td>98.443</td>
+<td>98.335</td>
+<td>0.1336</td>
+<td>0.0681</td>
+<td>-0.0656</td>
+<td>0.294</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>final</td>
+<td>98.510</td>
+<td>98.354</td>
+<td>0.1170</td>
+<td>0.0658</td>
+<td>-0.0512</td>
+<td>0.283</td>
+</tr>
+</tbody>
+</table>
+<p>The primary paired comparisons use SD minus residual dense. A smaller excess CE means less deletion damage, while absolute masked accuracy answers a different question.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Endpoint</th>
+<th>Excess CE difference [95% CI]</th>
+<th>Harmful-flip difference pp [95% CI]</th>
+<th>Masked-accuracy difference pp [95% CI]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constant SD</td>
+<td>selected</td>
+<td>-0.0535 [-0.1109, +0.0039]</td>
+<td>-0.327 [-0.759, +0.106]</td>
+<td>-0.149 [-0.989, +0.691]</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>selected</td>
+<td>-0.0588 [-0.1036, -0.0140]</td>
+<td>-0.467 [-0.929, -0.006]</td>
+<td>+0.129 [-0.723, +0.982]</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>final</td>
+<td>-0.0637 [-0.0998, -0.0275]</td>
+<td>-0.861 [-1.121, -0.601]</td>
+<td>+0.837 [+0.602, +1.072]</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>final</td>
+<td>-0.0493 [-0.0827, -0.0159]</td>
+<td>-0.873 [-1.099, -0.647]</td>
+<td>+0.856 [+0.603, +1.109]</td>
+</tr>
+</tbody>
+</table>
+<p>Decreasing SD supports the primary directional redundancy hypothesis on this panel. Constant SD has the same favorable direction, but its primary excess-CE interval includes zero. Neither selected-checkpoint SD comparison resolves an absolute masked-accuracy advantage: the starting full-model accuracy differs too. At the final checkpoint, both SD recipes retain markedly more accuracy after deletion. Their masked CE is also lower than their own full CE; this is a measured loss improvement, not by itself an identified calibration mechanism.</p>
+<p>The secondary unit-dropout control does not reproduce the same resilience: at the selected checkpoint its accuracy falls from 98.330% to 97.443% and excess CE is +0.1928; at the final checkpoint, 98.507% to 97.788% and +0.0282. Ordinary unit dropout is not interchangeable with training the precise branch bypasses used at inference.</p>
+<p>Plain-network surgery is catastrophic: selected accuracy falls from 97.913% to 8.621%, and final accuracy from 98.573% to 8.826%. Here a deleted affine/ReLU transition is replaced by a crop/ReLU that the plain model was never trained to use. This is evidence that the intervention is disruptive, not an architecture-only causal proof that plain networks cannot be compressed or re-encode information.</p>
+<h3>Removing every eligible branch is a useful secondary diagnostic</h3>
+<p>With all four body branches removed, accuracy is 93.507%, 95.370%, and 96.323% for selected residual, constant SD, and decreasing SD respectively. At epoch 100 the corresponding values are <strong>93.163%, 97.310%, and 97.460%</strong>. Only 16.423% of nominal full MACs remain.</p>
+<p>This is still a learned 2500-unit stem, successive prefix crops retaining 500 coordinates, and a learned classifier. It is not a zero-computation predictor or an early-exit head. These predeclared all-skipped measurements demonstrate substantial learned redundancy, but were not used to select a new deployment policy from test accuracy.</p>
+<p>Branch importance is unequal. Removing the first eligible branch saves 5 million MACs: final residual accuracy falls from 98.400% to 97.640%, versus 98.443%→98.360% for constant SD and 98.510%→98.400% for decreasing SD. Later branches can cost much less accuracy. A uniform layer-count rule obscures both compute and functional differences.</p>
+<h2>H2: “digit 1 is easier to drop layers on” weakens after confidence adjustment</h2>
+<p>The predeclared contrast is resilience of digit 1 minus the mean resilience of digits 4 and 9, among full-correct examples. Resilience is the fraction of the six primary masks that remain correct. Positive values favor digit 1.</p>
+<p>True-class-margin deciles were defined using full-correct policy-fit examples. Calibration data then froze common-support bins containing at least 20 full-correct examples of each target digit, and common bin weights. This standardizes each digit to a shared coarse margin distribution; it does not fully match individual examples or establish a causal digit effect.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Endpoint</th>
+<th>Raw contrast pp [95% CI]</th>
+<th>Margin-standardized contrast pp [95% CI]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>selected</td>
+<td>+0.999 [+0.754, +1.245]</td>
+<td>+1.260 [-0.065, +2.584]</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>selected</td>
+<td>+0.902 [-0.172, +1.975]</td>
+<td>+0.519 [-1.362, +2.401]</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>selected</td>
+<td>+0.697 [+0.336, +1.058]</td>
+<td>+0.302 [-0.065, +0.669]</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>final</td>
+<td>+1.076 [+0.705, +1.447]</td>
+<td>+1.216 [+0.765, +1.667]</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>final</td>
+<td>-0.029 [-0.229, +0.170]</td>
+<td>-0.499 [-1.281, +0.283]</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>final</td>
+<td>+0.209 [+0.139, +0.278]</td>
+<td>-0.119 [-0.185, -0.054]</td>
+</tr>
+</tbody>
+</table>
+<p>All three primary adjusted intervals include zero. The raw ordering therefore does not support a reliable intrinsic class rule at this precision. Adjustment does not always reduce the estimate: selected residual increases in magnitude but becomes less precise. At the secondary final decreasing-SD endpoint, the raw positive contrast reverses to <strong>−0.119 pp [−0.185, −0.054]</strong> after adjustment. The final residual contrast remains positive; there is no universal disappearance of class association either.</p>
+<p>The support and permutation results below show why a single attractive class ranking is insufficient. Coverage is the fraction of <strong>full-correct examples of digits 1, 4, and 9</strong> retained in the frozen common bins. The JSON also reports a fraction using all ten digits' full-correct examples as denominator; that is a different quantity.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Seed</th>
+<th>Adjusted contrast pp</th>
+<th>Common-support coverage</th>
+<th>One-sided permutation p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>101</td>
+<td>+0.743</td>
+<td>2535/3083 (82.2%)</td>
+<td>0.0569</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>102</td>
+<td>+1.808</td>
+<td>2405/3079 (78.1%)</td>
+<td>0.0010</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>103</td>
+<td>+1.227</td>
+<td>2209/3077 (71.8%)</td>
+<td>0.0030</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>101</td>
+<td>+0.913</td>
+<td>2711/3060 (88.6%)</td>
+<td>0.0250</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>102</td>
+<td>+0.999</td>
+<td>2592/3057 (84.8%)</td>
+<td>0.0070</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>103</td>
+<td>-0.354</td>
+<td>2480/3079 (80.5%)</td>
+<td>0.7612</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>101</td>
+<td>+0.159</td>
+<td>2846/3070 (92.7%)</td>
+<td>0.3966</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>102</td>
+<td>+0.454</td>
+<td>2731/3062 (89.2%)</td>
+<td>0.1209</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>103</td>
+<td>+0.293</td>
+<td>2655/3070 (86.5%)</td>
+<td>0.2687</td>
+</tr>
+</tbody>
+</table>
+<p>The table’s one-sided permutation p-values concern the digit-1-minus-mean(4,9) contrast. The separately recorded all-ten-digit permutation statistic is between-digit variance. The 1,000 within-bin permutations keep each example's six-mask result together and use frozen seed 20260913. Their p-values describe conditional label exchangeability within coarse margin bins; they are not three-seed replication tests, corrected multiple-comparison probabilities, or proof that digit identity causes resilience. Selected residual shows a positive adjusted association in all seeds, constant SD changes sign in seed 103, and decreasing SD has weaker per-seed permutation evidence. Between-seed variation remains important even when one per-example permutation p-value is small.</p>
+<p>Every digit's counts, raw and standardized rates, and exploratory ten-digit rankings are available in the analysis artifact. Those additional rankings were not used to turn the primary digit-1 hypothesis into a favorable post hoc class rule. Confidence and labels here are analysis covariates, not free features available to an inference router.</p>
+<h2>H3: direction predicts damage at selected checkpoints; the final and numerical checks limit the claim</h2>
+<p>At a full block output <code>h</code>, deletion substitutes the same-width post-ReLU cropped bypass <code>p</code>. The actual intervention is <code>delta = p − h</code>, not simply the negative pre-ReLU branch output. On a fixed 128-example validation probe, the first-order prediction is the downstream CE gradient dotted with this delta. Norm and angle are alternative fixed proxies.</p>
+<p>The table averages the four branch-wise Spearman correlations within a seed, then across three seeds. The SSE score is <code>1 − SSE(first-order prediction)/SSE(zero change)</code>, not the conventional R² relative to predicting mean damage.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Endpoint</th>
+<th>Gradient rank correlation</th>
+<th>Norm rank correlation</th>
+<th>Angle rank correlation</th>
+<th>First-order SSE score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>selected</td>
+<td>0.854</td>
+<td>-0.064</td>
+<td>0.231</td>
+<td>0.977</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>selected</td>
+<td>0.961</td>
+<td>-0.038</td>
+<td>0.216</td>
+<td>0.948</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>selected</td>
+<td>0.915</td>
+<td>-0.032</td>
+<td>0.083</td>
+<td>0.935</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>final</td>
+<td>0.035</td>
+<td>-0.042</td>
+<td>0.239</td>
+<td>0.977</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>final</td>
+<td>-0.451</td>
+<td>-0.157</td>
+<td>0.296</td>
+<td>0.993</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>final</td>
+<td>-0.316</td>
+<td>-0.142</td>
+<td>0.200</td>
+<td>0.967</td>
+</tr>
+</tbody>
+</table>
+<p>At selected checkpoints, gradient predictions beat both proxies in all 36 central branch/seed cases. At final checkpoints their rank correlations collapse or become negative, despite high all-example SSE scores. A few large-damage, already misclassified examples can dominate squared error while many tiny changes have unreliable ranks. The selected full-correct-only mean block scores range about 0.47–0.89, substantially below the all-example scores. Thus the favorable selected result is not a universal layer-importance law.</p>
+<p>The independent audit also identified a serious limitation in the Gaussian directional comparison. Changing finite-difference epsilon from 0.001 to 0.01 changes the estimated centered-logit response by 6–44% for selected deletion directions and 35–115% for selected Gaussian directions, measured as RMS disagreement relative to the epsilon-0.01 response; final Gaussian disagreement reaches about 120%. Even the last eligible branch, followed only by a linear classifier, has 6–44% deletion and 35–58% Gaussian disagreement at selected checkpoints. A numerical component is therefore demonstrated; ReLU boundary crossings cannot explain all of it. The relative contributions of cancellation and nonlinear crossings elsewhere are not isolated.</p>
+<p>For final checkpoints, 102–119 of the 128 probe examples have dense CE below FP32 machine epsilon. An independently recorded post hoc threshold sensitivity improves some correlations, but does not replace the frozen all-example analysis. We regard the finite-difference Gaussian anisotropy comparison as <strong>numerically unresolved</strong>, and do not infer a global Jacobian bound, contraction, or a complete read/write circuit from it.</p>
+<h2>H4: stochastic depth reduces exact mask interactions, without making the network globally linear</h2>
+<p>All 16 masks permit exact Walsh and Möbius expansions on four binary gates. For the primary statistic, logits are first centered across classes, then each example's fraction of nonconstant Walsh energy at degree two or higher is computed. The reported mean averages those per-example fractions; it is not the ratio of pooled energies. No test example had an undefined near-zero denominator.</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Residual dense</th>
+<th>Constant SD</th>
+<th>Decreasing SD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selected</td>
+<td>13.310%</td>
+<td>2.307%</td>
+<td>2.330%</td>
+</tr>
+<tr>
+<td>final</td>
+<td>15.952%</td>
+<td>3.714%</td>
+<td>3.146%</td>
+</tr>
+</tbody>
+</table>
+<p>At selected checkpoints, constant SD minus residual is <strong>−11.003 percentage points [−12.135, −9.871]</strong>, and decreasing SD minus residual is <strong>−10.979 [−11.492, −10.467]</strong>. Mean absolute higher-order energy also falls, from 0.6799 to 0.0533 and 0.0315 in centered-logit squared units. Thus the normalized effect is not just an expanding denominator. Full quality, total response scale, and architecture still differ between training recipes; this association alone does not identify why SD worked.</p>
+<p>Exact binary-corner reconstruction is an algebraic check that every four-variable function passes, not evidence of actual linear interpolation. We also ran the network at withheld fractional gains 0.25, 0.5, and 0.75 for individual branches and along the all-branch diagonal. At selected checkpoints the mean centered-logit discrepancy from the full corner multilinear interpolant is 0.041, 0.037, and 0.058 RMS for residual, constant SD, and decreasing SD. The corresponding degree-one truncation errors are much larger: 3.656, 1.136, and 0.700. These interpolation errors are descriptive in logit units; a small normalized Walsh interaction fraction does not make every anchored degree-one approximation accurate.</p>
+<p>Gate scaling is essential. The separately measured survival mixture compares the gain-one output with <code>rho*F(1/rho) + (1−rho)*F(0)</code> at each checkpoint's training survival probability. Inverse-survival scaling preserves the conditional mean of the gated affine contribution, not generally the downstream logits or expected loss. Nonzero mean-logit bias and CE Jensen gaps occur in the nontrivial probes. At the final decreasing-SD checkpoint, rho equals one: its zero mixture bias is an algebraic identity, not evidence for successful nonlinear averaging. Do not mix these scaled training probes with the gain-one inference deletion results.</p>
+<p>CE has its own nonlinear interactions, even when logits are additive; its coefficients are not literal counts of computational paths. Low higher-order energy likewise does not bound the size of first-order deletion effects. The evidence supports a measured reduction in this mask-response statistic, not a claim that dropout works if and only if the rest of the network is linear.</p>
+<h2>H5: a calibrated tree saves nominal work, but does not establish a useful adaptive advantage</h2>
+<p>Each checkpoint received one multioutput CART tree: maximum depth three, minimum leaf size 200, fixed seed 20260909. Its 49 features are 7×7 averages of raw image pixels, requiring neither labels nor a full-model forward. Using the first 5,000 validation positions, it predicts each mask's error change relative to dense inference. Dense predicted extra error is fixed to zero.</p>
+<p>The remaining 5,000 positions choose among a frozen grid of 11 accuracy/cost tradeoffs. Selection maximizes nominal MAC savings subject to at most ten net additional calibration errors, with deterministic tie rules and a full-model fallback. An independent static mask uses the same empirical tolerance. The random comparator shuffles the router's test mask assignments, preserving their exact realized MAC distribution while removing image-dependent assignment. This is one frozen shuffle, not an average over random policies.</p>
+<p>The policy manifest was written and hashed before local test-outcome access. Audit jobs had already computed mask test arrays, but these were withheld from fitting and selection. The tolerance is an empirical 0.2-percentage-point rule, not a confidence-certified generalization bound. Repairs can offset harmful flips, so net error is not the fraction of originally correct examples harmed.</p>
+<p>All nine primary quality/cost points follow. Static and routed policies can use different amounts of work; only the shuffled comparator exactly matches routed nominal cost. Test tolerance means no more than 20 net extra errors among the 10,000 test images.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Seed</th>
+<th>Full acc %</th>
+<th>Routed acc %</th>
+<th>Static acc % (mask)</th>
+<th>Shuffled acc %</th>
+<th>Routed MAC saved %</th>
+<th>Static MAC saved %</th>
+<th>Router test tolerance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>101</td>
+<td>98.43</td>
+<td>98.21</td>
+<td>98.32 (13)</td>
+<td>98.17</td>
+<td>20.93</td>
+<td>25.07</td>
+<td>fail</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>102</td>
+<td>98.30</td>
+<td>97.96</td>
+<td>98.11 (13)</td>
+<td>97.94</td>
+<td>27.81</td>
+<td>25.07</td>
+<td>fail</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>103</td>
+<td>98.39</td>
+<td>97.90</td>
+<td>97.70 (9)</td>
+<td>97.89</td>
+<td>29.99</td>
+<td>37.61</td>
+<td>fail</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>101</td>
+<td>97.76</td>
+<td>97.60</td>
+<td>97.41 (5)</td>
+<td>97.65</td>
+<td>13.64</td>
+<td>29.25</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>102</td>
+<td>97.65</td>
+<td>96.94</td>
+<td>97.17 (10)</td>
+<td>96.90</td>
+<td>65.79</td>
+<td>54.33</td>
+<td>fail</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>103</td>
+<td>98.00</td>
+<td>97.83</td>
+<td>97.68 (10)</td>
+<td>97.89</td>
+<td>24.40</td>
+<td>54.33</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>101</td>
+<td>98.22</td>
+<td>98.11</td>
+<td>97.97 (6)</td>
+<td>98.13</td>
+<td>24.40</td>
+<td>45.97</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>102</td>
+<td>97.67</td>
+<td>97.49</td>
+<td>97.58 (13)</td>
+<td>97.54</td>
+<td>25.76</td>
+<td>25.07</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>103</td>
+<td>98.10</td>
+<td>97.82</td>
+<td>97.82 (6)</td>
+<td>97.82</td>
+<td>34.09</td>
+<td>45.97</td>
+<td>fail</td>
+</tr>
+</tbody>
+</table>
+<p>Cross-entropy and separate harm/repair counts expose quality changes hidden by net accuracy. CE was recorded, but was not a post hoc policy-selection constraint.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Seed</th>
+<th>Full CE</th>
+<th>Routed CE</th>
+<th>Static CE</th>
+<th>Net extra errors</th>
+<th>Full-correct harmed</th>
+<th>Full-wrong repaired</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>101</td>
+<td>0.0669</td>
+<td>0.0648</td>
+<td>0.0559</td>
+<td>+22</td>
+<td>42</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>102</td>
+<td>0.0812</td>
+<td>0.1367</td>
+<td>0.0637</td>
+<td>+34</td>
+<td>52</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>103</td>
+<td>0.0733</td>
+<td>0.0884</td>
+<td>0.1500</td>
+<td>+49</td>
+<td>63</td>
+<td>14</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>101</td>
+<td>0.0758</td>
+<td>0.0826</td>
+<td>0.0865</td>
+<td>+16</td>
+<td>29</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>102</td>
+<td>0.0758</td>
+<td>0.1221</td>
+<td>0.1100</td>
+<td>+71</td>
+<td>115</td>
+<td>44</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>103</td>
+<td>0.0855</td>
+<td>0.0820</td>
+<td>0.0771</td>
+<td>+17</td>
+<td>32</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>101</td>
+<td>0.0754</td>
+<td>0.0694</td>
+<td>0.0659</td>
+<td>+11</td>
+<td>33</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>102</td>
+<td>0.0735</td>
+<td>0.0822</td>
+<td>0.0788</td>
+<td>+18</td>
+<td>55</td>
+<td>37</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>103</td>
+<td>0.0686</td>
+<td>0.0717</td>
+<td>0.0699</td>
+<td>+28</td>
+<td>52</td>
+<td>24</td>
+</tr>
+</tbody>
+</table>
+<p>Five of nine selected routers fail the test tolerance, despite meeting it on calibration. Only three of nine selected static masks meet it on test. Some reductions in nominal work are substantial, but the expected error constraint transfers imperfectly even within MNIST. There is no reason to rename the tolerance after observing failures.</p>
+<p>Across seeds, the selected router-minus-shuffled accuracy differences are +0.023 pp [−0.015, +0.061] for residual, −0.023 [−0.160, +0.113] for constant SD, and −0.023 [−0.086, +0.039] for decreasing SD. The image-dependent assignments therefore do not establish an advantage over their own matched-cost shuffle. Router-minus-static accuracy intervals also all include zero, and those static comparisons are not matched in cost.</p>
+<p>The final-checkpoint policies are secondary and do not rescue this claim:</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Full acc %</th>
+<th>Routed acc %</th>
+<th>Static acc %</th>
+<th>Shuffled acc %</th>
+<th>Routed MAC saved %</th>
+<th>Static MAC saved %</th>
+<th>Router tolerance passes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>98.400</td>
+<td>98.227</td>
+<td>98.107</td>
+<td>98.143</td>
+<td>15.26</td>
+<td>26.47</td>
+<td>2/3</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>98.443</td>
+<td>98.230</td>
+<td>98.270</td>
+<td>98.210</td>
+<td>45.56</td>
+<td>58.50</td>
+<td>2/3</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>98.510</td>
+<td>98.203</td>
+<td>98.220</td>
+<td>98.247</td>
+<td>56.70</td>
+<td>64.08</td>
+<td>0/3</td>
+</tr>
+</tbody>
+</table>
+<p>The final decreasing-SD router saves the most nominal MACs on average but misses the test tolerance in all three seeds. More removable computation does not ensure that this particular coarse tree identifies the right examples or masks.</p>
+<p>Actual A100 inference further changes the practical conclusion: the grouped router is slower than full inference despite its nominal MAC savings. The independently timed job includes image features, routing, gathering, affine calls, and scattering, and its predictions match the functional audit for all nine primary checkpoints. Static masks can run faster because they retain regular batches; their quality tolerance still often fails. The timing and cost ledger below distinguish these execution measurements from the affine-MAC estimates.</p>
+<h2>What this says about the Fable explanation and useful dropout choices</h2>
+<p>The accompanying <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/fable-layerdrop-audit.md">mathematical audit</a> supplies explicit counterexamples and qualifications. A residual update can re-encode coordinates: <code>x + (A−I)x = Ax</code>, including a rotation. Inverse-survival scaling does not make nonlinear outputs unbiased. A small angle is not the same as a small increment; a large radial rescaling can have zero angle. Deleting an ODE-like step does not automatically approximate a larger step over the original horizon. Small higher-order interaction energy does not bound a potentially large first-order loss effect. Those are mathematical limitations of the supplied argument, independent of whether these MNIST results are favorable.</p>
+<p>The practical evidence favors testing dropout that matches an explicitly trained, dimensionally valid bypass and deployment convention. Whole-branch stochastic depth fits that intervention here; ordinary unit dropout supplies a weaker control for branch deletion. Preserve the distinction between training-time inverse-survival gains and gain-one inference masks. Start with a validation-selected, cost-aware static mask panel, report absolute quality alongside damage, and measure actual execution. Class identity or a full-model margin can diagnose confounding but is not a free routing feature. This particular shallow router adds overhead without a demonstrated assignment advantage; a different router or accelerator would require its own frozen quality and timing test.</p>
+<p>The five hypothesis outcomes are therefore mixed: decreasing SD supports the primary redundancy contrast; a universal digit-class ordering does not survive the full adjustment and endpoint evidence; directional gradients are useful at selected checkpoints but numerically limited at final ones; SD reduces exact centered-logit interactions without proving global linearity; and this cheap adaptive router does not deliver a practical speed/quality win.</p>
+<h2>Verification, reproducibility, and limits</h2>
+<p>All 30 planned states and all 16 masks completed. The all-kept audit forward matched source logits bitwise on the 128-example direct probe, and original full validation accuracy/loss and full test accuracy/loss/error indices were verified. The older validation records contain no error-index lists. The independent audit checked 99 remote artifact hashes and sizes, 60 dense split references, and all 30 checkpoint states. Mechanistic probes used all 128 predeclared validation examples; none were reduced or selected for favorable correctness. Bulk-versus-probe predictions also agreed, while batch-shape logit differences were recorded. The compact per-example energy arrays reproduce the reported interaction fractions; the independent audit did not regenerate every transform from archived full logits.</p>
+<p>The policy manifest SHA-256 is <code>6aff7b936f9ff89478536cbd9468727a1c63c7e3894da98ee5033e2999b0ad52</code>. The recorded analyzer source hash matches the implementation used to fit it. The initial evaluation refusal concerned local wrapper JSON versus exact remote source JSON; retrieving the pinned originals resolved that provenance mismatch without changing scientific tolerances, policies, or fits.</p>
+<p>Three seeds, one reused dataset, one tapered MLP architecture, reused validation selection, multiple exploratory comparisons, a 128-example mechanism probe, and unresolved finite-difference precision all limit extrapolation. The policies optimize calibration net error, not class fairness or confidence-certified risk. MACs are not energy or latency. Results at all-skipped masks, final checkpoints, unit-dropout controls, and plain surgery remain separately labeled secondary evidence.</p>
+<p>The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/analysis.json">analysis JSON</a> contains every planned checkpoint, all mask/class/example summaries, both endpoints, seed-level values and intervals, calibration candidates, policy outcomes, and artifact hashes. The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/independent-check.json">independent check</a> records numerical and provenance verification, including post hoc precision diagnostics. The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/policy-manifest.json">policy manifest</a>, <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/analyze.py">analysis implementation</a>, and <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/audit.py">audit implementation</a> make the frozen choices inspectable. The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/routing-summary.json">routing summary</a> records actual inference measurements.</p>
+<h2>Measured A100 latency: static masks win this implementation</h2>
+<p>The nine primary selected-checkpoint models were timed on one <strong>NVIDIA A100-SXM4-40GB</strong>, using PyTorch 2.14.0+cu130, CUDA 13.0, FP32 tensors with TF32-enabled <code>high</code> matmul precision. The full 10,000-image test set is already on the GPU. Batch size is 2,048; every method receives two warmup batches, then three synchronized whole-test passes in rotating order. The table uses the median of all three passes, in <strong>milliseconds per 10,000 images</strong>. It is throughput timing, not single-image or cold-start latency.</p>
+<p>The input-dependent implementation includes average pooling, the decision tree, sorting, GPU-to-CPU mask counts, per-group gathers, genuine skipped affine calls and output scattering. The random comparator includes grouping but has preassigned masks. Checkpoint loading, initial host-to-device data transfer, fitting/calibration and verification are outside these inference timers. No compilation or graph-capture cost is hidden.</p>
+<table>
+<thead>
+<tr>
+<th>Method / seed</th>
+<th style="text-align: right;">Dense ms</th>
+<th style="text-align: right;">Static ms</th>
+<th style="text-align: right;">Routed ms</th>
+<th style="text-align: right;">Same-cost random ms</th>
+<th style="text-align: right;">Static test accuracy</th>
+<th style="text-align: right;">Routed test accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>residual / 101</td>
+<td style="text-align: right;">4.868</td>
+<td style="text-align: right;">4.075</td>
+<td style="text-align: right;">13.637</td>
+<td style="text-align: right;">9.610</td>
+<td style="text-align: right;">98.32%</td>
+<td style="text-align: right;">98.21%</td>
+</tr>
+<tr>
+<td>sd_annealed / 101</td>
+<td style="text-align: right;">4.830</td>
+<td style="text-align: right;">2.697</td>
+<td style="text-align: right;">13.589</td>
+<td style="text-align: right;">9.376</td>
+<td style="text-align: right;">97.97%</td>
+<td style="text-align: right;">98.11%</td>
+</tr>
+<tr>
+<td>sd_constant / 101</td>
+<td style="text-align: right;">4.727</td>
+<td style="text-align: right;">3.583</td>
+<td style="text-align: right;">15.374</td>
+<td style="text-align: right;">11.604</td>
+<td style="text-align: right;">97.41%</td>
+<td style="text-align: right;">97.60%</td>
+</tr>
+<tr>
+<td>residual / 102</td>
+<td style="text-align: right;">4.832</td>
+<td style="text-align: right;">4.049</td>
+<td style="text-align: right;">15.536</td>
+<td style="text-align: right;">11.569</td>
+<td style="text-align: right;">98.11%</td>
+<td style="text-align: right;">97.96%</td>
+</tr>
+<tr>
+<td>sd_annealed / 102</td>
+<td style="text-align: right;">4.832</td>
+<td style="text-align: right;">4.027</td>
+<td style="text-align: right;">12.583</td>
+<td style="text-align: right;">9.797</td>
+<td style="text-align: right;">97.58%</td>
+<td style="text-align: right;">97.49%</td>
+</tr>
+<tr>
+<td>sd_constant / 102</td>
+<td style="text-align: right;">4.461</td>
+<td style="text-align: right;">2.335</td>
+<td style="text-align: right;">9.242</td>
+<td style="text-align: right;">6.280</td>
+<td style="text-align: right;">97.17%</td>
+<td style="text-align: right;">96.94%</td>
+</tr>
+<tr>
+<td>residual / 103</td>
+<td style="text-align: right;">4.828</td>
+<td style="text-align: right;">3.449</td>
+<td style="text-align: right;">14.610</td>
+<td style="text-align: right;">11.184</td>
+<td style="text-align: right;">97.70%</td>
+<td style="text-align: right;">97.90%</td>
+</tr>
+<tr>
+<td>sd_annealed / 103</td>
+<td style="text-align: right;">4.816</td>
+<td style="text-align: right;">2.690</td>
+<td style="text-align: right;">11.062</td>
+<td style="text-align: right;">7.887</td>
+<td style="text-align: right;">97.82%</td>
+<td style="text-align: right;">97.82%</td>
+</tr>
+<tr>
+<td>sd_constant / 103</td>
+<td style="text-align: right;">4.827</td>
+<td style="text-align: right;">2.506</td>
+<td style="text-align: right;">11.237</td>
+<td style="text-align: right;">8.478</td>
+<td style="text-align: right;">97.68%</td>
+<td style="text-align: right;">97.83%</td>
+</tr>
+</tbody>
+</table>
+<p>Across the nine per-model medians, dense inference takes <strong>4.83 ms</strong>, static masks <strong>3.45 ms</strong>, and image-dependent routing <strong>13.59 ms</strong>. The router is <strong>2.07–3.25× slower</strong> than dense inference on every model. Static masks are <strong>1.19–1.93× faster</strong>, at the accuracy/cost points shown above. These masks were selected using validation; several exceed the empirical 0.2pp error tolerance on test, so speed is not an unconditional quality-preservation claim.</p>
+<p>All nine CPU/GPU routing decisions and all 36 method/checkpoint prediction vectors match the exact-mask functional references. Observed numerical disagreement count is zero. Each raw timing pass is retained. These three repetitions on one assigned GPU do not constitute an independent hardware benchmark or a tuned lower bound on routing overhead. A fused or coarse-bucket router could behave differently; that remains untested.</p>
+<p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypothesis-routing-v1.json">Raw timing run</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/routing-summary.json">Compact timing summary</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/routing_benchmark.py">Timing implementation</a></p>
+<h2>Compute cost and execution</h2>
+<table>
+<thead>
+<tr>
+<th>Audit seed</th>
+<th>GPU</th>
+<th style="text-align: right;">Function execution seconds</th>
+<th style="text-align: right;">Dispatch to result seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>NVIDIA A100-SXM4-40GB</td>
+<td style="text-align: right;">22.64</td>
+<td style="text-align: right;">30.39</td>
+</tr>
+<tr>
+<td>102</td>
+<td>NVIDIA A100-SXM4-40GB</td>
+<td style="text-align: right;">25.52</td>
+<td style="text-align: right;">34.92</td>
+</tr>
+<tr>
+<td>103</td>
+<td>NVIDIA A100-SXM4-40GB</td>
+<td style="text-align: right;">27.28</td>
+<td style="text-align: right;">37.63</td>
+</tr>
+</tbody>
+</table>
+<p>The fourth routing job took 17.55 seconds inside the function and 30.13 seconds dispatch-to-result. All four paid calls completed; all cloud apps are stopped. No neural training was performed. The shared MNIST environment’s metered snapshot rose from <strong>$3.97677 to $4.07871</strong>, an increase of about <strong>$0.10</strong>. Snapshot checked 2026-09-09T23:27:08.442662+00:00; this is metering, not a final invoice.</p>
+<p>The original <strong>$30</strong> cap still applies. Immutable worst-case reservations rose from $23.10357 to <strong>$23.88100</strong>, including $0.77743 for these four 180-second A100 allocations plus startup/idle allowances. Old reservations were not released or reset. Reservations and actual metering are different quantities.</p>
+<p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/billing-latest.json">Billing snapshot</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/budget-ledger.json">Shared reservation ledger</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/apps-stopped.json">Stopped-app check</a></p>
+<h2>Reproduce without new compute</h2>
+<p>From the repository root, use the existing Python environment with NumPy, PyTorch and scikit-learn. The stored policy manifest is immutable: evaluation verifies its validation data and source hashes before reading test arrays. The CPU full-width qualification used 32 original validation examples only to check API/runtime; its outputs are excluded from the experiment.</p>
+<pre><code class="language-bash">experiments/.venv/bin/python experiments/ciresan_stochastic_depth/layerdrop_hypotheses/analyze.py \
+  --phase evaluate \
+  --reference-dir experiments/ciresan_stochastic_depth/results/hypotheses/source-results
+experiments/.venv/bin/python experiments/ciresan_stochastic_depth/layerdrop_hypotheses/export_report.py --ready
+python3 scripts/build_mnist_layerdrop_report.py
+node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_page.cjs
+</code></pre>
+<p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">Frozen experimental protocol</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/audit-freeze.json">Pre-audit hashes/specifications</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/policy-manifest.json">Frozen policies</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/analysis.json">Full analysis</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/independent-check.json">Independent verification</a></p>
+<p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/fable-layerdrop-audit.md">Fable’s argument: mathematical audit</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/theory-counterexamples.json">Executed counterexamples</a></p></article></details>
+<footer><a href="report.md">Download experimental report</a><a href="data.json">Explorer data</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/hypotheses">Raw predictions, policies &amp; audit results</a><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">Frozen protocol</a></footer></main></body></html>

@@ -1,0 +1,18 @@
+{
+  "created_unix": 1788996059.263768,
+  "git_base": "f451b195f91066f40186d1e2d73576e9b9ba94eb",
+  "source_sha256": {
+    "hypothesis_app.py": "f716d89eb18acb85a02c19f0d0af7fd98002302b0d455d5233db5923317417fc",
+    "layerdrop_hypotheses/PROTOCOL.md": "1e6c57074b4ef390d75242aafc2010a1d3f5af281b092a6ea3c992af0ae8304a",
+    "layerdrop_hypotheses/audit.py": "36782558d6d6a2ad3c37228e4162ed3dc40a08169e54783dc93badfcd97d4068",
+    "layerdrop_hypotheses/mechanisms.py": "29b72b60287267727d2169ba4052c1c0b571b28b29bd4cf660f1b7fa8073e858",
+    "layerdrop_hypotheses/metrics.py": "bbab8e66fe1d0f61e010495ebeab611ba213d1915755a7afc66f05a49b1bf711",
+    "layerdrop_hypotheses/policy.py": "4c80a6c9c6f5eaec848aeacf256e46094b24558e6a6e19d53417c744b5a83f0e",
+    "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd"
+  },
+  "manifest_sha256": "614504e72e7ad9d977feb200335177b10500628bdb740af5e2e2b905f535a545",
+  "tests_passed": 39,
+  "protocol_frozen_before_paid_mask_audits": true,
+  "cpu_qualification": "32 original validation examples, pass/runtime inspected only; excluded from analysis",
+  "test_unblinding_rule": "Policy fit reads validation only; freeze all30policies andclassbins before analysis of test outcomes"
+}

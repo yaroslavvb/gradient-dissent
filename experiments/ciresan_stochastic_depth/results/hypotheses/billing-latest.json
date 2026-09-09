@@ -1,0 +1,5 @@
+{
+  "metered_cost_usd": 4.07871245,
+  "queried_unix": 1788996428.442662,
+  "scope": "Dedicated MNIST Ciresan environment, including all earlier baseline/stochastic-depth work and four new hypothesis audit/timing calls; snapshot, not invoice."
+}

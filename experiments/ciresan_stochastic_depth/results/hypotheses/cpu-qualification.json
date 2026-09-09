@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "n": 32,
+  "elapsed_seconds": 0.2047002089675516,
+  "source_checkpoint": "graph-eval-residual-s101/best.pt",
+  "outcomes_excluded": true,
+  "only_pass_and_runtime_inspected": true
+}

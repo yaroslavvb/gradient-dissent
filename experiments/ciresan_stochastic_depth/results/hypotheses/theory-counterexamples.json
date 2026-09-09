@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "purpose": "Constructed counterexamples to universal theoretical claims, not trained-model estimates",
+  "execution": "Python standard library; CPU binary64 arithmetic; no randomness or training",
+  "external_spend_usd": 0,
+  "source_sha256": "6b1d9e4aafc84848c1746e6e39c5709459a907245ce23e77c652eab222327289",
+  "all_checks_passed": true,
+  "residual_reencoding": {
+    "claim_refuted": "Residual blocks cannot re-encode the coordinate system",
+    "rotation_A": [
+      [
+        0.0,
+        -1.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "residual_matrix_A_minus_I": [
+      [
+        -1.0,
+        -1.0
+      ],
+      [
+        1.0,
+        -1.0
+      ]
+    ],
+    "classifier": "class 1 iff first output coordinate > 0",
+    "target_rule": "class 1 iff second input coordinate < 0",
+    "examples": [
+      {
+        "input": [
+          -1.0,
+          -1.0
+        ],
+        "target": 1,
+        "residual_increment": [
+          2.0,
+          0.0
+        ],
+        "full_state": [
+          1.0,
+          -1.0
+        ],
+        "rotated_state": [
+          1.0,
+          -1.0
+        ],
+        "full_prediction": 1,
+        "skip_prediction": 0
+      },
+      {
+        "input": [
+          -1.0,
+          1.0
+        ],
+        "target": 0,
+        "residual_increment": [
+          0.0,
+          -2.0
+        ],
+        "full_state": [
+          -1.0,
+          -1.0
+        ],
+        "rotated_state": [
+          -1.0,
+          -1.0
+        ],
+        "full_prediction": 0,
+        "skip_prediction": 0
+      },
+      {
+        "input": [
+          1.0,
+          -1.0
+        ],
+        "target": 1,
+        "residual_increment": [
+          0.0,
+          2.0
+        ],
+        "full_state": [
+          1.0,
+          1.0
+        ],
+        "rotated_state": [
+          1.0,
+          1.0
+        ],
+        "full_prediction": 1,
+        "skip_prediction": 1
+      },
+      {
+        "input": [
+          1.0,
+          1.0
+        ],
+        "target": 0,
+        "residual_increment": [
+          -2.0,
+          0.0
+        ],
+        "full_state": [
+          -1.0,
+          1.0
+        ],
+        "rotated_state": [
+          -1.0,
+          1.0
+        ],
+        "full_prediction": 0,
+        "skip_prediction": 1
+      }
+    ],
+    "max_absolute_identity_error": 0.0,
+    "full_accuracy": 1.0,
+    "skipped_accuracy": 0.5,
+    "accuracy_denominator": 4,
+    "units": "accuracy is a fraction"
+  },
+  "degree_one_damage": {
+    "claim_refuted": "Low interaction degree alone guarantees small deletion damage",
+    "mask_convention": "integer mask; bit i equals presence of branch i; 15 is full",
+    "number_of_presence_variables": 4,
+    "cases": [
+      {
+        "magnitude": 20.0,
+        "logit_formula": "C * (2*m_0 - 1)",
+        "true_label": 1,
+        "mask_losses": [
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09,
+          20.000000002061153,
+          2.061153620314381e-09
+        ],
+        "mobius_coefficients": [
+          20.000000002061153,
+          -20.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_absolute_coefficient_degree_ge_2": 0.0,
+        "full_ce": 2.061153620314381e-09,
+        "drop_branch_0_ce": 20.000000002061153,
+        "ce_damage": 20.0,
+        "full_prediction_correct": true,
+        "drop_branch_0_prediction_correct": false
+      },
+      {
+        "magnitude": 200.0,
+        "logit_formula": "C * (2*m_0 - 1)",
+        "true_label": 1,
+        "mask_losses": [
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87,
+          200.0,
+          1.3838965267367376e-87
+        ],
+        "mobius_coefficients": [
+          200.0,
+          -200.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_absolute_coefficient_degree_ge_2": 0.0,
+        "full_ce": 1.3838965267367376e-87,
+        "drop_branch_0_ce": 200.0,
+        "ce_damage": 200.0,
+        "full_prediction_correct": true,
+        "drop_branch_0_prediction_correct": false
+      }
+    ],
+    "interpretation": "The same degree-one structure permits arbitrarily large positive C; a coefficient magnitude or influence condition is additionally needed."
+  },
+  "additive_logits_nonlinear_ce": {
+    "claim_refuted": "A high-order loss interaction necessarily means a serial network circuit",
+    "logit_formula": "-2 + 2*m_0 + 2*m_1",
+    "true_label": 1,
+    "mask_convention": "integer mask; bit i equals presence of branch i; 3 is full",
+    "mask_logits": [
+      -2.0,
+      0.0,
+      0.0,
+      2.0
+    ],
+    "mask_losses": [
+      2.1269280110429727,
+      0.6931471805599453,
+      0.6931471805599453,
+      0.1269280110429725
+    ],
+    "logit_mobius_coefficients": [
+      -2.0,
+      2.0,
+      2.0,
+      0.0
+    ],
+    "loss_mobius_coefficients": [
+      2.1269280110429727,
+      -1.4337808304830273,
+      -1.4337808304830273,
+      0.8675616609660545
+    ],
+    "pair_interaction_logit": 0.0,
+    "pair_interaction_ce": 0.8675616609660545,
+    "interpretation": "CE curvature alone creates a nonzero second-order loss term."
+  },
+  "euler_stability": {
+    "claim_refuted": "Forward Euler is stable whenever tau*abs(lambda) <= 2",
+    "correct_scalar_condition": "abs(1 + tau*lambda) <= 1",
+    "cases": [
+      {
+        "case": "positive_real",
+        "lambda_real": 1.0,
+        "lambda_imag": 0.0,
+        "step_size": 0.5,
+        "steps": 20,
+        "tau_abs_lambda": 0.5,
+        "passes_incomplete_tau_abs_lambda_le_2_test": true,
+        "abs_one_plus_tau_lambda": 1.5,
+        "satisfies_euler_absolute_stability": false,
+        "final_euler_norm": 3325.256730079651,
+        "final_exact_norm": 22026.465794806718
+      },
+      {
+        "case": "pure_imaginary",
+        "lambda_real": 0.0,
+        "lambda_imag": 1.0,
+        "step_size": 0.5,
+        "steps": 20,
+        "tau_abs_lambda": 0.5,
+        "passes_incomplete_tau_abs_lambda_le_2_test": true,
+        "abs_one_plus_tau_lambda": 1.118033988749895,
+        "satisfies_euler_absolute_stability": false,
+        "final_euler_norm": 9.313225746154785,
+        "final_exact_norm": 1.0
+      }
+    ],
+    "interpretation": "The positive-real exact ODE also grows, so that case only exposes the omitted sign/phase condition. The imaginary case demonstrates numerical growth for an exactly norm-preserving flow."
+  },
+  "deletion_changes_horizon": {
+    "claim_refuted": "Deleting Euler updates is automatically a coarser integration of the same horizon",
+    "ode": "y'=1; y(0)=0",
+    "original_steps": 10,
+    "retained_steps": 5,
+    "original_step_size": 0.1,
+    "fixed_horizon_coarsened_step_size": 0.2,
+    "full_endpoint": 1.0,
+    "deleted_unscaled_endpoint": 0.5,
+    "fixed_horizon_coarsened_endpoint": 1.0,
+    "full_horizon": 1.0,
+    "deleted_unscaled_horizon": 0.5,
+    "interpretation": "Unscaled deletions omit half the accumulated flow. Keeping the original horizon requires doubling retained step sizes in this example."
+  }
+}
