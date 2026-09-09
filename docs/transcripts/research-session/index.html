@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The complete user-visible conversation behind the layer-dropout review, local toy experiments, A100 transfer study and research paper.">
+  <meta name="color-scheme" content="light dark">
+  <title>Gradient Dissent session transcript</title>
+  <link rel="stylesheet" href="transcript.css?v=20260909">
+  <script src="transcript.js?v=20260909" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#transcript">Skip to transcript</a>
+  <main class="page">
+    <header class="page-header">
+      <a class="back-link" href="../../significance/">← High-level report</a>
+      <p class="eyebrow">Session transcript · September 9, 2026</p>
+      <h1>Review paper and test claims</h1>
+      <p class="introduction">From the paper review to local experiments, parallel A100 runs and a research paper.</p>
+      <p id="scope-note" class="scope-note">This snapshot includes user and assistant messages through the request to publish this transcript. Tool output and private runtime context are omitted. The paper download points to its published PDF.</p>
+      <nav class="document-links" aria-label="Transcript downloads and navigation">
+        <a href="transcript.md" download>Download text</a>
+        <a href="transcript.json" download>Download JSON</a>
+        <a href="#end">Jump to end ↓</a>
+      </nav>
+    </header>
+
+    <section class="filter-panel" aria-label="Filter the transcript">
+      <div class="search-field">
+        <label for="search">Search the conversation</label>
+        <div class="search-input-wrap">
+          <input id="search" type="search" placeholder="Find a word or phrase…" autocomplete="off" spellcheck="false" aria-controls="transcript">
+          <button id="clear-search" type="button" hidden aria-label="Clear search">Clear</button>
+        </div>
+      </div>
+      <div class="filter-details">
+        <label class="checkbox-label"><input id="show-progress" type="checkbox" checked> Include progress updates</label>
+        <p id="message-count" class="message-count" role="status" aria-live="polite">Loading the conversation…</p>
+      </div>
+    </section>
+
+    <div id="load-error" class="notice" role="alert" hidden></div>
+    <p id="empty-results" class="notice" hidden>No messages match this search.</p>
+    <section id="transcript" class="transcript" aria-label="Session messages" tabindex="-1"></section>
+    <noscript><p class="notice">Enable JavaScript to read and search the conversation here, or <a href="transcript.md">open the complete text transcript</a>.</p></noscript>
+
+    <footer id="end" class="page-footer">
+      <p>End of this published snapshot.</p>
+      <a href="#">Back to top ↑</a>
+    </footer>
+  </main>
+</body>
+</html>

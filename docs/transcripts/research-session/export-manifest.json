@@ -1,0 +1,24 @@
+{
+  "threadId": "01a0874d-fa1d-7ae3-93ee-da1be8e0692a",
+  "cutoffRequest": "export this session and host html on github pages, I had a similar question for the animated groups fable, so reuse what was done there.",
+  "messages": 111,
+  "users": 5,
+  "assistant": 106,
+  "progressUpdates": 101,
+  "startedAt": "2026-09-09T17:53:50.728Z",
+  "endedAt": "2026-09-09T20:52:50.059Z",
+  "selection": "event_msg/item_completed; UserMessage plus AgentMessage commentary/final_answer/final only; unique item IDs",
+  "excluded": [
+    "tool calls and results",
+    "reasoning",
+    "system/developer instructions",
+    "runtime envelopes",
+    "events after export request"
+  ],
+  "adaptedFrom": "animated-groups-fable/tools/export_session_transcript.py and docs/transcripts/gray-scott-session/",
+  "rawRolloutPublished": false,
+  "files": {
+    "transcript.json": "3ff7548e58ba2ea0a9869e01de0d630a76f2f8778cf3bdb8048a72438eb0b88c",
+    "transcript.md": "297a736dcc1821d9b9ef61338a68f6684c57cff9b4947d30c221652b864404c2"
+  }
+}

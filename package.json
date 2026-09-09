@@ -13,7 +13,8 @@
     "serve": "python3 -m http.server 8765 --directory docs",
     "build:significance": "python3 scripts/build_significance.py",
     "check:significance": "node --check docs/significance/app.js && node scripts/check_significance.cjs",
-    "build:paper": "python3 scripts/build_paper.py"
+    "build:paper": "python3 scripts/build_paper.py",
+    "check:transcript": "node --check docs/transcripts/research-session/transcript.js && node scripts/check_session_transcript.cjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1",
