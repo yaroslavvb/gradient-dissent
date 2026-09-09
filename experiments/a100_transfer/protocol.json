@@ -1,0 +1,89 @@
+{
+  "frozen_unix": 1788979782.418991,
+  "families": {
+    "gpt_wikitext103": {
+      "batch_size": 32,
+      "context": 1024,
+      "image_size": 0,
+      "steps": 3200,
+      "timeout_seconds": 1200,
+      "rates": [
+        0.0003,
+        0.0006,
+        0.0012
+      ],
+      "weight_decay": 0.1,
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "eval_batch_size": 4
+    },
+    "vit_cifar100": {
+      "batch_size": 256,
+      "context": 0,
+      "image_size": 32,
+      "steps": 10240,
+      "timeout_seconds": 1200,
+      "rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "weight_decay": 0.05,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eval_batch_size": 256
+    },
+    "convnext_cifar100": {
+      "batch_size": 512,
+      "context": 0,
+      "image_size": 64,
+      "steps": 10000,
+      "timeout_seconds": 600,
+      "rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "weight_decay": 0.05,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eval_batch_size": 256
+    }
+  },
+  "recipes": [
+    "dense",
+    "constant_ild",
+    "decreasing_ild"
+  ],
+  "tuning_seeds": [
+    1000
+  ],
+  "evaluation_seeds": [
+    2000,
+    2001,
+    2002
+  ],
+  "selection": "Each recipe selects its full-depth final validation CE winner among all3 full-duration LRs on tuningseed1000. Ties use smaller LR. Do not use test/pruned metrics. No post-test grid changes.",
+  "tuning_runs": 27,
+  "evaluation_runs": 27,
+  "maximum_parallel_a100s": 9,
+  "primary_endpoint": "Within-seed CE(two-thirds retained)-CE(full), paired difference vsdense. GPT/ViTprefix8of12; ConvNeXtstageprefix2,2,6,2of3,3,9,3. Rawfull/prunedCEandaccuracyalso required.",
+  "matched_budget": "Same steps,batches,examples and full-duration LRgrid across recipes within eachfamily. Compute-then-mask; no sparse-execution/time/energy claim.",
+  "schedule": "Constant ILD pmax.4; decreasing ILD pmax.8*(1-t/(T-1)); layerfactorl/(L-1); expectedomission.2 forboth.",
+  "pilot_basis": "Observed A100 seconds/step and validation-only sanity checks fixed durations. CNN batch512 improves throughput. GPT ~105M tokenpresentations; ViT~58.25andCNN~113.78equivalentpasses via samplingwithreplacement.",
+  "limits": "Three finalseeds and1tuningseed; onefixedsplit per dataset. Short-runGPTpretrainingfarbelowcompute-optimal tokenbudget. ViTmeanpool/noCLStoken. CIFAR10032native;CNNbilinear64upsampling adds no new imageinformation.",
+  "projected_reserved_upper_usd_including_pilots": 39.666098,
+  "cost_cap_usd": 50,
+  "reservation_ceiling_usd": 42,
+  "core_source_sha256": {
+    "train.py": "50915ffcb0e0d0b40c55db02b31d3e91e9ad2013c127d187b8d2f96b033ebe4e",
+    "language.py": "9aaa1230aa655fca3d18716f65885c67a545a51ba6991ab0310ab4c58215b42b",
+    "vision.py": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0"
+  }
+}

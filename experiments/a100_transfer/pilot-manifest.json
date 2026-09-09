@@ -1,0 +1,71 @@
+[
+  {
+    "run_id": "pilot-v1-gpt_wikitext103",
+    "task": "gpt_wikitext103",
+    "stage": "pilot",
+    "recipe": "decreasing_ild",
+    "seed": 991,
+    "lr": 0.0006,
+    "steps": 30,
+    "batch_size": 32,
+    "context": 1024,
+    "image_size": 0,
+    "weight_decay": 0.1,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "timeout_seconds": 240,
+    "validation_windows": 8,
+    "validation_examples": 512,
+    "eval_batch_size": 4,
+    "log_every": 10,
+    "warmup_steps": 3
+  },
+  {
+    "run_id": "pilot-v1-vit_cifar100",
+    "task": "vit_cifar100",
+    "stage": "pilot",
+    "recipe": "decreasing_ild",
+    "seed": 991,
+    "lr": 0.0003,
+    "steps": 30,
+    "batch_size": 256,
+    "context": 0,
+    "image_size": 32,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "timeout_seconds": 240,
+    "validation_windows": 8,
+    "validation_examples": 512,
+    "eval_batch_size": 256,
+    "log_every": 10,
+    "warmup_steps": 3
+  },
+  {
+    "run_id": "pilot-v1-convnext_cifar100",
+    "task": "convnext_cifar100",
+    "stage": "pilot",
+    "recipe": "decreasing_ild",
+    "seed": 991,
+    "lr": 0.0003,
+    "steps": 30,
+    "batch_size": 128,
+    "context": 0,
+    "image_size": 64,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "timeout_seconds": 240,
+    "validation_windows": 8,
+    "validation_examples": 512,
+    "eval_batch_size": 256,
+    "log_every": 10,
+    "warmup_steps": 3
+  }
+]

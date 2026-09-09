@@ -1,0 +1,26 @@
+[
+  {
+    "run_id": "pilot-v3-convnext-b512",
+    "task": "convnext_cifar100",
+    "stage": "pilot",
+    "recipe": "decreasing_ild",
+    "seed": 991,
+    "lr": 0.001,
+    "steps": 30,
+    "batch_size": 512,
+    "context": 0,
+    "image_size": 64,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "timeout_seconds": 240,
+    "validation_windows": 8,
+    "validation_examples": 512,
+    "eval_batch_size": 256,
+    "log_every": 10,
+    "warmup_steps": 3,
+    "gpu": "A100"
+  }
+]

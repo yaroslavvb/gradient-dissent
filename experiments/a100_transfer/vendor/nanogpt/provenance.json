@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/karpathy/nanoGPT",
+  "revision": "3adf61e154c3fe3fca428ad6bc3818b27a3b8291",
+  "files": {
+    "model.py": {
+      "source": "https://raw.githubusercontent.com/karpathy/nanoGPT/3adf61e154c3fe3fca428ad6bc3818b27a3b8291/model.py",
+      "sha256": "7c01703240dbec5d554527dc666e35b3df8391d0b117fddc07afcf325a21d11c"
+    },
+    "LICENSE": {
+      "source": "https://raw.githubusercontent.com/karpathy/nanoGPT/3adf61e154c3fe3fca428ad6bc3818b27a3b8291/LICENSE",
+      "sha256": "a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe"
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "run_id": "pilot-v1-vit_cifar100",
+  "spec": {
+    "run_id": "pilot-v1-vit_cifar100",
+    "task": "vit_cifar100",
+    "stage": "pilot",
+    "recipe": "decreasing_ild",
+    "seed": 991,
+    "lr": 0.0003,
+    "steps": 30,
+    "batch_size": 256,
+    "context": 0,
+    "image_size": 32,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "timeout_seconds": 240,
+    "validation_windows": 8,
+    "validation_examples": 512,
+    "eval_batch_size": 256,
+    "log_every": 10,
+    "warmup_steps": 3
+  },
+  "metadata": {
+    "torch": "2.8.0+cu128",
+    "numpy": "2.2.6",
+    "python": "3.11.12",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "gpu_memory_total_bytes": 85094825984,
+    "nvidia_smi": "NVIDIA A100-SXM4-80GB, 81920 MiB, 580.95.05",
+    "parameters": 85219684,
+    "model_config": {
+      "family": "vit",
+      "depth": 12,
+      "width": 768,
+      "heads": 12,
+      "mlp_width": 3072,
+      "patch_size": 4,
+      "image_size": 32,
+      "tokens": 64,
+      "num_classes": 100,
+      "pooling": "mean of final-normalized patch tokens",
+      "mask": "shared over attention and MLP residual updates",
+      "initialization": "truncated normal std.02, zero biases, LayerNorm weight1"
+    },
+    "precision": "BF16 autocast; FP32 master parameters/AdamW states; TF32 allowed",
+    "source_sha256": {
+      "train.py": "68b78c7895391b4057ca7b0a296ad8f1a722e1a5718076682d0e46fd7bc375e5",
+      "language.py": "9aaa1230aa655fca3d18716f65885c67a545a51ba6991ab0310ab4c58215b42b",
+      "vision.py": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0"
+    },
+    "initial_state_sha256": "cc2a634c194de123dd91315e6b5bb4af878528cd68f7aa110cae68a3d0512471",
+    "prunable_count": 12,
+    "prunable_ids": [
+      "blocks.0",
+      "blocks.1",
+      "blocks.2",
+      "blocks.3",
+      "blocks.4",
+      "blocks.5",
+      "blocks.6",
+      "blocks.7",
+      "blocks.8",
+      "blocks.9",
+      "blocks.10",
+      "blocks.11"
+    ],
+    "training_examples_or_corpus_tokens": 45000,
+    "dataset_manifest_sha256": "d778612c3f7528180494c5772b84c0d40c469cd2946056fd3e6049ddc2baa98a"
+  },
+  "correctness": {
+    "gpu_all_kept_equals_default": true,
+    "checks_use_validation_only": true
+  },
+  "validation_before": {
+    "ce": 4.709442138671875,
+    "accuracy": 0.001953125,
+    "targets": 512
+  },
+  "validation": {
+    "ce": 4.212005615234375,
+    "accuracy": 0.076171875,
+    "targets": 512
+  },
+  "validation_panel": {
+    "split": "validation",
+    "examples": 512,
+    "source_split": "stratified subset of official CIFAR100 train"
+  },
+  "test_panel": null,
+  "rows": [],
+  "curve": [
+    {
+      "step": 1,
+      "train_ce": 4.741455078125,
+      "lr": 9.999999999999999e-05,
+      "nominal_mean_dropout": 0.40000003576278687,
+      "active_example_blocks": 1815,
+      "elapsed_training_seconds": 0.6325917389999987,
+      "step_seconds": 0.6315289320000019
+    },
+    {
+      "step": 10,
+      "train_ce": 4.514190673828125,
+      "lr": 0.0002660489510030986,
+      "nominal_mean_dropout": 0.27586206793785095,
+      "active_example_blocks": 20314,
+      "elapsed_training_seconds": 1.462443479000001,
+      "step_seconds": 0.08843217900000155
+    },
+    {
+      "step": 20,
+      "train_ce": 4.32342529296875,
+      "lr": 0.00011712834024925766,
+      "nominal_mean_dropout": 0.13793103396892548,
+      "active_example_blocks": 44898,
+      "elapsed_training_seconds": 2.358477089000001,
+      "step_seconds": 0.08870575300000283
+    },
+    {
+      "step": 30,
+      "train_ce": 4.198974609375,
+      "lr": 2.9999999999999997e-05,
+      "nominal_mean_dropout": 0.0,
+      "active_example_blocks": 73796,
+      "elapsed_training_seconds": 3.247932036999998,
+      "step_seconds": 0.0876456100000027
+    }
+  ],
+  "train_seconds": 3.250701369999998,
+  "container_function_seconds": 15.516400855999999,
+  "mean_step_seconds_after_warmup": 0.08855349524999986,
+  "peak_allocated_bytes": 7150904832,
+  "peak_reserved_bytes": 7476346880,
+  "clipped_steps": 30,
+  "nominal_mean_dropout": 0.20000000298023224,
+  "realized_active_example_blocks": 73796,
+  "dense_example_blocks": 92160,
+  "training_data_stream_sha256": "3a90895df8ce51244743e4751b4b87a31a1673a8ee438c30ab1962dc17281dcf",
+  "layerscale_before": {},
+  "layerscale_after": {},
+  "training_targets_or_images": 7680,
+  "cost_note": "Use Modal billing plus invocation reservation ledger; runtime alone excludes startup/build/idle/egress."
+}

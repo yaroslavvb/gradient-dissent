@@ -1,0 +1,148 @@
+{
+  "run_id": "pilot-v1-gpt_wikitext103",
+  "spec": {
+    "run_id": "pilot-v1-gpt_wikitext103",
+    "task": "gpt_wikitext103",
+    "stage": "pilot",
+    "recipe": "decreasing_ild",
+    "seed": 991,
+    "lr": 0.0006,
+    "steps": 30,
+    "batch_size": 32,
+    "context": 1024,
+    "image_size": 0,
+    "weight_decay": 0.1,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "timeout_seconds": 240,
+    "validation_windows": 8,
+    "validation_examples": 512,
+    "eval_batch_size": 4,
+    "log_every": 10,
+    "warmup_steps": 3
+  },
+  "metadata": {
+    "torch": "2.8.0+cu128",
+    "numpy": "2.2.6",
+    "python": "3.11.12",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "gpu_memory_total_bytes": 85094825984,
+    "nvidia_smi": "NVIDIA A100-SXM4-80GB, 81920 MiB, 580.95.05",
+    "parameters": 124439808,
+    "model_config": {
+      "block_size": 1024,
+      "vocab_size": 50257,
+      "n_layer": 12,
+      "n_head": 12,
+      "n_embd": 768
+    },
+    "precision": "BF16 autocast; FP32 master parameters/AdamW states; TF32 allowed",
+    "source_sha256": {
+      "vision.py": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+      "language.py": "9aaa1230aa655fca3d18716f65885c67a545a51ba6991ab0310ab4c58215b42b",
+      "train.py": "4c4352a5ea364e33a7ba9e8aa78040c9b4a49bddfd67aef08f137a543fdc561f",
+      "modal_app.py": "6dd2eed2179c78d92aa88b5477e0f2aa01c58ee396f19dbae1ab55ccdab27c4a"
+    },
+    "initial_state_sha256": "479b577c893dacd141d7140866a0fc22bc7537915220f61c1ebcb01519693700",
+    "prunable_count": 12,
+    "prunable_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "training_examples_or_corpus_tokens": 117949584
+  },
+  "validation_before": {
+    "ce": 10.963813781738281,
+    "accuracy": 0.0,
+    "targets": 8192
+  },
+  "validation": {
+    "ce": 7.037934064865112,
+    "accuracy": 0.12109375,
+    "targets": 8192
+  },
+  "validation_panel": {
+    "split": "val",
+    "context": 1024,
+    "windows": 8,
+    "target_tokens": 8192,
+    "all_available_windows": 212,
+    "starts": [
+      0,
+      33523,
+      70270,
+      103978,
+      139013,
+      175191,
+      207814,
+      246235
+    ],
+    "policy": "Document-contained disjoint context+1 spans, stride context+1; optional evenly spaced deterministic subset."
+  },
+  "test_panel": null,
+  "rows": [],
+  "curve": [
+    {
+      "step": 1,
+      "train_ce": 10.970614433288574,
+      "lr": 0.00019999999999999998,
+      "nominal_mean_dropout": 0.40000003576278687,
+      "active_example_blocks": 222,
+      "elapsed_training_seconds": 1.225379577,
+      "step_seconds": 1.2117859689999992
+    },
+    {
+      "step": 10,
+      "train_ce": 7.687743186950684,
+      "lr": 0.0005320979020061972,
+      "nominal_mean_dropout": 0.27586206793785095,
+      "active_example_blocks": 2553,
+      "elapsed_training_seconds": 3.723113777,
+      "step_seconds": 0.27579982900000033
+    },
+    {
+      "step": 20,
+      "train_ce": 7.325918197631836,
+      "lr": 0.00023425668049851533,
+      "nominal_mean_dropout": 0.13793103396892548,
+      "active_example_blocks": 5652,
+      "elapsed_training_seconds": 6.491744159000001,
+      "step_seconds": 0.2762334459999991
+    },
+    {
+      "step": 30,
+      "train_ce": 7.098299026489258,
+      "lr": 5.9999999999999995e-05,
+      "nominal_mean_dropout": 0.0,
+      "active_example_blocks": 9265,
+      "elapsed_training_seconds": 9.270789015,
+      "step_seconds": 0.2776237739999985
+    }
+  ],
+  "train_seconds": 9.273743503,
+  "container_function_seconds": 19.473261542,
+  "mean_step_seconds_after_warmup": 0.2767151893499996,
+  "peak_allocated_bytes": 32591200768,
+  "peak_reserved_bytes": 38455476224,
+  "clipped_steps": 12,
+  "nominal_mean_dropout": 0.20000000298023224,
+  "realized_active_example_blocks": 9265,
+  "dense_example_blocks": 11520,
+  "training_data_stream_sha256": "c8f8f835c809c5a97b005b0596df6e5dab93d0639b3b89008ac35dc64e1b120b",
+  "layerscale_before": {},
+  "layerscale_after": {},
+  "training_targets_or_images": 983040,
+  "cost_note": "Use Modal billing plus invocation reservation ledger; runtime alone excludes startup/build/idle/egress."
+}
