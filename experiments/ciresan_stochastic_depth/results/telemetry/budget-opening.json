@@ -1,0 +1,11 @@
+{
+  "opened_unix": 1788997143.415175,
+  "absolute_cap_usd": 30.0,
+  "spend_guard_usd": 24.0,
+  "metered_opening_usd": 4.07871245,
+  "legacy_ledger_sha256": "e86fd5248a5adfd8831de25532e7efc25b9952d5cd02a7499941df74ac1442fc",
+  "legacy_cumulative_reservations_usd": 23.881000399999998,
+  "prior_apps_confirmed_stopped": true,
+  "prior_app_count": 17,
+  "accounting": "This newly authorized rerun phase uses closed-phase metering plus all new worst-case reservations. Prior completed reservation entries remain immutable audit history, not simultaneously live liabilities. Six-dollar buffer covers billing lag/build/egress. No previous run IDs or artifacts are reused."
+}

@@ -1,0 +1,262 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ciresan metric audit</title><link rel="stylesheet" href="../style.css"></head><body><main><a href="./">Back to training plots</a><article><h1>Metric inventory and low-overhead telemetry plan</h1>
+<p>Status: implementation proposal, 9 September 2026. This document inventories the local historical source and sanitized W&amp;B evidence; it does not authorize compute, upload logs, or change the frozen experiments. New instrumented reruns must have new run IDs and source hashes. The root runner decides the final cadence and records any departure from this proposal.</p>
+<h2>Recommendation</h2>
+<p>Keep the useful historical measurements: loss/accuracy, layer gradient magnitude, activation/backprop scale and zeros, and gradient variability. Add actual parameter updates, branch activity, class errors, and separate training/telemetry clocks. Collect most scalar measurements at existing evaluation boundaries, with a small fixed dense probe every ten epochs. Do not put Python hooks, histogram construction, matrix eigendecompositions, or W&amp;B calls inside CUDA-graph replay.</p>
+<p>Use accurately named dense-probe and sampled-training metrics instead of silently overlaying quantities with different semantics. In particular, a last masked minibatch's gradient is not the historical dense-statistics gradient; a Fisher/gradient second moment is not a Hessian eigenvalue; nominal skipped MACs are not measured time or energy saved.</p>
+<h2>Sources and what can actually be recovered</h2>
+<p>The frozen source snapshots are <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/reference/train_ciresan_new.py">train_ciresan_new.py</a> (SHA-256 <code>60bfa9d8d8c4d1ff1a7689dd6089e391a6b557059bcaa20205e26bcf99c6cf73</code>) and <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/reference/util.py">util.py</a> (<code>2a3599417c650bd0bab7e6117895c2d89bdd2d3a761568ef25104564b121c8c6</code>). They were copied from the public <code>yaroslavvb/stuff/autotune</code> source. They do not establish the exact dirty checkout used for every historical run, and the snapshot does not include the underlying <code>autograd_lib</code> implementation.</p>
+<p>The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/history/README.md">history inventory</a> contains sanitized metadata for all 327 project runs. <code>run-metadata.json</code> deliberately whitelists only scalar performance/configuration fields. It does <strong>not</strong> retain per-layer diagnostic histories. <code>selected-histories.json</code> queried all count-verified evaluation rows for ten runs but saved only first, extrema, last, and first ≥98% records. Thus the metric names below are verified source emissions, not a claim that every diagnostic curve was recovered from W&amp;B. No absent diagnostic curve should be invented from these caches.</p>
+<p>The source explicitly links historical run <a href="https://wandb.ai/yaroslavvb/train_ciresan/runs/425pu650">425pu650</a>: configured <code>train_steps=100</code>, training batch 64, statistics batch 5,000, one statistics batch, <code>skip_stats=0</code>. Its config also includes <code>disable_hess=1</code>, a flag absent from this source version. Run <a href="https://wandb.ai/yaroslavvb/train_ciresan/runs/0ovwv4x6">0ovwv4x6</a> uses 100 training steps per collection, statistics batch 1,000, <code>sampled=0</code>, <code>curv=kfac</code>, and <code>log_spectra=0</code>. The faster 2024 reference <a href="https://wandb.ai/yaroslavvb/train_ciresan/runs/ts4k9n55">ts4k9n55</a> records <code>skip_stats=1</code>, <code>disable_hess=1</code>, and 1,000 training steps per evaluation. Its curvature curves therefore are not an appropriate reference for an instrumented training-speed claim. Config fields absent from the source demonstrate source-version uncertainty.</p>
+<h2>Historical collection cadence and axes</h2>
+<p>Every outer iteration first evaluates the <strong>entire official test set and configured training set</strong>, then optionally collects diagnostics, then executes <code>train_steps</code> optimization steps. Defaults are 100 steps × batch 64 = 6,400 training-example presentations between evaluations. The first evaluation is at initialization. The loop has no final post-training evaluation. <code>epoch = token_count // 60000</code> is an integer exposure counter even if a smaller dataset was configured; it is not necessarily a completed DataLoader epoch. With <code>drop_last=True</code>, incomplete training batches are dropped.</p>
+<p><code>skip_stats=1</code> skips the large curvature block but leaves full train/test evaluation. <code>stats_batch_size × stats_num_batches</code> defines diagnostic sample count <code>n</code>; however the Fisher diagnostic code asserts that <code>stats_num_batches==1</code>. The statistics loader shuffles examples from the training dataset. After validation, the model remains in eval mode throughout statistics collection, so unit dropout is off. Training mode is restored afterward.</p>
+<p>The source sends each scalar separately to TensorBoard with <code>global_step=gl.get_global_step()</code>; W&amp;B is enabled through <code>wandb.tensorboard.patch(tensorboardX=False)</code>. The copied files do not define <code>gl.get_global_step()</code>. Historical <code>_step</code>, <code>global_step</code>, and <code>epoch</code> are not interchangeable: e.g. 425pu650 ends at <code>_step=32600</code>, <code>global_step=2086400</code>, epoch 34. The modern rerun should explicitly log <code>optimizer_step</code>, <code>examples_seen</code>, and <code>epoch</code>, with a documented axis for every plot.</p>
+<h3>Performance and timing names</h3>
+<table>
+<thead>
+<tr>
+<th>Historical key</th>
+<th>Exact meaning in supplied source</th>
+<th>Proposed modern field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>val_accuracy</code>, <code>val_loss</code></td>
+<td>Official-test percent accuracy and mean CE, despite the word “val”</td>
+<td><code>test/accuracy_pct</code>, <code>test/ce</code>; gated by the declared study protocol</td>
+</tr>
+<tr>
+<td><code>train_accuracy</code>, <code>train_loss</code></td>
+<td>Dense eval-mode accuracy in percent and mean CE over the entire configured training set</td>
+<td><code>train_full/*</code> only if full-set evaluation; otherwise explicitly <code>train_probe/*</code> with sample count</td>
+</tr>
+<tr>
+<td><code>epoch</code></td>
+<td>Integer <code>token_count//60000</code> before the next training chunk</td>
+<td><code>epoch</code>, <code>optimizer_step</code>, <code>examples_seen</code>, and <code>equivalent_passes</code> separately</td>
+</tr>
+<tr>
+<td><code>lr</code>, <code>momentum</code></td>
+<td>Current optimizer scalars</td>
+<td><code>optimizer/lr</code>, <code>optimizer/momentum</code>; also log shrinkage and schedules</td>
+</tr>
+<tr>
+<td><code>time/outer</code></td>
+<td>Milliseconds since start of the previous outer iteration</td>
+<td><code>time/run_elapsed_seconds</code>; keep interval and cumulative clocks distinct</td>
+</tr>
+<tr>
+<td><code>time/validate</code></td>
+<td>Python wall time around complete test and train evaluations, milliseconds</td>
+<td><code>time/evaluation_seconds</code> and cumulative total</td>
+</tr>
+<tr>
+<td><code>time/train</code></td>
+<td>Python wall time around <code>train_steps</code> updates, milliseconds</td>
+<td>Synchronized <code>time/training_seconds</code> and interval training seconds</td>
+</tr>
+<tr>
+<td><code>time/stats_forward</code>, <code>time/backprop_H</code>, <code>time/compute_stats</code>, <code>time/spectrum</code></td>
+<td>Python wall time around diagnostic portions, in milliseconds; <code>compute_stats</code> logs repeatedly inside hooks</td>
+<td><code>time/telemetry_seconds</code> and optional coarse phase totals</td>
+</tr>
+</tbody>
+</table>
+<p>The historical timer uses <code>perf_counter</code> without an explicit CUDA synchronization. Transfers and scalar logging may incidentally synchronize, but these timers are not clean GPU kernel times. W&amp;B <code>_runtime</code> includes evaluation, diagnostics, initialization and logging. Preserve it as historical run elapsed time, never call it isolated training time or assume the same GPU.</p>
+<h2>Exact layer-statistics inventory</h2>
+<p>All original layer metrics use <code>layer-{i}</code> for affine layers 0 through 5. Let <code>A_i</code> be an example's <strong>input to that affine layer</strong>, <code>B_i</code> its backpropagated preactivation derivative, and <code>G_i = B_i A_iᵀ</code> its weight-gradient outer product. Bias coordinates are not appended to <code>A</code>; these are weight metrics, not weight-plus-bias metrics. The ordinary Fisher pass differentiates <strong>sum CE</strong>, so each <code>B_i</code> is the per-example derivative without a <code>1/n</code> batch-mean factor. Its mean weight gradient is <code>g = BᵀA/n</code>.</p>
+<p>The source also obtains Hessian-loss and Jacobian backpropagation samples. Their factor normalization depends on the <code>autograd_lib</code> sampler convention; the source names alone do not establish an exact full parameter Hessian. Use “output-curvature/GGN-style block” and “Jacobian Gram block” unless the revived implementation explicitly defines and verifies them.</p>
+<h3>Factor and diagonal metrics</h3>
+<p>For each of <code>hessian</code>, <code>jacobian</code>, and <code>fisher</code>, the source emits the same eight suffixes beneath <code>layer-{i}/{family}/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Source computation and qualification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>diag_l2</code></td>
+<td>Largest element of the estimated curvature diagonal; not the full matrix spectral norm</td>
+</tr>
+<tr>
+<td><code>diag_fro</code></td>
+<td>Frobenius norm of that diagonal array</td>
+</tr>
+<tr>
+<td><code>diag_trace</code></td>
+<td>Sum of the diagonal entries</td>
+</tr>
+<tr>
+<td><code>diag_average</code></td>
+<td>Mean diagonal entry</td>
+</tr>
+<tr>
+<td><code>kfac_trace</code></td>
+<td><code>tr(AA/n) * tr(BB/n)</code></td>
+</tr>
+<tr>
+<td><code>kfac_fro</code></td>
+<td><strong>Unnormalized</strong> <code>||AA||F * ||BB||F</code>; scales as <code>n²</code> relative to the normalized factor product</td>
+</tr>
+<tr>
+<td><code>diversity</code></td>
+<td>Mean per-example squared outer-product norm divided by squared mean outer-product norm</td>
+</tr>
+<tr>
+<td><code>kfac_error</code></td>
+<td>Mean absolute difference between the KFAC diagonal and estimated diagonal, divided by mean absolute estimated diagonal</td>
+</tr>
+</tbody>
+</table>
+<p>Here <code>AA = Σ A_i A_iᵀ</code> and <code>BB = Σ B_i B_iᵀ</code>, with additional sampler accumulation for the curvature/Jacobian families. No parameter-norm or actual parameter-update/delta metric is emitted by this script; those would be useful <strong>new</strong> measurements, not preserved legacy fields.</p>
+<h3>Gradient, activation and pairwise metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Historical suffix under <code>layer-{i}/</code></th>
+<th>Exact meaning / needed correction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grad_fro</code></td>
+<td><code>||g||F</code>, the weight gradient of mean dense statistics-batch CE</td>
+</tr>
+<tr>
+<td><code>enorms</code></td>
+<td><code>||g||F²</code></td>
+</tr>
+<tr>
+<td><code>min_norm</code>, <code>median_norm</code>, <code>max_norm</code></td>
+<td>Statistics of <code>||G_i||F = ||A_i||₂ ||B_i||₂</code></td>
+</tr>
+<tr>
+<td><code>mean_norm</code></td>
+<td><strong><code>sqrt(Σ||G_i||F²)/n</code></strong>, not <code>mean(||G_i||F)</code> and not RMS; do not carry the misleading name forward</td>
+</tr>
+<tr>
+<td><code>norms_centered</code></td>
+<td><code>mean(||G_i||F²) − ||g||F²</code>, the trace of the population-normalized gradient covariance</td>
+</tr>
+<tr>
+<td><code>a_sparsity</code>, <code>b_sparsity</code></td>
+<td>Fraction of affine-input activations / backprop elements <strong>≤0</strong>; negative backprops count as “sparse” in the legacy field</td>
+</tr>
+<tr>
+<td><code>mean_activation</code>, <code>msr_activation</code></td>
+<td>Mean and root-mean-square affine input; “msr” is a legacy spelling</td>
+</tr>
+<tr>
+<td><code>mean_backprop</code>, <code>msr_backprop</code></td>
+<td>Mean and root-mean-square preactivation derivative</td>
+</tr>
+<tr>
+<td><code>mean_dot_product</code>, <code>median_dot_product</code>, <code>mean_cosine</code>, <code>median_cosine</code></td>
+<td>Summaries from <code>autograd_lib.offset_dotprod/offset_cosines</code> on within-statistics-batch example pairs; exact pairing requires the unarchived helper implementation</td>
+</tr>
+<tr>
+<td><code>train_regret</code>, <code>test_regret1</code>, <code>test_regret2</code>, <code>train_regret_opt</code>, <code>test_regret_opt</code>, <code>regret_ratio</code></td>
+<td>Median quadratic offset-loss predictions from <code>autograd_lib.offset_losses</code>, with offsets 0/1/2 and fixed or optimized alpha; these are <strong>not measured train/test loss changes</strong>, and “test” refers to offset examples from the statistics batch</td>
+</tr>
+</tbody>
+</table>
+<h3>Curvature, noise and heuristic rates</h3>
+<p>The source emits <code>hess_trace</code>, <code>jac_trace</code>; KFAC Rayleigh quotients of the mean gradient <code>hess_curv</code>, <code>jac_curv</code>; and per-example directional quotients <code>hess_curv_grad</code>, <code>jac_curv_grad</code>, <code>sigma_curv_grad</code> with <code>_max</code> and <code>_median</code>. For example, <code>hess_curv = &lt;g, (BB_H/n) g (AA/n)&gt; / ||g||²</code> and <code>hess_curv_grad</code> averages that KFAC quotient over individual <code>G_i</code>. <code>sigma_curv_grad</code> substitutes the empirical-Fisher factors.</p>
+<p>Other emitted names are <code>hess_noise</code>, <code>jac_noise</code>, <code>hess_noise_centered</code>, <code>jac_noise_centered</code>, <code>openai_gradient_noise</code>, <code>hess_noise_normalized</code>, <code>jac_noise_normalized</code>, <code>norms_hess</code>, <code>norms_jac</code>, <code>lyap_hess_max</code>, <code>lyap_hess_ave</code>, <code>lyap_jac_max</code>, <code>lyap_jac_ave</code>, <code>band_bottou</code>, <code>band_bottou_stoch</code>, <code>band_yaida</code>, <code>band_yaida_centered</code>, and <code>lr1</code>–<code>lr4</code>. These are algebraic moment/curvature proxies and heuristic rates, not optimizer settings or directly measured noise-driven loss increases. <code>norms_hess</code> accumulates square roots of directional quadratic forms, whereas <code>norms_jac</code> accumulates the quadratic forms themselves; their dimensions differ. The value called <code>openai_gradient_noise</code> uses this square-root accumulator and should not be relabeled a standard gradient-noise scale without rederivation.</p>
+<p>Material source issues: <code>lyap_hess_ave</code> and <code>lyap_jac_ave</code> read unwritten <code>*_sum</code> fields, while accumulation writes <code>*_mean</code>; <code>band_bottou_stoch</code> reads unwritten <code>curv_ratio</code>. Permissive default dictionaries can silently provide zeros. <code>lr1</code>–<code>lr4</code> divide already-averaged directional curvatures by <code>n</code> again. Empty/zero-gradient cases can create undefined ratios. <code>skip_nans</code> filters infinities too, and some filtered sums retain the original <code>n</code> denominator. Treat these fields as unaudited legacy output, not targets for literal restoration.</p>
+<h3>Spectra and histograms</h3>
+<p>Every diagnostic collection computes all of <code>hess_A</code>, <code>hess_B</code>, <code>fish_A</code>, <code>fish_B</code>, <code>jac_A</code>, and <code>jac_B</code> factor eigenspectra for every layer. It logs <code>{hess,fish,jac}{A,B}_erank</code>, where <code>erank = sum(eigenvalues)/max(eigenvalue)</code> is a trace-to-top-eigenvalue effective dimension, not entropy rank. It derives <code>hess_l2</code>, <code>jac_l2</code>, <code>fish_l2</code> from products of largest factor eigenvalues, and <code>jain1_sto</code>, <code>jain1_det</code>, <code>jain1_lr</code> from heuristic trace/spectral formulas.</p>
+<p>Always-on histogram names inside the statistics block are <code>hist_hess_eig</code>, <code>hist_fish_eig</code>, <code>hist_jac_eig</code>, <code>hist_grad_norms</code>, <code>hist_grad_norms_hess</code>, <code>hist_curv_jac</code>, <code>hist_curv_hess</code>, and <code>hist_cosines</code>. <strong>Both <code>hist_fish_eig</code> and <code>hist_jac_eig</code> mistakenly use Hessian eigenvalue products.</strong> Product spectra can materialize one value per layer weight, up to five million entries for a single layer.</p>
+<p>The output-space block always logs <code>mismatch/rho</code>, <code>mismatch/rho_cheap</code>, <code>mismatch/diagonalizability</code> and figures <code>mismatch/{sigma,hess,lyapunov,lyapunov_cheap}</code>. <code>log_spectra=1</code> additionally logs layer figures <code>{hess_A,hess_B,hess_AB,jac_A,jac_B,fish_A,fish_B,Lyap,Lyap_cheap}</code>, scalars <code>trace_ratio</code>, <code>dims</code>, <code>L_erank</code>, <code>L_cheap_erank</code>, <code>rho</code>, <code>rho_cheap</code>, and computed <code>jain2_*</code> values. The latter are assigned to <code>s</code> <strong>after</strong> its <code>log_scalars</code> call, so they are not actually emitted by that assignment path. Setting <code>log_spectra=0</code> therefore does not eliminate most spectral overhead.</p>
+<h2>Proposed implementation contract</h2>
+<p>Canonical metric families below are suggestions; the runner may choose equivalent names, but must preserve their units and provenance. Use explicit <code>*_pct</code> for 0–100 accuracy and <code>*_fraction</code> for 0–1 quantities. Store scalar rows locally first and send one batched W&amp;B row per logging boundary. W&amp;B <code>_step</code> should not be the scientific x-axis; define each metric against the recorded optimizer-step axis. Do not enable <code>wandb.watch</code>, per-step histograms, or source/checkpoint auto-upload as a side effect.</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Measurements</th>
+<th>Proposed cadence and cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>train/stochastic_ce</code>, <code>optimizer/*</code>, <code>schedule/*</code></td>
+<td>Existing epoch mean stochastic loss, LR, momentum, shrinkage, branch drop probabilities, scheduled changes</td>
+<td>Every epoch, reusing existing device reductions and host metadata</td>
+</tr>
+<tr>
+<td><code>validation/*</code>, <code>train_probe/*</code></td>
+<td>Dense CE, accuracy, sample count, predicted-class counts; CE/accuracy generalization gap only between explicitly labeled comparable splits</td>
+<td>Existing evaluation boundaries; first epoch, every five epochs, and final is the present controlled-study cadence</td>
+</tr>
+<tr>
+<td><code>test/*</code></td>
+<td>CE, accuracy, confusion matrix, per-class support/error rates</td>
+<td>Only at protocol-authorized endpoints; never add monitored test selection to a validation-controlled rerun</td>
+</tr>
+<tr>
+<td><code>time/*</code>, <code>memory/*</code></td>
+<td>Training, evaluation, telemetry, preparation, checkpoint I/O and run elapsed time; setup separately; peak allocated/reserved bytes</td>
+<td>Coarse boundaries, with synchronization outside timed training; log sampled W&amp;B transport/finish wall time separately</td>
+</tr>
+<tr>
+<td><code>branch/{j}/*</code></td>
+<td>Drop probability, realized kept/dropped counts, valid gradient observations, nominal affine MAC exposure</td>
+<td>Every epoch from the masks already generated; do not sum stale skipped gradients</td>
+</tr>
+<tr>
+<td><code>parameter/layer_{i}/*</code></td>
+<td>Weight and bias L2/RMS, displacement from initialization, change since previous diagnostic snapshot, update-to-weight norm ratio</td>
+<td>Sparse boundaries, separate weight/bias; reductions are memory bandwidth work over ~12M parameters</td>
+</tr>
+<tr>
+<td><code>training_sample/layer_{i}/*</code></td>
+<td>Last <strong>active</strong> sampled training gradient L2/RMS and validity/mask, momentum-buffer magnitude if useful</td>
+<td>One explicitly identified training step at a diagnostic boundary; no per-step host synchronization</td>
+</tr>
+<tr>
+<td><code>probe/dense/layer_{i}/*</code></td>
+<td>Dense mean-CE weight/bias gradient L2; affine-input mean/RMS/zero and nonpositive fractions; preactivation-backprop mean/RMS/zero and nonpositive fractions</td>
+<td>Fixed 128 training examples, initialization, epoch 1, every ten epochs, final; one ordinary dense forward/backward on the probe</td>
+</tr>
+<tr>
+<td><code>probe/dense/gradient_moments/*</code></td>
+<td>Per-example weight-gradient norm mean/RMS/median/max; exact empirical-Fisher weight-block trace; mean-gradient squared norm; covariance trace; gradient diversity</td>
+<td>Same small probe, using outer-product identities without building per-example parameter-gradient tensors or covariance matrices</td>
+</tr>
+</tbody>
+</table>
+<p>The probe indices must come only from the fitting training split, selected and hashed before the rerun, using a dedicated RNG or deterministic indices. Keep the same probe across all recipes/seeds where scientifically appropriate, with its sample count and input normalization recorded. This makes trajectories comparable but does not turn that small fixed training subset into held-out generalization evidence.</p>
+<p>Use model eval mode and ordinary FP32 scientific reductions for dense probes. Different training precision, dropout schedule, input normalization or logit activation must remain explicit configuration. Gradients of <strong>mean</strong> CE satisfy <code>B_mean = B_per_example/n</code>; multiply the backpropagated activation derivative by <code>n</code> before reporting legacy-scale per-example moments. Conversely the weight <code>.grad</code> from mean CE already has the correct scale for legacy <code>grad_fro</code>.</p>
+<p>For each affine layer, <code>mean(||A_i||²||B_i||²)</code> is the exact weight-block empirical-Fisher trace on that probe. <code>||BᵀA/n||F²</code> is the squared mean gradient, and their difference is population-normalized covariance trace; the difference can be clipped only for diagnosed floating-point roundoff, with the convention recorded. Norms and quantiles require only per-example scalar arrays. Gradient diversity divides the first by the second; when the denominator is negligible, report null plus validity counts rather than an enormous misleading number. These are gradient second moments, <strong>not Hessian curvature</strong>, and need distinct plot titles.</p>
+<h3>Parameter deltas and CUDA-graph safety</h3>
+<p>The actual parameter change includes momentum and any post-update multiplicative shrinkage. Do not substitute <code>−lr*gradient</code> and label it a measured update. A snapshot difference across ten epochs is <code>delta_since_snapshot</code> with start/end optimizer step and interval length; it is not an individual optimizer-step update or path length. If root wants true step updates, snapshot parameters before exactly one predeclared diagnostic step, then subtract afterward; this adds a ~48 MB FP32 snapshot for this model. Displacement from initialization is another separate quantity.</p>
+<p>The optimized graph helper keeps persistent gradient storage. Skipped branches may retain <strong>old</strong> <code>.grad</code> values. Filter using the exact last active mask; log null/validity for skipped gradients, not zeros that imply a measured derivative. Shrinkage can still move skipped parameters, so their measured update is not necessarily zero. Momentum in skipped branches is frozen by the present controlled-study update rule.</p>
+<p>Do not attach ordinary Python module hooks to captured graph replay and assume they run at every replay. Execute the probe separately through the existing eager model with <code>autograd.grad</code> targeting intermediates/parameters; avoid <code>.backward()</code> into or replacement of graph-owned <code>.grad</code> buffers. Restore model mode and preserve all optimizer, parameter, buffer and RNG state. Forward probes must not consume the training-order, stochastic-depth, or unit-dropout streams. Independent tests should confirm that instrumentation on/off leaves a short training trajectory and masks unchanged, and that zero gradients, all-skipped masks, and undefined ratios are handled explicitly.</p>
+<h2>Curvature options and overhead controls</h2>
+<p>Default telemetry should omit full AA/BB matrices, repeated Hessian/Jacobian backpropagations, eigensolves, Lyapunov solvers, and millions-of-values spectra. The old source annotates roughly 600 ms for each Hessian/Jacobian pass and 27 ms per <code>compute_stats</code> layer call; these are author comments on historical hardware, <strong>not measurements on the new A100 runner</strong>. The asymptotic cost is enough to reject them as “free” instrumentation: factor construction is <code>O(n d²)</code>, dense factor eigensolves are cubic in widths up to 2500, and output-curvature/Jacobian passes can require up to ten output directions. Multiple large factor matrices, graph retention, repeated scalar transfers, histogram construction, and Matplotlib rendering amplify overhead.</p>
+<p>If genuine curvature is required, use an explicitly optional coarse diagnostic at initialization and selected/final checkpoints, outside training timing: a fixed small probe and a verified Hessian-vector or GGN-vector product with a defined direction. Label signed directional true-Hessian curvature separately from nonnegative GGN curvature and from empirical-Fisher moments. One direction is not a top eigenvalue; a few power iterations are approximate and must disclose iteration count and convergence. Preserve probe/source hashes and count every added backward/vector product. Given the preceding audit's finite-difference precision failures, a tiny-epsilon loss-difference estimate should not be added as an inexpensive curvature substitute.</p>
+<p>Proposed overhead target: telemetry measurement plus serialization should add no more than <strong>5%</strong> to the instrumented rerun's comparable training-and-existing-evaluation wall time, excluding remote network finalization; also report total end-to-end overhead including that finalization. This is a target to measure, not an asserted result. Root can qualify the probe on an existing authorized run. If the target is missed, deterministically reduce the probe cadence or size before experimental outcomes are used, record the decision, and keep all main loss/accuracy curves. Never silently change diagnostic precision based on an attractive or unattractive statistic. Collect lightweight JSON rows in memory, flush periodically, and render spectra/plots after training on CPU. Keep raw scalar histories even if W&amp;B upload fails; training must not wait for every network request.</p>
+<h2>Main plots for the rerun</h2>
+<ol>
+<li>Dense train-probe and validation CE/accuracy versus optimizer steps and isolated training seconds, with endpoint markers; show total elapsed time separately. Add official-test values only at declared endpoints. Include seed traces behind means and clearly labeled three-seed intervals.</li>
+<li>Generalization gap and predicted-class counts/confusion at authorized endpoints, making the historical dead-class/ReLU failure visible instead of relying only on aggregate accuracy.</li>
+<li>Layer-by-epoch heatmaps of dense-probe gradient L2, parameter L2, snapshot displacement/update ratio, activation zero fraction and backprop zero fraction. Keep sampled masked-training gradients in a separate plot with missing skipped observations.</li>
+<li>SD probability/realized survival and nominal MAC exposure versus training step, alongside measured training throughput. This tests whether reduced branch work becomes real speed.</li>
+<li>Probe per-example gradient RMS, covariance trace, and gradient diversity, with finite-count and sample-size annotations. Optional verified curvature belongs in its own chart with its approximation and overhead stated; it must not be conflated with these inexpensive gradient moments.</li>
+</ol>
+<p>For meaningful historical overlays, use only the saved evaluation points and mark them as a different source/recipe/hardware regime. Historical <code>val_*</code> becomes labeled official test, not modern validation. Recovered old extrema are sparse observations, not a reconstructed dense curve. Parameter deltas, per-class diagnostics, and new fixed-probe measurements cannot be presented as if they had been measured in the old run.</p>
+<h2>Implemented offline curvature extension</h2>
+<p>After the lightweight plan was written, the root runner selected a separate, bounded offline diagnostic rather than adding curvature to training. The implemented entry point is <code>telemetry.curvature.analyze_curvature(model, x, y, mode='exact', samples=1, seed=20260909, probe_id=..., eig_max_dimension=1536, include_directional=True)</code>. The planned checkpoint panel is epochs 0, 1, 5, 10, 20, 50, and 100 for seed 101 of residual dense, constant SD, and decreasing SD: seven snapshots per recipe, 21 total. The fixed 128-example fitting-training probe matches the recorder’s current first-128-example probe. The instrumented training cadence was reduced to ten epochs/probe128 after timing qualification; this is a measured-overhead adaptation, not selection using scientific outcomes. Resources and dispatch remain owned by the root runner; no runtime result is asserted here.</p>
+<p>Exact mode uses all ten output-unit directions for the Jacobian Gram and ten square-root CE-output-Hessian directions for GGN. The observed-label Fisher is exact on the finite probe in either exact or sampled mode. Sampled mode is implemented for explicit alternatives: independent per-example Rademacher combinations averaged over the specified sample count, with estimator labels. It must not silently replace the pinned exact ten-direction panel after inspecting a statistic.</p>
+<p>Per layer, the JSON stores the shared activation-factor spectrum and three families: <code>empirical_fisher</code>, <code>ce_ggn</code>, and <code>jacobian_gram</code>. Each contains weight/bias diagonal max, Frobenius norm, trace and average; normalized KFAC trace/Frobenius norm/top eigenvalue; effective and stable ranks; relative diagonal approximation error; and its backprop-factor eigenspectrum. Bias diagonals are separate and are null when a layer has no bias; weight block metrics exclude weight/bias cross terms. The largest smaller-Gram dimension is at most 1,280 for ten directions and 128 examples. Eigenvalue lists are factor spectra only: the implementation never materializes millions of Kronecker-product eigenvalues or a full parameter-square matrix. The actual largest eigenproblem dimension is logged. An eigenproblem exceeding the configured cap uses an explicitly labeled approximate top-spectrum fallback; the pinned N128/ten-output/1536-cap plan does not need that fallback.</p>
+<p>Directional metrics use actual per-example CE weight gradients. They report each family's <strong>KFAC</strong> Rayleigh quotients in the mean and individual gradient directions; weighted-gradient norms; empirical covariance contraction retaining activation/backprop dependence; a separate factorized KFAC-noise contraction; and their ratios to the mean-gradient quadratic form. These are clearly defined replacements for the original curvature/noise intent, not aliases for its buggy or dimensionally inconsistent fields. Zero denominators produce null with validity counts. Approximate centered noise quantities may be negative and are not silently clipped.</p>
+<p>The output-space mismatch block computes mean CE-logit Hessian H and empirical gradient second moment F, projects onto H's numerically retained support, and solves <code>H L + L H = 2F</code> there. It reports support cutoff/rank, discarded Fisher mass, solution residual, Lyapunov and preconditioned-Fisher spectra, and both ambient- and support-dimension rho conventions. The ratio of their effective ranks is given a descriptive name rather than claiming it proves “diagonalizability.” These are output-logit diagnostics, not a full-network stability theorem.</p>
+<p>The offline wrapper loads a separate checkpoint model and raw inputs in <strong>FP64</strong>, so model derivatives, moments, and eigenspectra all use FP64; its input normalization still follows the original model factory. The reusable curvature function records the supplied model dtype and temporarily sets float32 matmul precision to <code>highest</code> for any float32 operations. CE output gradients and the Hessian factor use cancellation-resistant sums of other probabilities instead of <code>1−p</code> at high confidence, with the convention recorded. This is an explicit numerical implementation choice, not a retroactive modification of earlier frozen gradient probes. Parameters, <code>.grad</code> storage, optimizer state, model modes, and RNG states are preserved. Derivative and reduction dtypes, probe hashes, elapsed time, and matrix dimensions accompany the results.</p>
+<p>Eleven CPU tests pass against independently constructed tiny parameter-space Fisher/GGN/Jacobian blocks and KFAC matrices, including directional/noise contractions, output support projection, sampled normalization, saturated-softmax behavior, state preservation, and the real crop-residual model class. GPU runtime and finite-probe representativeness remain to be measured by the authorized offline runner. Expensive legacy offset-regret predictions, heuristic learning-rate prescriptions, erroneous duplicate histograms, unnormalized Frobenius norms and unwritten accumulator fields remain omitted and named in the output metadata.</p>
+<p>The implemented <code>telemetry/offline_curvature.py</code> wrapper accepts the <code>telemetry.run.run(spec, root, progress_commit)</code> dispatch contract. Its independent <code>curvature_source_sha256</code> mapping must pin <code>telemetry/curvature.py</code>, <code>telemetry/offline_curvature.py</code>, and <code>model_data.py</code>. It verifies the source run’s separately frozen training-source map, every snapshot file against <code>result.telemetry.snapshots</code>, original training/split hashes, and the recorder’s raw-image/label probe hash. Epoch 0 and epoch 100 also match the source initialization and trained-final parameter hashes. An optional <code>source_result_sha256</code> pins exact remote JSON bytes; local results containing additional dispatch metadata are not byte-identical substitutes. All SHA values and the distinction between externally pinned and merely recorded source-result digests are saved.</p>
+<p>Every completed checkpoint writes <code>curvature-{epoch:03d}.json</code> and an updated aggregate <code>result.json</code>, followed by the supplied volume-commit callback. The default computational work limit is 420 seconds inside the parent’s 480-second invocation. It records the first snapshot’s runtime projection, and stops with an explicit incomplete <code>budget_censored</code> result if elapsed time plus 1.25 times the largest observed snapshot duration plus five seconds exceeds that limit. It does not switch to sampled directions, drop unfavorable checkpoints, or lower precision. All original snapshots remain untouched.</p>
+<p><strong>Exact in this output means exact affine-block diagonal/trace and exact finite-probe factor spectra under the stated arithmetic and all output directions. It does not mean an exact full Fisher, GGN, Jacobian Gram, or parameter Hessian matrix.</strong> KFAC still discards dependencies between activation and derivative factors and omits cross-layer structure. Recorder FP32 and offline FP64 probe CE/accuracy are shown side by side as descriptive precision comparisons, not required to be bitwise equal. Six synthetic filesystem-wrapper tests verify successful seven-snapshot completion, incremental persistence, duplicate-run refusal, source/checkpoint/probe tamper guards, and runtime censoring, in addition to the eleven curvature tests.</p></article></main></body></html>

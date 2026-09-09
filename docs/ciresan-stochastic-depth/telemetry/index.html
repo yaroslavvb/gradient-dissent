@@ -1,0 +1,690 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ciresan training, with the instruments on</title><meta name="description" content="Repeated A100 MNIST experiments with training curves, layer statistics, Fisher and GGN diagnostics, and measured telemetry overhead."><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="style.css"><script defer src="data.js"></script><script defer src="app.js"></script></head><body><a class="skip" href="#main">Skip to plots</a><header><a class="brand" href="../../">GRADIENT DISSENT</a><nav><a href="../">Original experiment</a><a href="../optimization/">A100 optimization</a><a href="../hypotheses/">Layer-drop hypotheses</a></nav></header><main id="main"><p class="eyebrow">MNIST · fully connected networks · A100 reruns · September 9, 2026</p><h1>Training, with the instruments on.</h1><p id="headline">Five training methods, three seeds each, plus the optimized baseline. Inspect learning curves first, then follow activations, gradients and curvature through all six affine layers.</p><div class="controls"><label>Comparison<select id="cohort"><option value="controlled">Five-method comparison · 50k train / 10k validation</option><option value="baseline">Optimized baseline · 60k train</option></select></label><label>Horizontal axis<select id="axis"><option value="epoch">Epoch</option><option value="training_seconds">Measured training seconds</option><option value="run_elapsed_seconds">Run elapsed seconds</option></select></label><label>Seed<select id="seed"><option value="all">All three · individual traces</option><option>101</option><option>102</option><option>103</option></select></label></div><div class="legend" id="legend"></div><div class="plot-grid"><section><h2>Accuracy</h2><svg id="accuracy" viewBox="0 0 760 340" role="img" aria-label="Accuracy learning curves"></svg></section><section><h2>Cross-entropy</h2><svg id="loss" viewBox="0 0 760 340" role="img" aria-label="Cross entropy learning curves"></svg></section></div><div class="controls"><label>Learning-curve split<select id="split"><option value="validation">Validation</option><option value="test">Official test</option><option value="train">Full training set</option></select></label><label class="check"><input id="zoom" type="checkbox" checked>Accuracy: zoom to 95–100%</label><label class="check"><input id="loss-log" type="checkbox" checked>Log loss axis</label></div><p class="note" id="curve-note"></p><p class="note">Each line is one seed; line dashes distinguish seeds. Detailed diagnostics run at epochs 0, 1 and every 10; original validation checks keep their five-epoch cadence. Lines connect measured checkpoints, with no smoothing. Hover or focus a plotted point for its value.</p><details><summary>Accessible curve values / download</summary><button type="button" id="download-curves">Download displayed curves as CSV</button><div class="table-wrap"><table id="curve-table"></table></div></details>
+<section class="section"><h2>What changed when the layer was dropped?</h2><p>The default plot follows per-example gradient diversity: the average squared gradient norm divided by the squared mean gradient. Large values can reflect cancellation, or one example dominating an otherwise nearly zero-gradient probe. Select any recorded scalar to inspect its trajectory.</p><div class="controls"><label>Metric search<input id="metric-search" type="search" placeholder="activation, gradient, sparsity, update…"></label><label class="wide">Recorded scalar<select id="metric"></select></label><label class="check"><input id="metric-log" type="checkbox" checked>Log axis</label></div><div class="plot-grid"><section><h3>Selected statistic</h3><svg id="metric-chart" viewBox="0 0 760 350" role="img" aria-label="Selected layer statistic across training"></svg></section><section><h3 id="norm-heading">Mean gradient magnitude</h3><svg id="gradient-norm" viewBox="0 0 760 350" role="img" aria-label="Probe mean gradient L2 norm alongside the selected statistic"></svg></section></div><p id="metric-note" class="note"></p><details><summary>How to read these statistics</summary><p>Within each cohort, probe statistics use the same fixed 128 training examples, with every branch kept and unit dropout disabled. They measure the learned network under a common diagnostic input, rather than a random training mask. Layer 0 is the stem, layers 1–4 are the eligible body branches, and layer 5 is the classifier.</p><p>Training-state gradients refer to the last minibatch. A skipped branch may retain stale gradient storage, so those values are flagged or omitted. Update norms measure net parameter displacement between diagnostic checkpoints, not a single optimizer step. Zero gradient denominators are undefined and remain missing.</p></details></section>
+<section class="section"><h2>Which digits improve first?</h2><div class="controls"><label>True digit<select id="digit"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></label><label>Split<select id="class-split"><option value="test">Official test</option><option value="validation">Validation</option><option value="train">Training</option></select></label></div><svg id="class-chart" viewBox="0 0 1100 350" role="img" aria-label="Per digit accuracy learning curves"></svg><p class="note">These curves describe classification while keeping every branch. Actual resilience to deleting branches is measured in the <a href="../hypotheses/">16-mask experiment</a>. Class differences here do not establish which digits can safely skip layers.</p></section>
+<section class="section"><h2>Curvature, after the training clock stops</h2><p>Three methods, seed 101, seven saved checkpoints. We evaluate the same 128 training examples in float64. The Fisher, cross-entropy generalized Gauss–Newton (GGN), and unweighted logit-Jacobian Gram answer different questions.</p><div class="controls"><label>Affine layer<select id="curv-layer"><option value="0">0 · stem</option><option value="1">1 · first body</option><option value="2">2 · second body</option><option value="3">3 · third body</option><option value="4">4 · fourth body</option><option value="5">5 · classifier</option></select></label><label>Curvature family<select id="curv-family"><option value="ce_ggn">Cross-entropy GGN</option><option value="empirical_fisher">Empirical Fisher</option><option value="jacobian_gram">Logit-Jacobian Gram</option><option value="activation_factor">Activation factor</option><option value="gradient_moments">Gradient moments · float64</option><option value="output_mismatch">Output Fisher / GGN mismatch</option></select></label><label>Statistic<select id="curv-metric"></select></label><label class="check"><input id="curv-log" type="checkbox" checked>Log axis</label></div><svg id="curvature" viewBox="0 0 1100 370" role="img" aria-label="Offline curvature diagnostic across checkpoints"></svg><p id="curv-note" class="note"></p><h3>Factor spectrum at a saved checkpoint</h3><div class="controls"><label>Checkpoint epoch<select id="spectrum-epoch"><option>0</option><option>1</option><option>5</option><option>10</option><option>20</option><option>50</option><option selected>100</option></select></label><label>Factor<select id="spectrum-factor"><option value="activation">Activation second moment</option><option value="backprop">Backprop second moment · selected family</option></select></label></div><svg id="spectrum" viewBox="0 0 1100 350" role="img" aria-label="Eigenvalues of the activation or backprop second-moment factor"></svg><p class="note">Eigenvalues come from the exact smaller Gram matrix. Zero modes are omitted on the log scale. These are factor spectra, not full parameter-curvature spectra. Backprop spectra require one of the first three curvature families.</p><details><summary>Exact and approximate parts</summary><p>All ten output directions are evaluated exactly on the fixed probe. Per-parameter diagonals and gradient moments are exact for that probe, up to floating-point arithmetic. Kronecker-factored (KFAC) curvature is an approximation: it separates activation and backpropagation factors. Its eigenvalues are not the spectrum of the full network Hessian. The GGN omits the network’s second-derivative term. These are diagnostics on 128 examples, not population curvature estimates.</p><p>The old logger’s Fisher/Jacobian spectrum mix-up and inconsistent normalizations are corrected. Unpopulated legacy fields are omitted. See the metric audit for a definition-by-definition mapping.</p></details></section>
+<section class="section"><h2>What did the instruments cost?</h2><div id="qualification-note"></div><div class="table-wrap"><table id="overhead-table"></table></div><p class="note">Training seconds measure synchronized GPU optimization only. Telemetry seconds measure the additional synchronized diagnostic work. Run elapsed includes setup, evaluation, checkpoint I/O and diagnostics; Modal dispatch time also includes provisioning. Paired total wall clocks can differ because graph setup is warm or cold. Upload happens after training.</p><div class="table-wrap"><table id="baseline-table"></table></div><p id="baseline-note" class="note"></p><h3>Historical reference: all 91 recorded evaluations</h3><svg id="history-chart" viewBox="0 0 1100 330" role="img" aria-label="Historical Ciresan accuracy versus W and B run elapsed seconds"></svg><p class="note">The original <a href="https://wandb.ai/yaroslavvb/train_ciresan/runs/ts4k9n55">ts4k9n55 run</a> calls official-test accuracy “val_accuracy.” Its W&B elapsed clock includes evaluation and logging, and its GPU is unknown. The architecture/input convention also differs. This is historical context, not a controlled hardware speedup comparison.</p></section>
+<article id="report"><h2>Ciresan MNIST reruns with low-overhead training statistics</h2>
+<p>All <strong>18 requested reruns are complete and verified</strong>, with <strong>401 logged checkpoints and 838 distinct scalar fields</strong> available in the interactive explorer. The five-method comparison reproduces its original recorded learning curves. The optimized baseline again reaches the requested 98.63% threshold at epochs 24,23 and 21. The earlier layer-deletion findings remain available in the <a href="https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/hypotheses/">hypothesis report</a>.</p>
+<p>The main practical result is that useful historical diagnostics fit comfortably beside these optimized trainers. Added telemetry costs <strong>1.24–5.94% of training time in the 100-epoch comparison</strong>. For the very short baseline, cold initial diagnostics cost enough to exceed our 10% target: <strong>0.80–1.12 seconds total, or 14.13–18.54% of training</strong>. After initialization, the added work is 0.19–0.26 seconds. Both successful qualification and this final cold-start exceedance are reported.</p>
+<p>The revived statistics also expose two interpretation traps. A gradient-diversity ratio near the probe size can mean one example dominates nearly vanishing gradients. And cross-entropy curvature can fall even as sensitivity of the logits grows. Measuring these quantities separately is more informative than treating “flatness,” Fisher magnitude or gradient diversity as a single explanation of generalization.</p>
+<h2>What is available</h2>
+<p>The <a href="https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/telemetry/">interactive report</a> includes train/validation/test accuracy and CE against epoch, synchronized training time or elapsed time; all scalar layer statistics; a matching mean-gradient magnitude plot; every digit’s accuracy curve; Fisher/GGN/Jacobian diagnostics; exact factor spectra; and the complete 91-observation historical W&amp;B reference curve. No smoothing is applied. Missing and undefined measurements remain missing.</p>
+<p>The architecture remains 784→2500→2000→1500→1000→500→10. Cropped residual bypasses make the four body affine branches eligible for stochastic depth; the stem and classifier always run. The optimized CUDA-graph implementations and frozen scientific settings were reused. Statistics run at epoch boundaries, without optimizer-step hooks or network logging.</p>
+<p>Historical statistics were audited definition by definition. We retain full-split scores, per-class counts/confusions, activation/backprop distributions, parameter and gradient norms, momentum and parameter-displacement summaries, and fixed-probe per-example gradient moments. Sparse saved checkpoints support the expensive curvature families afterward. The <a href="https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/telemetry/metric-plan.html">metric audit</a> identifies corrected labels/normalizations and excluded buggy or unjustified legacy fields. These are intentional corrections, not a byte-for-byte resurrection of the old logger.</p>
+<h2>W&amp;B and reproducibility</h2>
+<p>W&amp;B was not authenticated in this environment. The plots are hosted on GitHub Pages, and <strong>all 18 runs have complete post-training W&amp;B JSONL exports</strong>: 401 rows, with every original finite scalar and measured clock preserved. Authenticated replay creates new runs and uses measured epoch/training/elapsed axes; upload time is never substituted for training time. See the <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/telemetry/WANDB.md">export instructions</a>, <a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/telemetry/wandb-export">exports</a>, and <a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/telemetry">reproduction commands</a>.</p>
+<p>Verification includes 49 CPU tests for formulas, state/RNG preservation, replay checks, checkpoint provenance and export completeness. The report additionally exercises every scalar selector and the main cohort/split/time controls without a browser. Source hashes, all runs, both qualification attempts and budget records are committed alongside the code. Large model checkpoint files remain in the existing Modal volume, with exact hashes; all reported measurements and spectra are in GitHub.</p>
+<h2>Training findings from the instrumented reruns</h2>
+<p>All 18 declared reruns verified. The 15 controlled runs reproduce every original recorded scientific loss/accuracy value, initialization hash, training-order digest, and layer-mask digest. The three optimized-baseline reruns reproduce their recorded curves, initialization and stopping checkpoints. Old final parameter hashes were not recorded, so matching final weights to those old runs is not claimed. Both qualification attempts separately established byte-identical on/off final parameters and complete scientific histories. These are instrumented repeats of existing seeds, not 18 new independent replications.</p>
+<p>Controlled settings remain the original widths, normalized pixels, linear logits, 50,000/10,000 fitting/validation split, batch 64 FP32/TF32, 100 epochs and frozen learning rates: .03 for plain and .01 for all residual recipes. Ordinary dropout is .2; SD schedules remain frozen. Dense diagnostics disable both unit dropout and branch removal. They use the same fixed first 128 fitting examples, with detailed measurements at epoch 0, epoch 1 and every 10 epochs. No metric alters training or validation-CE checkpoint selection; diagnostic official-test evaluations are repeated and disclosed. Three seeds reuse the same datasets and probe.</p>
+<h3>Quality and checkpoint dependence</h3>
+<p>Each cell is mean ± sample SD over seeds 101–103 (n=3); accuracy is percent, CE is mean cross-entropy. Selected means the unchanged minimum-validation-CE checkpoint. Final means epoch 100. Values below use the original scientific reductions, which the reruns reproduce exactly.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Selected epochs</th>
+<th style="text-align: right;">Selected test accuracy</th>
+<th style="text-align: right;">Selected test CE</th>
+<th style="text-align: right;">Final test accuracy</th>
+<th style="text-align: right;">Final test CE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plain</td>
+<td>5, 10, 10</td>
+<td style="text-align: right;">97.913 ± 0.332</td>
+<td style="text-align: right;">0.0853 ± 0.0092</td>
+<td style="text-align: right;">98.573 ± 0.025</td>
+<td style="text-align: right;">0.1116 ± 0.0064</td>
+</tr>
+<tr>
+<td>Residual</td>
+<td>10, 10, 10</td>
+<td style="text-align: right;">98.373 ± 0.067</td>
+<td style="text-align: right;">0.0738 ± 0.0072</td>
+<td style="text-align: right;">98.400 ± 0.000</td>
+<td style="text-align: right;">0.0972 ± 0.0056</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>5, 5, 10</td>
+<td style="text-align: right;">97.803 ± 0.179</td>
+<td style="text-align: right;">0.0790 ± 0.0056</td>
+<td style="text-align: right;">98.443 ± 0.031</td>
+<td style="text-align: right;">0.1336 ± 0.0225</td>
+</tr>
+<tr>
+<td>Annealed SD</td>
+<td>15, 5, 10</td>
+<td style="text-align: right;">97.997 ± 0.289</td>
+<td style="text-align: right;">0.0725 ± 0.0035</td>
+<td style="text-align: right;">98.510 ± 0.046</td>
+<td style="text-align: right;">0.1170 ± 0.0159</td>
+</tr>
+<tr>
+<td>Residual unit dropout</td>
+<td>15, 15, 10</td>
+<td style="text-align: right;">98.330 ± 0.142</td>
+<td style="text-align: right;">0.0714 ± 0.0042</td>
+<td style="text-align: right;">98.507 ± 0.115</td>
+<td style="text-align: right;">0.1031 ± 0.0055</td>
+</tr>
+</tbody>
+</table>
+<p>Constant SD minus residual accuracy is -0.570 percentage points at the selected checkpoint and +0.043 at epoch 100. The apparent accuracy ranking therefore depends on the endpoint. Both SD recipes have higher final test CE than residual; higher final top-1 accuracy alone is not an across-metric improvement.</p>
+<p>Annealed SD minus residual accuracy is -0.377 percentage points at the selected checkpoint and +0.110 at epoch 100. The apparent accuracy ranking therefore depends on the endpoint. Both SD recipes have higher final test CE than residual; higher final top-1 accuracy alone is not an across-metric improvement.</p>
+<p>All 12 plain/residual/SD runs reach 100% dense fitting accuracy by epoch 100. Their mean full-fitting CE values are Plain 1.37e-06, Residual 7.64e-06, Constant SD 2.14e-06, Annealed SD 4.51e-06. Residual unit dropout ends at 99.967% mean fitting accuracy, with full-fitting CE spanning 4.56e-06–0.0044. These training curves show near-complete fitting despite branch removal; they do not support a blanket claim that these SD settings prevent overfitting.</p>
+<h3>What the fixed-probe gradients show</h3>
+<p>For the final affine head (layer 5), g_i is the per-example weight gradient of unaveraged CE. The reported gradient norm is ||mean_i g_i||, and diversity is D=mean_i||g_i||² / ||mean_i g_i||². The largest-example energy share is max_i||g_i||² / sum_i||g_i||², reconstructed from the recorded maximum norm and second moment. Gradients exclude bias here. The table uses all three seeds; gradient norms and D are seed means, energy shares are seed ranges.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th style="text-align: right;">Head gradient norm epoch 1 → 100</th>
+<th style="text-align: right;">D epoch 1 → 100</th>
+<th style="text-align: right;">Largest-example energy share at 100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plain</td>
+<td style="text-align: right;">0.146 → 6.55e-05</td>
+<td style="text-align: right;">112.3 → 127.9</td>
+<td style="text-align: right;">99.61–100.00%</td>
+</tr>
+<tr>
+<td>Residual</td>
+<td style="text-align: right;">0.259 → 0.000162</td>
+<td style="text-align: right;">116.3 → 127.9</td>
+<td style="text-align: right;">89.55–98.99%</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td style="text-align: right;">0.188 → 8.35e-06</td>
+<td style="text-align: right;">156.3 → 127.6</td>
+<td style="text-align: right;">60.25–100.00%</td>
+</tr>
+<tr>
+<td>Annealed SD</td>
+<td style="text-align: right;">0.17 → 0.000106</td>
+<td style="text-align: right;">131.8 → 128.0</td>
+<td style="text-align: right;">99.98–100.00%</td>
+</tr>
+<tr>
+<td>Residual unit dropout</td>
+<td style="text-align: right;">0.191 → 0.00122</td>
+<td style="text-align: right;">143.6 → 138.8</td>
+<td style="text-align: right;">58.26–99.99%</td>
+</tr>
+</tbody>
+</table>
+<p>A diversity ratio near 128 is not evidence that 128 examples supply equally useful independent gradients: one dominant example alone produces D≈128. The energy shares above and extremely small median gradient norms indicate substantial concentration as the probe becomes confidently fitted. Small denominators and FP32 arithmetic further limit late-stage ratio interpretation. These observations describe one fixed training probe; they neither identify a population mechanism nor make diversity a validated predictor of test accuracy. Neighbor-gradient cosines refer to cyclic neighbors in this fixed dataset order, not neighboring optimization steps.</p>
+<h3>Activations and class-specific behavior</h3>
+<p>Mean fraction of zero post-ReLU activations at epoch 100, over the fixed probe and then the three seeds. Layers 0–4 are the five hidden activations; the linear head is excluded. A zero on this probe does not prove a permanently dead neuron.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th style="text-align: right;">Layer0</th>
+<th style="text-align: right;">Layer1</th>
+<th style="text-align: right;">Layer2</th>
+<th style="text-align: right;">Layer3</th>
+<th style="text-align: right;">Layer4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plain</td>
+<td style="text-align: right;">83.9%</td>
+<td style="text-align: right;">68.5%</td>
+<td style="text-align: right;">60.5%</td>
+<td style="text-align: right;">59.3%</td>
+<td style="text-align: right;">59.5%</td>
+</tr>
+<tr>
+<td>Residual</td>
+<td style="text-align: right;">64.0%</td>
+<td style="text-align: right;">43.0%</td>
+<td style="text-align: right;">32.3%</td>
+<td style="text-align: right;">28.5%</td>
+<td style="text-align: right;">29.6%</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td style="text-align: right;">68.3%</td>
+<td style="text-align: right;">62.4%</td>
+<td style="text-align: right;">63.8%</td>
+<td style="text-align: right;">64.4%</td>
+<td style="text-align: right;">56.9%</td>
+</tr>
+<tr>
+<td>Annealed SD</td>
+<td style="text-align: right;">73.0%</td>
+<td style="text-align: right;">68.6%</td>
+<td style="text-align: right;">71.9%</td>
+<td style="text-align: right;">74.2%</td>
+<td style="text-align: right;">73.2%</td>
+</tr>
+<tr>
+<td>Residual unit dropout</td>
+<td style="text-align: right;">84.0%</td>
+<td style="text-align: right;">65.2%</td>
+<td style="text-align: right;">58.5%</td>
+<td style="text-align: right;">55.2%</td>
+<td style="text-align: right;">53.6%</td>
+</tr>
+</tbody>
+</table>
+<p>Both SD recipes have sparser dense probe activations than the residual control at these frozen settings; annealed SD has roughly 69–74% zero activations across its hidden layers at epoch 100. This association coexists with near-perfect fitting and does not by itself explain generalization. The plain model also differs architecturally and uses another learning rate.</p>
+<p>Epoch100 class-specific test-accuracy differences from residual (percentage points; mean across seeds) are shown for every digit, avoiding a selected best/worst-class account. Classes have different fixed MNIST test counts, so equal-weight averages of these ten cells need not equal the overall accuracy difference.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe − residual</th>
+<th style="text-align: right;">0</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">6</th>
+<th style="text-align: right;">7</th>
+<th style="text-align: right;">8</th>
+<th style="text-align: right;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constant SD</td>
+<td style="text-align: right;">+0.000</td>
+<td style="text-align: right;">+0.147</td>
+<td style="text-align: right;">+0.129</td>
+<td style="text-align: right;">+0.033</td>
+<td style="text-align: right;">+0.034</td>
+<td style="text-align: right;">-0.037</td>
+<td style="text-align: right;">+0.313</td>
+<td style="text-align: right;">+0.000</td>
+<td style="text-align: right;">-0.137</td>
+<td style="text-align: right;">-0.066</td>
+</tr>
+<tr>
+<td>Annealed SD</td>
+<td style="text-align: right;">+0.170</td>
+<td style="text-align: right;">+0.029</td>
+<td style="text-align: right;">+0.129</td>
+<td style="text-align: right;">+0.297</td>
+<td style="text-align: right;">+0.136</td>
+<td style="text-align: right;">-0.037</td>
+<td style="text-align: right;">+0.104</td>
+<td style="text-align: right;">+0.259</td>
+<td style="text-align: right;">+0.068</td>
+<td style="text-align: right;">-0.066</td>
+</tr>
+<tr>
+<td>Residual unit dropout</td>
+<td style="text-align: right;">+0.170</td>
+<td style="text-align: right;">+0.059</td>
+<td style="text-align: right;">-0.258</td>
+<td style="text-align: right;">+0.099</td>
+<td style="text-align: right;">+0.136</td>
+<td style="text-align: right;">+0.299</td>
+<td style="text-align: right;">+0.487</td>
+<td style="text-align: right;">+0.357</td>
+<td style="text-align: right;">-0.034</td>
+<td style="text-align: right;">-0.198</td>
+</tr>
+</tbody>
+</table>
+<p>Small overall differences hide mixed class effects. These repeated-test descriptive slices have no multiple-comparison correction and cannot establish digit-specific causal benefits.</p>
+<h3>Timing and measurement overhead</h3>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th style="text-align: right;">Mean training s</th>
+<th style="text-align: right;">Mean telemetry s</th>
+<th style="text-align: right;">Total telemetry / training range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plain</td>
+<td style="text-align: right;">62.130</td>
+<td style="text-align: right;">1.458</td>
+<td style="text-align: right;">2.12–2.79%</td>
+</tr>
+<tr>
+<td>Residual</td>
+<td style="text-align: right;">66.218</td>
+<td style="text-align: right;">1.899</td>
+<td style="text-align: right;">1.30–5.94%</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td style="text-align: right;">56.849</td>
+<td style="text-align: right;">1.753</td>
+<td style="text-align: right;">1.51–5.57%</td>
+</tr>
+<tr>
+<td>Annealed SD</td>
+<td style="text-align: right;">56.859</td>
+<td style="text-align: right;">1.628</td>
+<td style="text-align: right;">2.03–4.53%</td>
+</tr>
+<tr>
+<td>Residual unit dropout</td>
+<td style="text-align: right;">68.716</td>
+<td style="text-align: right;">1.100</td>
+<td style="text-align: right;">1.24–2.26%</td>
+</tr>
+<tr>
+<td>Optimized baseline</td>
+<td style="text-align: right;">5.716</td>
+<td style="text-align: right;">0.913</td>
+<td style="text-align: right;">14.13–18.54%</td>
+</tr>
+</tbody>
+</table>
+<p>The three central seed 101 runs save seven snapshots each; checkpoint I/O adds 0.705–0.924s, already included in their telemetry totals. Main-run training-time ratios to the original runs range 0.9914–1.0047; this small variation is not an instrumented overhead estimate because evaluation is excluded from that timer.</p>
+<p>The v1 qualification failed the 10% direct-overhead gate for one controlled pair (11.55%), and was retained. The timing-only change to cadence 10/probe 128 passed v2 (maximum 4.22%). Nevertheless, all three final short baseline runs exceed 10% including cold epoch 0 diagnostics: initial measurement costs 0.592–0.860s, while later telemetry costs only 3.34–4.33% of training. The qualification gate is therefore not a universal final cold-start bound. No settings were changed after observing this exceedance.</p>
+<p>The optimized baseline exactly repeats target epochs 24/23/21 and official-test accuracies 98.67/98.63/98.71%. Its faster, separately optimized recipe uses all 60,000 training examples, batch 256 BF16, unit dropout and the frozen LR/shrinkage schedule; it is not a controlled arm of the 50,000-example SD experiment. These are repeated already-selected seeds and a test-target stopping rule, not an untouched test evaluation. Invocation and stopping-wall clocks include extra setup/evaluation; training clocks do not. Offline curvature and subsequent W&amp;B uploads are separate costs.</p>
+<h3>Provenance and limits</h3>
+<p>Derived from every raw telemetry-main-<em>.json and telemetry-baseline-</em>.json declared in telemetry/rerun-manifest.json. Exact source/file hashes, every raw scientific curve, all scalar measurements, per-class counts and both qualification attempts are retained in analysis.json and plot-data.json. Reproduce this note with telemetry/analyze.py after all 18 reruns verify. The historical ts4k9n55 reference includes all 91 count-verified public evaluation rows; its legacy val means official test, and its W&amp;B runtime includes logging/evaluation on unverified hardware. It is not an isolated GPU-training-time baseline.</p>
+<h2>Offline curvature: what the revived Ciresan statistics actually show</h2>
+<p>All <strong>21 planned snapshots completed and passed verification</strong>: residual dense, constant stochastic depth, and decreasing stochastic depth; seed 101; epochs 0, 1, 5, 10, 20, 50, and 100. The same 128 fitting-training examples, initial parameters, and dense gain-one inference convention were used throughout. These are three training trajectories from <strong>one seed</strong>, not three independent seed replications.</p>
+<p>The clearest result is that loss curvature and raw logit sensitivity move differently. From initialization to epoch 100, residual-dense CE-GGN weight trace drops from 87.04 to 0.4235, while its Jacobian-Gram trace grows from 976.04 to 170,620.90. Both SD models finish with smaller CE-GGN and Jacobian traces than this residual control, but all three perfectly classify this small training probe. The measurements therefore do not establish a test-accuracy improvement or a universal “flatter means better” explanation.</p>
+<p>A second result is a warning about the historical approximations: at epoch 100 the KFAC CE-GGN diagonal differs from the exact diagonal by <strong>83–583% relative L1 error</strong>, depending on recipe and layer. Its eigenspectrum is computed accurately, but it is the spectrum of an approximation that can be poor on this concentrated probe.</p>
+<h3>Definitions, scope, and connection to the old names</h3>
+<p>The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/telemetry/METRIC_PLAN.md">metric inventory</a> audits the supplied <code>train_ciresan_new.py</code> and <code>util.py</code>. The new implementation preserves useful mathematical quantities and corrects misleading historical labels and normalization bugs.</p>
+<table>
+<thead>
+<tr>
+<th>Historical intent/name</th>
+<th>Modern quantity and limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layer-i/fisher/diag_trace</code></td>
+<td>Exact finite-probe mean squared observed-label CE weight-gradient norm; empirical Fisher, not generally CE curvature</td>
+</tr>
+<tr>
+<td><code>layer-i/hessian/diag_trace</code></td>
+<td>Exact affine-weight-block CE-GGN diagonal trace using all ten output-Hessian-factor directions; not the full parameter Hessian</td>
+</tr>
+<tr>
+<td><code>layer-i/jacobian/diag_trace</code></td>
+<td>Exact mean logit-Jacobian Gram weight trace, summed over ten outputs rather than averaged over classes</td>
+</tr>
+<tr>
+<td><code>kfac_trace</code>, <code>kfac_fro</code>, <code>{hess,jac,fish}_l2</code></td>
+<td>Correctly normalized KFAC trace, Frobenius norm and largest eigenvalue; the old Frobenius field omitted the <code>n²</code> normalization</td>
+</tr>
+<tr>
+<td><code>{hess,fish,jac}{A,B}_erank</code></td>
+<td>Factor trace divided by largest eigenvalue; not entropy rank. Stable rank is also reported separately</td>
+</tr>
+<tr>
+<td><code>hess_curv</code>, <code>hess_curv_grad</code></td>
+<td>Mean-gradient and per-example-gradient Rayleigh quotients of the KFAC CE-GGN block; different directions give different quantities</td>
+</tr>
+<tr>
+<td>Gradient-noise ratios</td>
+<td>Explicit covariance/curvature contractions, separating empirical activation/backprop dependence from factorized approximations; not an inferred optimal batch size</td>
+</tr>
+<tr>
+<td><code>mismatch/rho</code>, <code>rho_cheap</code></td>
+<td>Output-logit H/F Lyapunov/preconditioned-Fisher concentration on retained Hessian support; not a full-network stability certificate</td>
+</tr>
+</tbody>
+</table>
+<p>All diagnostic models and inputs were converted from recorded FP32 checkpoints to FP64. Output derivatives use a cancellation-resistant CE formulation, and moment/spectrum reductions are FP64. The original training/recorder arithmetic remains unchanged. These runs compute exact diagonals and exact <strong>factor spectra</strong>, not an exact full Fisher/GGN/Jacobian matrix. KFAC still assumes factor independence and omits cross-layer structure. Full output-direction enumeration removes stochastic output sampling error, but does not remove finite-probe or KFAC approximation error.</p>
+<h3>The trajectories: Fisher, GGN and Jacobian are not interchangeable</h3>
+<p>The traces below sum exact weight diagonals over all six affine layers; biases are excluded. Off-diagonal blocks do not affect that summed trace. CE and accuracy refer only to the fixed 128 training examples. Values are descriptive at the seven saved epochs; unsaved intermediate extrema are unknown.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Epoch</th>
+<th>Probe CE</th>
+<th>Probe accuracy %</th>
+<th>Empirical-Fisher trace</th>
+<th>CE-GGN trace</th>
+<th>Jacobian-Gram trace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>0</td>
+<td>2.3262</td>
+<td>5.469</td>
+<td>86.983</td>
+<td>87.039</td>
+<td>976.044</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>1</td>
+<td>0.1182</td>
+<td>97.656</td>
+<td>115.88</td>
+<td>130.61</td>
+<td>16123.9</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>5</td>
+<td>0.035437</td>
+<td>99.219</td>
+<td>61.367</td>
+<td>17.842</td>
+<td>38482.7</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>10</td>
+<td>0.00025018</td>
+<td>100.000</td>
+<td>0.069652</td>
+<td>4.8946</td>
+<td>75265.5</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>20</td>
+<td>4.5511e-05</td>
+<td>100.000</td>
+<td>0.0039747</td>
+<td>1.4043</td>
+<td>110343</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>50</td>
+<td>1.5776e-05</td>
+<td>100.000</td>
+<td>0.0008853</td>
+<td>0.75423</td>
+<td>144778</td>
+</tr>
+<tr>
+<td>Residual dense</td>
+<td>100</td>
+<td>7.2171e-06</td>
+<td>100.000</td>
+<td>0.00023162</td>
+<td>0.4235</td>
+<td>170621</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>0</td>
+<td>2.3262</td>
+<td>5.469</td>
+<td>86.983</td>
+<td>87.039</td>
+<td>976.044</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>1</td>
+<td>0.12145</td>
+<td>97.656</td>
+<td>64.978</td>
+<td>85.315</td>
+<td>12013.1</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>5</td>
+<td>0.031464</td>
+<td>99.219</td>
+<td>44.244</td>
+<td>10.591</td>
+<td>27069.5</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>10</td>
+<td>0.023937</td>
+<td>99.219</td>
+<td>49.043</td>
+<td>33.964</td>
+<td>39891.4</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>20</td>
+<td>3.075e-05</td>
+<td>100.000</td>
+<td>0.00048844</td>
+<td>0.44197</td>
+<td>83840.4</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>50</td>
+<td>2.951e-07</td>
+<td>100.000</td>
+<td>1.1807e-07</td>
+<td>0.0092719</td>
+<td>140424</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>100</td>
+<td>1.471e-06</td>
+<td>100.000</td>
+<td>3.1185e-06</td>
+<td>0.02206</td>
+<td>111458</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>0</td>
+<td>2.3262</td>
+<td>5.469</td>
+<td>86.983</td>
+<td>87.039</td>
+<td>976.044</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>1</td>
+<td>0.15692</td>
+<td>96.094</td>
+<td>75.371</td>
+<td>101.32</td>
+<td>6146.92</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>5</td>
+<td>0.051097</td>
+<td>99.219</td>
+<td>45.566</td>
+<td>26.448</td>
+<td>13356.6</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>10</td>
+<td>0.039646</td>
+<td>99.219</td>
+<td>56.42</td>
+<td>22.807</td>
+<td>20318.2</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>20</td>
+<td>0.028463</td>
+<td>99.219</td>
+<td>62.521</td>
+<td>55.898</td>
+<td>36949.6</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>50</td>
+<td>9.4715e-06</td>
+<td>100.000</td>
+<td>6.0475e-05</td>
+<td>0.069058</td>
+<td>61928.3</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>100</td>
+<td>9.2335e-07</td>
+<td>100.000</td>
+<td>1.0139e-06</td>
+<td>0.013558</td>
+<td>82068.6</td>
+</tr>
+</tbody>
+</table>
+<p>At epoch 100, constant SD has 19.2× lower CE-GGN trace than residual dense, and decreasing SD has 31.2× lower trace. Their logit-Jacobian traces are only 1.53× and 2.08× lower. Thus the loss-curvature contrast is much larger than the raw sensitivity contrast. CE's output curvature shrinks as probabilities saturate; interpreting the entire trace reduction as a change in the underlying network Jacobian would be incorrect.</p>
+<p>Empirical Fisher gives another answer again. For residual dense at epoch 5, its trace is 61.37 while CE-GGN is 17.84, and one probe image is wrong. At epoch 100, Fisher is about 1828× smaller than GGN. Squared observed-label gradients and expected output-loss curvature need not agree. Constant SD also has larger CE and GGN at epoch 100 than epoch 50 on this probe: the actual trajectories should not be forced monotonic.</p>
+<p>The dense probe reaches 100% accuracy at the first observed epoch 10 for residual, epoch 20 for constant SD, and epoch 50 for decreasing SD. That is an observation about these saved training-probe evaluations, not the precise first crossing time or a whole-dataset convergence claim.</p>
+<h3>Spectra and approximation error: lower magnitude can coexist with higher rank</h3>
+<p>The final-checkpoint table contrasts curvature scale and spectral concentration. Activation effective rank is computed from an <strong>uncentered second moment</strong>, not a centered covariance or count of usable features. The final affine layer is layer 5, the classifier.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>GGN KFAC diagonal relative-L1 error, layers 0–5</th>
+<th>Stem KFAC top eigenvalue</th>
+<th>Head KFAC top eigenvalue</th>
+<th>Head input effective rank</th>
+<th>Head GGN KFAC effective rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>0.876–1.871</td>
+<td>0.062115</td>
+<td>0.0066085</td>
+<td>1.981</td>
+<td>2.647</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>0.833–4.065</td>
+<td>0.0027933</td>
+<td>0.00048267</td>
+<td>3.441</td>
+<td>3.903</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>0.833–5.832</td>
+<td>0.0016471</td>
+<td>0.00016115</td>
+<td>4.021</td>
+<td>6.008</td>
+</tr>
+</tbody>
+</table>
+<p>At initialization, CE-GGN diagonal approximation errors range only 0.008–0.194 across layers. They grow substantially during fitting; the largest observed error across this panel is about 5.89, or 589%, for decreasing SD at epoch 50. Exact factor eigendecomposition does not validate the factorization assumption.</p>
+<p>SD's final classifier-input effective rank is higher than the control's even as curvature magnitude is lower. Likewise the classifier's KFAC CE-GGN effective rank increases from 2.647 in residual dense to 3.903/6.008 in constant/decreasing SD. “Small curvature” is not the same as “low rank.” These values depend on parameterization, uncentered moments, finite-probe support, and the KFAC approximation; they are not evidence of a universal representation-capacity law.</p>
+<p>The stored mean-gradient and per-example directional curvatures are useful descriptions of this KFAC operator. Given the large diagonal errors, they should not be promoted to accurate directional curvature of the exact GGN or to a Hessian-based learning-rate guarantee. The older buggy ratio/rate fields and duplicated eigenvalue histograms were not reproduced.</p>
+<h3>Output mismatch: rising rho can accompany vanishing absolute noise</h3>
+<p>Here H is the mean CE Hessian with respect to ten output logits, and F is their observed-label gradient second moment. The solver retains H's numerical support and solves <code>H L + L H = 2F</code> there. Every snapshot retains the expected nine-dimensional softmax support; the discarded relative Fisher norm is below 2.2×10⁻¹⁵. No material discarded Fisher component explains these results.</p>
+<p>The reported ambient convention is <code>rho = 10 / effective_rank(L)</code>. It is scale invariant and includes the constant-shift null direction in its dimension convention; it is not a divergence threshold. “Cheap rho” uses the spectrum of the symmetrically preconditioned Fisher, equivalent to the nonzero eigenvalues of the projected <code>F H⁺</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Checkpoint</th>
+<th>Output H trace</th>
+<th>Output F trace</th>
+<th>Top eigenvalue of L</th>
+<th>Effective rank of L</th>
+<th>Rho</th>
+<th>Cheap rho</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Common initialization</td>
+<td>0.89925</td>
+<td>0.90484</td>
+<td>1.4623</td>
+<td>6.271</td>
+<td>1.595</td>
+<td>1.595</td>
+</tr>
+<tr>
+<td>Residual dense final</td>
+<td>1.4422e-05</td>
+<td>7.9815e-09</td>
+<td>0.00070445</td>
+<td>1.297</td>
+<td>7.711</td>
+<td>7.796</td>
+</tr>
+<tr>
+<td>Constant SD final</td>
+<td>2.9412e-06</td>
+<td>4.7443e-10</td>
+<td>0.00018423</td>
+<td>1.021</td>
+<td>9.792</td>
+<td>9.995</td>
+</tr>
+<tr>
+<td>Decreasing SD final</td>
+<td>1.8464e-06</td>
+<td>1.433e-10</td>
+<td>0.00011641</td>
+<td>1.011</td>
+<td>9.890</td>
+<td>9.989</td>
+</tr>
+</tbody>
+</table>
+<p>Rho approaches ten for the final SD models because the remaining mismatch is concentrated in roughly one direction, while the absolute scale of L and F has fallen sharply. Calling the higher rho “more instability” would ignore that scale change.</p>
+<p>A related finite-probe warning appears in the gradient-noise statistics. At final checkpoints, the empirical covariance-to-mean-gradient quadratic ratio is about 127 for SD, close to <code>N−1</code> for N=128. If only one example contributes a nonzero gradient, that ratio equals N−1 even without an independently identified critical batch size. As a post hoc concentration check, <code>(sum ||g_i||)² / sum ||g_i||²</code> is only 1.003–1.005 across layers for constant SD and 1.013–1.018 for decreasing SD, versus 1.57–1.87 for residual. The norm mass is carried by very few of these already memorized examples. This is not a count of statistically independent samples, and these ratios should not drive an optimizer recommendation without a larger fresh probe.</p>
+<h3>Runtime, verification, and limits</h3>
+<p>These were separate post-training A100 jobs. They added <strong>zero optimizer steps</strong> and did not extend the training clocks. Their own compute, checkpoint/data loading and volume commits still have real cost. All jobs used NVIDIA A100-SXM4-40GB, torch 2.14.0+cu130, Python 3.11.12, two CPU threads and FP64 diagnostics.</p>
+<table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Curvature compute seconds</th>
+<th>Recorded job elapsed seconds</th>
+<th>Local dispatch elapsed seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual dense</td>
+<td>3.598</td>
+<td>20.526</td>
+<td>48.089</td>
+</tr>
+<tr>
+<td>Constant SD</td>
+<td>3.205</td>
+<td>19.213</td>
+<td>28.152</td>
+</tr>
+<tr>
+<td>Decreasing SD</td>
+<td>3.832</td>
+<td>24.423</td>
+<td>35.266</td>
+</tr>
+</tbody>
+</table>
+<p>Curvature computation totals 10.636 seconds across 21 snapshots. Recorded job elapsed includes loading and prior volume commits but excludes its own final persistence operation; local dispatch includes setup, queue/wait and return overhead. Those clocks must not be interchanged or credited as a training speedup. The largest eigenproblem was 1,280, and every factor spectrum used the exact smaller-Gram solver; no job was censored or downgraded.</p>
+<p>The wrapper verified original checkpoint bytes, training-source pins, separate curvature-source pins, training/split hashes and the recorder probe hash. This postprocessing independently rehashed all 21 diagnostic artifact payloads and checked all three current offline source-pin maps. Initial parameters agree across recipes; the diagnostic model's parameters were unchanged. FP64 and recorder-FP32 probe predictions agree at every snapshot where the recorder supplied a same-size probe, while loss differences are recorded. That agreement does not make their gradients numerically identical.</p>
+<p>The limits are substantial: one seed, 128 reused fitting-training examples, changing confidence, seven observation times, a particular tapered residual architecture and structured KFAC approximations. Dense-mode probing turns off the SD masks and unit dropout; it describes the resulting trained weights, not the stochastic training objective's expected curvature. The results motivate separating geometry, confidence and gradient concentration, but do not isolate which mechanism caused branch-deletion resilience or establish better held-out generalization.</p>
+<p>The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/telemetry/curvature-summary.json">compact machine-readable summary</a> contains every row and 378 recipe/epoch/layer/family records with raw-file SHA-256 links. Full spectra and provenance are in the <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/telemetry/telemetry-curvature-residual-s101-v1.json">residual result</a>, <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/telemetry/telemetry-curvature-sd_constant-s101-v1.json">constant-SD result</a>, and <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/telemetry/telemetry-curvature-sd_annealed-s101-v1.json">decreasing-SD result</a>. The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/telemetry/curvature.py">curvature implementation</a> and <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/telemetry/offline_curvature.py">checkpoint wrapper</a> specify normalization, support projection and the fixed runtime rule.</p>
+<h2>Compute budget</h2>
+<p>The new phase added <strong>$0.93</strong> of metered Modal usage. The full MNIST environment total is <strong>$5.00 of the existing $30 cap</strong>, as of the recorded closing query. All 23 environment apps, including the six new telemetry apps, are stopped with zero tasks. Metering can lag slightly; the retained conservative aggregate reservation is $9.26, below the $24 guard and $30 absolute cap.</p>
+<p>This phase accounts for completed earlier work using its $4.08 metered closing balance plus every new worst-case invocation reservation. The old reservation ledger was preserved byte for byte. Both timing-only qualification attempts, all 18 reruns and all three offline jobs are included. No new spending allowance was inferred.</p></article><footer><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/telemetry">Code, metric definitions &amp; replay</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/telemetry">Raw results &amp; W&B exports</a><a href="metric-plan.html">Historical metric audit</a><a href="report.md">Experimental report</a></footer></main></body></html>

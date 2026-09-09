@@ -1,0 +1,61 @@
+{
+  "metered_total_usd": 5.00375173,
+  "metered_opening_usd": 4.07871245,
+  "metered_increment_this_phase_usd": 0.92503928,
+  "all_environment_apps_stopped": true,
+  "all_environment_apps_count": 23,
+  "new_phase_apps": [
+    {
+      "app_id": "ap-ZiLkzahzDvoMXsjolCh5uN",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:51:40-07:00",
+      "stopped_at": "2026-09-09 16:52:19-07:00"
+    },
+    {
+      "app_id": "ap-d0QwKNTHEBp0pOaxN0kw1X",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:51:09-07:00",
+      "stopped_at": "2026-09-09 16:51:42-07:00"
+    },
+    {
+      "app_id": "ap-hwGMCOliVDcZ685JvWHtKw",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:50:36-07:00",
+      "stopped_at": "2026-09-09 16:51:29-07:00"
+    },
+    {
+      "app_id": "ap-3FadyQDjCt3XSiewFSYkws",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:46:02-07:00",
+      "stopped_at": "2026-09-09 16:51:06-07:00"
+    },
+    {
+      "app_id": "ap-cDy8KB773QCLpZiMhpm5CN",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:44:06-07:00",
+      "stopped_at": "2026-09-09 16:45:49-07:00"
+    },
+    {
+      "app_id": "ap-oi62aGBOuWE8sp2ZuSLtgs",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:40:26-07:00",
+      "stopped_at": "2026-09-09 16:42:08-07:00"
+    }
+  ],
+  "closed_at_unix": 1788998011.7613928,
+  "aggregate_reservation_upper_usd": 9.26367165,
+  "absolute_cap_usd": 30,
+  "billing_note": "Metered snapshot, subject to small reporting lag/storage/egress. Phase reservations use completed old-phase metering plus every new worst-case invocation reservation; legacy ledger remains byte-for-byte unchanged."
+}

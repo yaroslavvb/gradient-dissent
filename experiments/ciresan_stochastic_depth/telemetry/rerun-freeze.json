@@ -1,0 +1,61 @@
+{
+  "created_utc": "2026-09-09T23:46:02.519057+00:00",
+  "qualification": "telemetry-qualification-v2",
+  "qualification_sha256": "40fe7bab341dbfae894cb4f2e6fbdb5a9a75979545018f351278357344e1209d",
+  "decision": "Cadence10, fixed128 training probe. All three parity and <=10% direct-overhead gates pass. No recipe/data/seed/LR/selection retuning. Repeated diagnostic test evaluation is reported; no test-driven changes.",
+  "pairs": [
+    {
+      "name": "baseline-s101",
+      "parameters_bitwise_equal": true,
+      "on_training_seconds": 7.580555085999919,
+      "off_training_seconds": 7.5738645960000355,
+      "on_total_seconds": 11.375393324000001,
+      "off_total_seconds": 9.332489957000007,
+      "telemetry_seconds": 0.3202616089999992,
+      "overhead_fraction_of_training": 0.04224777808045634,
+      "paired_order": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "controlled-s101",
+      "parameters_bitwise_equal": true,
+      "on_training_seconds": 13.312898810999986,
+      "off_training_seconds": 13.371241612,
+      "on_total_seconds": 14.600251531000001,
+      "off_total_seconds": 15.211990752999998,
+      "telemetry_seconds": 0.4830235170000101,
+      "overhead_fraction_of_training": 0.0362823697421109,
+      "paired_order": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "controlled-s102",
+      "parameters_bitwise_equal": true,
+      "on_training_seconds": 13.285881571000012,
+      "off_training_seconds": 13.288879848999976,
+      "on_total_seconds": 14.400364959000001,
+      "off_total_seconds": 14.080136880999994,
+      "telemetry_seconds": 0.25886224599999963,
+      "overhead_fraction_of_training": 0.019484009744978888,
+      "paired_order": [
+        true,
+        false
+      ]
+    }
+  ],
+  "manifest_sha256": "19b501016b99934d94f4e1ec678df9678b31f44fcb269c7f0153e37881e88e95",
+  "source_sha256": {
+    "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd",
+    "optimization/stochastic_graph.py": "7844db46e84f39809feb7dbf3684e95a199b01773b6a3dc800127fb84c274a1a",
+    "optimization/kernels.py": "9abaea746b1f2cd5cb0178825b6fb0ea275de7b49c0c847fcf1cdb22068ea66c",
+    "telemetry/controlled_train.py": "9b844dc88fb477d96b4201db7126ec8292b5ce1297991883100f550d7986d327",
+    "telemetry/baseline_train.py": "04823bd2efa0d5319e5efca05f6b15138e43b81060be5a844a526393d53e297b",
+    "telemetry/recorder.py": "8645b826e184573a009ad9ce7b58bbf50c2e6716da8f8712d0e0168f0f83b9cb",
+    "telemetry/metrics.py": "93443a401ecfc78358a39c1c7dde8689fc6f6cf950cb62b21d0bee278d07013e",
+    "telemetry/run.py": "cc6871a0955dd3307f85222f377e15eeeb2efa3dfe86fdcc6405413380161a76"
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "run_id": "telemetry-curvature-sd_constant-s101-v1",
+    "runner": "curvature",
+    "stage": "evaluate",
+    "gpu": "A100",
+    "timeout_seconds": 480,
+    "work_limit_seconds": 420,
+    "source_run_id": "telemetry-main-sd_constant-s101-v1",
+    "recipe": "sd_constant",
+    "seed": 101,
+    "snapshot_epochs": [
+      0,
+      1,
+      5,
+      10,
+      20,
+      50,
+      100
+    ],
+    "probe_n": 128,
+    "mode": "exact",
+    "eig_max_dimension": 1536,
+    "include_directional": true,
+    "precision": "fp64",
+    "curvature_source_sha256": {
+      "telemetry/curvature.py": "2b0924c24d88127a51b197ec729952a77e35b47314a95fae4b7ce2bae98e1523",
+      "telemetry/offline_curvature.py": "1c47765aa456bd634cb7d50e49a30f9871aad7e8d439dbd57cd9b8ca32b0f025",
+      "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd"
+    }
+  },
+  {
+    "run_id": "telemetry-curvature-sd_annealed-s101-v1",
+    "runner": "curvature",
+    "stage": "evaluate",
+    "gpu": "A100",
+    "timeout_seconds": 480,
+    "work_limit_seconds": 420,
+    "source_run_id": "telemetry-main-sd_annealed-s101-v1",
+    "recipe": "sd_annealed",
+    "seed": 101,
+    "snapshot_epochs": [
+      0,
+      1,
+      5,
+      10,
+      20,
+      50,
+      100
+    ],
+    "probe_n": 128,
+    "mode": "exact",
+    "eig_max_dimension": 1536,
+    "include_directional": true,
+    "precision": "fp64",
+    "curvature_source_sha256": {
+      "telemetry/curvature.py": "2b0924c24d88127a51b197ec729952a77e35b47314a95fae4b7ce2bae98e1523",
+      "telemetry/offline_curvature.py": "1c47765aa456bd634cb7d50e49a30f9871aad7e8d439dbd57cd9b8ca32b0f025",
+      "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd"
+    }
+  }
+]
