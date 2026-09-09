@@ -1,0 +1,25 @@
+{
+  "source_summary_file": "experiments/a100_transfer/results/summary.json",
+  "source_summary_sha256": "57614ac19dacc9ee90db9b0f2b7cf5f6a1315398e7cee2ec5128fa174a446f09",
+  "script_sha256": "3a0978a10b83df2c4098dd5345a3315a85264b385357d588c0d0c190e33bee67",
+  "python": "3.14.4",
+  "matplotlib": "3.10.8",
+  "numpy": "2.5.3",
+  "figure_width_inches": 6.5,
+  "dpi": 300,
+  "figure_heights_inches": {
+    "fig1_full_to_pruned_ce": 3.15,
+    "fig2_vit_accuracy_secondary": 3.1,
+    "fig3_primary_paired_effects": 3.35
+  },
+  "data_source": "Verified aggregate summary only; no experiments rerun",
+  "palette": {
+    "dense": "#546478",
+    "constant_ild": "#216aab",
+    "decreasing_ild": "#bb5425"
+  },
+  "figure_1_note": "Independent CE scales; table rows follow recipe legend order. Retained is prefix8/12 for GPT/ViT and stagewise12/18 for ConvNeXt.",
+  "figure_2_note": "Secondary categorical masks; seed dots are training replicates, not extra mask replicates.",
+  "figure_3_note": "Independent horizontal scales and target units; intervals have df2. Positive relative signed-change effects do not alone determine absolute pruned quality.",
+  "integration_note": "Root adjusted default source path and documentation only; figure-rendering functions unchanged."
+}

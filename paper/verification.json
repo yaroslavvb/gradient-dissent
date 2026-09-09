@@ -1,0 +1,186 @@
+{
+  "pdf_sha256": "8b1fe0e07cc4d3f441c9a4eb6807988486d25584346ab49ce20dfe5d252b4f0a",
+  "pages": 13,
+  "render_dpi": 120,
+  "all_pages_visually_inspected": true,
+  "all_fonts_embedded": true,
+  "figures": 3,
+  "figure_embedded_dpi": 300,
+  "endpoint_values_verified": 108,
+  "primary_effects_independently_verified": 6,
+  "core_training_hashes_unchanged": true,
+  "summary_sha256": "57614ac19dacc9ee90db9b0f2b7cf5f6a1315398e7cee2ec5128fa174a446f09",
+  "latex_overfull_or_unresolved_warnings": false,
+  "bbox_extraction_note": "Poppler math-font control characters removed only to parse bbox XML; all rendered equations visually inspected.",
+  "page_checks": [
+    {
+      "page": 1,
+      "extracted_words": 282,
+      "x_range": [
+        70.834,
+        540.368752
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 2,
+      "extracted_words": 640,
+      "x_range": [
+        70.834,
+        541.927639
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 3,
+      "extracted_words": 546,
+      "x_range": [
+        71.348,
+        541.386915
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 4,
+      "extracted_words": 483,
+      "x_range": [
+        71.492,
+        541.928749
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 5,
+      "extracted_words": 530,
+      "x_range": [
+        71.621,
+        541.934475
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 6,
+      "extracted_words": 287,
+      "x_range": [
+        71.629,
+        541.929945
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 7,
+      "extracted_words": 410,
+      "x_range": [
+        71.621,
+        541.934846
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 8,
+      "extracted_words": 493,
+      "x_range": [
+        71.502,
+        541.935862
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 9,
+      "extracted_words": 546,
+      "x_range": [
+        70.834,
+        541.932888
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 10,
+      "extracted_words": 595,
+      "x_range": [
+        71.621,
+        541.936591
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 11,
+      "extracted_words": 404,
+      "x_range": [
+        72.0,
+        541.937107
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 12,
+      "extracted_words": 331,
+      "x_range": [
+        71.629,
+        541.384765
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    },
+    {
+      "page": 13,
+      "extracted_words": 561,
+      "x_range": [
+        70.834,
+        541.935615
+      ],
+      "y_range": [
+        46.549318,
+        747.835744
+      ],
+      "visually_inspected": true
+    }
+  ]
+}

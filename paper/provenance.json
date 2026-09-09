@@ -1,0 +1,8 @@
+{
+  "experiment_commit": "28f9db3bdc2e8910a105c7e40944b521c8bf0c1f",
+  "summary_sha256": "57614ac19dacc9ee90db9b0f2b7cf5f6a1315398e7cee2ec5128fa174a446f09",
+  "scientific_input_sha256": "5bad33d925dd3eb17e43351a69239f8a661df59c0a61a2916a1079dbd3c7d64f",
+  "final_runs": 27,
+  "tuning_runs": 27,
+  "no_new_training": true
+}

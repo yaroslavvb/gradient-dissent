@@ -12,7 +12,8 @@
     "check:a100": "node --check docs/a100-transfer/app.js && node scripts/check_a100_report.cjs",
     "serve": "python3 -m http.server 8765 --directory docs",
     "build:significance": "python3 scripts/build_significance.py",
-    "check:significance": "node --check docs/significance/app.js && node scripts/check_significance.cjs"
+    "check:significance": "node --check docs/significance/app.js && node scripts/check_significance.cjs",
+    "build:paper": "python3 scripts/build_paper.py"
   },
   "devDependencies": {
     "jsdom": "^30.0.1",

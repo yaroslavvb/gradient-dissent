@@ -7,3 +7,6 @@ tmp/
 research/sources/
 .env
 .env.*
+
+# Local PDF copy; canonical public PDF is committed under docs/significance.
+/output/
