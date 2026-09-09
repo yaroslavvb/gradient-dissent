@@ -1,0 +1,39 @@
+tune dense6 0.001 10 val 2.2848 seconds 14.25
+tune dense6 0.001 11 val 2.2805 seconds 14.24
+tune dense6 0.003 10 val 2.1225 seconds 14.26
+tune dense6 0.003 11 val 2.1126 seconds 14.29
+tune dense6 0.01 10 val 2.0713 seconds 14.04
+tune dense6 0.01 11 val 2.0465 seconds 14.02
+tune constant_ild 0.001 10 val 2.3174 seconds 14.02
+tune constant_ild 0.001 11 val 2.3107 seconds 14.01
+tune constant_ild 0.003 10 val 2.1622 seconds 13.64
+tune constant_ild 0.003 11 val 2.1267 seconds 13.63
+tune constant_ild 0.01 10 val 2.0869 seconds 13.73
+tune constant_ild 0.01 11 val 2.0485 seconds 13.71
+tune decreasing_ild 0.001 10 val 2.3285 seconds 14.2
+tune decreasing_ild 0.001 11 val 2.295 seconds 14.13
+tune decreasing_ild 0.003 10 val 2.1585 seconds 14.25
+tune decreasing_ild 0.003 11 val 2.1263 seconds 14.18
+Traceback (most recent call last):
+  File "/Users/yaroslavvb/git/gradient-dissent/experiments/depth_lm/run.py", line 201, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/yaroslavvb/git/gradient-dissent/experiments/depth_lm/run.py", line 187, in main
+    for run in pool.map(tuning_job,jobs):
+               ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.4/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/process.py", line 617, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.4/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 639, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.4/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 311, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.4/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 445, in result
+    self._condition.wait(timeout)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.4/Frameworks/Python.framework/Versions/3.14/lib/python3.14/threading.py", line 369, in wait
+    waiter.acquire()
+    ~~~~~~~~~~~~~~^^
+KeyboardInterrupt

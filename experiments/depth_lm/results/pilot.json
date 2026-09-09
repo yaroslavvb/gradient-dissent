@@ -1,0 +1,37 @@
+{
+  "run": {
+    "config": "dense6",
+    "seed": 999,
+    "lr": 0.003,
+    "steps": 120,
+    "tokens": 122880,
+    "parameters": 312448,
+    "train_seconds": 1.8809353332035244,
+    "validation_ce": 2.5626216530799866,
+    "active_sequence_blocks": 11520,
+    "dense_sequence_blocks": 11520,
+    "nominal_mean_dropout": 0.0,
+    "clipped_steps": 18,
+    "max_preclip_grad_norm": 4.934153079986572
+  },
+  "curve": [
+    {
+      "step": 1,
+      "train_ce": 4.188873767852783,
+      "mean_dropout": 0.0,
+      "realized_active_sequence_blocks": 96
+    },
+    {
+      "step": 100,
+      "train_ce": 2.6241724491119385,
+      "mean_dropout": 0.0,
+      "realized_active_sequence_blocks": 9600
+    },
+    {
+      "step": 120,
+      "train_ce": 2.5782668590545654,
+      "mean_dropout": 0.0,
+      "realized_active_sequence_blocks": 11520
+    }
+  ]
+}

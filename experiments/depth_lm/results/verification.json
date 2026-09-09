@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "source_sha256": "cd434863c53590468e2efbf50e970c7df65b9f0973fe4ea97f4085a1a5a05707",
+  "raw_mask_rows": 1335,
+  "tuning_runs": 50,
+  "evaluation_runs": 25,
+  "complete_subset_enumeration": true,
+  "independent_primary_ci_recalculation": {
+    "constant_ild": {
+      "mean": -0.04648345112800598,
+      "low": -0.0619120353555196,
+      "high": -0.03105486690049237
+    },
+    "decreasing_ild": {
+      "mean": -0.04330816864967346,
+      "low": -0.05874390995662737,
+      "high": -0.027872427342719556
+    },
+    "alternating": {
+      "mean": -0.02179524302482605,
+      "low": -0.04447796684499551,
+      "high": 0.0008874807953434087
+    }
+  },
+  "zero_dropout_forward_and_gradients_equal": true,
+  "dropped_block_identity": true,
+  "checkpoint_readback": [
+    {
+      "config": "dense6",
+      "seed": 100,
+      "prefix4_ce_exact_match": true
+    },
+    {
+      "config": "decreasing_ild",
+      "seed": 100,
+      "prefix4_ce_exact_match": true
+    }
+  ],
+  "note": "Readback uses local ignored checkpoints when available; no new hyperparameter selection."
+}

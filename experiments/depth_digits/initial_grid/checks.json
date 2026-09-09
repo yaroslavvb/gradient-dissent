@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": [
+    "disjoint exhaustive data splits",
+    "train-only normalization",
+    "identical initial embed/head/first3 for same seed",
+    "prefix/full/allkeep equivalence",
+    "repeated eval exactly deterministic",
+    "no nn.Dropout modules",
+    "finite input and parameter gradients",
+    "zero-dropout training equals inference",
+    "schedule mean and first-layer retention"
+  ],
+  "schedule": {
+    "dense6": {
+      "mean_dropout": 0.0,
+      "expected_active_blocks_per_step": 6.0
+    },
+    "constant_ild": {
+      "mean_dropout": 0.20000000000000007,
+      "expected_active_blocks_per_step": 4.799999999999998
+    },
+    "decreasing_ild": {
+      "mean_dropout": 0.20000000000000004,
+      "expected_active_blocks_per_step": 4.8
+    },
+    "dense3": {
+      "mean_dropout": 0.0,
+      "expected_active_blocks_per_step": 3.0
+    }
+  }
+}

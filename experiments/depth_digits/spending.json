@@ -1,0 +1,8 @@
+{
+  "currency": "USD",
+  "experiment_budget": 50,
+  "paid_services_invoked": [],
+  "local_cpu_cost_charged": 0,
+  "total_external_spend": 0,
+  "note": "Local CPU only. Electricity/hardware amortization are not priced; no cloud, Modal, or paid API calls."
+}

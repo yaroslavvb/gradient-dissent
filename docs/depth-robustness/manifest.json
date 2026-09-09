@@ -1,0 +1,27 @@
+{
+  "source_files": {
+    "language_model": "experiments/depth_lm/results/result.json",
+    "digits": "experiments/depth_digits/result.json"
+  },
+  "primary_endpoint": "Paired difference of prefix4 excess CE relative to full6 baseline",
+  "cloud_spend_usd": 0,
+  "experiment_budget_usd": 50,
+  "final_tuning_runs": 90,
+  "final_evaluation_runs": 45,
+  "subset_evaluations": 2315,
+  "lm_primary": {
+    "n": 5,
+    "mean": -0.04330816864967346,
+    "std": 0.012431496225445482,
+    "ci95_low": -0.05874390995662737,
+    "ci95_high": -0.027872427342719556
+  },
+  "digits_primary": {
+    "mean": -0.06770565509796142,
+    "n": 5,
+    "std": 0.014568466778308248,
+    "ci95_low": -0.08579479580561439,
+    "ci95_high": -0.04961651439030845
+  },
+  "notes": "Earlier partial LM tuning/pilot and complete digits boundary-search sweep are archived separately, not counted as independent final replicates."
+}

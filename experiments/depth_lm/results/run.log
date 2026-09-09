@@ -1,0 +1,77 @@
+tune dense6 0.001 10 val 2.2848 seconds 13.36
+tune dense6 0.001 11 val 2.2805 seconds 13.37
+tune dense6 0.003 10 val 2.1225 seconds 13.4
+tune dense6 0.003 11 val 2.1126 seconds 13.39
+tune dense6 0.01 10 val 2.0713 seconds 13.67
+tune dense6 0.01 11 val 2.0465 seconds 13.65
+tune dense6 0.02 10 val 2.5372 seconds 14.0
+tune dense6 0.02 11 val 2.6503 seconds 13.9
+tune dense6 0.03 10 val 2.6826 seconds 14.35
+tune dense6 0.03 11 val 2.5967 seconds 14.45
+tune constant_ild 0.001 10 val 2.3174 seconds 13.9
+tune constant_ild 0.001 11 val 2.3107 seconds 13.89
+tune constant_ild 0.003 10 val 2.1622 seconds 14.6
+tune constant_ild 0.003 11 val 2.1267 seconds 14.58
+tune constant_ild 0.01 10 val 2.0869 seconds 14.62
+tune constant_ild 0.01 11 val 2.0485 seconds 14.61
+tune constant_ild 0.02 10 val 2.0945 seconds 14.86
+tune constant_ild 0.02 11 val 2.5058 seconds 14.88
+tune constant_ild 0.03 10 val 2.6116 seconds 15.09
+tune constant_ild 0.03 11 val 2.6015 seconds 15.14
+tune decreasing_ild 0.001 10 val 2.3285 seconds 13.89
+tune decreasing_ild 0.001 11 val 2.295 seconds 13.91
+tune decreasing_ild 0.003 10 val 2.1585 seconds 13.9
+tune decreasing_ild 0.003 11 val 2.1263 seconds 13.84
+tune decreasing_ild 0.01 10 val 2.0731 seconds 13.83
+tune decreasing_ild 0.01 11 val 2.0769 seconds 13.81
+tune decreasing_ild 0.02 10 val 2.5078 seconds 14.14
+tune decreasing_ild 0.02 11 val 2.1732 seconds 14.0
+tune decreasing_ild 0.03 10 val 2.6089 seconds 14.47
+tune decreasing_ild 0.03 11 val 2.5348 seconds 14.56
+tune alternating 0.001 10 val 2.3093 seconds 13.93
+tune alternating 0.001 11 val 2.2948 seconds 13.94
+tune alternating 0.003 10 val 2.1565 seconds 13.78
+tune alternating 0.003 11 val 2.1204 seconds 13.79
+tune alternating 0.01 10 val 2.0802 seconds 13.8
+tune alternating 0.01 11 val 2.0451 seconds 13.81
+tune alternating 0.02 10 val 2.5851 seconds 14.23
+tune alternating 0.02 11 val 2.3285 seconds 14.2
+tune alternating 0.03 10 val 2.6219 seconds 14.48
+tune alternating 0.03 11 val 2.6362 seconds 14.44
+tune dense4 0.001 10 val 2.2827 seconds 9.52
+tune dense4 0.001 11 val 2.2871 seconds 9.49
+tune dense4 0.003 10 val 2.1287 seconds 9.5
+tune dense4 0.003 11 val 2.1139 seconds 9.51
+tune dense4 0.01 10 val 2.0458 seconds 9.51
+tune dense4 0.01 11 val 2.0479 seconds 9.49
+tune dense4 0.02 10 val 2.065 seconds 9.64
+tune dense4 0.02 11 val 2.4517 seconds 9.66
+tune dense4 0.03 10 val 2.6439 seconds 9.23
+tune dense4 0.03 11 val 2.5969 seconds 9.23
+selected {'dense6': 0.01, 'constant_ild': 0.01, 'decreasing_ild': 0.01, 'alternating': 0.01, 'dense4': 0.01}
+eval dense6 100 full 2.1207 prefix4 2.1659
+eval constant_ild 100 full 2.1137 prefix4 2.1172
+eval decreasing_ild 100 full 2.1235 prefix4 2.1253
+eval alternating 100 full 2.125 prefix4 2.1572
+eval dense4 100 full 2.102 prefix4 2.102
+eval dense6 101 full 2.1158 prefix4 2.1543
+eval constant_ild 101 full 2.117 prefix4 2.1184
+eval decreasing_ild 101 full 2.1236 prefix4 2.1349
+eval alternating 101 full 2.1023 prefix4 2.1433
+eval dense4 101 full 2.1075 prefix4 2.1075
+eval dense6 102 full 2.0982 prefix4 2.1373
+eval constant_ild 102 full 2.1157 prefix4 2.1176
+eval decreasing_ild 102 full 2.1186 prefix4 2.1225
+eval alternating 102 full 2.101 prefix4 2.1171
+eval dense4 102 full 2.1068 prefix4 2.1068
+eval dense6 103 full 2.1065 prefix4 2.1766
+eval constant_ild 103 full 2.1154 prefix4 2.1187
+eval decreasing_ild 103 full 2.1223 prefix4 2.1356
+eval alternating 103 full 2.1256 prefix4 2.1491
+eval dense4 103 full 2.1109 prefix4 2.1109
+eval dense6 104 full 2.1202 prefix4 2.1764
+eval constant_ild 104 full 2.0996 prefix4 2.1063
+eval decreasing_ild 104 full 2.1063 prefix4 2.1086
+eval alternating 104 full 2.0976 prefix4 2.125
+eval dense4 104 full 2.0878 prefix4 2.0878
+DONE {'tuning_runs': 50, 'evaluation_runs': 25, 'test_model_subset_evaluations': 1335} local seconds 982.080949499039

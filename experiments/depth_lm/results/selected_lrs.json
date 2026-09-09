@@ -1,0 +1,7 @@
+{
+  "dense6": 0.01,
+  "constant_ild": 0.01,
+  "decreasing_ild": 0.01,
+  "alternating": 0.01,
+  "dense4": 0.01
+}

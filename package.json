@@ -5,7 +5,9 @@
   "description": "Interactive critical review and reproducible experiments for arXiv:2609.05275",
   "scripts": {
     "build": "python3 scripts/build_report.py && node scripts/render_math.cjs",
+    "build:depth": "python3 scripts/build_depth_report.py",
     "check": "node --check docs/app.js && node scripts/check_site.cjs",
+    "check:depth": "node --check docs/depth-robustness/app.js && node scripts/check_depth_report.cjs",
     "serve": "python3 -m http.server 8765 --directory docs"
   },
   "devDependencies": {

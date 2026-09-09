@@ -1,0 +1,84 @@
+{
+  "protocol": {
+    "depth": 6,
+    "width": 64,
+    "heads": 4,
+    "context": 64,
+    "batch": 16,
+    "steps": 800,
+    "learning_rates": [
+      0.001,
+      0.003,
+      0.01,
+      0.02,
+      0.03
+    ],
+    "tuning_seeds": [
+      10,
+      11
+    ],
+    "evaluation_seeds": [
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "concurrency": "Up to4 isolated worker processes; each uses1 PyTorch CPU thread and its own RNG state.",
+    "validation_windows": 64,
+    "test_windows": 128,
+    "split": [
+      0.8,
+      0.1,
+      0.1
+    ],
+    "primary_endpoint": "Prefix4 CE minus full CE, paired difference vs dense6; report raw CE as well.",
+    "tuning_endpoint": "Full-depth validation CE only. No pruning masks or test data used for selection. Initial partial three-rate sweep showed improving validation at upper boundary; uniformly extended all five treatments to five rates before any final evaluation.",
+    "budget": "Matched steps and tokens, not matched FLOPs. Compute then mask; no actual training speedup claim.",
+    "optimizer": "AdamW lr chosen per treatment; weight_decay .01 for matrices only, betas .9/.999, eps1e-8; gradient clipping1;20-step warmup then cosine to10%.",
+    "mask_semantics": "Shared per-sequence attention/FFN Bernoulli mask, inverse-survival scaling separately on both residual branches (paper Eq6). All parameters participate in autograd; zero gradients still get AdamW updates.",
+    "evaluation": "No fine-tuning, no auxiliary exit head/loss, no adapters, no rescaling after pruning. Original absolute positional embeddings, final LayerNorm and linear head reused. Exact all nonempty subsets, one-based layer IDs. Random-mask results mean uniform over exact subsets.",
+    "model": "Pre-LN causal transformer, learned absolute positions,4-head attention,GELU FFN4x,untied char embedding/head,output projections init std .02/sqrt(2L); all other linear/embed std .02. No CompleteP, ALiBi, squared ReLU or tokenization from target paper."
+  },
+  "treatments": {
+    "dense6": {
+      "depth": 6,
+      "schedule": "none",
+      "pmax": 0.0
+    },
+    "constant_ild": {
+      "depth": 6,
+      "schedule": "constant",
+      "pmax": 0.4
+    },
+    "decreasing_ild": {
+      "depth": 6,
+      "schedule": "decreasing",
+      "pmax": 0.8
+    },
+    "alternating": {
+      "depth": 6,
+      "schedule": "alternating",
+      "pmax": 0.4
+    },
+    "dense4": {
+      "depth": 4,
+      "schedule": "none",
+      "pmax": 0.0
+    }
+  },
+  "metadata": {
+    "timestamp_utc": "2026-09-09T18:19:13.122319+00:00",
+    "python": "3.14.4 (main, Apr  7 2026, 13:13:20) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "torch": "2.14.0",
+    "numpy": "2.5.3",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "cpu": "Apple M5 Max",
+    "threads": 1,
+    "device": "cpu",
+    "precision": "float32",
+    "source_sha256": "cd434863c53590468e2efbf50e970c7df65b9f0973fe4ea97f4085a1a5a05707",
+    "cloud_spend_usd": 0,
+    "modal_invocations": 0
+  }
+}

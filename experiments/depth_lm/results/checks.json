@@ -1,0 +1,7 @@
+{
+  "all_keep_equals_full": true,
+  "unit_scale_equals_eval": true,
+  "pruning_equals_zeroed_branches": true,
+  "causal_future_token_test_max_abs_error": 0.0,
+  "schedule_mean_and_endpoints": true
+}

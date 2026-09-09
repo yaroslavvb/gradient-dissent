@@ -4,6 +4,7 @@ An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity 
 
 - [Interactive report and 16-chapter slide view](https://yaroslavvb.github.io/gradient-dissent/)
 - [Extended review](https://yaroslavvb.github.io/gradient-dissent/review.html)
+- [Separate depth-robustness experiment report](https://yaroslavvb.github.io/gradient-dissent/depth-robustness/): a tiny causal transformer and 8×8 digit classifier, five seeds per treatment, exact layer-subset enumeration, and $0 cloud spend.
 - [Original paper PDF](https://arxiv.org/pdf/2609.05275v1)
 - [Experiments and reproduction instructions](experiments/README.md)
 
@@ -35,6 +36,8 @@ npm run serve
 Open `http://localhost:8765`. The interactive edition needs HTTP to fetch its local results JSON. The published report has no runtime CDN, tracking, or backend dependency. Use **Present** to enter slide mode; arrow keys navigate, Escape returns to the report. Charts have associated explanations and data tables. Motion starts only on request.
 
 `npm run build` regenerates `docs/review.html` from the three research Markdown files and renders equations into local HTML/MathML. `docs/index.html`, `docs/style.css`, and `docs/app.js` are authored static sources. GitHub Pages publishes the committed `docs/` directory from `main`.
+
+The separate depth report is built from saved measurements with `python3 -m pip install -r requirements-depth-report.txt`, then `npm run build:depth` and `npm run check:depth`. Its source template is `scripts/depth-report-template.html`; the builder regenerates HTML, Markdown, plot data, and standalone scientific figures without retraining. See the [transformer](experiments/depth_lm/README.md) and [digits](experiments/depth_digits/README.md) protocols to repeat training. Final sweeps contain 90 tuning and 45 evaluation runs; earlier boundary-search runs are archived and disclosed separately.
 
 ## Provenance
 
