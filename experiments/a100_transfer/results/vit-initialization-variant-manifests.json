@@ -1,0 +1,70 @@
+[
+  {
+    "container_id": "ta-01M23WB92FS5Z37SCMH90CCT9R",
+    "kind": "avx512",
+    "cpu_capability": "AVX512",
+    "torch": "2.8.0+cu128",
+    "source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "rows": [
+      {
+        "seed": 1000,
+        "state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+        "file": "/work/vit-initialization-audit/avx512/1000.pt",
+        "rng_sha256": "a97688355aab8b61216aae9d9cb052f08555eddb14dd95f390823ea711324165"
+      },
+      {
+        "seed": 2000,
+        "state_sha256": "6ef65e5e226647b6d6182da1a4b2847c57b160203d66a8d4169fdf9b68bb4239",
+        "file": "/work/vit-initialization-audit/avx512/2000.pt",
+        "rng_sha256": "9fff5c30c1e9ed9878ee1293ff223d1ff85a4a09de7f8b952a8f029fdb5fccba"
+      },
+      {
+        "seed": 2001,
+        "state_sha256": "78b9cccc8b55e3b16b761b720b93402d8956e437fafe1cb0cfe02d0d88c7420c",
+        "file": "/work/vit-initialization-audit/avx512/2001.pt",
+        "rng_sha256": "7a6eac2a44112100f1d3e8863e77791f7e81533e1343505cda196d40fecbc307"
+      },
+      {
+        "seed": 2002,
+        "state_sha256": "fa0d5c5cbc1cd7cab4129a16fff2f9aded19c7e03481d530a5f91628a26a9c55",
+        "file": "/work/vit-initialization-audit/avx512/2002.pt",
+        "rng_sha256": "efa818dd67f0bec3ba609ca148978ed7b919dcd3a3312ffa2952b12cbf46ffc7"
+      }
+    ],
+    "committed": true
+  },
+  {
+    "container_id": "ta-01M23WAQAXSHTTGRF7WK218R0R",
+    "kind": "avx2",
+    "cpu_capability": "AVX2",
+    "torch": "2.8.0+cu128",
+    "source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "rows": [
+      {
+        "seed": 1000,
+        "state_sha256": "0ed156a680238964ebd18ba1403394069e934b8f27f3b6aa2cc0ec51747aba70",
+        "file": "/work/vit-initialization-audit/avx2/1000.pt",
+        "rng_sha256": "a97688355aab8b61216aae9d9cb052f08555eddb14dd95f390823ea711324165"
+      },
+      {
+        "seed": 2000,
+        "state_sha256": "45c46c9d400fa4c09c80cfd3b966610b8bd5cba3438b29031831263f76ff26c0",
+        "file": "/work/vit-initialization-audit/avx2/2000.pt",
+        "rng_sha256": "9fff5c30c1e9ed9878ee1293ff223d1ff85a4a09de7f8b952a8f029fdb5fccba"
+      },
+      {
+        "seed": 2001,
+        "state_sha256": "3532faee4bf1ee344fbf236b36dd0e4dbd6bbb6d6b5ed05f7b4cb287a9285c5d",
+        "file": "/work/vit-initialization-audit/avx2/2001.pt",
+        "rng_sha256": "7a6eac2a44112100f1d3e8863e77791f7e81533e1343505cda196d40fecbc307"
+      },
+      {
+        "seed": 2002,
+        "state_sha256": "e0dce01ff146be028eebf4a7d658956c717eef3d2ea1a263b061dccbc4b71b69",
+        "file": "/work/vit-initialization-audit/avx2/2002.pt",
+        "rng_sha256": "efa818dd67f0bec3ba609ca148978ed7b919dcd3a3312ffa2952b12cbf46ffc7"
+      }
+    ],
+    "committed": true
+  }
+]

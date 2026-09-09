@@ -2,6 +2,8 @@
 
 The same ConvNeXt seed produced two different SHA-256 state hashes across Modal CPU hosts. Full-tensor comparison shows that these are **roundoff-scale differences, not bitwise-identical initializations**. The first differing operation in a controlled initialization probe is CPU `erfinv_`. Training code, random seeds, and reported hashes remain unchanged.
 
+This document records the earlier ConvNeXt diagnosis. A subsequent ViT mismatch has its own [independent initialization audit](vit-initialization-audit.md) and architecture-specific numerical qualification. Claims that all ViT initializations matched exactly have therefore been superseded; recorded GPT initializations remain byte-identical within seed. The ConvNeXt evidence below does not automatically qualify another architecture's hashes.
+
 ## What was observed
 
 The [nine-worker probe](results/initialization-worker-probes.json) reconstructed seed 1000 using frozen `vision.py` and PyTorch `2.8.0+cu128`. Eight workers reporting PyTorch CPU capability `AVX512` produced `0b281e0b…d43939`; one reporting `AVX2` produced `14ceace6…370af8`. These reproduce both hashes observed in the training records. All 59 randomized Conv/Linear weight tensors differed in their byte hashes; all 123 constant tensors, including LayerScale, matched. All workers had the same post-initialization CPU RNG state. A matching RNG state alone establishes neither matching tensor values nor matching arithmetic.

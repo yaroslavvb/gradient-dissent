@@ -1,0 +1,51 @@
+[
+  {
+    "container_id": "ta-01M23WQCX49GHTDPDSD1VZTTZR",
+    "cpu_capability": "AVX2",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  },
+  {
+    "container_id": "ta-01M23WB92FS5Z37SCMH90CCT9R",
+    "cpu_capability": "AVX512",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  },
+  {
+    "container_id": "ta-01M23WAQAXSHTTGRF7WK218R0R",
+    "cpu_capability": "AVX2",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  },
+  {
+    "container_id": "ta-01M23W9AVVEH80R04A6S2S886R",
+    "cpu_capability": "AVX512",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  },
+  {
+    "container_id": "ta-01M23W9BDWGJTMTP5E2DPDEQTR",
+    "cpu_capability": "AVX2",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  },
+  {
+    "container_id": "ta-01M23TVG5F7FQEYWK7BBXAKNVR",
+    "cpu_capability": "AVX512",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  },
+  {
+    "container_id": "ta-01M23TVG5FT8R1SX6SSXWBZCMR",
+    "cpu_capability": "AVX512",
+    "torch": "2.8.0+cu128",
+    "machine": "x86_64",
+    "mkl_available": true
+  }
+]

@@ -45,6 +45,22 @@ CNN_INITIALIZATION_EVIDENCE = {
     "initialization-variant-manifests.json": "64bd44b980b7d204be439208d007194713c9f152ca27a83642183d423ce28fe4",
     "initialization-worker-probes.json": "cc55ae7133d1e2f8434490e1220be68b12983326e7e53a3890bd4c6d7ae94489",
 }
+# Thresholds and independent inventory were fixed before the ViT comparison.
+# Activation followed complete reconstruction/numerical auditing of all hashes.
+VIT_INITIALIZATION_SOURCE = "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0"
+VIT_INITIALIZATION_TORCH = "2.8.0+cu128"
+VIT_INITIALIZATION_THRESHOLDS = {"max_absolute_difference": 1e-7, "relative_l2_difference": 1e-6}
+VIT_INITIALIZATION_PAIRS = {
+    1000: ("578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca", "0ed156a680238964ebd18ba1403394069e934b8f27f3b6aa2cc0ec51747aba70"),
+    2000: ("6ef65e5e226647b6d6182da1a4b2847c57b160203d66a8d4169fdf9b68bb4239", "45c46c9d400fa4c09c80cfd3b966610b8bd5cba3438b29031831263f76ff26c0"),
+    2001: ("78b9cccc8b55e3b16b761b720b93402d8956e437fafe1cb0cfe02d0d88c7420c", "3532faee4bf1ee344fbf236b36dd0e4dbd6bbb6d6b5ed05f7b4cb287a9285c5d"),
+    2002: ("fa0d5c5cbc1cd7cab4129a16fff2f9aded19c7e03481d530a5f91628a26a9c55", "e0dce01ff146be028eebf4a7d658956c717eef3d2ea1a263b061dccbc4b71b69"),
+}
+VIT_INITIALIZATION_EVIDENCE = {
+    "numerical": {"file": "vit-initialization-numerical-audit.json", "sha256": "3d5e8ec53622ac28bd753c20e6a11a5fc74043fb70df027c535f95c1bbc0e2de"},
+    "variants": {"file": "vit-initialization-variant-manifests.json", "sha256": "7051a1bdbc77372f6689b8ed2c3045292174771196f19f81b73236cade78ec44"},
+    "probes": {"file": "vit-initialization-cpu-probes.json", "sha256": "2d2150c601fd8a1ff448ad572796d66ee44d584991beb4823651d25461207756"},
+}
 
 
 class AuditError(ValueError):
@@ -105,6 +121,119 @@ def cnn_tensor_inventory():
     require(len(shapes) == 182 and sum(math.prod(s) for s in shapes.values()) == 27897028,
             "Internal ConvNeXt audit inventory mismatch")
     return shapes
+
+
+def vit_tensor_inventory():
+    """Independent inventory for the frozen native-32, 100-class ViT."""
+    width, inner = 768, 3072
+    shapes = {"position": [1,64,width], "patch.weight": [width,3,4,4], "patch.bias": [width],
+              "norm.weight": [width], "norm.bias": [width], "head.weight": [100,width], "head.bias": [100]}
+    for block in range(12):
+        prefix = f"blocks.{block}."
+        shapes.update({prefix+"attn_norm.weight": [width], prefix+"attn_norm.bias": [width],
+                       prefix+"qkv.weight": [3*width,width], prefix+"qkv.bias": [3*width],
+                       prefix+"attn_out.weight": [width,width], prefix+"attn_out.bias": [width],
+                       prefix+"mlp_norm.weight": [width], prefix+"mlp_norm.bias": [width],
+                       prefix+"mlp.0.weight": [inner,width], prefix+"mlp.0.bias": [inner],
+                       prefix+"mlp.2.weight": [width,inner], prefix+"mlp.2.bias": [width]})
+    require(len(shapes) == 151 and sum(math.prod(s) for s in shapes.values()) == 85219684,
+            "Internal ViT audit inventory mismatch")
+    return shapes
+
+
+def verify_vit_initialization_audit(results_dir, core_hashes):
+    """Independently verify only the exact, fully audited ViT variants.
+
+    Tolerances were fixed before comparing reconstructed ViT initial states.
+    """
+    require(bool(VIT_INITIALIZATION_PAIRS) and set(VIT_INITIALIZATION_EVIDENCE) == {"numerical", "variants", "probes"},
+            "ViT numerical initialization audit lacks its exact evidence/state allowlist")
+    require(core_hashes["vision.py"] == VIT_INITIALIZATION_SOURCE, "ViT initialization audit source mismatch")
+    evidence, provenance = {}, []
+    for role, record in VIT_INITIALIZATION_EVIDENCE.items():
+        path = results_dir/record["file"]
+        value = load(path)
+        digest = sha(path.read_bytes())
+        require(digest == checked_hash(record["sha256"], "ViT evidence"), f"ViT initialization evidence changed: {path.name}")
+        evidence[role] = value
+        provenance.append({"file": record["file"], "sha256": digest})
+    numerical = evidence["numerical"]
+    require(numerical.get("passed") is True and numerical.get("torch") == VIT_INITIALIZATION_TORCH and
+            numerical.get("vision_source_sha256") == VIT_INITIALIZATION_SOURCE, "ViT numerical audit provenance/status mismatch")
+    require(numerical.get("thresholds") == VIT_INITIALIZATION_THRESHOLDS, "ViT initialization audit tolerance changed")
+    seeds = set(VIT_INITIALIZATION_PAIRS)
+    variants = evidence["variants"]
+    require(len(variants) == 2 and {v["kind"] for v in variants} == {"avx512", "avx2"}, "Unexpected ViT initialization variants")
+    variants = {v["kind"]: v for v in variants}
+    probes = evidence["probes"]
+    require(len(probes) == 7 and len({p["container_id"] for p in probes}) == 7, "ViT CPU probe count/identity mismatch")
+    by_container = {p["container_id"]: p for p in probes}
+    for probe in probes:
+        require(probe["torch"] == VIT_INITIALIZATION_TORCH and probe["cpu_capability"] in ("AVX2", "AVX512") and
+                probe["machine"] == "x86_64" and probe["mkl_available"] is True, "ViT CPU probe runtime mismatch")
+    rng = {}
+    for index, kind in enumerate(("avx512", "avx2")):
+        variant = variants[kind]
+        require(variant.get("torch") == VIT_INITIALIZATION_TORCH and variant.get("source_sha256") == VIT_INITIALIZATION_SOURCE and
+                variant.get("cpu_capability") == kind.upper() and variant.get("committed") is True,
+                f"ViT initialization variant provenance mismatch: {kind}")
+        require(variant["container_id"] in by_container and by_container[variant["container_id"]]["cpu_capability"] == kind.upper(),
+                f"ViT reconstruction worker is absent from CPU provenance: {kind}")
+        rows = variant["rows"]
+        require(len(rows) == len(seeds) and {row["seed"] for row in rows} == seeds, "ViT initialization variant seed mismatch")
+        for row in rows:
+            seed = row["seed"]
+            require(row["state_sha256"] == VIT_INITIALIZATION_PAIRS[seed][index], f"Unrecognized ViT initialization hash: {kind}/{seed}")
+            require(row["file"] == f"/work/vit-initialization-audit/{kind}/{seed}.pt",
+                    "Unexpected ViT initialization state artifact path")
+            digest = checked_hash(row["rng_sha256"], f"ViT initialization RNG {kind}/{seed}")
+            if seed in rng:
+                require(rng[seed] == digest, f"ViT post-initialization RNG differs for seed {seed}")
+            rng[seed] = digest
+    shapes = vit_tensor_inventory()
+    rows = numerical["rows"]
+    require(len(rows) == len(seeds) and {row["seed"] for row in rows} == seeds, "ViT numerical audit seed mismatch")
+    seed_audits = []
+    for row in rows:
+        seed = row["seed"]
+        require(row.get("task") == "vit_cifar100" and row.get("passed") is True and
+                tuple(row["state_hashes"]) == VIT_INITIALIZATION_PAIRS[seed], f"ViT numerical audit identity mismatch: {seed}")
+        tensors = row["tensors"]
+        require(len(tensors) == len(shapes) and {t["name"] for t in tensors} == set(shapes), f"Incomplete/duplicate ViT tensor inventory: {seed}")
+        maximum, squared_diff, squared_norm, numel, changed = 0., 0., 0., 0, 0
+        for tensor in tensors:
+            name, shape = tensor["name"], tensor["shape"]
+            size = math.prod(shape)
+            require(shape == shapes[name] and tensor["dtype"] == "torch.float32" and tensor["numel"] == size,
+                    f"ViT numerical audit shape/dtype/count mismatch: {seed}/{name}")
+            count = tensor["changed_elements"]
+            require(isinstance(count, int) and not isinstance(count, bool) and 0 <= count <= size, f"Invalid ViT changed count: {seed}/{name}")
+            mx = finite(tensor["max_absolute_difference"], f"ViT {seed}/{name} max difference")
+            sd = finite(tensor["squared_difference"], f"ViT {seed}/{name} squared difference")
+            sn = finite(tensor["squared_reference_norm"], f"ViT {seed}/{name} squared norm")
+            require(mx >= 0 and sd >= 0 and sn >= 0 and mx <= VIT_INITIALIZATION_THRESHOLDS["max_absolute_difference"],
+                    f"Out-of-bound ViT tensor difference: {seed}/{name}")
+            require((count == 0) == (mx == 0 and sd == 0), f"Inconsistent ViT zero-difference count: {seed}/{name}")
+            require(mx*mx <= sd*(1+1e-12) and sd <= count*mx*mx*(1+1e-12), f"Inconsistent ViT tensor difference norm: {seed}/{name}")
+            maximum = max(maximum, mx)
+            squared_diff += sd
+            squared_norm += sn
+            numel += size
+            changed += count
+        require(squared_norm > 0, f"ViT reference norm is zero: {seed}")
+        relative = math.sqrt(squared_diff/squared_norm)
+        require(numel == row["parameters"] == 85219684 and changed == row["changed_elements"], f"ViT numerical audit aggregate count mismatch: {seed}")
+        require(maximum == row["max_absolute_difference"] and math.isclose(relative, row["relative_l2_difference"], rel_tol=1e-12, abs_tol=1e-20),
+                f"ViT numerical audit aggregate bound mismatch: {seed}")
+        require(relative <= VIT_INITIALIZATION_THRESHOLDS["relative_l2_difference"], f"Relative ViT initialization difference exceeds fixed bound: {seed}")
+        seed_audits.append({"seed": seed, "state_hashes": row["state_hashes"], "parameters": numel, "changed_elements": changed,
+                            "max_absolute_difference": maximum, "relative_l2_difference": relative, "rng_sha256": rng[seed]})
+    return {"passed": True, "posthoc_verification_adjustment": True, "task": "vit_cifar100", "audited_seeds": sorted(seeds),
+            "torch": VIT_INITIALIZATION_TORCH, "vision_source_sha256": VIT_INITIALIZATION_SOURCE,
+            "thresholds": dict(VIT_INITIALIZATION_THRESHOLDS), "max_absolute_difference": max(r["max_absolute_difference"] for r in seed_audits),
+            "max_relative_l2_difference": max(r["relative_l2_difference"] for r in seed_audits), "evidence_files": provenance,
+            "seed_audits": seed_audits,
+            "interpretation": "Separate post hoc ViT initialization verification based on reconstructed untrained states, with thresholds fixed before tensor comparisons. Only exact state hashes covered by the complete numerical audit are permitted; matching RNG and small weight differences do not establish identical subsequent training trajectories."}
 
 
 def verify_initialization_audit(results_dir, core_hashes):
@@ -196,17 +325,20 @@ def verify_initialization_audit(results_dir, core_hashes):
             "max_absolute_difference": max(r["max_absolute_difference"] for r in seed_audits),
             "max_relative_l2_difference": max(r["relative_l2_difference"] for r in seed_audits),
             "evidence_files": provenance, "seed_audits": seed_audits,
-            "interpretation": "Post hoc verification adjustment based only on reconstructed, untrained CPU states, independent of test outcomes. ConvNeXt permits only the two exact recorded hashes per audited seed, whose complete tensors are numerically close and whose post-init RNG states match. GPT/ViT require bit-identical paired initialization. This does not establish identical training trajectories or eliminate host-dependent numerical variation."}
+            "interpretation": "Post hoc verification adjustment based only on reconstructed, untrained CPU states, independent of test outcomes. ConvNeXt permits only the two exact recorded hashes per audited seed, whose complete tensors are numerically close and whose post-init RNG states match. GPT requires bit-identical paired initialization; ViT is covered by a separate architecture-specific numerical audit. This does not establish identical training trajectories or eliminate host-dependent numerical variation."}
 
 
-def verify_initialization_pairing(runs, audit):
+def verify_initialization_pairing(runs, audit, vit_audit=None):
     require(bool(runs), "Empty initialization pairing group")
     task, seed = runs[0]["spec"]["task"], runs[0]["spec"]["seed"]
     require(all(r["spec"]["task"] == task and r["spec"]["seed"] == seed for r in runs), "Mixed initialization pairing group")
     hashes = {r["run_id"]: checked_hash(r["metadata"]["initial_state_sha256"], r["run_id"]+" initialization") for r in runs}
     observed = sorted(set(hashes.values()))
-    if task == "convnext_cifar100":
-        require(audit.get("passed") is True and seed in CNN_INITIALIZATION_PAIRS and set(observed) <= set(CNN_INITIALIZATION_PAIRS[seed]),
+    if task in ("convnext_cifar100", "vit_cifar100"):
+        selected_audit = audit if task == "convnext_cifar100" else vit_audit
+        pairs = CNN_INITIALIZATION_PAIRS if task == "convnext_cifar100" else VIT_INITIALIZATION_PAIRS
+        require(isinstance(selected_audit, dict) and selected_audit.get("passed") is True and selected_audit.get("task") == task and
+                seed in pairs and set(observed) <= set(pairs[seed]),
                 f"{task}/{seed}: initialization hash is not an audited variant")
         for run in runs:
             require(run["metadata"].get("torch") == CNN_INITIALIZATION_TORCH and run["metadata"]["source_sha256"]["vision.py"] == CNN_INITIALIZATION_SOURCE,
@@ -373,7 +505,7 @@ def dataset_hashes(dataset):
     return {"gpt_wikitext103": language, "vit_cifar100": vision, "convnext_cifar100": vision}
 
 
-def verify_tuning(results_dir, evaluation_jobs, core_hashes, data_hashes, initialization_audit=None):
+def verify_tuning(results_dir, evaluation_jobs, core_hashes, data_hashes, initialization_audit=None, vit_initialization_audit=None):
     """Verify complete equal LR comparisons when a tuning manifest is present."""
     manifest = results_dir.parent / "tuning-manifest.json"
     if not manifest.exists():
@@ -386,6 +518,8 @@ def verify_tuning(results_dir, evaluation_jobs, core_hashes, data_hashes, initia
     require(len(ids) == len(set(ids)), "Duplicate tuning run IDs")
     if initialization_audit is None:
         initialization_audit = verify_initialization_audit(results_dir, core_hashes)
+    if vit_initialization_audit is None:
+        vit_initialization_audit = verify_vit_initialization_audit(results_dir, core_hashes)
     by_family = defaultdict(list)
     for spec in jobs:
         run = load(results_dir / (spec["run_id"]+".json"))
@@ -409,7 +543,7 @@ def verify_tuning(results_dir, evaluation_jobs, core_hashes, data_hashes, initia
         tuning_seeds = sorted({s for s,_ in grids["dense"]})
         for seed in tuning_seeds:
             paired = [r for r in runs if r["spec"]["seed"] == seed]
-            pairing.append(verify_initialization_pairing(paired, initialization_audit))
+            pairing.append(verify_initialization_pairing(paired, initialization_audit, vit_initialization_audit))
             require(len({checked_hash(r["training_data_stream_sha256"], r["run_id"]+" training stream") for r in paired}) == 1,
                     f"{task}/{seed}: tuning data streams are not paired")
             require(len({canonical(r["validation_panel"]) for r in paired}) == 1,
@@ -503,6 +637,7 @@ def summarize(results_dir, manifest_path):
         require(sha((results_dir.parent/name).read_bytes()) == digest,
                 f"Current {name} differs from executed source; restore the actual executed version before publishing")
     initialization_audit = verify_initialization_audit(results_dir, code)
+    vit_initialization_audit = verify_vit_initialization_audit(results_dir, code)
     initialization_pairing = []
     for task, group in design.items():
         family_runs = [r for r in runs if r["spec"]["task"] == task]
@@ -517,9 +652,9 @@ def summarize(results_dir, manifest_path):
                     f"{task}: masks differ across recipes or seeds")
         for seed in sorted({j["seed"] for j in group}):
             paired = [r for r in family_runs if r["spec"]["seed"] == seed]
-            initialization_pairing.append(verify_initialization_pairing(paired, initialization_audit))
+            initialization_pairing.append(verify_initialization_pairing(paired, initialization_audit, vit_initialization_audit))
             require(len({r["training_data_stream_sha256"] for r in paired}) == 1, f"{task}/{seed}: training streams are not paired")
-    tuning, tune_manifest = verify_tuning(results_dir, jobs, code, data_hashes, initialization_audit)
+    tuning, tune_manifest = verify_tuning(results_dir, jobs, code, data_hashes, initialization_audit, vit_initialization_audit)
     budget = verify_budget(results_dir, jobs)
     by_cell = {(r["spec"]["task"],r["spec"]["recipe"],r["spec"]["seed"]):r for r in runs}
     curves, comparisons, family_info, learning, gamma_rows = [], [], [], [], []
@@ -587,8 +722,9 @@ def summarize(results_dir, manifest_path):
                              "evaluation_manifest_sha256": sha(manifest_path.read_bytes()), "tuning_manifest": tune_manifest,
                              "dataset_preparation_manifest_sha256": sha(dataset_path.read_bytes()), "executed_core_source_sha256": code,
                              "initialization_numerical_audit": initialization_audit, "initialization_pairing": initialization_pairing,
+                             "vit_initialization_numerical_audit": vit_initialization_audit,
                              "raw_files": files, "checks": ["exact locked run specs and complete paired cells", "no silently discarded successful final runs",
-                                 "bit-identical GPT/ViT initialization; only exact allowlisted, numerically audited ConvNeXt variants", "identical paired data streams", "executed core source matches published source",
+                                 "bit-identical GPT initialization; separate exact allowlists and full numerical audits for ConvNeXt and ViT variants", "identical paired data streams", "executed core source matches published source",
                                  "executed dataset manifests match preparation artifacts", "identical heldout panels and masks",
                                  "nominal20% mean omission for ILD", "completed terminal steps", "passed GPU full/allkeep equivalence",
                                  "unique prescribed mask panel and fixed target counts", "equal full-validation-only LR search", "reservation ledger arithmetic/specs"]},
@@ -598,7 +734,7 @@ def summarize(results_dir, manifest_path):
             "layerscale_by_stage": gamma_rows, "budget": budget,
             "limitations": ["Few final training seeds; intervals are fragile and unadjusted across primary/secondary comparisons.",
                 "Learning-rate selection uncertainty and heldout dataset uncertainty are not included in seed intervals; tuning uses its recorded independent seed count.",
-                "ConvNeXt same-seed initial weights can differ by CPU host. A post hoc audit accepts only two measured, numerically close hashes per seed with matching post-init RNG; identical training trajectories are not established. GPT/ViT initialization remains bit-identically paired.",
+                "ConvNeXt and ViT same-seed initial weights can differ by CPU host. Separate post hoc audits accept only two measured, numerically close hashes per architecture/seed with matching post-init RNG; identical training trajectories are not established. GPT initialization remains bit-identically paired.",
                 "Compute-then-mask executes dense branches; these runs do not establish FLOP, latency, memory, energy, or dollar savings.",
                 "Peak reserved GPU memory can include allocator cache from previous calls or prevalidation; it is not the model's required VRAM. Peak allocated memory describes live tensors in this implementation, including resident data.",
                 "Two-thirds retained residual blocks does not imply two-thirds FLOPs; ConvNeXt stage transitions always remain.",
@@ -667,12 +803,13 @@ def render_markdown(summary):
     else:
         out += ["", "No metered-usage snapshot was available; measured spend is not inferred from reservations."]
     out += ["", f"[Budget ledger]({REPO}/results/budget-ledger.json) · [Locked evaluation manifest]({REPO}/evaluation-manifest.json) · [Analysis source]({REPO}/analyze.py)", "",
-            "Verification requires every locked final run, bit-identical GPT/ViT initialization, exact allowlisted numerical variants for ConvNeXt initialization, identical paired data streams, executed data/source hashes matching the saved artifacts, completed steps, unique fixed mask panels, identical target counts, and passed GPU full-mask/default equivalence. Raw-file SHA-256 values are included in summary.json. Failed attempts and earlier pilots remain in the result/ledger audit trail and are not statistical replicates.", "",
+            "Verification requires every locked final run, bit-identical GPT initialization, separate exact allowlists and numerical audits for ConvNeXt and ViT initialization variants, identical paired data streams, executed data/source hashes matching the saved artifacts, completed steps, unique fixed mask panels, identical target counts, and passed GPU full-mask/default equivalence. Raw-file SHA-256 values are included in summary.json. Failed attempts and earlier pilots remain in the result/ledger audit trail and are not statistical replicates.", "",
             "## Initialization audit qualification", ""]
-    initialization = summary["verification"]["initialization_numerical_audit"]
-    out += [f"A **post hoc verification adjustment**, based on untrained CPU initializations and independent of test outcomes, permits two exact recorded ConvNeXt initialization hashes for each of seeds {', '.join(map(str,initialization['audited_seeds']))}. Every tensor was compared across the two variants: maximum absolute difference **{initialization['max_absolute_difference']:.10g}**, maximum relative L2 difference **{initialization['max_relative_l2_difference']:.10g}**, with identical post-initialization RNG states. The analyzer recomputes these bounds from per-tensor statistics and checks pinned evidence SHA-256 values, the frozen source, PyTorch version, shapes, dtypes, and the full parameter count. Unknown hashes fail verification. GPT and ViT retain bit-identical paired initialization.", "",
-            "These are seed-paired, numerically close ConvNeXt initializations, not bit-identical weights across all runs. This evidence does not show that subsequent training trajectories are identical or quantify downstream host effects. The LR grid, CE-only selection, evaluation seeds, training code and primary endpoint were unchanged.", "",
-            " · ".join(f"[{p['file']}]({REPO}/results/{p['file']})" for p in initialization["evidence_files"]), "",
+    for key, label in (("initialization_numerical_audit", "ConvNeXt"), ("vit_initialization_numerical_audit", "ViT")):
+        initialization = summary["verification"][key]
+        out += [f"A separate **post hoc verification adjustment** for **{label}**, based on untrained CPU initializations and independent of test outcomes, permits two exact recorded hashes for each of seeds {', '.join(map(str,initialization['audited_seeds']))}. Every tensor was compared across the two variants: maximum absolute difference **{initialization['max_absolute_difference']:.10g}**, maximum relative L2 difference **{initialization['max_relative_l2_difference']:.10g}**, with identical post-initialization RNG states. The analyzer recomputes these bounds from per-tensor statistics and checks pinned evidence SHA-256 values, the frozen source, PyTorch version, shapes, dtypes, and the full parameter count. Unknown hashes fail verification.", "",
+                " · ".join(f"[{p['file']}]({REPO}/results/{p['file']})" for p in initialization["evidence_files"]), ""]
+    out += ["ConvNeXt and ViT are seed-paired with separately audited, numerically close initializations; weights are not bit-identical across all runs. **GPT retains bit-identical paired initialization.** These audits do not establish identical subsequent training trajectories or quantify downstream host effects. The LR grid, CE-only selection, evaluation seeds, training code and primary endpoint were unchanged. ViT numerical tolerances were fixed before its full tensor comparison.", "",
             "## Limits of the result", ""]
     out.extend("- "+limit for limit in summary["limitations"])
     out += ["", "[Vision implementation/provenance]({}/vision-notes.md) · [Language implementation/provenance]({}/language-notes.md)".format(REPO,REPO), ""]
