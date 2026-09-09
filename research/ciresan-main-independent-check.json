@@ -1,0 +1,2584 @@
+{
+  "generated_utc": "2026-09-09T22:58:15.050577+00:00",
+  "scope": "Independent recomputation from 15 graph-eval-*.json files; no analyzer aggregate imported, no model or paid calls.",
+  "raw_results_directory": "experiments/ciresan_stochastic_depth/results",
+  "raw_file_sha256": {
+    "graph-eval-plain-s101": "fc8928a6121cf8e7a2808d5025e9990eab8cefbf1e0fff92af40a3c46ccf4939",
+    "graph-eval-residual_unit_dropout-s102": "057cb0f41d53c773755dd796355f8d6109b37163dc7db038ecec4ce58491ac7f",
+    "graph-eval-residual-s101": "fe619114848785e3c30051ef64298fcdebac62677cd911eb4f290c51155fac39",
+    "graph-eval-sd_annealed-s101": "3469bd70bd03fc1b0a07868f7348c8a8f1921b9d5313bbfb9f37e15f7cd70c7a",
+    "graph-eval-sd_constant-s101": "092c055f120d9044df072d756bf7ae5ca3b6d1e2eabcc8a1935074f2c8cea817",
+    "graph-eval-residual_unit_dropout-s103": "bdf01e637e82c343ae9def157a544f2727fd41fc1347ac5acafd7ecd2c599f07",
+    "graph-eval-residual-s102": "62a0410e4d65211e47150addd59f001e8f930bf1a34115109867bcf8140f50ab",
+    "graph-eval-sd_annealed-s102": "ff3505ee0fe5952a81a1abc57b103b76eb1e8a20f66f7c4b6d87bb9647d67eed",
+    "graph-eval-sd_constant-s102": "f53d6c00ad2bbbb9e436121fd2b7dd8c1041d0def849282feb495558d8475261",
+    "graph-eval-sd_constant-s103": "6f33d71a0b3df47c5095bf732b47172ef6b43b5332b6351e8bc9710f56eec666",
+    "graph-eval-sd_annealed-s103": "cf48c318ae956e822dbe1a313819479ae687d3614c1994e6111c369e7983cb06",
+    "graph-eval-residual-s103": "29b4d0a2989b4dc0ae9baf103eebb0a61913599e1b60026bb14e28a756b66bb5",
+    "graph-eval-residual_unit_dropout-s101": "a2cff196860cf892cac8e1079cda0be32cc82778d390119e0f0ae4120ae27bcd",
+    "graph-eval-plain-s102": "7ef024e92795c7acdd9956a74e553f9393d662c2b0b8ba08014036d26f091c91",
+    "graph-eval-plain-s103": "c6460d176950a86cff04c698bf3a5e4a74d3e95bb2b8c442ac3309fecf501213"
+  },
+  "seeds_in_value_order": [
+    101,
+    102,
+    103
+  ],
+  "integrity": {
+    "complete_runs": 15,
+    "epochs_each": 100,
+    "same_initial_parameters_within_seed": true,
+    "same_executed_example_order_within_seed": true,
+    "same_source_hashes_across_runs": true,
+    "same_dataset_metadata_across_runs": true,
+    "source_sha256": {
+      "train_optimized.py": "3a2553956753bc6d617e9550ea33f6c1efc6ea046169c161c57db7e3e3da8d8d",
+      "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd",
+      "optimization/stochastic_graph.py": "7844db46e84f39809feb7dbf3684e95a199b01773b6a3dc800127fb84c274a1a",
+      "optimization/test_stochastic_graph.py": "fed8f7d61ce10d4f3c2ab0942bc5a245b0e2b8e4b50d253ee65ab5d45b813d11",
+      "train.py": "bc1d430a2e104963feed5b55510fb0344f9f84f00ce2e56b9feaf442e067cb41"
+    },
+    "all_reported_gpu": "NVIDIA A100-SXM4-40GB",
+    "test_error_indices_unique_and_consistent": true,
+    "validation_ce_checkpoint_selection_checked": true
+  },
+  "methods": {
+    "summary": "Arithmetic means and unbiased sample SD across three seeds. CE is mean negative log probability in nats per example. Accuracy is percent; differences are percentage points.",
+    "paired_ci": "Treatment minus residual-dense within each seed. Two-sided 95% Student-t CI: mean +/- 4.302652729911275 * sample_sd / sqrt(3), df=2. No multiple-comparison correction.",
+    "time": "Full 100-epoch synchronized training_seconds, separately total_run_seconds. Selected accumulated training time is an observed checkpoint time, not an early-stopped invocation or matched-quality runtime.",
+    "macs": {
+      "widths": [
+        784,
+        2500,
+        2000,
+        1500,
+        1000,
+        500,
+        10
+      ],
+      "forward_affine_macs_per_example_by_layer": [
+        1960000,
+        5000000,
+        3000000,
+        1500000,
+        500000,
+        5000
+      ],
+      "total": 11965000,
+      "formula": "100 * sum(actual_skipped_batch_counts[i] * body_affine_MACs[i]) / (100 * steps_per_epoch * total_dense_affine_MACs)",
+      "interpretation": "Realized skip counts weighted by nominal affine forward multiply-accumulates. Ignores bias, activation, crop/add, optimizer, data movement and kernel overhead; not profiler FLOPs or measured energy. Every full branch bypass also omits its affine backward computation; this calculation does not separately measure backward cost."
+    }
+  },
+  "arms": {
+    "plain": {
+      "learning_rates": [
+        0.03,
+        0.03,
+        0.03
+      ],
+      "selected_epochs": [
+        5,
+        10,
+        10
+      ],
+      "selected": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              99.05199999999999,
+              99.846,
+              99.63
+            ],
+            "mean": 99.50933333333333,
+            "sample_sd": 0.41052324335333007
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.0309840185546875,
+              0.00522846435546875,
+              0.012568994140625
+            ],
+            "mean": 0.016260492350260416,
+            "sample_sd": 0.013268666560775041
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              97.56,
+              98.22,
+              97.96000000000001
+            ],
+            "mean": 97.91333333333334,
+            "sample_sd": 0.33246553706111037
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.08981358642578124,
+              0.074681591796875,
+              0.09139046630859375
+            ],
+            "mean": 0.08529521484375,
+            "sample_sd": 0.009225420487819066
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.058829567871093745,
+            0.06945312744140625,
+            0.07882147216796875
+          ],
+          "mean": 0.06903472249348958,
+          "sample_sd": 0.010002517502068327
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.09530687255859376,
+            0.082777001953125,
+            0.09482418212890625
+          ],
+          "mean": 0.09096935221354167,
+          "sample_sd": 0.007098887208903928
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.028665936279296873,
+            0.005651724243164062,
+            0.010275442504882812
+          ],
+          "mean": 0.014864367675781249,
+          "sample_sd": 0.012174036494897615
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.040546271950006485,
+            0.01573232375085354,
+            0.012632125988602638
+          ],
+          "mean": 0.02297024056315422,
+          "sample_sd": 0.015300015229566876
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            3.1668497759999985,
+            6.242367563,
+            6.247140233000003
+          ],
+          "mean": 5.218785857333334,
+          "sample_sd": 1.7770303756556711
+        }
+      },
+      "final": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              100.0,
+              100.0,
+              100.0
+            ],
+            "mean": 100.0,
+            "sample_sd": 0.0
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              1.3377690315246583e-06,
+              1.389368176460266e-06,
+              1.3874831795692444e-06
+            ],
+            "mean": 1.371540129184723e-06,
+            "sample_sd": 2.926181096914555e-08
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.55000000000001,
+              98.57000000000001,
+              98.6
+            ],
+            "mean": 98.57333333333334,
+            "sample_sd": 0.02516611478422706
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.10615570068359376,
+              0.118670654296875,
+              0.109908544921875
+            ],
+            "mean": 0.11157829996744792,
+            "sample_sd": 0.006422388762742991
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.10615436291456223,
+            0.11866926492869853,
+            0.10990715743869543
+          ],
+          "mean": 0.11157692842731873,
+          "sample_sd": 0.006422366734444103
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.1359433837890625,
+            0.12793756103515624,
+            0.12374986572265625
+          ],
+          "mean": 0.12921027018229167,
+          "sample_sd": 0.006195588118883112
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.508619450032711e-06,
+            1.4887548983097076e-06,
+            1.5430828556418418e-06
+          ],
+          "mean": 1.5134857346614202e-06,
+          "sample_sd": 2.748894835267908e-08
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.3511548786482308e-06,
+            1.4032017361387261e-06,
+            1.3994722394272685e-06
+          ],
+          "mean": 1.3846096180714085e-06,
+          "sample_sd": 2.9032601999041216e-08
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            62.66078952299994,
+            62.06725023199999,
+            62.069416075999996
+          ],
+          "mean": 62.26581861033331,
+          "sample_sd": 0.34205655834904264
+        }
+      },
+      "training_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          62.66078952299994,
+          62.06725023199999,
+          62.069416075999996
+        ],
+        "mean": 62.26581861033331,
+        "sample_sd": 0.34205655834904264
+      },
+      "total_run_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          65.040802399,
+          64.380409661,
+          64.464765977
+        ],
+        "mean": 64.62865934566666,
+        "sample_sd": 0.35940982084587647
+      },
+      "local_dispatch_elapsed_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          77.94276189804077,
+          76.51593399047852,
+          75.23716711997986
+        ],
+        "mean": 76.56528766949971,
+        "sample_sd": 1.3534724286044086
+      },
+      "graph_setup_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.5377813729999996,
+          0.4841900739999998,
+          0.5044398809999997
+        ],
+        "mean": 0.5088037759999997,
+        "sample_sd": 0.027060848412514972
+      },
+      "epoch_preparation_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.23657420100003446,
+          0.2570380449999998,
+          0.2796882149999744
+        ],
+        "mean": 0.25776682033333626,
+        "sample_sd": 0.021566244130854464
+      },
+      "fixed_epoch_train_probe_ce": {
+        "5": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.028665936279296873,
+            0.029962387084960938,
+            0.03961064453125
+          ],
+          "mean": 0.03274632263183594,
+          "sample_sd": 0.005979914926398066
+        },
+        "10": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.02798346862792969,
+            0.005651724243164062,
+            0.010275442504882812
+          ],
+          "mean": 0.014636878458658855,
+          "sample_sd": 0.01178742102840123
+        },
+        "20": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.00016567851305007936,
+            0.008443861389160156,
+            0.003719793701171875
+          ],
+          "mean": 0.0041097778677940365,
+          "sample_sd": 0.004152847657962246
+        },
+        "50": {
+          "n": 3,
+          "values_in_seed_order": [
+            4.155942797660828e-06,
+            4.839690774679184e-06,
+            4.4162113219499585e-06
+          ],
+          "mean": 4.470614964763324e-06,
+          "sample_sd": 3.4510526116345567e-07
+        },
+        "100": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.508619450032711e-06,
+            1.4887548983097076e-06,
+            1.5430828556418418e-06
+          ],
+          "mean": 1.5134857346614202e-06,
+          "sample_sd": 2.748894835267908e-08
+        }
+      },
+      "actual_skipped_batches_per_body_layer": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "actual_hidden_affine_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "actual_affine_forward_mac_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0
+      }
+    },
+    "residual": {
+      "learning_rates": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "selected_epochs": [
+        10,
+        10,
+        10
+      ],
+      "selected": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              99.99,
+              99.97399999999999,
+              99.988
+            ],
+            "mean": 99.984,
+            "sample_sd": 0.00871779788708548
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.0006481150817871094,
+              0.0013115446472167969,
+              0.0009604203796386719
+            ],
+            "mean": 0.0009733600362141927,
+            "sample_sd": 0.00033190401188562833
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.42999999999999,
+              98.3,
+              98.39
+            ],
+            "mean": 98.37333333333333,
+            "sample_sd": 0.06658328118479243
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.06685361328125,
+              0.08115352172851563,
+              0.0732955322265625
+            ],
+            "mean": 0.0737675557454427,
+            "sample_sd": 0.00716163040458154
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.06620549819946289,
+            0.07984197708129884,
+            0.07233511184692383
+          ],
+          "mean": 0.07279419570922852,
+          "sample_sd": 0.006829821195914346
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.07871497802734374,
+            0.086232080078125,
+            0.08150302734375
+          ],
+          "mean": 0.08215002848307291,
+          "sample_sd": 0.003800087323493867
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0005857361793518066,
+            0.0010311304092407226,
+            0.0009086164474487305
+          ],
+          "mean": 0.0008418276786804199,
+          "sample_sd": 0.00023008598334052266
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.002672010799869895,
+            0.0013442746130749583,
+            0.0034319129772484303
+          ],
+          "mean": 0.0024827327967310944,
+          "sample_sd": 0.0010566116158486907
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            6.697065197000002,
+            6.709153070999998,
+            6.654841128000001
+          ],
+          "mean": 6.687019798666667,
+          "sample_sd": 0.028515422298560664
+        }
+      },
+      "final": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              100.0,
+              100.0,
+              100.0
+            ],
+            "mean": 100.0,
+            "sample_sd": 0.0
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              7.610405683517456e-06,
+              7.733514308929443e-06,
+              7.571223378181458e-06
+            ],
+            "mean": 7.638381123542785e-06,
+            "sample_sd": 8.468503695588692e-08
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.4,
+              98.4,
+              98.4
+            ],
+            "mean": 98.4,
+            "sample_sd": 0.0
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.09158612060546875,
+              0.10281859130859375,
+              0.09727741088867188
+            ],
+            "mean": 0.09722737426757813,
+            "sample_sd": 0.005616402520450987
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.09157851019978523,
+            0.10281085779428482,
+            0.0972698396652937
+          ],
+          "mean": 0.09721973588645459,
+          "sample_sd": 0.005616341417008555
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.1132458740234375,
+            0.1143310546875,
+            0.1161923583984375
+          ],
+          "mean": 0.11458976236979167,
+          "sample_sd": 0.0014901811271410374
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            7.73824155330658e-06,
+            7.656004279851914e-06,
+            8.095967769622803e-06
+          ],
+          "mean": 7.830071200927098e-06,
+          "sample_sd": 2.3391554291971755e-07
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            7.716164873272646e-06,
+            7.856979209464043e-06,
+            7.685952368774451e-06
+          ],
+          "mean": 7.753032150503714e-06,
+          "sample_sd": 9.127947281229259e-08
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            66.39346609800003,
+            66.65198389999996,
+            66.08704199600002
+          ],
+          "mean": 66.37749733133334,
+          "sample_sd": 0.28280928177025955
+        }
+      },
+      "training_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          66.39346609800003,
+          66.65198389999996,
+          66.08704199600002
+        ],
+        "mean": 66.37749733133334,
+        "sample_sd": 0.28280928177025955
+      },
+      "total_run_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          69.289195148,
+          69.40373477499999,
+          68.436189201
+        ],
+        "mean": 69.043039708,
+        "sample_sd": 0.5286591386923497
+      },
+      "local_dispatch_elapsed_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          82.96621227264404,
+          116.4759840965271,
+          112.37635684013367
+        ],
+        "mean": 103.93951773643494,
+        "sample_sd": 18.27871419078628
+      },
+      "graph_setup_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.5471660720000004,
+          0.5074710900000001,
+          0.5549174040000002
+        ],
+        "mean": 0.5365181886666669,
+        "sample_sd": 0.025452332754717446
+      },
+      "epoch_preparation_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.42535296200006467,
+          0.36275831900002853,
+          0.24180300400000743
+        ],
+        "mean": 0.3433047616667002,
+        "sample_sd": 0.09330850679411022
+      },
+      "fixed_epoch_train_probe_ce": {
+        "5": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.024110069274902345,
+            0.022509915161132814,
+            0.02074333953857422
+          ],
+          "mean": 0.022454441324869793,
+          "sample_sd": 0.00168405026327937
+        },
+        "10": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0005857361793518066,
+            0.0010311304092407226,
+            0.0009086164474487305
+          ],
+          "mean": 0.0008418276786804199,
+          "sample_sd": 0.00023008598334052266
+        },
+        "20": {
+          "n": 3,
+          "values_in_seed_order": [
+            5.4524981975555417e-05,
+            5.5880576372146605e-05,
+            5.670015811920166e-05
+          ],
+          "mean": 5.570190548896789e-05,
+          "sample_sd": 1.0985400663352394e-06
+        },
+        "50": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.695121228694916e-05,
+            1.702602803707123e-05,
+            1.76820307970047e-05
+          ],
+          "mean": 1.7219757040341696e-05,
+          "sample_sd": 4.020847158138158e-07
+        },
+        "100": {
+          "n": 3,
+          "values_in_seed_order": [
+            7.73824155330658e-06,
+            7.656004279851914e-06,
+            8.095967769622803e-06
+          ],
+          "mean": 7.830071200927098e-06,
+          "sample_sd": 2.3391554291971755e-07
+        }
+      },
+      "actual_skipped_batches_per_body_layer": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "actual_hidden_affine_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "actual_affine_forward_mac_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0
+      }
+    },
+    "sd_constant": {
+      "learning_rates": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "selected_epochs": [
+        5,
+        5,
+        10
+      ],
+      "selected": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              99.028,
+              99.086,
+              99.598
+            ],
+            "mean": 99.23733333333334,
+            "sample_sd": 0.3136898680756712
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.02965966796875,
+              0.029500888671875,
+              0.01180263671875
+            ],
+            "mean": 0.023654397786458333,
+            "sample_sd": 0.010264233192051624
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              97.76,
+              97.65,
+              98.0
+            ],
+            "mean": 97.80333333333334,
+            "sample_sd": 0.17897858344878093
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.0757639404296875,
+              0.07578109130859376,
+              0.0855085205078125
+            ],
+            "mean": 0.07901785074869792,
+            "sample_sd": 0.00562109144024319
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0461042724609375,
+            0.046280202636718754,
+            0.07370588378906251
+          ],
+          "mean": 0.05536345296223959,
+          "sample_sd": 0.015885254619749583
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.08439702758789062,
+            0.08423145141601562,
+            0.08811070556640625
+          ],
+          "mean": 0.08557972819010416,
+          "sample_sd": 0.00219345360714284
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.030873800659179686,
+            0.03068314208984375,
+            0.012710030364990235
+          ],
+          "mean": 0.024755657704671225,
+          "sample_sd": 0.010432254846262522
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.05210796371102333,
+            0.050449542701244354,
+            0.020655980333685875
+          ],
+          "mean": 0.041071162248651184,
+          "sample_sd": 0.017699500827064705
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            2.846230949999992,
+            2.865269929000007,
+            5.7411300360000155
+          ],
+          "mean": 3.8175436383333383,
+          "sample_sd": 1.6659018856602987
+        }
+      },
+      "final": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              100.0,
+              100.0,
+              100.0
+            ],
+            "mean": 100.0,
+            "sample_sd": 0.0
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              2.671930193901062e-06,
+              5.373771861195564e-07,
+              3.2176196575164796e-06
+            ],
+            "mean": 2.142309012512366e-06,
+            "sample_sd": 1.4164387996668406e-06
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.47,
+              98.41,
+              98.45
+            ],
+            "mean": 98.44333333333333,
+            "sample_sd": 0.03055050463304061
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.1167528076171875,
+              0.159143896484375,
+              0.12501793212890625
+            ],
+            "mean": 0.13363821207682292,
+            "sample_sd": 0.022471827331612078
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.11675013568699359,
+            0.15914335910718888,
+            0.12501471450924873
+          ],
+          "mean": 0.1336360697678104,
+          "sample_sd": 0.02247314336846084
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.129225,
+            0.1662599365234375,
+            0.139342626953125
+          ],
+          "mean": 0.14494252115885417,
+          "sample_sd": 0.019141988981301834
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            2.94302012771368e-06,
+            9.336449205875397e-07,
+            4.725553095340729e-06
+          ],
+          "mean": 2.8674060478806494e-06,
+          "sample_sd": 1.8970846101958034e-06
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0006054788245819509,
+            0.0006684671971015632,
+            0.0006976648001000285
+          ],
+          "mean": 0.0006572036072611809,
+          "sample_sd": 4.711385000850784e-05
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            56.78209531600007,
+            56.69546716900007,
+            57.04250599799998
+          ],
+          "mean": 56.84002282766671,
+          "sample_sd": 0.1806258139478525
+        }
+      },
+      "training_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          56.78209531600007,
+          56.69546716900007,
+          57.04250599799998
+        ],
+        "mean": 56.84002282766671,
+        "sample_sd": 0.1806258139478525
+      },
+      "total_run_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          58.152022927999994,
+          57.99291641699999,
+          58.59628729100001
+        ],
+        "mean": 58.24707554533333,
+        "sample_sd": 0.3127144911006294
+      },
+      "local_dispatch_elapsed_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          62.76535224914551,
+          62.91851997375488,
+          64.32691287994385
+        ],
+        "mean": 63.336928367614746,
+        "sample_sd": 0.8607654087811151
+      },
+      "graph_setup_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.14420809399999257,
+          0.11921265600000197,
+          0.23537590499999794
+        ],
+        "mean": 0.16626555166666415,
+        "sample_sd": 0.06114224140147729
+      },
+      "epoch_preparation_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.1956165539999688,
+          0.1949651999999844,
+          0.19466109800012532
+        ],
+        "mean": 0.19508095066669284,
+        "sample_sd": 0.00048813185159525443
+      },
+      "fixed_epoch_train_probe_ce": {
+        "5": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.030873800659179686,
+            0.03068314208984375,
+            0.03044433288574219
+          ],
+          "mean": 0.03066709187825521,
+          "sample_sd": 0.00021518329181041945
+        },
+        "10": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.011969097900390625,
+            0.0058496265411376955,
+            0.012710030364990235
+          ],
+          "mean": 0.010176251602172852,
+          "sample_sd": 0.003765236850897632
+        },
+        "20": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.00011181420087814331,
+            0.00036339800357818605,
+            0.0010640790939331055
+          ],
+          "mean": 0.000513097099463145,
+          "sample_sd": 0.0004934667882622145
+        },
+        "50": {
+          "n": 3,
+          "values_in_seed_order": [
+            2.1569395437836647e-06,
+            4.9785066395998e-06,
+            3.195488452911377e-06
+          ],
+          "mean": 3.4436448787649473e-06,
+          "sample_sd": 1.4270586630609791e-06
+        },
+        "100": {
+          "n": 3,
+          "values_in_seed_order": [
+            2.94302012771368e-06,
+            9.336449205875397e-07,
+            4.725553095340729e-06
+          ],
+          "mean": 2.8674060478806494e-06,
+          "sample_sd": 1.8970846101958034e-06
+        }
+      },
+      "actual_skipped_batches_per_body_layer": [
+        [
+          7719,
+          15527,
+          23589,
+          31320
+        ],
+        [
+          7773,
+          15460,
+          23463,
+          31533
+        ],
+        [
+          7857,
+          15464,
+          23550,
+          31175
+        ]
+      ],
+      "actual_hidden_affine_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          20.014084507042252,
+          20.03303457106274,
+          19.98617157490397
+        ],
+        "mean": 20.01109688433632,
+        "sample_sd": 0.023573916079407398
+      },
+      "actual_affine_forward_mac_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          14.57724808754514,
+          14.57580341296344,
+          14.616842872376912
+        ],
+        "mean": 14.589964790961831,
+        "sample_sd": 0.023288306434315113
+      }
+    },
+    "sd_annealed": {
+      "learning_rates": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "selected_epochs": [
+        15,
+        5,
+        10
+      ],
+      "selected": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              99.78,
+              98.842,
+              99.588
+            ],
+            "mean": 99.40333333333334,
+            "sample_sd": 0.49551723817979665
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.0073738916015625,
+              0.03972373779296875,
+              0.013546199951171876
+            ],
+            "mean": 0.020214609781901042,
+            "sample_sd": 0.017174949909820242
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.22,
+              97.67,
+              98.1
+            ],
+            "mean": 97.99666666666667,
+            "sample_sd": 0.28919428302325056
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.0753540283203125,
+              0.073514599609375,
+              0.06864859008789062
+            ],
+            "mean": 0.0725057393391927,
+            "sample_sd": 0.0034646897055538007
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.06798013671875,
+            0.03379086181640625,
+            0.05510239013671875
+          ],
+          "mean": 0.05229112955729166,
+          "sample_sd": 0.017267136969430937
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0818095947265625,
+            0.080600244140625,
+            0.07372632446289062
+          ],
+          "mean": 0.07871205444335938,
+          "sample_sd": 0.004359903644409535
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.00715621337890625,
+            0.0401638427734375,
+            0.0138310546875
+          ],
+          "mean": 0.020383703613281248,
+          "sample_sd": 0.017452186267630985
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.018753517419099808,
+            0.07478492707014084,
+            0.03467870503664017
+          ],
+          "mean": 0.042739049841960274,
+          "sample_sd": 0.02887224594062924
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            7.405219249000012,
+            2.394592239000005,
+            4.8572008109999985
+          ],
+          "mean": 4.885670766333338,
+          "sample_sd": 2.5054348249561222
+        }
+      },
+      "final": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              100.0,
+              100.0,
+              100.0
+            ],
+            "mean": 100.0,
+            "sample_sd": 0.0
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              9.178103506565094e-07,
+              9.956718981266022e-07,
+              1.161283016204834e-05
+            ],
+            "mean": 4.508770803610484e-06,
+            "sample_sd": 6.152419047114718e-06
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.47,
+              98.56,
+              98.5
+            ],
+            "mean": 98.51,
+            "sample_sd": 0.045825756949560134
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.12641207275390626,
+              0.125885546875,
+              0.09863500366210938
+            ],
+            "mean": 0.11697754109700521,
+            "sample_sd": 0.015887284759775844
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.1264111549435556,
+            0.12588455120310188,
+            0.09862339083194734
+          ],
+          "mean": 0.1169730323262016,
+          "sample_sd": 0.015893436856155702
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.134895361328125,
+            0.1462005126953125,
+            0.11486622314453125
+          ],
+          "mean": 0.13198736572265624,
+          "sample_sd": 0.01586826248346425
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            9.382639080286026e-07,
+            1.3413389213383198e-06,
+            1.2217939645051956e-05
+          ],
+          "mean": 4.832514158139626e-06,
+          "sample_sd": 6.3991405347624086e-06
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            9.261892159884155e-07,
+            1.006537672765262e-06,
+            1.2222410077811219e-05
+          ],
+          "mean": 4.7183789888549654e-06,
+          "sample_sd": 6.498805729258499e-06
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            57.05315608299995,
+            56.70104473499994,
+            56.86089320400008
+          ],
+          "mean": 56.87169800733332,
+          "sample_sd": 0.1763041638161115
+        }
+      },
+      "training_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          57.05315608299995,
+          56.70104473499994,
+          56.86089320400008
+        ],
+        "mean": 56.87169800733332,
+        "sample_sd": 0.1763041638161115
+      },
+      "total_run_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          59.033537945000006,
+          57.97499664500002,
+          58.654153147
+        ],
+        "mean": 58.554229245666676,
+        "sample_sd": 0.5362984341713765
+      },
+      "local_dispatch_elapsed_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          67.56442379951477,
+          61.986685037612915,
+          64.56072402000427
+        ],
+        "mean": 64.70394428571065,
+        "sample_sd": 2.7916261313770807
+      },
+      "graph_setup_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.1592274239999938,
+          0.1109077150000104,
+          0.125818663000004
+        ],
+        "mean": 0.1319846006666694,
+        "sample_sd": 0.024742931514731056
+      },
+      "epoch_preparation_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.29897472499999367,
+          0.1870565390000678,
+          0.29633173399990653
+        ],
+        "mean": 0.2607876659999893,
+        "sample_sd": 0.06386670233279275
+      },
+      "fixed_epoch_train_probe_ce": {
+        "5": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.04201461791992187,
+            0.0401638427734375,
+            0.040451123046875
+          ],
+          "mean": 0.04087652791341146,
+          "sample_sd": 0.0009960266743746058
+        },
+        "10": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.01586862487792969,
+            0.01628696594238281,
+            0.0138310546875
+          ],
+          "mean": 0.0153288818359375,
+          "sample_sd": 0.0013139128344373731
+        },
+        "20": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.014221287536621094,
+            0.002658833885192871,
+            0.0016759017944335938
+          ],
+          "mean": 0.006185341072082519,
+          "sample_sd": 0.006976665791010675
+        },
+        "50": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.2370342761278153e-05,
+            2.2179435193538665e-05,
+            6.309223920106888e-06
+          ],
+          "mean": 1.3619667291641236e-05,
+          "sample_sd": 8.008527349173846e-06
+        },
+        "100": {
+          "n": 3,
+          "values_in_seed_order": [
+            9.382639080286026e-07,
+            1.3413389213383198e-06,
+            1.2217939645051956e-05
+          ],
+          "mean": 4.832514158139626e-06,
+          "sample_sd": 6.3991405347624086e-06
+        }
+      },
+      "actual_skipped_batches_per_body_layer": [
+        [
+          7686,
+          15519,
+          23418,
+          31322
+        ],
+        [
+          7895,
+          15464,
+          23344,
+          31254
+        ],
+        [
+          7810,
+          15508,
+          23505,
+          31406
+        ]
+      ],
+      "actual_hidden_affine_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          19.96030729833547,
+          19.963380281690142,
+          20.03303457106274
+        ],
+        "mean": 19.985574050362782,
+        "sample_sd": 0.041130725443489634
+      },
+      "actual_affine_forward_mac_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          14.529680839281022,
+          14.60833534428468,
+          14.610957161118135
+        ],
+        "mean": 14.582991114894613,
+        "sample_sd": 0.046186660361783316
+      }
+    },
+    "residual_unit_dropout": {
+      "learning_rates": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "selected_epochs": [
+        15,
+        15,
+        10
+      ],
+      "selected": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              99.928,
+              99.89,
+              99.766
+            ],
+            "mean": 99.86133333333333,
+            "sample_sd": 0.08471914384206593
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.00284011474609375,
+              0.0042043408203125,
+              0.00696410400390625
+            ],
+            "mean": 0.0046695198567708335,
+            "sample_sd": 0.0021009796528306626
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.49,
+              98.28,
+              98.22
+            ],
+            "mean": 98.33,
+            "sample_sd": 0.1417744687875756
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.070423388671875,
+              0.07600043334960938,
+              0.06777940673828126
+            ],
+            "mean": 0.07140107625325522,
+            "sample_sd": 0.004196811216999174
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.06758327392578126,
+            0.07179609252929688,
+            0.06081530273437501
+          ],
+          "mean": 0.06673155639648438,
+          "sample_sd": 0.005539720497673935
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.07943436889648438,
+            0.07700753784179687,
+            0.07913580322265625
+          ],
+          "mean": 0.07852590332031249,
+          "sample_sd": 0.0013233898368047513
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0023075422286987306,
+            0.0034024448394775393,
+            0.006542992401123047
+          ],
+          "mean": 0.004084326489766439,
+          "sample_sd": 0.002198518018921571
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.017445523291826248,
+            0.018479302525520325,
+            0.023269619792699814
+          ],
+          "mean": 0.01973148187001546,
+          "sample_sd": 0.003107408863660708
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            10.387162182999987,
+            10.391320092999962,
+            6.922194121000075
+          ],
+          "mean": 9.233558799000008,
+          "sample_sd": 2.0017016081532213
+        }
+      },
+      "final": {
+        "train": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              99.996,
+              100.0,
+              99.90400000000001
+            ],
+            "mean": 99.96666666666667,
+            "sample_sd": 0.05430776494510271
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.00013944978713989259,
+              4.563659131526947e-06,
+              0.004401022338867188
+            ],
+            "mean": 0.0015150119283795357,
+            "sample_sd": 0.002500268112416067
+          }
+        },
+        "test": {
+          "accuracy_pct": {
+            "n": 3,
+            "values_in_seed_order": [
+              98.50999999999999,
+              98.61999999999999,
+              98.39
+            ],
+            "mean": 98.50666666666666,
+            "sample_sd": 0.11503622617824413
+          },
+          "ce_nats_per_example": {
+            "n": 3,
+            "values_in_seed_order": [
+              0.09737022094726562,
+              0.10340599365234375,
+              0.1084447509765625
+            ],
+            "mean": 0.10307365519205729,
+            "sample_sd": 0.005544739893050781
+          }
+        },
+        "test_minus_full_train_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.09723077116012573,
+            0.10340142999321222,
+            0.10404372863769532
+          ],
+          "mean": 0.10155864326367775,
+          "sample_sd": 0.00376178077454071
+        },
+        "validation_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.1133442626953125,
+            0.12150003662109375,
+            0.13693134765625
+          ],
+          "mean": 0.12392521565755209,
+          "sample_sd": 0.01197909697171614
+        },
+        "dense_train_probe_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            5.356653928756714e-05,
+            3.8077834993600845e-06,
+            0.0022846445083618164
+          ],
+          "mean": 0.0007806729437162479,
+          "sample_sd": 0.0013027151775776727
+        },
+        "stochastic_training_ce": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.00178746716119349,
+            0.00023923903063405305,
+            0.0007256848039105535
+          ],
+          "mean": 0.0009174636652460322,
+          "sample_sd": 0.0007917303422284899
+        },
+        "accumulated_training_seconds": {
+          "n": 3,
+          "values_in_seed_order": [
+            69.06684382699984,
+            68.9706536939999,
+            69.05123090900008
+          ],
+          "mean": 69.02957614333327,
+          "sample_sd": 0.051622011571611025
+        }
+      },
+      "training_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          69.06684382699984,
+          68.9706536939999,
+          69.05123090900008
+        ],
+        "mean": 69.02957614333327,
+        "sample_sd": 0.051622011571611025
+      },
+      "total_run_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          70.44327690200001,
+          70.302410441,
+          70.41408692899998
+        ],
+        "mean": 70.386591424,
+        "sample_sd": 0.07434945900992976
+      },
+      "local_dispatch_elapsed_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          74.23230910301208,
+          74.76753115653992,
+          76.74276685714722
+        ],
+        "mean": 75.2475357055664,
+        "sample_sd": 1.3222718363252297
+      },
+      "graph_setup_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.03377378700000122,
+          0.03338537299998734,
+          0.03211320100001558
+        ],
+        "mean": 0.03309078700000138,
+        "sample_sd": 0.000868603562839731
+      },
+      "epoch_preparation_seconds": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.17526344500004143,
+          0.2019195160000038,
+          0.1850075390000825
+        ],
+        "mean": 0.1873968333333759,
+        "sample_sd": 0.01348770091035124
+      },
+      "fixed_epoch_train_probe_ce": {
+        "5": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.02910301513671875,
+            0.03005115661621094,
+            0.03767455749511719
+          ],
+          "mean": 0.032276243082682295,
+          "sample_sd": 0.004699052238261471
+        },
+        "10": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.009862776947021484,
+            0.01123970947265625,
+            0.006542992401123047
+          ],
+          "mean": 0.009215159606933594,
+          "sample_sd": 0.0024144034412033836
+        },
+        "20": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.004295299530029297,
+            0.00444824333190918,
+            0.007462289428710938
+          ],
+          "mean": 0.005401944096883138,
+          "sample_sd": 0.0017859493599824779
+        },
+        "50": {
+          "n": 3,
+          "values_in_seed_order": [
+            4.7472965717315674e-05,
+            0.00014637192487716675,
+            0.0004188443660736084
+          ],
+          "mean": 0.00020422975222269695,
+          "sample_sd": 0.00019232739115764908
+        },
+        "100": {
+          "n": 3,
+          "values_in_seed_order": [
+            5.356653928756714e-05,
+            3.8077834993600845e-06,
+            0.0022846445083618164
+          ],
+          "mean": 0.0007806729437162479,
+          "sample_sd": 0.0013027151775776727
+        }
+      },
+      "actual_skipped_batches_per_body_layer": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "actual_hidden_affine_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0
+      },
+      "actual_affine_forward_mac_omission_pct": {
+        "n": 3,
+        "values_in_seed_order": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0
+      }
+    }
+  },
+  "paired_against_residual": {
+    "plain": {
+      "selected": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            -0.869999999999993,
+            -0.08000000000000229,
+            -0.42999999999999705
+          ],
+          "mean": -0.45999999999999747,
+          "sample_sd": 0.3958535082577851,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -1.4433546282288139,
+          "ci_high": 0.5233546282288188
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.022959973144531243,
+            -0.006471929931640627,
+            0.01809493408203125
+          ],
+          "mean": 0.011527659098307289,
+          "sample_sd": 0.015776756802498373,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.027663977445366382,
+          "ci_high": 0.05071929564198096
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.03033590347290039,
+            0.003916919708251953,
+            0.011608573760986328
+          ],
+          "mean": 0.015287132314046223,
+          "sample_sd": 0.013588212559435733,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.018467858941397006,
+          "ci_high": 0.04904212356948945
+        }
+      },
+      "final": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.15000000000000568,
+            0.17000000000000348,
+            0.20000000000000018
+          ],
+          "mean": 0.17333333333333645,
+          "sample_sd": 0.02516611478423306,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.1108172385372345,
+          "ci_high": 0.23584942812943838
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.014569580078125005,
+            0.01585206298828125,
+            0.012631134033203123
+          ],
+          "mean": 0.014350925699869793,
+          "sample_sd": 0.0016215588599439727,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.01032275018390861,
+          "ci_high": 0.018379101215830976
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            -6.272636651992798e-06,
+            -6.344146132469177e-06,
+            -6.1837401986122135e-06
+          ],
+          "mean": -6.266840994358063e-06,
+          "sample_sd": 8.035986647385253e-08,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -6.466465969184488e-06,
+          "ci_high": -6.0672160195316376e-06
+        }
+      },
+      "training_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            -3.7326765750000916,
+            -4.58473366799997,
+            -4.017625920000029
+          ],
+          "mean": -4.11167872100003,
+          "sample_sd": 0.4337450512280344,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -5.18916116008119,
+          "ci_high": -3.0341962819188693
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.9437794591189067,
+            0.9312138454141352,
+            0.9392070548377215
+          ],
+          "mean": 0.9380667864569211,
+          "sample_sd": 0.0063599387520301715,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.9222678227579865,
+          "ci_high": 0.9538657501558557
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.059569574584278,
+            1.0738671948710918,
+            1.064727947739684
+          ],
+          "mean": 1.0660549057316846,
+          "sample_sd": 0.007240586965217587,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.0480682905955032,
+          "ci_high": 1.084041520867866
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 0.938056135191781
+      },
+      "total_run_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            -4.248392749000004,
+            -5.023325113999988,
+            -3.971423224000006
+          ],
+          "mean": -4.414380362333333,
+          "sample_sd": 0.5452415174777637,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -5.76883537796276,
+          "ci_high": -3.0599253467039054
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.9386860716172912,
+            0.9276216887998159,
+            0.9419689601310826
+          ],
+          "mean": 0.9360922401827299,
+          "sample_sd": 0.0075171151245963744,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.917418691017449,
+          "ci_high": 0.9547657893480107
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.065318885873175,
+            1.0780256780043913,
+            1.0616061062785358
+          ],
+          "mean": 1.0683168900520341,
+          "sample_sd": 0.008610551997837916,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.0469270931144135,
+          "ci_high": 1.0897066869896548
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 0.9360633543800674
+      }
+    },
+    "sd_constant": {
+      "selected": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            -0.6699999999999928,
+            -0.649999999999995,
+            -0.39000000000000146
+          ],
+          "mean": -0.5699999999999964,
+          "sample_sd": 0.15620499351812867,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.9580347151766888,
+          "ci_high": -0.18196528482330404
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.008910327148437494,
+            -0.0053724304199218725,
+            0.012212988281250003
+          ],
+          "mean": 0.005250295003255208,
+          "sample_sd": 0.009346583022779346,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.017967904360509542,
+          "ci_high": 0.028468494367019957
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.02901155288696289,
+            0.028189344024658204,
+            0.01084221633911133
+          ],
+          "mean": 0.022681037750244142,
+          "sample_sd": 0.01026095883223569,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.0028085970445887697,
+          "ci_high": 0.04817067254507705
+        }
+      },
+      "final": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.07000000000000339,
+            0.009999999999998899,
+            0.050000000000005596
+          ],
+          "mean": 0.043333333333335965,
+          "sample_sd": 0.030550504633041625,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.03255832734146003,
+          "ci_high": 0.11922499400813197
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.025166687011718744,
+            0.05632530517578124,
+            0.027740521240234364
+          ],
+          "mean": 0.036410837809244784,
+          "sample_sd": 0.017294382426921287,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.006550789780518269,
+          "ci_high": 0.07937246539900783
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            -4.938475489616394e-06,
+            -7.1961371228098865e-06,
+            -4.353603720664978e-06
+          ],
+          "mean": -5.4960721110304194e-06,
+          "sample_sd": 1.5010611345766799e-06,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -9.22491468321532e-06,
+          "ci_high": -1.7672295388455184e-06
+        }
+      },
+      "training_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            -9.611370781999966,
+            -9.956516730999894,
+            -9.044535998000043
+          ],
+          "mean": -9.537474503666635,
+          "sample_sd": 0.46045923739716005,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -10.681318660051735,
+          "ci_high": -8.393630347281535
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.8552361949621201,
+            0.8506193492164019,
+            0.8631420665105957
+          ],
+          "mean": 0.8563325368963726,
+          "sample_sd": 0.0063329366280719295,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.8406006501918625,
+          "ci_high": 0.8720644236008827
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.1692676314340178,
+            1.1756139816490287,
+            1.1585578305118145
+          ],
+          "mean": 1.1678131478649536,
+          "sample_sd": 0.008620598282218117,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.1463983945734402,
+          "ci_high": 1.189227901156467
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 0.8563146414505675
+      },
+      "total_run_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            -11.13717222000001,
+            -11.410818358,
+            -9.839901909999995
+          ],
+          "mean": -10.79596416266667,
+          "sample_sd": 0.8392030895088111,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -12.880660205211296,
+          "ci_high": -8.711268120122043
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.839265383351455,
+            0.8355878340698416,
+            0.8562178574686591
+          ],
+          "mean": 0.8436903582966518,
+          "sample_sd": 0.011003852453034554,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.8163552734425044,
+          "ci_high": 0.8710254431507993
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.1915182251490946,
+            1.1967622782746454,
+            1.167927054168692
+          ],
+          "mean": 1.1854025191974773,
+          "sample_sd": 0.015359652723129053,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.1472470266271289,
+          "ci_high": 1.2235580117678257
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 0.8436342865504552
+      }
+    },
+    "sd_annealed": {
+      "selected": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            -0.20999999999999908,
+            -0.6299999999999972,
+            -0.29000000000000137
+          ],
+          "mean": -0.3766666666666659,
+          "sample_sd": 0.22300971578236825,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.9306535117492039,
+          "ci_high": 0.17732017841587205
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0085004150390625,
+            -0.007638922119140634,
+            -0.004646942138671881
+          ],
+          "mean": -0.0012618164062500048,
+          "sample_sd": 0.008585677500626707,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.022589821667285223,
+          "ci_high": 0.020066188854785214
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.00672577651977539,
+            0.03841219314575195,
+            0.012585779571533205
+          ],
+          "mean": 0.019241249745686848,
+          "sample_sd": 0.01685908396319407,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.022639036514423776,
+          "ci_high": 0.06112153600579747
+        }
+      },
+      "final": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.07000000000000339,
+            0.16000000000000458,
+            0.10000000000000009
+          ],
+          "mean": 0.11000000000000269,
+          "sample_sd": 0.04582575694955941,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.0038374910121837663,
+          "ci_high": 0.22383749101218914
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.034825952148437506,
+            0.023066955566406255,
+            0.0013575927734374993
+          ],
+          "mean": 0.019750166829427086,
+          "sample_sd": 0.0169789159093816,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.022427798487291605,
+          "ci_high": 0.06192813214614577
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            -6.692595332860947e-06,
+            -6.737842410802841e-06,
+            4.0416067838668824e-06
+          ],
+          "mean": -3.129610319932302e-06,
+          "sample_sd": 6.210497394483153e-06,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -1.8557341106875268e-05,
+          "ci_high": 1.2298120467010665e-05
+        }
+      },
+      "training_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            -9.340310015000085,
+            -9.950939165000023,
+            -9.226148791999947
+          ],
+          "mean": -9.505799324000018,
+          "sample_sd": 0.38970540763935224,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -10.473881223626375,
+          "ci_high": -8.53771742437366
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.8593188371697099,
+            0.8507030311366317,
+            0.8603939817345984
+          ],
+          "mean": 0.85680528334698,
+          "sample_sd": 0.005311976608370721,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.8436096019296945,
+          "ci_high": 0.8700009647642656
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.1637124158637597,
+            1.175498338901992,
+            1.16225824590724
+          ],
+          "mean": 1.1671563335576638,
+          "sample_sd": 0.007260884411640913,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.1491192967693682,
+          "ci_high": 1.1851933703459594
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 0.8567918390090788
+      },
+      "total_run_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            -10.255657202999998,
+            -11.42873812999997,
+            -9.782036054000002
+          ],
+          "mean": -10.488810462333324,
+          "sample_sd": 0.8477483491750167,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -12.59473410667227,
+          "ci_high": -8.382886817994379
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.851987641347339,
+            0.8353296379935344,
+            0.8570634021530663
+          ],
+          "mean": 0.8481268938313132,
+          "sample_sd": 0.011369615414446178,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.8198832034111274,
+          "ci_high": 0.876370584251499
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.1737259456235696,
+            1.1971321913131259,
+            1.1667748237619953
+          ],
+          "mean": 1.1792109868995635,
+          "sample_sd": 0.015904612523042733,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.1397017391388107,
+          "ci_high": 1.2187202346603163
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 0.8480830144980134
+      }
+    },
+    "residual_unit_dropout": {
+      "selected": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.060000000000004494,
+            -0.019999999999997797,
+            -0.17000000000000348
+          ],
+          "mean": -0.04333333333333226,
+          "sample_sd": 0.11676186592091739,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.33338588777272704,
+          "ci_high": 0.2467192211060625
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.003569775390625002,
+            -0.005153088378906254,
+            -0.0055161254882812455
+          ],
+          "mean": -0.002366479492187499,
+          "sample_sd": 0.005144151097215388,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.015145259228202663,
+          "ci_high": 0.010412300243827666
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.0021919996643066405,
+            0.002892796173095703,
+            0.006003683624267578
+          ],
+          "mean": 0.0036961598205566405,
+          "sample_sd": 0.0020288613839299567,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.0013438112553672715,
+          "ci_high": 0.008736130896480553
+        }
+      },
+      "final": {
+        "test_accuracy_delta_pp": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.10999999999999899,
+            0.21999999999999797,
+            -0.009999999999998899
+          ],
+          "mean": 0.10666666666666602,
+          "sample_sd": 0.11503622617824774,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.17909916101090673,
+          "ci_high": 0.39243249434423877
+        },
+        "test_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.005784100341796869,
+            0.0005874023437500014,
+            0.011167340087890623
+          ],
+          "mean": 0.005846280924479165,
+          "sample_sd": 0.005290242951521212,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.00729541109621028,
+          "ci_high": 0.01898797294516861
+        },
+        "full_train_ce_delta": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.00013183938145637514,
+            -3.169855177402496e-06,
+            0.004393451115489006
+          ],
+          "mean": 0.001507373547255993,
+          "sample_sd": 0.002500327912672145,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.004703785312588455,
+          "ci_high": 0.007718532407100442
+        }
+      },
+      "training_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            2.67337772899981,
+            2.3186697939999448,
+            2.964188913000058
+          ],
+          "mean": 2.6520788119999374,
+          "sample_sd": 0.32328619851100376,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.8489913745601472,
+          "ci_high": 3.4551662494397277
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.0402656750146735,
+            1.0347877086071244,
+            1.0448528005411328
+          ],
+          "mean": 1.0399687280543102,
+          "sample_sd": 0.005039112226668696,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 1.0274508793378294,
+          "ci_high": 1.052486576770791
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.9612928927851959,
+            0.9663817918228365,
+            0.9570726129863427
+          ],
+          "mean": 0.9615824325314584,
+          "sample_sd": 0.004661338606125392,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.9500030255123091,
+          "ci_high": 0.9731618395506076
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 1.0399544863639807
+      },
+      "total_run_seconds": {
+        "treatment_minus_residual": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.1540817540000035,
+            0.8986756660000168,
+            1.9778977279999737
+          ],
+          "mean": 1.343551715999998,
+          "sample_sd": 0.5640072824459532,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": -0.05752004407850553,
+          "ci_high": 2.7446234760785013
+        },
+        "treatment_over_residual_ratio": {
+          "n": 3,
+          "values_in_seed_order": [
+            1.0166560132721258,
+            1.0129485202621074,
+            1.028901342273615
+          ],
+          "mean": 1.0195019586026162,
+          "sample_sd": 0.008348514008541622,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.9987631001161421,
+          "ci_high": 1.0402408170890902
+        },
+        "residual_over_treatment_speedup": {
+          "n": 3,
+          "values_in_seed_order": [
+            0.983616864451017,
+            0.9872170006638078,
+            0.9719104824863478
+          ],
+          "mean": 0.9809147825337242,
+          "sample_sd": 0.008003018786373604,
+          "df": 2,
+          "confidence": 0.95,
+          "t_critical": 4.302652729911275,
+          "ci_low": 0.9610341817578996,
+          "ci_high": 1.0007953833095489
+        },
+        "ratio_of_mean_treatment_to_mean_residual": 1.0194596257882362
+      }
+    }
+  },
+  "interpretation": [
+    "At the validation-CE-selected primary endpoint, constant SD has lower test accuracy in every seed and its unadjusted paired 95% CI excludes zero; decreasing SD also has lower accuracy in every seed but its interval includes zero.",
+    "At fixed epoch100, both SD mean test accuracies are slightly above residual-dense, but both paired accuracy intervals include zero. Their final test CE is higher in every seed. Selection endpoint and evaluation metric materially alter the impression.",
+    "Validation-selected SD checkpoints have greater full-training CE and smaller train/test CE gaps, but this compares different selected epochs. A smaller gap by itself is not evidence of better held-out predictions.",
+    "At matched epoch10 the mean deterministic training-probe CE is 0.00084183 for residual-dense, 0.01017625 for constant SD, and 0.01532888 for decreasing SD. This supports delayed early fitting, but all three attain 100% full-training accuracy at epoch100; it does not establish improved generalization.",
+    "At epoch100 every SD model has approximately zero full-training CE and essentially perfect train accuracy. These data do not support a sustained inability to fit training data as the benefit of SD. The final deterministic dense training loss is distinct from stochastic training loss.",
+    "The direct execution result is robust: both SD arms reduce realized nominal affine MACs by about14.6% and full100-epoch training time by about14.3% versus the matched residual-dense control. This is a measured fixed-horizon speed result, not a matched-target-quality speedup.",
+    "Plain has higher mean final accuracy than either SD arm and has a different validation-selected LR. The added residual architecture is a substantive intervention; SD should primarily be compared with residual-dense.",
+    "Only3 seeds, one data split and one reused official test set; no multiple-comparison correction. The separate baseline optimization already inspected MNIST test outcomes, so the overall investigation is exploratory."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "run_id": "opt-compile-214-v2",
+  "spec": {
+    "run_id": "opt-compile-214-v2",
+    "stage": "pilot",
+    "kind": "microbench",
+    "seed": 1,
+    "timeout_seconds": 360,
+    "gpu": "A100",
+    "measure_steps": 100,
+    "variants": [
+      {
+        "mode": "compile",
+        "compile_mode": "max-autotune",
+        "precision": "fp32",
+        "fused": true,
+        "batch_size": 64
+      }
+    ]
+  },
+  "error_type": "RemoteError",
+  "error": "Input failed with an exception that was too large: InductorError('LoweringException: RuntimeError: PyTorch is checking the matmul precision without a specific backend name,Current status indicate that you have used mix of the legacy and new APIs to set the matmul precision. We suggest only using the new API for matmul precision. See also: https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices\\n  target: aten.mm.default\\n  args[0]: TensorBox(StorageBox(\\n    InputBuffer(name=\\'primals_1\\', layout=FixedLayout(\\'cuda:0\\', torch.float32, size=[64, 784], stride=[784, 1]))\\n  ))\\n  args[1]: TensorBox(\\n    ReinterpretView(\\n      StorageBox(\\n        InputBuffer(name=\\'primals_2\\', layout=FixedLayout(\\'cuda:0\\', torch.float32, size=[2500, 784], stride=[784, 1]))\\n      ),\\n      FixedLayout(\\'cuda:0\\', torch.float32, size=[784, 2500], stride=[1, 784]),\\n      origins=OrderedSet([permute]),\\n      stack_traces = {,\\n        File \"/opt/ciresan_stochastic_depth/model_data.py\", line 123, in forward,\\n          h = self._unit_mask(F.relu(self.layers[0](h)), generator),\\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^,\\n      ,\\n      }\\n    )\\n  )RuntimeError: PyTorch is checking the matmul precision without a specific backend name,Current status indicate that you have used mix of the legacy and new APIs to set the matmul precision. We suggest only using the new API for matmul precision. See also: https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices\\n  target: aten.mm.default\\n  args[0]: TensorBox(StorageBox(\\n    InputBuffer(name=\\'primals_1\\', layout=FixedLayout(\\'cuda:0\\', torch.float32, size=[64, 784], stride=[784, 1]))\\n  ))\\n  args[1]: TensorBox(\\n    ReinterpretView(\\n      StorageBox(\\n        InputBuffer(name=\\'primals_2\\', layout=FixedLayout(\\'cuda:0\\', torch.float32, size=[2500, 784], stride=[784, 1]))\\n      ),\\n      FixedLayout(\\'cuda:0\\', torch.float32, size=[784, 2500], stride=[1, 784]),\\n      origins=OrderedSet([permute]),\\n      stack_traces = {,\\n        File \"/opt/ciresan_stochastic_depth/model_data.py\", line 123, in forward,\\n          h = self._unit_mask(F.relu(self.layers[0](h)), generator),\\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^,\\n      ,\\n      }\\n    )\\n  )\\nFound from : \\n   File \"/opt/ciresan_stochastic_depth/model_data.py\", line 123, in forward\\n    h = self._unit_mask(F.relu(self.layers[0](h)), generator)\\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n\\n\\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you\\'re reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\\n')...",
+  "local_dispatch_elapsed_seconds": 24.033267974853516
+}

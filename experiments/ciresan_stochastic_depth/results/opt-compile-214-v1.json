@@ -1,0 +1,24 @@
+{
+  "run_id": "opt-compile-214-v1",
+  "spec": {
+    "run_id": "opt-compile-214-v1",
+    "stage": "pilot",
+    "kind": "microbench",
+    "seed": 1,
+    "timeout_seconds": 360,
+    "gpu": "A100",
+    "measure_steps": 100,
+    "variants": [
+      {
+        "mode": "compile",
+        "compile_mode": "max-autotune",
+        "precision": "fp32",
+        "fused": true,
+        "batch_size": 64
+      }
+    ]
+  },
+  "error_type": "ModuleNotFoundError",
+  "error": "No module named 'kernels'",
+  "local_dispatch_elapsed_seconds": 28.2155282497406
+}

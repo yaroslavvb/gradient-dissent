@@ -1,0 +1,126 @@
+{
+  "final": true,
+  "data_sha256": "28609ebcca16f27f2cf2266741643786721a713a0d32bc285f394b67e0593f9f",
+  "raw_files": [
+    {
+      "run_id": "pilot-source-plain",
+      "sha256": "40b6e6e3ce2969d04534b7ab4e6b72bff2f384207d5227166e9d441b2d4a8721"
+    },
+    {
+      "run_id": "pilot-source-residual",
+      "sha256": "9957ed67a913c53fa6f6502ba2de6a5028e43b8cec1683fd711fc6531c6e8606"
+    },
+    {
+      "run_id": "pilot-normalized-plain",
+      "sha256": "d16a83571b89f88ad5324d7e031fb52b3d98b717d5016f199dee924af5b48f1c"
+    },
+    {
+      "run_id": "pilot-normalized-residual",
+      "sha256": "5c05a80f4b9b792b2ca6730ba3d5f625387db9836c7e9aba5bb467096b208b46"
+    },
+    {
+      "run_id": "pilot-source-linear",
+      "sha256": "e11e2c09691fe444be112a1d3b3a7426d2792567be987ab365e8c3aa882b0839"
+    },
+    {
+      "run_id": "pilot-normalized-sd",
+      "sha256": "672efaa4f1ccb8a22613ef8aa0e30369cc769eb4a7891c7949fe218b383a20be"
+    },
+    {
+      "run_id": "graph-eval-plain-s101",
+      "sha256": "fc8928a6121cf8e7a2808d5025e9990eab8cefbf1e0fff92af40a3c46ccf4939"
+    },
+    {
+      "run_id": "graph-eval-plain-s102",
+      "sha256": "7ef024e92795c7acdd9956a74e553f9393d662c2b0b8ba08014036d26f091c91"
+    },
+    {
+      "run_id": "graph-eval-plain-s103",
+      "sha256": "c6460d176950a86cff04c698bf3a5e4a74d3e95bb2b8c442ac3309fecf501213"
+    },
+    {
+      "run_id": "graph-eval-residual-s101",
+      "sha256": "fe619114848785e3c30051ef64298fcdebac62677cd911eb4f290c51155fac39"
+    },
+    {
+      "run_id": "graph-eval-residual-s102",
+      "sha256": "62a0410e4d65211e47150addd59f001e8f930bf1a34115109867bcf8140f50ab"
+    },
+    {
+      "run_id": "graph-eval-residual-s103",
+      "sha256": "29b4d0a2989b4dc0ae9baf103eebb0a61913599e1b60026bb14e28a756b66bb5"
+    },
+    {
+      "run_id": "graph-eval-sd_constant-s101",
+      "sha256": "092c055f120d9044df072d756bf7ae5ca3b6d1e2eabcc8a1935074f2c8cea817"
+    },
+    {
+      "run_id": "graph-eval-sd_constant-s102",
+      "sha256": "f53d6c00ad2bbbb9e436121fd2b7dd8c1041d0def849282feb495558d8475261"
+    },
+    {
+      "run_id": "graph-eval-sd_constant-s103",
+      "sha256": "6f33d71a0b3df47c5095bf732b47172ef6b43b5332b6351e8bc9710f56eec666"
+    },
+    {
+      "run_id": "graph-eval-sd_annealed-s101",
+      "sha256": "3469bd70bd03fc1b0a07868f7348c8a8f1921b9d5313bbfb9f37e15f7cd70c7a"
+    },
+    {
+      "run_id": "graph-eval-sd_annealed-s102",
+      "sha256": "ff3505ee0fe5952a81a1abc57b103b76eb1e8a20f66f7c4b6d87bb9647d67eed"
+    },
+    {
+      "run_id": "graph-eval-sd_annealed-s103",
+      "sha256": "cf48c318ae956e822dbe1a313819479ae687d3614c1994e6111c369e7983cb06"
+    },
+    {
+      "run_id": "graph-eval-residual_unit_dropout-s101",
+      "sha256": "a2cff196860cf892cac8e1079cda0be32cc82778d390119e0f0ae4120ae27bcd"
+    },
+    {
+      "run_id": "graph-eval-residual_unit_dropout-s102",
+      "sha256": "057cb0f41d53c773755dd796355f8d6109b37163dc7db038ecec4ce58491ac7f"
+    },
+    {
+      "run_id": "graph-eval-residual_unit_dropout-s103",
+      "sha256": "bdf01e637e82c343ae9def157a544f2727fd41fc1347ac5acafd7ecd2c599f07"
+    },
+    {
+      "run_id": "graph-fidelity-source-plain-s101",
+      "sha256": "558b07b345ba4dda09bcb719ca9984e038e99ed112e5ef6149844b74be4c4c1c"
+    },
+    {
+      "run_id": "graph-fidelity-source-plain-s102",
+      "sha256": "82aee3798104d051104d96ab139a55b11693b480766f72702d7d2342a655bf08"
+    },
+    {
+      "run_id": "graph-fidelity-source-plain-s103",
+      "sha256": "549108b4c498494928986ea3a567ebc61ea5d726f1cef3502f38e8773e31d2e6"
+    },
+    {
+      "run_id": "graph-fidelity-source-residual-s101",
+      "sha256": "9840b14b64aab7af85bde0e1b13add5d31b922c4279a8efeb54dbdb80b493cb1"
+    },
+    {
+      "run_id": "graph-fidelity-source-residual-s102",
+      "sha256": "ce4a0ab1ea1c931808cfe079a005fbf453f0578084d888a119c6432439f56614"
+    },
+    {
+      "run_id": "graph-fidelity-source-residual-s103",
+      "sha256": "f5c6324f317eb3b86d4ecd9530d61b0c1c8e0bdc729e1093b137e312ae9e81fa"
+    },
+    {
+      "run_id": "graph-fidelity-source-sd-s101",
+      "sha256": "2177272e90cce2499066ed3f2a07f1470ef30003e74f7ffde28c6bd6faebd07e"
+    },
+    {
+      "run_id": "graph-fidelity-source-sd-s102",
+      "sha256": "43187e0a3d248e85962b41861aeb4967da3b7b9472e3095dd8ca8992575d62a6"
+    },
+    {
+      "run_id": "graph-fidelity-source-sd-s103",
+      "sha256": "7325b9c703eb1e93a7f911d25ba5af19fb5e1ea37e3bbb01e7a38407968a5d38"
+    }
+  ]
+}

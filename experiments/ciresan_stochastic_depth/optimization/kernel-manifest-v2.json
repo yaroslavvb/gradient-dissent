@@ -1,0 +1,61 @@
+[
+  {
+    "run_id": "opt-kernels-214-v2",
+    "stage": "pilot",
+    "kind": "microbench",
+    "seed": 1,
+    "timeout_seconds": 300,
+    "gpu": "A100",
+    "measure_steps": 100,
+    "variants": [
+      {
+        "mode": "eager",
+        "precision": "fp32",
+        "fused": false,
+        "batch_size": 64
+      },
+      {
+        "mode": "cuda_graph",
+        "precision": "fp32",
+        "fused": false,
+        "batch_size": 64
+      },
+      {
+        "mode": "cuda_graph",
+        "precision": "fp32",
+        "fused": true,
+        "batch_size": 64
+      },
+      {
+        "mode": "cuda_graph",
+        "precision": "bf16",
+        "fused": true,
+        "batch_size": 64
+      },
+      {
+        "mode": "cuda_graph",
+        "precision": "bf16",
+        "fused": true,
+        "batch_size": 256
+      }
+    ]
+  },
+  {
+    "run_id": "opt-compile-214-v2",
+    "stage": "pilot",
+    "kind": "microbench",
+    "seed": 1,
+    "timeout_seconds": 360,
+    "gpu": "A100",
+    "measure_steps": 100,
+    "variants": [
+      {
+        "mode": "compile",
+        "compile_mode": "max-autotune",
+        "precision": "fp32",
+        "fused": true,
+        "batch_size": 64
+      }
+    ]
+  }
+]

@@ -1,0 +1,86 @@
+{
+  "run_id": "opt-compile-214-v3",
+  "spec": {
+    "run_id": "opt-compile-214-v3",
+    "stage": "pilot",
+    "kind": "microbench",
+    "seed": 1,
+    "timeout_seconds": 360,
+    "gpu": "A100",
+    "measure_steps": 100,
+    "variants": [
+      {
+        "mode": "compile",
+        "compile_mode": "max-autotune",
+        "precision": "fp32",
+        "fused": true,
+        "batch_size": 64
+      }
+    ]
+  },
+  "dataset": {
+    "train_n": 60000,
+    "test_n": 10000,
+    "files": {
+      "train-images-idx3-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz",
+        "md5": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+        "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+        "bytes": 9912422
+      },
+      "train-labels-idx1-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz",
+        "md5": "d53e105ee54ea40749a09fcbcd1e9432",
+        "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+        "bytes": 28881
+      },
+      "t10k-images-idx3-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz",
+        "md5": "9fb629c4189551a2d022fa330f9573f3",
+        "sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+        "bytes": 1648877
+      },
+      "t10k-labels-idx1-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz",
+        "md5": "ec29112dd5afa0611ce80d1b7f02629c",
+        "sha256": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6",
+        "bytes": 4542
+      }
+    }
+  },
+  "test_monitoring": "Official test is monitored as a speed target; this is not an unbiased generalization study.",
+  "hardware": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "tf32": true,
+    "precision_api": "torch.set_float32_matmul_precision(high)",
+    "cpu_threads": 2
+  },
+  "kernel_tests": {
+    "tests_run": 4,
+    "skipped": 0,
+    "passed": true
+  },
+  "benchmarks": [
+    {
+      "variant": {
+        "mode": "compile",
+        "compile_mode": "max-autotune",
+        "precision": "fp32",
+        "fused": true,
+        "batch_size": 64
+      },
+      "setup_seconds": 229.410219162,
+      "step_seconds": [
+        0.001154917560000115,
+        0.0011604798199999777,
+        0.001169630740000116
+      ],
+      "median_step_seconds": 0.0011604798199999777,
+      "initial_parameters_sha256": "df8ef46c69011718b66e38f100c668736a2aeb36fd131152f01cd2416b04dacc"
+    }
+  ],
+  "total_run_seconds": 245.712412652,
+  "local_dispatch_elapsed_seconds": 345.9931619167328
+}

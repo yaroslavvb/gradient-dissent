@@ -17,7 +17,9 @@
     "check:transcript": "node --check docs/transcripts/research-session/transcript.js && node scripts/check_session_transcript.cjs",
     "check:dropout": "node --check docs/dropout-animation/app.js && node scripts/check_dropout_animation.cjs",
     "build:history": "python3 scripts/build_stochastic_depth_history.py",
-    "check:history": "node scripts/check_stochastic_depth_history.cjs"
+    "check:history": "node scripts/check_stochastic_depth_history.cjs",
+    "build:ciresan": "python3 scripts/build_ciresan_report.py --final && python3 scripts/build_ciresan_optimization.py",
+    "check:ciresan": "node scripts/check_ciresan_report.cjs && node scripts/check_ciresan_optimization.cjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1",

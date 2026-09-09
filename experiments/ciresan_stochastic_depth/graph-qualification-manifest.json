@@ -1,0 +1,21 @@
+[
+  {
+    "run_id": "graph-qualification-v1",
+    "stage": "pilot",
+    "cohort": "qualification",
+    "recipe": "sd_annealed",
+    "pmax": 0.8,
+    "input_scale": 0.00392156862745098,
+    "output_relu": false,
+    "lr": 0.03,
+    "shrinkage": 0.0,
+    "seed": 1,
+    "epochs": 5,
+    "batch_size": 64,
+    "eval_every": 5,
+    "train_size": 50000,
+    "timeout_seconds": 180,
+    "gpu": "A100",
+    "validate_kernels": true
+  }
+]

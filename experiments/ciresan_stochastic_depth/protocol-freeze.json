@@ -1,0 +1,23 @@
+{
+  "frozen_utc": "2026-09-09T22:21:40.481935+00:00",
+  "test_results_available": false,
+  "full_epochs": 100,
+  "main_final_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "fidelity_seeds": [
+    101,
+    102,
+    103
+  ],
+  "files_sha256": {
+    "PROTOCOL.md": "10b6a4602f05f236ecefc12a58dd490376dae9b9b46f91a74bc39250dbb8ad87",
+    "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd",
+    "train.py": "bc1d430a2e104963feed5b55510fb0344f9f84f00ce2e56b9feaf442e067cb41",
+    "tune-manifest.json": "d89566a5016dc87723b9ac4166403aa80f2f86e8a79b39e5575ba55f7b57aa91"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "run_id": "tune-sd_annealed-lr0.01",
+  "spec": {
+    "run_id": "tune-sd_annealed-lr0.01",
+    "stage": "tune",
+    "cohort": "main",
+    "recipe": "sd_annealed",
+    "pmax": 0.8,
+    "input_scale": 0.00392156862745098,
+    "output_relu": false,
+    "lr": 0.01,
+    "shrinkage": 0.0,
+    "seed": 1,
+    "epochs": 100,
+    "batch_size": 64,
+    "eval_every": 5,
+    "train_size": 50000,
+    "timeout_seconds": 420,
+    "gpu": "A100"
+  },
+  "error_type": "RemoteError",
+  "error": "",
+  "local_dispatch_elapsed_seconds": 25.09187364578247
+}

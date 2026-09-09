@@ -1,0 +1,15 @@
+{
+  "frozen_utc": "2026-09-09T22:43:39.504360+00:00",
+  "reason": "Raw/ReLU candidate proved initialization-fragile. Confirm two linear-output+ordinary-unit-dropout recipes that reachedtarget with6\u20137trainingseconds; distinguish rawpixels fromnormalizedpixels and do not choose bystartupcacheadvantage.",
+  "groups": [
+    "raw-linear-dropout-step",
+    "normalized-dropout-step"
+  ],
+  "fresh_seeds": [
+    101,
+    102,
+    103
+  ],
+  "test_monitored_search": true,
+  "search_closed_after_these_confirmations": true
+}

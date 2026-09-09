@@ -5,6 +5,8 @@ An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity 
 - [Interactive report and 16-chapter slide view](https://yaroslavvb.github.io/gradient-dissent/)
 - [How layer dropout works](https://yaroslavvb.github.io/gradient-dissent/dropout-animation/): animated per-sequence paths, shared attention/FFN masks, inverse-survival scaling, depth/time scheduling, and fixed inference modes.
 - [Stochastic depth after 2016](https://yaroslavvb.github.io/gradient-dissent/stochastic-depth-history/): the original authors, successful vision/speech applications, language-model descendants, and a critical novelty comparison with the new paper.
+- [Ciresan-width MNIST on A100](https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/optimization/): 98.63% in all three confirmation runs, median 5.61 seconds of training and 15.59 seconds from invocation to score; kernel-only acceleration, explicit recipe changes, and all failed attempts.
+- [Stochastic depth in the MNIST MLP](https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/): five equally tuned methods, three paired seeds, source-style failure controls, and interactive training curves.
 - [Extended review](https://yaroslavvb.github.io/gradient-dissent/review.html)
 - [Separate depth-robustness experiment report](https://yaroslavvb.github.io/gradient-dissent/depth-robustness/): a tiny causal transformer and 8×8 digit classifier, five seeds per treatment, exact layer-subset enumeration, and $0 cloud spend.
 - [Larger A100 transfer experiment report](https://yaroslavvb.github.io/gradient-dissent/a100-transfer/): 124M-parameter nanoGPT-style language model, 85M-parameter vision transformer, and 28M-parameter ConvNeXt on WikiText-103 and CIFAR-100. Three paired final seeds, nine fixed pruning interventions, and a $50 experiment ceiling.
@@ -61,3 +63,5 @@ The standalone dropout animation is authored in `docs/dropout-animation/`. Run `
 Build the independent paper from saved results with `python3 scripts/build_paper.py` (TeX Live 2026). See `paper/README.md` for figure regeneration and rendering.
 
 Rebuild the stochastic-depth history from its cited Markdown source with `npm run build:history`; validate navigation and source links with `npm run check:history`.
+
+The [Ciresan experiment guide](experiments/ciresan_stochastic_depth/README.md) documents the separate baseline time-to-quality search and controlled stochastic-depth comparison. Rebuild their reports from saved measurements with `npm run build:ciresan`; validate with `npm run check:ciresan`. These commands perform no training. All current MNIST optimization and stochastic-depth calls share one $30 cap, independent of the older A100 transfer study.

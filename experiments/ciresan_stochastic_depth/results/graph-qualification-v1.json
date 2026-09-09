@@ -1,0 +1,257 @@
+{
+  "spec": {
+    "run_id": "graph-qualification-v1",
+    "stage": "pilot",
+    "cohort": "qualification",
+    "recipe": "sd_annealed",
+    "pmax": 0.8,
+    "input_scale": 0.00392156862745098,
+    "output_relu": false,
+    "lr": 0.03,
+    "shrinkage": 0.0,
+    "seed": 1,
+    "epochs": 5,
+    "batch_size": 64,
+    "eval_every": 5,
+    "train_size": 50000,
+    "timeout_seconds": 180,
+    "gpu": "A100",
+    "validate_kernels": true
+  },
+  "run_id": "graph-qualification-v1",
+  "history": [
+    {
+      "epoch": 1,
+      "stochastic_training_loss": 0.5742324590682983,
+      "dense_train_probe": {
+        "loss": 0.2391094970703125,
+        "accuracy": 0.9421,
+        "n": 10000
+      },
+      "validation": {
+        "loss": 0.2580827392578125,
+        "accuracy": 0.9378,
+        "n": 10000
+      },
+      "training_seconds": 0.5331159429999985,
+      "epoch_training_seconds": 0.5331159429999985,
+      "drop_probabilities": [
+        0.2,
+        0.4,
+        0.6000000000000001,
+        0.8
+      ],
+      "zero_logit_fraction": 0.0,
+      "validation_probe_prediction_counts": [
+        226,
+        222,
+        232,
+        172,
+        200,
+        227,
+        182,
+        189,
+        191,
+        207
+      ]
+    },
+    {
+      "epoch": 5,
+      "stochastic_training_loss": 0.0511770024895668,
+      "dense_train_probe": {
+        "loss": 0.02762164306640625,
+        "accuracy": 0.9913,
+        "n": 10000
+      },
+      "validation": {
+        "loss": 0.0902487060546875,
+        "accuracy": 0.9756,
+        "n": 10000
+      },
+      "training_seconds": 2.903625222999999,
+      "epoch_training_seconds": 0.6645692049999994,
+      "drop_probabilities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "zero_logit_fraction": 0.0,
+      "validation_probe_prediction_counts": [
+        219,
+        209,
+        216,
+        181,
+        216,
+        211,
+        191,
+        190,
+        221,
+        194
+      ]
+    }
+  ],
+  "best_validation_loss": 0.0902487060546875,
+  "best_epoch": 5,
+  "diverged": false,
+  "failure_reason": null,
+  "parameter_count": 11972510,
+  "initial_parameters_sha256": "df8ef46c69011718b66e38f100c668736a2aeb36fd131152f01cd2416b04dacc",
+  "dataset": {
+    "dataset": "MNIST",
+    "input_shape": [
+      28,
+      28
+    ],
+    "pixel_dtype": "float32",
+    "pixel_range": [
+      0,
+      255
+    ],
+    "normalization": "none; model input_scale is explicit",
+    "split_method": "torch.randperm; nested train prefix; fixed final 10000 validation indices",
+    "split_seed": 20260909,
+    "train_size": 50000,
+    "val_size": 10000,
+    "train_indices_sha256": "1083febc455815d0a5d7e9a387b9744d8b456a344b7088c7a9ca1235dade5fdf",
+    "val_indices_sha256": "90bec5b643d05f06c9863616b685340f4bdb8a5647dbd51ecf30523f138d9b98",
+    "split_sha256": "c03cdc8c896d959cba65d17e3159434951f83a7a73f73bae14a8f35e32c3fa6b",
+    "train_class_counts": [
+      4901,
+      5664,
+      4975,
+      5140,
+      4813,
+      4488,
+      4918,
+      5224,
+      4903,
+      4974
+    ],
+    "val_class_counts": [
+      1022,
+      1078,
+      983,
+      991,
+      1029,
+      933,
+      1000,
+      1041,
+      948,
+      975
+    ],
+    "train_pixel_mean": 33.3190803527832,
+    "train_pixel_std": 78.57264709472656,
+    "test_included": false,
+    "files": {
+      "train-images-idx3-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz",
+        "md5": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+        "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+        "bytes": 9912422
+      },
+      "train-labels-idx1-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz",
+        "md5": "d53e105ee54ea40749a09fcbcd1e9432",
+        "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+        "bytes": 28881
+      }
+    },
+    "training_data_sha256": "db25eee67973dd887c79eb5b31e7466c2b0717df28dcdd5ca60c87116de2b25d"
+  },
+  "training_seconds": 2.903625222999999,
+  "epoch_preparation_seconds": 0.02087741399999743,
+  "graph_setup_seconds": 1.176032342000001,
+  "kernels": {
+    "graph_count": 16,
+    "setup_seconds": 1.176032342000001,
+    "precision": "fp32",
+    "allocated_before_capture_bytes": 304978432,
+    "allocated_after_setup_bytes": 371472896,
+    "reserved_after_setup_bytes": 908066816,
+    "parameter_count": 11972510,
+    "shared_parameter_gradient_momentum_storage": true,
+    "separate_private_graph_pools": true,
+    "dropout_draw": "one CPU Bernoulli per body transition per minibatch, or externally supplied mask",
+    "dropped_parameter_momentum_updated": false,
+    "shrinkage_applies_to_dropped_parameters": false,
+    "loss_aliases_static_storage": true,
+    "input_copies_inside_capture": false,
+    "scale_buffer_dtype": "float32",
+    "scale_update_requires_recapture": false
+  },
+  "kernel_validation": {
+    "tests_run": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "seconds": 6.264530008,
+    "output": "test_cpu_sequence_matches_source_sgd_and_freezes_dropped_momentum (optimization.test_stochastic_graph.Semantics.test_cpu_sequence_matches_source_sgd_and_freezes_dropped_momentum) ... ok\ntest_cuda_masks_annealing_and_restoration (optimization.test_stochastic_graph.Semantics.test_cuda_masks_annealing_and_restoration) ... ok\ntest_cuda_unit_dropout_draws_fresh_masks_and_reproduces_seed (optimization.test_stochastic_graph.Semantics.test_cuda_unit_dropout_draws_fresh_masks_and_reproduces_seed) ... ok\ntest_plain_residual_and_unit_dropout_forward_parity (optimization.test_stochastic_graph.Semantics.test_plain_residual_and_unit_dropout_forward_parity) ... ok\ntest_validation (optimization.test_stochastic_graph.Semantics.test_validation) ... ok\ntest_zero_branch_does_not_execute (optimization.test_stochastic_graph.Semantics.test_zero_branch_does_not_execute) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 6.258s\n\nOK\n"
+  },
+  "source_sha256": {
+    "train_optimized.py": "b2e331c838ce2e3846650c7f91d35d57b762642c788542ff212238d176637ed6",
+    "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd",
+    "optimization/stochastic_graph.py": "7844db46e84f39809feb7dbf3684e95a199b01773b6a3dc800127fb84c274a1a",
+    "optimization/test_stochastic_graph.py": "fed8f7d61ce10d4f3c2ab0942bc5a245b0e2b8e4b50d253ee65ab5d45b813d11",
+    "train.py": "bc1d430a2e104963feed5b55510fb0344f9f84f00ce2e56b9feaf442e067cb41"
+  },
+  "gradient_observations": [
+    {
+      "epoch": 1,
+      "active_mask": [
+        false,
+        true,
+        false,
+        false
+      ],
+      "layer_grad_norms": [
+        0.6559089422225952,
+        null,
+        0.6284369826316833,
+        null,
+        null,
+        0.4707854688167572
+      ]
+    },
+    {
+      "epoch": 5,
+      "active_mask": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "layer_grad_norms": [
+        0.6709981560707092,
+        0.36191728711128235,
+        0.2745806574821472,
+        0.22725071012973785,
+        0.2171998769044876,
+        0.2168491780757904
+      ]
+    }
+  ],
+  "skipped_batch_counts": [
+    404,
+    781,
+    1200,
+    1584
+  ],
+  "steps_per_epoch": 781,
+  "training_examples_per_epoch": 49984,
+  "executed_epoch_order_sha256": "6986d2f2458cbf0a60202b1ac0c5375609f2bf2e1636641ec2118cbc1a9a18b9",
+  "executed_epoch_masks_sha256": "8ba896ba8b8621d9d6596326a06d2470e74afb408009e8a499155faaae5fed68",
+  "hardware": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.14.0+cu130",
+    "cuda_runtime": "13.0",
+    "tf32": true,
+    "float32_matmul_precision": "high",
+    "dtype": "float32",
+    "cpu_threads": 2
+  },
+  "total_run_seconds": 11.924107472000001,
+  "local_dispatch_elapsed_seconds": 26.28109908103943
+}

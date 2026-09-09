@@ -1,0 +1,531 @@
+{
+  "source": "https://api.wandb.ai/graphql",
+  "method": "Read-only sampledHistory query for evaluation-key intersection, samples=100000; compared returned evaluation count against number of val_accuracy records in historyKeys. Only claim whole-history extrema where count matches.",
+  "note": "Accuracy is percentage; _runtime seconds from W&B, includes diagnostics/evaluation; _step is W&B log row, not consistent optimizer-step index.",
+  "runs": [
+    {
+      "id": "ts4k9n55",
+      "commit": "c59482dc38dc7f0e57ba143fde52dc9611de05a1",
+      "total_history_lines": 90735,
+      "accuracy_rows_expected": 91,
+      "accuracy_rows_retrieved": 91,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 89179,
+        "_runtime": 388.48669505119324,
+        "val_accuracy": 98.63,
+        "val_loss": 0.05202686374563491,
+        "train_accuracy": 99.99833333333333,
+        "train_loss": 0.0011935512842144818,
+        "epoch": 94
+      },
+      "minimum_observed_loss": {
+        "_step": 90181,
+        "_runtime": 392.66776609420776,
+        "val_accuracy": 98.55,
+        "val_loss": 0.051922405781515406,
+        "train_accuracy": 99.99833333333333,
+        "train_loss": 0.0013080234697554261,
+        "epoch": 96
+      },
+      "last_observed_evaluation": {
+        "_step": 90181,
+        "_runtime": 392.66776609420776,
+        "val_accuracy": 98.55,
+        "val_loss": 0.051922405781515406,
+        "train_accuracy": 99.99833333333333,
+        "train_loss": 0.0013080234697554261,
+        "epoch": 96
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 1,
+        "_runtime": 1.937422275543213,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322666931152,
+        "train_accuracy": 9.685,
+        "train_loss": 2.336323178100586,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 5011,
+        "_runtime": 23.82707405090332,
+        "val_accuracy": 98.05,
+        "val_loss": 0.06682662035053363,
+        "train_accuracy": 99.81833333333333,
+        "train_loss": 0.008756870194446917,
+        "epoch": 5
+      }
+    },
+    {
+      "id": "dkh42jiw",
+      "commit": "c59482dc38dc7f0e57ba143fde52dc9611de05a1",
+      "total_history_lines": 75072,
+      "accuracy_rows_expected": 75,
+      "accuracy_rows_retrieved": 75,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 66133,
+        "_runtime": 286.4102244377136,
+        "val_accuracy": 98.5,
+        "val_loss": 0.05263151089459716,
+        "train_accuracy": 99.99833333333333,
+        "train_loss": 0.001158688671203951,
+        "epoch": 70
+      },
+      "minimum_observed_loss": {
+        "_step": 66133,
+        "_runtime": 286.4102244377136,
+        "val_accuracy": 98.5,
+        "val_loss": 0.05263151089459716,
+        "train_accuracy": 99.99833333333333,
+        "train_loss": 0.001158688671203951,
+        "epoch": 70
+      },
+      "last_observed_evaluation": {
+        "_step": 74149,
+        "_runtime": 321.1012177467346,
+        "val_accuracy": 98.44,
+        "val_loss": 0.054261741666356104,
+        "train_accuracy": 99.99833333333333,
+        "train_loss": 0.0017256906623020769,
+        "epoch": 78
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 1,
+        "_runtime": 1.9954886436462402,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322666931152,
+        "train_accuracy": 9.685,
+        "train_loss": 2.336323178100586,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 5011,
+        "_runtime": 23.77479600906372,
+        "val_accuracy": 98.05,
+        "val_loss": 0.06682662035053363,
+        "train_accuracy": 99.81833333333333,
+        "train_loss": 0.008756870194446917,
+        "epoch": 5
+      }
+    },
+    {
+      "id": "eqbwkagf",
+      "commit": "c59482dc38dc7f0e57ba143fde52dc9611de05a1",
+      "total_history_lines": 34,
+      "accuracy_rows_expected": 1,
+      "accuracy_rows_retrieved": 1,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 1,
+        "_runtime": 8.120804071426392,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322674560547,
+        "train_accuracy": 9.685,
+        "train_loss": 2.3363231577555337,
+        "epoch": 0
+      },
+      "minimum_observed_loss": {
+        "_step": 1,
+        "_runtime": 8.120804071426392,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322674560547,
+        "train_accuracy": 9.685,
+        "train_loss": 2.3363231577555337,
+        "epoch": 0
+      },
+      "last_observed_evaluation": {
+        "_step": 1,
+        "_runtime": 8.120804071426392,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322674560547,
+        "train_accuracy": 9.685,
+        "train_loss": 2.3363231577555337,
+        "epoch": 0
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 1,
+        "_runtime": 8.120804071426392,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322674560547,
+        "train_accuracy": 9.685,
+        "train_loss": 2.3363231577555337,
+        "epoch": 0
+      },
+      "first_at_least_98pct": null
+    },
+    {
+      "id": "d25te34x",
+      "commit": "c59482dc38dc7f0e57ba143fde52dc9611de05a1",
+      "total_history_lines": 2762,
+      "accuracy_rows_expected": 3,
+      "accuracy_rows_retrieved": 3,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 2005,
+        "_runtime": 89.37433218955994,
+        "val_accuracy": 97.34,
+        "val_loss": 0.08613539482168853,
+        "train_accuracy": 98.59666666666666,
+        "train_loss": 0.047629225045939284,
+        "epoch": 2
+      },
+      "minimum_observed_loss": {
+        "_step": 2005,
+        "_runtime": 89.37433218955994,
+        "val_accuracy": 97.34,
+        "val_loss": 0.08613539482168853,
+        "train_accuracy": 98.59666666666666,
+        "train_loss": 0.047629225045939284,
+        "epoch": 2
+      },
+      "last_observed_evaluation": {
+        "_step": 2005,
+        "_runtime": 89.37433218955994,
+        "val_accuracy": 97.34,
+        "val_loss": 0.08613539482168853,
+        "train_accuracy": 98.59666666666666,
+        "train_loss": 0.047629225045939284,
+        "epoch": 2
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 1,
+        "_runtime": 7.3485941886901855,
+        "val_accuracy": 9.88,
+        "val_loss": 2.335322674560547,
+        "train_accuracy": 9.685,
+        "train_loss": 2.3363231577555337,
+        "epoch": 0
+      },
+      "first_at_least_98pct": null
+    },
+    {
+      "id": "s0og2713",
+      "commit": null,
+      "total_history_lines": 1140,
+      "accuracy_rows_expected": 1140,
+      "accuracy_rows_retrieved": 1140,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 1056,
+        "_runtime": 5194.825053215027,
+        "val_accuracy": 98.66999816894531,
+        "val_loss": 0.054572828114032745,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.0009552202536724508,
+        "epoch": 112
+      },
+      "minimum_observed_loss": {
+        "_step": 468,
+        "_runtime": 2302.868743419647,
+        "val_accuracy": 98.54000091552734,
+        "val_loss": 0.05118754506111145,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.0013287184992805123,
+        "epoch": 49
+      },
+      "last_observed_evaluation": {
+        "_step": 1139,
+        "_runtime": 5602.102871894836,
+        "val_accuracy": 98.54000091552734,
+        "val_loss": 0.053759705275297165,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.0015444171149283648,
+        "epoch": 121
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 0,
+        "_runtime": 12.723556995391846,
+        "val_accuracy": 9.880000114440918,
+        "val_loss": 2.335322380065918,
+        "train_accuracy": 9.6850004196167,
+        "train_loss": 2.3363232612609863,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 41,
+        "_runtime": 214.9953474998474,
+        "val_accuracy": 98.1500015258789,
+        "val_loss": 0.06122194230556488,
+        "train_accuracy": 99.74500274658203,
+        "train_loss": 0.011557016521692276,
+        "epoch": 4
+      }
+    },
+    {
+      "id": "0ovwv4x6",
+      "commit": null,
+      "total_history_lines": 400,
+      "accuracy_rows_expected": 100,
+      "accuracy_rows_retrieved": 100,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 376,
+        "_runtime": 1625.5477848052979,
+        "val_accuracy": 98.45999908447266,
+        "val_loss": 0.06476696580648422,
+        "train_accuracy": 99.99666595458984,
+        "train_loss": 0.00046023636241443455,
+        "epoch": 10
+      },
+      "minimum_observed_loss": {
+        "_step": 200,
+        "_runtime": 857.982640504837,
+        "val_accuracy": 98.37000274658203,
+        "val_loss": 0.05976145341992378,
+        "train_accuracy": 99.8949966430664,
+        "train_loss": 0.004994544666260481,
+        "epoch": 5
+      },
+      "last_observed_evaluation": {
+        "_step": 396,
+        "_runtime": 1710.6279425621033,
+        "val_accuracy": 98.4000015258789,
+        "val_loss": 0.06556081026792526,
+        "train_accuracy": 99.99666595458984,
+        "train_loss": 0.0004307753115426749,
+        "epoch": 10
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 0,
+        "_runtime": 10.489394664764404,
+        "val_accuracy": 9.880000114440918,
+        "val_loss": 2.335322618484497,
+        "train_accuracy": 9.6850004196167,
+        "train_loss": 2.3363232612609863,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 156,
+        "_runtime": 668.5443875789642,
+        "val_accuracy": 98.01000213623047,
+        "val_loss": 0.06425055116415024,
+        "train_accuracy": 99.77833557128906,
+        "train_loss": 0.00925490166991949,
+        "epoch": 4
+      }
+    },
+    {
+      "id": "wjpw622x",
+      "commit": null,
+      "total_history_lines": 9301,
+      "accuracy_rows_expected": 94,
+      "accuracy_rows_retrieved": 94,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 9300,
+        "_runtime": 2844.210585832596,
+        "val_accuracy": 98.44000244140625,
+        "val_loss": 0.05507950484752655,
+        "train_accuracy": 99.99333190917969,
+        "train_loss": 0.0020931106992065907,
+        "epoch": 9
+      },
+      "minimum_observed_loss": {
+        "_step": 9300,
+        "_runtime": 2844.210585832596,
+        "val_accuracy": 98.44000244140625,
+        "val_loss": 0.05507950484752655,
+        "train_accuracy": 99.99333190917969,
+        "train_loss": 0.0020931106992065907,
+        "epoch": 9
+      },
+      "last_observed_evaluation": {
+        "_step": 9300,
+        "_runtime": 2844.210585832596,
+        "val_accuracy": 98.44000244140625,
+        "val_loss": 0.05507950484752655,
+        "train_accuracy": 99.99333190917969,
+        "train_loss": 0.0020931106992065907,
+        "epoch": 9
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 0,
+        "_runtime": 41.84921336174011,
+        "val_accuracy": 9.880000114440918,
+        "val_loss": 2.335322380065918,
+        "train_accuracy": 9.6850004196167,
+        "train_loss": 2.3363232612609863,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 2800,
+        "_runtime": 885.3775086402893,
+        "val_accuracy": 98,
+        "val_loss": 0.06862875819206238,
+        "train_accuracy": 99.30333709716797,
+        "train_loss": 0.02782435715198517,
+        "epoch": 2
+      }
+    },
+    {
+      "id": "425pu650",
+      "commit": null,
+      "total_history_lines": 32601,
+      "accuracy_rows_expected": 327,
+      "accuracy_rows_retrieved": 327,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 24700,
+        "_runtime": 1913.9319565296173,
+        "val_accuracy": 98.4800033569336,
+        "val_loss": 0.05504941940307617,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.001891799853183329,
+        "epoch": 26
+      },
+      "minimum_observed_loss": {
+        "_step": 26000,
+        "_runtime": 2013.4307227134705,
+        "val_accuracy": 98.37999725341797,
+        "val_loss": 0.055033907294273376,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.0018202223582193255,
+        "epoch": 27
+      },
+      "last_observed_evaluation": {
+        "_step": 32600,
+        "_runtime": 2517.719493865967,
+        "val_accuracy": 98.3499984741211,
+        "val_loss": 0.05722103267908096,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.001976571511477232,
+        "epoch": 34
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 0,
+        "_runtime": 14.78311538696289,
+        "val_accuracy": 9.880000114440918,
+        "val_loss": 2.335322856903076,
+        "train_accuracy": 9.6850004196167,
+        "train_loss": 2.3363232612609863,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 4200,
+        "_runtime": 335.26140117645264,
+        "val_accuracy": 98.13999938964844,
+        "val_loss": 0.060799065977334976,
+        "train_accuracy": 99.77166748046875,
+        "train_loss": 0.01025939267128706,
+        "epoch": 4
+      }
+    },
+    {
+      "id": "dz4nupwx",
+      "commit": null,
+      "total_history_lines": 457400,
+      "accuracy_rows_expected": 4574,
+      "accuracy_rows_retrieved": 4574,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 129300,
+        "_runtime": 24994.264795780182,
+        "val_accuracy": 98.75,
+        "val_loss": 0.055055052042007446,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.0008722732309252024,
+        "epoch": 137
+      },
+      "minimum_observed_loss": {
+        "_step": 106200,
+        "_runtime": 20521.684962511063,
+        "val_accuracy": 98.61000061035156,
+        "val_loss": 0.05104830488562584,
+        "train_accuracy": 99.99833679199219,
+        "train_loss": 0.001093439757823944,
+        "epoch": 113
+      },
+      "last_observed_evaluation": {
+        "_step": 457300,
+        "_runtime": 88826.09873843193,
+        "val_accuracy": 98.48999786376953,
+        "val_loss": 0.05615559592843056,
+        "train_accuracy": 100,
+        "train_loss": 0.0012165468651801348,
+        "epoch": 487
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 0,
+        "_runtime": 26.648518562316895,
+        "val_accuracy": 9.880000114440918,
+        "val_loss": 2.335322380065918,
+        "train_accuracy": 9.6850004196167,
+        "train_loss": 2.3363232612609863,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 3800,
+        "_runtime": 758.14439868927,
+        "val_accuracy": 98.05999755859375,
+        "val_loss": 0.06308890134096146,
+        "train_accuracy": 99.6933364868164,
+        "train_loss": 0.013478915207087994,
+        "epoch": 4
+      }
+    },
+    {
+      "id": "lozczj9u",
+      "commit": "cb44c099519322aade3909609e1b3fc5a738d0bd",
+      "total_history_lines": 14291,
+      "accuracy_rows_expected": 15,
+      "accuracy_rows_retrieved": 15,
+      "all_accuracy_rows_retrieved": true,
+      "best_observed_accuracy": {
+        "_step": 640000,
+        "_runtime": 80.77477741241455,
+        "val_accuracy": 98.45999908447266,
+        "val_loss": 0.055991191416978836,
+        "train_accuracy": 99.99666595458984,
+        "train_loss": 0.0016904863296076655,
+        "epoch": 10
+      },
+      "minimum_observed_loss": {
+        "_step": 384000,
+        "_runtime": 51.34910845756531,
+        "val_accuracy": 98.36000061035156,
+        "val_loss": 0.05443688482046127,
+        "train_accuracy": 99.98833465576172,
+        "train_loss": 0.002640247344970703,
+        "epoch": 6
+      },
+      "last_observed_evaluation": {
+        "_step": 896000,
+        "_runtime": 109.77261018753052,
+        "val_accuracy": 98.38999938964844,
+        "val_loss": 0.0555419847369194,
+        "train_accuracy": 99.99666595458984,
+        "train_loss": 0.0019129577558487654,
+        "epoch": 14
+      },
+      "history_retained": "Only first, extrema, last, and first >=98% evaluation retained; queried all count-verified evaluation rows.",
+      "first_observed_evaluation": {
+        "_step": 0,
+        "_runtime": 7.198301553726196,
+        "val_accuracy": 86.38999938964844,
+        "val_loss": 0.5510074496269226,
+        "train_accuracy": 85.3933334350586,
+        "train_loss": 0.5709086656570435,
+        "epoch": 0
+      },
+      "first_at_least_98pct": {
+        "_step": 192000,
+        "_runtime": 29.376392364501953,
+        "val_accuracy": 98.08000183105469,
+        "val_loss": 0.05795690789818764,
+        "train_accuracy": 99.68000030517578,
+        "train_loss": 0.015220687724649906,
+        "epoch": 3
+      }
+    }
+  ]
+}

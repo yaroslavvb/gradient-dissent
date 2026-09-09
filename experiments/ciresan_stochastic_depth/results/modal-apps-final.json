@@ -1,0 +1,122 @@
+[
+  {
+    "app_id": "ap-uSbBz461Z8ztw2bIUX3xS7",
+    "description": "gradient-dissent-ciresan-graphs",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:52:47-07:00",
+    "stopped_at": "2026-09-09 15:58:17-07:00"
+  },
+  {
+    "app_id": "ap-n0ohWDtVvGsr5U8tdwrJnZ",
+    "description": "gradient-dissent-ciresan-graphs",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:49:31-07:00",
+    "stopped_at": "2026-09-09 15:52:41-07:00"
+  },
+  {
+    "app_id": "ap-goorvxmj6t5IBTpjffuwn5",
+    "description": "gradient-dissent-ciresan-graphs",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:47:39-07:00",
+    "stopped_at": "2026-09-09 15:48:10-07:00"
+  },
+  {
+    "app_id": "ap-jtTBM8xCjzjYp36DVx1C7X",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:43:40-07:00",
+    "stopped_at": "2026-09-09 15:44:16-07:00"
+  },
+  {
+    "app_id": "ap-FGq3pDBzQPOEADUyORnfCJ",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:42:31-07:00",
+    "stopped_at": "2026-09-09 15:43:30-07:00"
+  },
+  {
+    "app_id": "ap-HgolZY6dkocIdmYTbF2kZX",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:41:32-07:00",
+    "stopped_at": "2026-09-09 15:42:36-07:00"
+  },
+  {
+    "app_id": "ap-ors7G6IijsRQozdijQxME9",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:39:04-07:00",
+    "stopped_at": "2026-09-09 15:40:47-07:00"
+  },
+  {
+    "app_id": "ap-tzWdmeoO8D0mYe3Bwe9VpA",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:31:53-07:00",
+    "stopped_at": "2026-09-09 15:37:54-07:00"
+  },
+  {
+    "app_id": "ap-VyVIWIOqBjHZESIYi3xqGy",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:31:54-07:00",
+    "stopped_at": "2026-09-09 15:37:45-07:00"
+  },
+  {
+    "app_id": "ap-P0biWVbyJNatADyTNI8lea",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:36:07-07:00",
+    "stopped_at": "2026-09-09 15:37:45-07:00"
+  },
+  {
+    "app_id": "ap-h01tnmAvRUIRkm93o4dT1Z",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:30:50-07:00",
+    "stopped_at": "2026-09-09 15:31:22-07:00"
+  },
+  {
+    "app_id": "ap-jU0oGhk2JPxF6mzPHh3CX1",
+    "description": "gradient-dissent-ciresan-optimization",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:28:51-07:00",
+    "stopped_at": "2026-09-09 15:30:49-07:00"
+  },
+  {
+    "app_id": "ap-110V0Yi1GAryoUBT8PQlkR",
+    "description": "gradient-dissent-ciresan-transfer",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:21:52-07:00",
+    "stopped_at": "2026-09-09 15:25:33-07:00"
+  },
+  {
+    "app_id": "ap-dSe8CL3z1ysGro30IEOKQT",
+    "description": "gradient-dissent-ciresan-transfer",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:20:33-07:00",
+    "stopped_at": "2026-09-09 15:21:09-07:00"
+  },
+  {
+    "app_id": "ap-DrZ95ScZXf9r75tfHcv0J9",
+    "description": "gradient-dissent-ciresan-transfer",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 15:18:59-07:00",
+    "stopped_at": "2026-09-09 15:20:18-07:00"
+  }
+]

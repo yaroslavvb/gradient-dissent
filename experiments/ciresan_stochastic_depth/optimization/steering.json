@@ -1,0 +1,15 @@
+{
+  "at_utc": "2026-09-09T22:28:15.379374+00:00",
+  "event": "User requested baseline speed optimization before stochastic-depth study",
+  "action": "Stopped Modal app ap-110V0Yi1GAryoUBT8PQlkR; zero active containers verified. Incomplete tuning abandoned pending optimized common runner. All reservations retained.",
+  "completed_tuning_runs": [
+    "tune-sd_constant-lr0.1",
+    "tune-plain-lr0.03",
+    "tune-plain-lr0.1",
+    "tune-plain-lr0.01",
+    "tune-residual-lr0.01"
+  ],
+  "target": "Official MNIST test accuracy>=98.63% on60000train/10000test, explicit test-monitored speed benchmark",
+  "historical_first_threshold_runtime_seconds": 388.48669505119324,
+  "current_budget_cap_usd": 30
+}

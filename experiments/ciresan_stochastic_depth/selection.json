@@ -1,0 +1,65 @@
+{
+  "frozen_utc": "2026-09-09T22:52:46.523534+00:00",
+  "criterion": "among completed nondiverged candidates, minimum validation CE across scheduled checkpoints, tie broken by lower LR",
+  "excluded_diverged_candidates": [
+    "graph-tune-sd_constant-lr0.1",
+    "graph-tune-sd_annealed-lr0.1",
+    "graph-tune-residual_unit_dropout-lr0.1"
+  ],
+  "selected_learning_rates": {
+    "plain": 0.03,
+    "residual": 0.01,
+    "sd_constant": 0.01,
+    "sd_annealed": 0.01,
+    "residual_unit_dropout": 0.01
+  },
+  "winners": {
+    "plain": {
+      "run_id": "graph-tune-plain-lr0.03",
+      "lr": 0.03,
+      "validation_ce": 0.0866325439453125,
+      "epoch": 5
+    },
+    "residual": {
+      "run_id": "graph-tune-residual-lr0.01",
+      "lr": 0.01,
+      "validation_ce": 0.07866966552734375,
+      "epoch": 5
+    },
+    "sd_constant": {
+      "run_id": "graph-tune-sd_constant-lr0.01",
+      "lr": 0.01,
+      "validation_ce": 0.07920894775390624,
+      "epoch": 10
+    },
+    "sd_annealed": {
+      "run_id": "graph-tune-sd_annealed-lr0.01",
+      "lr": 0.01,
+      "validation_ce": 0.0804996337890625,
+      "epoch": 15
+    },
+    "residual_unit_dropout": {
+      "run_id": "graph-tune-residual_unit_dropout-lr0.01",
+      "lr": 0.01,
+      "validation_ce": 0.08553690795898437,
+      "epoch": 15
+    }
+  },
+  "candidate_results_sha256": {
+    "graph-tune-plain-lr0.01": "ecf3007ad8be09e76410b7297a72613252a3bdd2886f8df9a6fbabee48021ac9",
+    "graph-tune-plain-lr0.03": "1012d4462d65724a956b4a0b3e53f9e5d7777143821001f27ac818bf78dd956f",
+    "graph-tune-plain-lr0.1": "2a129b27945225df4ca733508575a84a4f8f8428e6b4f74766ae0a451ba10631",
+    "graph-tune-residual-lr0.01": "cd391e00ae69c44280d46383d0c9bd3f1380608dc70fa5a8c3a53720014537c9",
+    "graph-tune-residual-lr0.03": "f23c57038f670da085a1bf09f10565b243ee2ce22640f08a76d5a8ee1658156c",
+    "graph-tune-residual-lr0.1": "a7ece97324dd241af5be58503af16e6314e0a84a9fa3f003e340bf2c3bdad00a",
+    "graph-tune-sd_constant-lr0.01": "cc102e730f5b75bd105797e7c92a42219202c3438393a9bbee240d73873fa87c",
+    "graph-tune-sd_constant-lr0.03": "471895473e68d3f057d9f4a768d616bef25ad43a48c8c24fd5622c34be254f9c",
+    "graph-tune-sd_constant-lr0.1": "8685fb2df072339201bd69fed589a9bfcfd5bd613c6716538aeceaf62c02e19e",
+    "graph-tune-sd_annealed-lr0.01": "bf2e6d6ec5f6fd10535bfd4d208da5825e7cdccb391e18fdbc05f64347f407cb",
+    "graph-tune-sd_annealed-lr0.03": "7089ae92f258ea8fc07561d2cfbf84ca8d42738b3c593283f41575df2601fa99",
+    "graph-tune-sd_annealed-lr0.1": "82b76bd24513ee2e42feee995c7e2081db2f4586e395827e10b83dcfc25ed36e",
+    "graph-tune-residual_unit_dropout-lr0.01": "67b7ee7159296726fd53a3a0f640b872c436725917b2659f2b0240101ab1269a",
+    "graph-tune-residual_unit_dropout-lr0.03": "d93a3786807b9e4a8abb0cb1303ca8a2e7c1bdd75e567a9840431cc8ce366b74",
+    "graph-tune-residual_unit_dropout-lr0.1": "94201eae0e842139eb4def9487b8b53ef18ec1fc2e76c52175015126b9299c7a"
+  }
+}

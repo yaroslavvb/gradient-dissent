@@ -1,0 +1,254 @@
+{
+  "spec": {
+    "run_id": "tune-sd_constant-lr0.1",
+    "stage": "tune",
+    "cohort": "main",
+    "recipe": "sd_constant",
+    "pmax": 0.4,
+    "input_scale": 0.00392156862745098,
+    "output_relu": false,
+    "lr": 0.1,
+    "shrinkage": 0.0,
+    "seed": 1,
+    "epochs": 100,
+    "batch_size": 64,
+    "eval_every": 5,
+    "train_size": 50000,
+    "timeout_seconds": 420,
+    "gpu": "A100"
+  },
+  "run_id": "tune-sd_constant-lr0.1",
+  "history": [
+    {
+      "epoch": 1,
+      "stochastic_training_loss": 0.4502171277999878,
+      "dense_train_probe": {
+        "loss": 0.24054677734375,
+        "accuracy": 0.9385,
+        "n": 10000
+      },
+      "validation": {
+        "loss": 0.269894482421875,
+        "accuracy": 0.9322,
+        "n": 10000
+      },
+      "training_seconds": 1.3816759510000054,
+      "epoch_training_seconds": 1.3816759510000054,
+      "drop_probabilities": [
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4
+      ],
+      "zero_logit_fraction": 0.0,
+      "validation_probe_prediction_counts": [
+        230,
+        217,
+        209,
+        189,
+        223,
+        195,
+        187,
+        181,
+        223,
+        194
+      ]
+    },
+    {
+      "epoch": 5,
+      "stochastic_training_loss": 0.1250401735305786,
+      "dense_train_probe": {
+        "loss": 0.07834326782226562,
+        "accuracy": 0.9781,
+        "n": 10000
+      },
+      "validation": {
+        "loss": 0.13323460693359376,
+        "accuracy": 0.9696,
+        "n": 10000
+      },
+      "training_seconds": 6.698063400000024,
+      "epoch_training_seconds": 1.3035800530000188,
+      "drop_probabilities": [
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4
+      ],
+      "zero_logit_fraction": 0.0,
+      "validation_probe_prediction_counts": [
+        220,
+        199,
+        215,
+        175,
+        221,
+        216,
+        192,
+        186,
+        226,
+        198
+      ]
+    },
+    {
+      "epoch": 10,
+      "stochastic_training_loss": 0.06588279455900192,
+      "dense_train_probe": {
+        "loss": 0.04074286804199219,
+        "accuracy": 0.9889,
+        "n": 10000
+      },
+      "validation": {
+        "loss": 0.120637158203125,
+        "accuracy": 0.9749,
+        "n": 10000
+      },
+      "training_seconds": 13.185871450999997,
+      "epoch_training_seconds": 1.3003120410000122,
+      "drop_probabilities": [
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4
+      ],
+      "zero_logit_fraction": 0.0,
+      "validation_probe_prediction_counts": [
+        224,
+        209,
+        223,
+        177,
+        212,
+        203,
+        191,
+        178,
+        224,
+        207
+      ]
+    },
+    {
+      "epoch": 12,
+      "diverged": true,
+      "training_seconds": 15.84950925299998
+    }
+  ],
+  "best_validation_loss": 0.120637158203125,
+  "best_epoch": 10,
+  "diverged": true,
+  "parameter_count": 11972510,
+  "initial_parameters_sha256": "df8ef46c69011718b66e38f100c668736a2aeb36fd131152f01cd2416b04dacc",
+  "dataset": {
+    "dataset": "MNIST",
+    "input_shape": [
+      28,
+      28
+    ],
+    "pixel_dtype": "float32",
+    "pixel_range": [
+      0,
+      255
+    ],
+    "normalization": "none; model input_scale is explicit",
+    "split_method": "torch.randperm; nested train prefix; fixed final 10000 validation indices",
+    "split_seed": 20260909,
+    "train_size": 50000,
+    "val_size": 10000,
+    "train_indices_sha256": "1083febc455815d0a5d7e9a387b9744d8b456a344b7088c7a9ca1235dade5fdf",
+    "val_indices_sha256": "90bec5b643d05f06c9863616b685340f4bdb8a5647dbd51ecf30523f138d9b98",
+    "split_sha256": "c03cdc8c896d959cba65d17e3159434951f83a7a73f73bae14a8f35e32c3fa6b",
+    "train_class_counts": [
+      4901,
+      5664,
+      4975,
+      5140,
+      4813,
+      4488,
+      4918,
+      5224,
+      4903,
+      4974
+    ],
+    "val_class_counts": [
+      1022,
+      1078,
+      983,
+      991,
+      1029,
+      933,
+      1000,
+      1041,
+      948,
+      975
+    ],
+    "train_pixel_mean": 33.3190803527832,
+    "train_pixel_std": 78.57264709472656,
+    "test_included": false,
+    "files": {
+      "train-images-idx3-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz",
+        "md5": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+        "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+        "bytes": 9912422
+      },
+      "train-labels-idx1-ubyte.gz": {
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz",
+        "md5": "d53e105ee54ea40749a09fcbcd1e9432",
+        "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+        "bytes": 28881
+      }
+    },
+    "training_data_sha256": "db25eee67973dd887c79eb5b31e7466c2b0717df28dcdd5ca60c87116de2b25d"
+  },
+  "training_seconds": 15.84950925299998,
+  "gradient_observations": [
+    {
+      "epoch": 1,
+      "layer_grad_norms": [
+        0.7129361629486084,
+        null,
+        0.5593811273574829,
+        null,
+        0.4921043813228607,
+        0.525881290435791
+      ]
+    },
+    {
+      "epoch": 6,
+      "layer_grad_norms": [
+        0.2802421450614929,
+        0.2865680456161499,
+        0.20493628084659576,
+        0.1945389360189438,
+        null,
+        0.13004101812839508
+      ]
+    },
+    {
+      "epoch": 11,
+      "layer_grad_norms": [
+        0.05485227331519127,
+        0.03644126281142235,
+        0.034377556294202805,
+        null,
+        null,
+        0.02887672930955887
+      ]
+    }
+  ],
+  "skipped_batch_counts": [
+    916,
+    1835,
+    2773,
+    3746
+  ],
+  "steps_per_epoch": 781,
+  "training_examples_per_epoch": 49984,
+  "hardware": {
+    "device": "cuda",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.8.0+cu128",
+    "tf32": true,
+    "dtype": "float32",
+    "cpu_threads": 2
+  },
+  "total_run_seconds": 16.52472629400002,
+  "local_dispatch_elapsed_seconds": 19.33895707130432
+}

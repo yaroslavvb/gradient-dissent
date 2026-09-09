@@ -1,0 +1,15 @@
+{
+  "scope": "Public master source snapshot retrieved read-only; this does not prove exact code of historical W&B runs.",
+  "sources": {
+    "train": {
+      "url": "https://raw.githubusercontent.com/yaroslavvb/stuff/master/autotune/train_ciresan_new.py",
+      "sha256": "60bfa9d8d8c4d1ff1a7689dd6089e391a6b557059bcaa20205e26bcf99c6cf73",
+      "line_count": 647
+    },
+    "util": {
+      "url": "https://raw.githubusercontent.com/yaroslavvb/stuff/master/autotune/util.py",
+      "sha256": "2a3599417c650bd0bab7e6117895c2d89bdd2d3a761568ef25104564b121c8c6",
+      "line_count": 2718
+    }
+  }
+}
