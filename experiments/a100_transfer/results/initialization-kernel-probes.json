@@ -1,0 +1,44 @@
+[
+  {
+    "cpu_capability": "AVX512",
+    "mkl_available": true,
+    "mkl_enable_instructions": null,
+    "stages": {
+      "uniform": "1a9811901e2553b3758cebec8522760003419d6b48ac7d42522f2a0b856173d2",
+      "erfinv": "c0dc1b63adaf73f9486f3bcb12b1d6bd9e29db803621acc7b25dcd3e24d9ce46",
+      "scale": "d219207db86ee24cd4681409b3275bf5c0dc232ef0f1aaa58e605aa9f0d17016"
+    },
+    "model_hash": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+    "torch": "2.8.0+cu128",
+    "label": "avx512-default",
+    "container_id": "ta-01M23TVGB126DEJ6TT00J32A5R"
+  },
+  {
+    "cpu_capability": "AVX512",
+    "mkl_available": true,
+    "mkl_enable_instructions": "AVX2",
+    "stages": {
+      "uniform": "1a9811901e2553b3758cebec8522760003419d6b48ac7d42522f2a0b856173d2",
+      "erfinv": "d23e8d5042cf7608817da4a53a25b53d800a5ab9bd047ca28039c7e61055d3f7",
+      "scale": "11228d35712459cdbcf6970ab926fa7efed7bb36208dc36e8eb58c6d895e4320"
+    },
+    "model_hash": "f122b694bd458aeb81bcc93afde0f2f684bf08761b2d901b3c5fff7cc3f4da93",
+    "torch": "2.8.0+cu128",
+    "label": "avx512-mkl-avx2",
+    "container_id": "ta-01M23TVGB126DEJ6TT00J32A5R"
+  },
+  {
+    "cpu_capability": "AVX2",
+    "mkl_available": true,
+    "mkl_enable_instructions": null,
+    "stages": {
+      "uniform": "1a9811901e2553b3758cebec8522760003419d6b48ac7d42522f2a0b856173d2",
+      "erfinv": "c6b5437ebc29799040b4429db21d4f5fb3bf3fcbdd99884fe30b4bddac0b6774",
+      "scale": "88aa340e863a467988bc6d17775e85befbb55c6de2c772095c108e2cf89a39ef"
+    },
+    "model_hash": "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8",
+    "torch": "2.8.0+cu128",
+    "label": "avx2-default",
+    "container_id": "ta-01M23TWH4TDZWB2X8E0CRRGZNR"
+  }
+]

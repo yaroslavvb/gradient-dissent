@@ -1,0 +1,68 @@
+[
+  {
+    "kind": "avx512",
+    "cpu_capability": "AVX512",
+    "torch": "2.8.0+cu128",
+    "source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "rows": [
+      {
+        "seed": 1000,
+        "state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+        "file": "/work/initialization-audit/avx512/1000.pt",
+        "rng_sha256": "6ac28af157c9ea4f15d8d48c2f641e24a866cbfa683740327121a80d0e388c33"
+      },
+      {
+        "seed": 2000,
+        "state_sha256": "779fb93eab45b3be10560e4ea5284fbcf4a3720743c4bf26ff434148ea8acc1a",
+        "file": "/work/initialization-audit/avx512/2000.pt",
+        "rng_sha256": "2c9a8bafc7c37a4f931430b665a1919be5ae3ee5f6c75f56167e185a15a1c8da"
+      },
+      {
+        "seed": 2001,
+        "state_sha256": "88bb29bc604531546ffba0538c2613605dca544fc9fc18349e5a6b0ce2d8b9e1",
+        "file": "/work/initialization-audit/avx512/2001.pt",
+        "rng_sha256": "f67e03f026d3967f7b54bc211111cf31f3e0b2ee1af426fab5e62361e2cec556"
+      },
+      {
+        "seed": 2002,
+        "state_sha256": "62e4cf6632275a306c622c0fb7c8f09c15d09d563d6d8a4d1437430148df41b8",
+        "file": "/work/initialization-audit/avx512/2002.pt",
+        "rng_sha256": "c4d23481cc1991b1a43eddc35e4bd22480fe64b8ca467c8715e998f240130eac"
+      }
+    ],
+    "committed": true
+  },
+  {
+    "kind": "avx2",
+    "cpu_capability": "AVX2",
+    "torch": "2.8.0+cu128",
+    "source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "rows": [
+      {
+        "seed": 1000,
+        "state_sha256": "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8",
+        "file": "/work/initialization-audit/avx2/1000.pt",
+        "rng_sha256": "6ac28af157c9ea4f15d8d48c2f641e24a866cbfa683740327121a80d0e388c33"
+      },
+      {
+        "seed": 2000,
+        "state_sha256": "4aa96a3d184a042bf0599a2a4e9953a15ab04c99f2f6c00d677fbe8d7bf939e5",
+        "file": "/work/initialization-audit/avx2/2000.pt",
+        "rng_sha256": "2c9a8bafc7c37a4f931430b665a1919be5ae3ee5f6c75f56167e185a15a1c8da"
+      },
+      {
+        "seed": 2001,
+        "state_sha256": "b01dcf0da2b2e4b28c746d3b541771bb93dfc9fd47782eacf66177229d44e283",
+        "file": "/work/initialization-audit/avx2/2001.pt",
+        "rng_sha256": "f67e03f026d3967f7b54bc211111cf31f3e0b2ee1af426fab5e62361e2cec556"
+      },
+      {
+        "seed": 2002,
+        "state_sha256": "bf54efd51c77baa142139a5fb4f8f40fc00256565ec0f5a73ab3bc1803874bbe",
+        "file": "/work/initialization-audit/avx2/2002.pt",
+        "rng_sha256": "c4d23481cc1991b1a43eddc35e4bd22480fe64b8ca467c8715e998f240130eac"
+      }
+    ],
+    "committed": true
+  }
+]

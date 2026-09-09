@@ -1,0 +1,212 @@
+{
+  "run_id": "tune-vit_cifar100-constant_ild-lr2",
+  "spec": {
+    "batch_size": 256,
+    "context": 0,
+    "image_size": 32,
+    "steps": 10240,
+    "timeout_seconds": 1200,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eval_batch_size": 256,
+    "run_id": "tune-vit_cifar100-constant_ild-lr2",
+    "task": "vit_cifar100",
+    "stage": "tune",
+    "recipe": "constant_ild",
+    "seed": 1000,
+    "lr": 0.001,
+    "gpu": "A100",
+    "validation_windows": 128,
+    "test_windows": 256,
+    "validation_examples": 5000,
+    "log_every": 1024,
+    "warmup_steps": 100
+  },
+  "metadata": {
+    "torch": "2.8.0+cu128",
+    "numpy": "2.2.6",
+    "python": "3.11.12",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "gpu_memory_total_bytes": 42405855232,
+    "nvidia_smi": "NVIDIA A100-SXM4-40GB, 40960 MiB, 580.95.05",
+    "parameters": 85219684,
+    "model_config": {
+      "family": "vit",
+      "depth": 12,
+      "width": 768,
+      "heads": 12,
+      "mlp_width": 3072,
+      "patch_size": 4,
+      "image_size": 32,
+      "tokens": 64,
+      "num_classes": 100,
+      "pooling": "mean of final-normalized patch tokens",
+      "mask": "shared over attention and MLP residual updates",
+      "initialization": "truncated normal std.02, zero biases, LayerNorm weight1"
+    },
+    "precision": "BF16 autocast; FP32 master parameters/AdamW states; TF32 allowed",
+    "source_sha256": {
+      "train.py": "50915ffcb0e0d0b40c55db02b31d3e91e9ad2013c127d187b8d2f96b033ebe4e",
+      "language.py": "9aaa1230aa655fca3d18716f65885c67a545a51ba6991ab0310ab4c58215b42b",
+      "vision.py": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0"
+    },
+    "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+    "prunable_count": 12,
+    "prunable_ids": [
+      "blocks.0",
+      "blocks.1",
+      "blocks.2",
+      "blocks.3",
+      "blocks.4",
+      "blocks.5",
+      "blocks.6",
+      "blocks.7",
+      "blocks.8",
+      "blocks.9",
+      "blocks.10",
+      "blocks.11"
+    ],
+    "training_examples_or_corpus_tokens": 45000,
+    "dataset_manifest_sha256": "d778612c3f7528180494c5772b84c0d40c469cd2946056fd3e6049ddc2baa98a"
+  },
+  "correctness": {
+    "gpu_all_kept_equals_default": true,
+    "checks_use_validation_only": true
+  },
+  "validation_before": {
+    "ce": 4.7430312500000005,
+    "accuracy": 0.01119999960064888,
+    "targets": 5000
+  },
+  "validation": {
+    "ce": 3.34673818359375,
+    "accuracy": 0.19299998879432678,
+    "targets": 5000
+  },
+  "validation_panel": {
+    "split": "validation",
+    "examples": 5000,
+    "source_split": "stratified subset of official CIFAR100 train"
+  },
+  "test_panel": null,
+  "rows": [],
+  "curve": [
+    {
+      "step": 1,
+      "train_ce": 4.6497802734375,
+      "lr": 1e-05,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 2467,
+      "elapsed_training_seconds": 0.3699774980000008,
+      "step_seconds": 0.3696140210000003
+    },
+    {
+      "step": 1024,
+      "train_ce": 3.3715896606445312,
+      "lr": 0.0009817218080481875,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 2515711,
+      "elapsed_training_seconds": 96.12461475799999,
+      "step_seconds": 0.09366412500000365
+    },
+    {
+      "step": 2048,
+      "train_ce": 3.4377593994140625,
+      "lr": 0.0009205649891494088,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 5032592,
+      "elapsed_training_seconds": 191.976842854,
+      "step_seconds": 0.0928543229999832
+    },
+    {
+      "step": 3072,
+      "train_ce": 3.6846160888671875,
+      "lr": 0.0008224145112679623,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 7547719,
+      "elapsed_training_seconds": 287.65607624800003,
+      "step_seconds": 0.0927855869999803
+    },
+    {
+      "step": 4096,
+      "train_ce": 3.5374755859375,
+      "lr": 0.0006970687779607154,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 10063870,
+      "elapsed_training_seconds": 383.063621383,
+      "step_seconds": 0.09292634100000896
+    },
+    {
+      "step": 5120,
+      "train_ce": 3.575714111328125,
+      "lr": 0.0005570411065908234,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 12579531,
+      "elapsed_training_seconds": 478.59630527,
+      "step_seconds": 0.09271190900000192
+    },
+    {
+      "step": 6144,
+      "train_ce": 3.530925750732422,
+      "lr": 0.00041631051858361103,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 15096198,
+      "elapsed_training_seconds": 574.0149471889999,
+      "step_seconds": 0.09277888099995835
+    },
+    {
+      "step": 7168,
+      "train_ce": 3.47491455078125,
+      "lr": 0.0002889262078284398,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 17614397,
+      "elapsed_training_seconds": 669.735463334,
+      "step_seconds": 0.09285237000005964
+    },
+    {
+      "step": 8192,
+      "train_ce": 3.3684158325195312,
+      "lr": 0.00018760500373392653,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 20130555,
+      "elapsed_training_seconds": 765.305287189,
+      "step_seconds": 0.09300098400001389
+    },
+    {
+      "step": 9216,
+      "train_ce": 3.5393600463867188,
+      "lr": 0.00012246184479058886,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 22647646,
+      "elapsed_training_seconds": 860.9109787829999,
+      "step_seconds": 0.0936475320000909
+    },
+    {
+      "step": 10240,
+      "train_ce": 3.259805679321289,
+      "lr": 0.0001,
+      "nominal_mean_dropout": 0.20000001788139343,
+      "active_example_blocks": 25164642,
+      "elapsed_training_seconds": 956.668771638,
+      "step_seconds": 0.09336843100004444
+    }
+  ],
+  "train_seconds": 956.671002208,
+  "container_function_seconds": 966.560882485,
+  "mean_step_seconds_after_warmup": 0.09307584388445748,
+  "peak_allocated_bytes": 7150904832,
+  "peak_reserved_bytes": 7476346880,
+  "clipped_steps": 10240,
+  "nominal_mean_dropout": 0.20000000298023224,
+  "realized_active_example_blocks": 25164642,
+  "dense_example_blocks": 31457280,
+  "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+  "layerscale_before": {},
+  "layerscale_after": {},
+  "training_targets_or_images": 2621440,
+  "cost_note": "Use Modal billing plus invocation reservation ledger; runtime alone excludes startup/build/idle/egress.",
+  "local_dispatch_elapsed_seconds": 992.0173709392548
+}

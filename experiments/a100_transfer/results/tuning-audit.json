@@ -1,0 +1,828 @@
+{
+  "passed": true,
+  "qualification": "ConvNeXt initialization is paired by seed and independently audited as numerically close, not bit-identical across all runs. This post hoc verification adjustment used only untrained initialization states; no final test outputs were read for this tuning audit. Unknown initialization variants remain rejected.",
+  "generated_utc": "2026-09-09T19:49:52.208339+00:00",
+  "tuning_runs": 27,
+  "locked_final_runs": 27,
+  "checks": [
+    "Every raw tuning spec exactly matches the frozen tuning manifest",
+    "Frozen executed train/language/vision source hashes and prepared dataset hashes match",
+    "All tuning runs completed the final training horizon, identical batch size and family controls",
+    "All GPU full-mask/default checks passed on validation data",
+    "No tuning run contains test scores or a test panel",
+    "Equal LR grids and distinct tuning/final seeds",
+    "Same-seed initial hashes bit-identical for GPT/ViT; only audited exact ConvNeXt variants admitted",
+    "Same-seed data streams and validation panels identical across all learning rates and recipes",
+    "Terminal full-depth validation CE alone determines learning-rate winners; accuracy does not select",
+    "Eight of nine selected learning rates are grid boundaries",
+    "All 54 tuning/final budget reservations match exact locked specs; ledger arithmetic below authorization"
+  ],
+  "executed_core_source_sha256": {
+    "train.py": "50915ffcb0e0d0b40c55db02b31d3e91e9ad2013c127d187b8d2f96b033ebe4e",
+    "language.py": "9aaa1230aa655fca3d18716f65885c67a545a51ba6991ab0310ab4c58215b42b",
+    "vision.py": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0"
+  },
+  "dataset_manifest_sha256": {
+    "gpt_wikitext103": "0c342d233f94241b05e07184c30086c414a99eb11c190447da5c38675edf7f6c",
+    "vit_cifar100": "d778612c3f7528180494c5772b84c0d40c469cd2946056fd3e6049ddc2baa98a",
+    "convnext_cifar100": "d778612c3f7528180494c5772b84c0d40c469cd2946056fd3e6049ddc2baa98a"
+  },
+  "evaluation_manifest_sha256": "8130bac3dfea34bd0d26d6a2bcd88b196d2ab82d8cdd0c3ac49401268b426179",
+  "tuning_manifest": {
+    "file": "tuning-manifest.json",
+    "sha256": "e6a69e3db1a99560267cb3164f8aee348b8994162d8c823531f8b3041f5a1da4",
+    "runs": 27,
+    "initialization_pairing": [
+      {
+        "task": "convnext_cifar100",
+        "seed": 1000,
+        "status": "audited_numerical_close",
+        "observed_hashes": [
+          "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8"
+        ],
+        "run_hashes": {
+          "tune-convnext_cifar100-dense-lr0": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "tune-convnext_cifar100-constant_ild-lr0": "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8",
+          "tune-convnext_cifar100-decreasing_ild-lr0": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "tune-convnext_cifar100-dense-lr1": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "tune-convnext_cifar100-constant_ild-lr1": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "tune-convnext_cifar100-decreasing_ild-lr1": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "tune-convnext_cifar100-dense-lr2": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "tune-convnext_cifar100-constant_ild-lr2": "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8",
+          "tune-convnext_cifar100-decreasing_ild-lr2": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939"
+        }
+      },
+      {
+        "task": "gpt_wikitext103",
+        "seed": 1000,
+        "status": "exact",
+        "observed_hashes": [
+          "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9"
+        ],
+        "run_hashes": {
+          "tune-gpt_wikitext103-dense-lr0": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-constant_ild-lr0": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-decreasing_ild-lr0": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-dense-lr1": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-constant_ild-lr1": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-decreasing_ild-lr1": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-dense-lr2": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-constant_ild-lr2": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+          "tune-gpt_wikitext103-decreasing_ild-lr2": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9"
+        }
+      },
+      {
+        "task": "vit_cifar100",
+        "seed": 1000,
+        "status": "exact",
+        "observed_hashes": [
+          "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca"
+        ],
+        "run_hashes": {
+          "tune-vit_cifar100-dense-lr0": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-constant_ild-lr0": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-decreasing_ild-lr0": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-dense-lr1": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-constant_ild-lr1": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-decreasing_ild-lr1": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-dense-lr2": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-constant_ild-lr2": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+          "tune-vit_cifar100-decreasing_ild-lr2": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca"
+        }
+      }
+    ]
+  },
+  "initialization_numerical_audit": {
+    "passed": true,
+    "posthoc_verification_adjustment": true,
+    "task": "convnext_cifar100",
+    "audited_seeds": [
+      1000,
+      2000,
+      2001,
+      2002
+    ],
+    "torch": "2.8.0+cu128",
+    "vision_source_sha256": "edd014c05c041793025db1f64224de194ae0345c47b4e6720a631404f3848bf0",
+    "thresholds": {
+      "max_absolute_difference": 1e-07,
+      "relative_l2_difference": 1e-06
+    },
+    "max_absolute_difference": 7.450580596923828e-09,
+    "max_relative_l2_difference": 5.362363754206486e-09,
+    "evidence_files": [
+      {
+        "file": "initialization-numerical-audit.json",
+        "sha256": "e2e8b144d47e7c465e7c178994b239dd2ccd523276025ab1628bdd191fd0a7e8"
+      },
+      {
+        "file": "initialization-variant-manifests.json",
+        "sha256": "64bd44b980b7d204be439208d007194713c9f152ca27a83642183d423ce28fe4"
+      },
+      {
+        "file": "initialization-worker-probes.json",
+        "sha256": "cc55ae7133d1e2f8434490e1220be68b12983326e7e53a3890bd4c6d7ae94489"
+      }
+    ],
+    "seed_audits": [
+      {
+        "seed": 1000,
+        "state_hashes": [
+          "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+          "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183867,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.3558964638539205e-09,
+        "rng_sha256": "6ac28af157c9ea4f15d8d48c2f641e24a866cbfa683740327121a80d0e388c33"
+      },
+      {
+        "seed": 2000,
+        "state_hashes": [
+          "779fb93eab45b3be10560e4ea5284fbcf4a3720743c4bf26ff434148ea8acc1a",
+          "4aa96a3d184a042bf0599a2a4e9953a15ab04c99f2f6c00d677fbe8d7bf939e5"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183638,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.352809309482752e-09,
+        "rng_sha256": "2c9a8bafc7c37a4f931430b665a1919be5ae3ee5f6c75f56167e185a15a1c8da"
+      },
+      {
+        "seed": 2001,
+        "state_hashes": [
+          "88bb29bc604531546ffba0538c2613605dca544fc9fc18349e5a6b0ce2d8b9e1",
+          "b01dcf0da2b2e4b28c746d3b541771bb93dfc9fd47782eacf66177229d44e283"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183534,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.362363754206486e-09,
+        "rng_sha256": "f67e03f026d3967f7b54bc211111cf31f3e0b2ee1af426fab5e62361e2cec556"
+      },
+      {
+        "seed": 2002,
+        "state_hashes": [
+          "62e4cf6632275a306c622c0fb7c8f09c15d09d563d6d8a4d1437430148df41b8",
+          "bf54efd51c77baa142139a5fb4f8f40fc00256565ec0f5a73ab3bc1803874bbe"
+        ],
+        "parameters": 27897028,
+        "changed_elements": 183059,
+        "max_absolute_difference": 7.450580596923828e-09,
+        "relative_l2_difference": 5.360915287664752e-09,
+        "rng_sha256": "c4d23481cc1991b1a43eddc35e4bd22480fe64b8ca467c8715e998f240130eac"
+      }
+    ],
+    "interpretation": "Post hoc verification adjustment based only on reconstructed, untrained CPU states, independent of test outcomes. ConvNeXt permits only the two exact recorded hashes per audited seed, whose complete tensors are numerically close and whose post-init RNG states match. GPT/ViT require bit-identical paired initialization. This does not establish identical training trajectories or eliminate host-dependent numerical variation."
+  },
+  "learning_rate_selection": [
+    {
+      "task": "convnext_cifar100",
+      "recipe": "dense",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_validation_ce": {
+        "0.0003": 3.3722920532226563,
+        "0.001": 3.5933856567382816,
+        "0.003": 3.9583864990234376
+      },
+      "mean_validation_accuracy": {
+        "0.0003": 0.5321999788284302,
+        "0.001": 0.5307999849319458,
+        "0.003": 0.5112000107765198
+      },
+      "selected_lr": 0.0003,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "convnext_cifar100",
+      "recipe": "constant_ild",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_validation_ce": {
+        "0.0003": 2.681849346923828,
+        "0.001": 2.924037322998047,
+        "0.003": 2.9579732360839843
+      },
+      "mean_validation_accuracy": {
+        "0.0003": 0.5654000043869019,
+        "0.001": 0.5781999826431274,
+        "0.003": 0.5895999670028687
+      },
+      "selected_lr": 0.0003,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "convnext_cifar100",
+      "recipe": "decreasing_ild",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_validation_ce": {
+        "0.0003": 2.8196343383789064,
+        "0.001": 3.0644024841308597,
+        "0.003": 3.1933373657226563
+      },
+      "mean_validation_accuracy": {
+        "0.0003": 0.5663999915122986,
+        "0.001": 0.5740000009536743,
+        "0.003": 0.5902000069618225
+      },
+      "selected_lr": 0.0003,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "gpt_wikitext103",
+      "recipe": "dense",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0003,
+        0.0006,
+        0.0012
+      ],
+      "mean_validation_ce": {
+        "0.0003": 3.7522258162498474,
+        "0.0006": 3.5988154113292694,
+        "0.0012": 3.5143952518701553
+      },
+      "mean_validation_accuracy": {
+        "0.0003": 0.3625640869140625,
+        "0.0006": 0.37554168701171875,
+        "0.0012": 0.38333892822265625
+      },
+      "selected_lr": 0.0012,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "gpt_wikitext103",
+      "recipe": "constant_ild",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0003,
+        0.0006,
+        0.0012
+      ],
+      "mean_validation_ce": {
+        "0.0003": 3.971467360854149,
+        "0.0006": 3.7138316333293915,
+        "0.0012": 3.679940275847912
+      },
+      "mean_validation_accuracy": {
+        "0.0003": 0.33672332763671875,
+        "0.0006": 0.3619384765625,
+        "0.0012": 0.36365509033203125
+      },
+      "selected_lr": 0.0012,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "gpt_wikitext103",
+      "recipe": "decreasing_ild",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0003,
+        0.0006,
+        0.0012
+      ],
+      "mean_validation_ce": {
+        "0.0003": 4.036542475223541,
+        "0.0006": 3.7531092762947083,
+        "0.0012": 3.728503219783306
+      },
+      "mean_validation_accuracy": {
+        "0.0003": 0.33092498779296875,
+        "0.0006": 0.3590087890625,
+        "0.0012": 0.35984039306640625
+      },
+      "selected_lr": 0.0012,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "vit_cifar100",
+      "recipe": "dense",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_validation_ce": {
+        "0.0001": 3.0123381958007815,
+        "0.0003": 3.1416650756835938,
+        "0.001": 3.36550576171875
+      },
+      "mean_validation_accuracy": {
+        "0.0001": 0.47599998116493225,
+        "0.0003": 0.48179998993873596,
+        "0.001": 0.18799999356269836
+      },
+      "selected_lr": 0.0001,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "vit_cifar100",
+      "recipe": "constant_ild",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_validation_ce": {
+        "0.0001": 2.668220361328125,
+        "0.0003": 2.6195007202148437,
+        "0.001": 3.34673818359375
+      },
+      "mean_validation_accuracy": {
+        "0.0001": 0.4885999858379364,
+        "0.0003": 0.503600001335144,
+        "0.001": 0.19299998879432678
+      },
+      "selected_lr": 0.0003,
+      "selected_at_boundary": false,
+      "same_horizon_as_final": true
+    },
+    {
+      "task": "vit_cifar100",
+      "recipe": "decreasing_ild",
+      "tuning_seeds": [
+        1000
+      ],
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_validation_ce": {
+        "0.0001": 2.5174935485839844,
+        "0.0003": 2.814760144042969,
+        "0.001": 3.2262690673828125
+      },
+      "mean_validation_accuracy": {
+        "0.0001": 0.48579999804496765,
+        "0.0003": 0.4867999851703644,
+        "0.001": 0.2184000015258789
+      },
+      "selected_lr": 0.0001,
+      "selected_at_boundary": true,
+      "same_horizon_as_final": true
+    }
+  ],
+  "selected_boundary_count": 8,
+  "raw_tuning_files": [
+    {
+      "run_id": "tune-gpt_wikitext103-dense-lr0",
+      "sha256": "0436f4b5e023a75cfbbec33f80ae3475fbf0ae0dea239b4c524f2cdb55c5a6f3",
+      "task": "gpt_wikitext103",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.7522258162498474,
+      "terminal_validation_accuracy": 0.3625640869140625
+    },
+    {
+      "run_id": "tune-vit_cifar100-dense-lr0",
+      "sha256": "ae403d0c4135417c28fc2ae3624462b4a301174f5e4c0247e07dd10fcdf2bd96",
+      "task": "vit_cifar100",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.0001,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 3.0123381958007815,
+      "terminal_validation_accuracy": 0.47599998116493225
+    },
+    {
+      "run_id": "tune-convnext_cifar100-dense-lr0",
+      "sha256": "26afb538f8f1887129021f417af48b757fe8808f8d748bf33da41bb2ab1f6e9d",
+      "task": "convnext_cifar100",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 3.3722920532226563,
+      "terminal_validation_accuracy": 0.5321999788284302
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-constant_ild-lr0",
+      "sha256": "3e4a986ef835ed34cb0808e7393fbb864f759fdf030e38b7ae4589cbd839bbe1",
+      "task": "gpt_wikitext103",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.971467360854149,
+      "terminal_validation_accuracy": 0.33672332763671875
+    },
+    {
+      "run_id": "tune-vit_cifar100-constant_ild-lr0",
+      "sha256": "abc5971a9fde9418107fa2506b82a6c8ab1da594fdbc89ba6c2e107d71420d87",
+      "task": "vit_cifar100",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.0001,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 2.668220361328125,
+      "terminal_validation_accuracy": 0.4885999858379364
+    },
+    {
+      "run_id": "tune-convnext_cifar100-constant_ild-lr0",
+      "sha256": "5927fcae9b9d505d80d9090973e8ebfa18e6aa1985713fe49beb4dee311322ba",
+      "task": "convnext_cifar100",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 10000,
+      "initial_state_sha256": "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 2.681849346923828,
+      "terminal_validation_accuracy": 0.5654000043869019
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-decreasing_ild-lr0",
+      "sha256": "acf5c660a0e9c460a04df52d0d9cdc17297070790eda1f09d90084cc495eaaa3",
+      "task": "gpt_wikitext103",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 4.036542475223541,
+      "terminal_validation_accuracy": 0.33092498779296875
+    },
+    {
+      "run_id": "tune-vit_cifar100-decreasing_ild-lr0",
+      "sha256": "3ee5c090dd1409f4a26c7f62d258cbb304ad43ad5c21a6357bfa3f5bfa9857fb",
+      "task": "vit_cifar100",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.0001,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 2.5174935485839844,
+      "terminal_validation_accuracy": 0.48579999804496765
+    },
+    {
+      "run_id": "tune-convnext_cifar100-decreasing_ild-lr0",
+      "sha256": "8a7a33440acb0c52314ce50b687e6ab06715a85be3a4e160c5f541419c3a7c79",
+      "task": "convnext_cifar100",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 2.8196343383789064,
+      "terminal_validation_accuracy": 0.5663999915122986
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-dense-lr1",
+      "sha256": "5bfa3cf88419c4ce06a3d774783e442d6ad366c0eccf8bcfd31cc28373d3f32b",
+      "task": "gpt_wikitext103",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.0006,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.5988154113292694,
+      "terminal_validation_accuracy": 0.37554168701171875
+    },
+    {
+      "run_id": "tune-vit_cifar100-dense-lr1",
+      "sha256": "18e77a73a7d4870b4df81c4acf36559341e6bc165d458b6b0ceb9a642ebc3bc0",
+      "task": "vit_cifar100",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 3.1416650756835938,
+      "terminal_validation_accuracy": 0.48179998993873596
+    },
+    {
+      "run_id": "tune-convnext_cifar100-dense-lr1",
+      "sha256": "63c1e9dc0b10bb1d50aca5b2e4f76c82ff07c357007219c7cc5f982489a7feee",
+      "task": "convnext_cifar100",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.001,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 3.5933856567382816,
+      "terminal_validation_accuracy": 0.5307999849319458
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-constant_ild-lr1",
+      "sha256": "7bf7e7ad896d1a82e01c6e4344b2533c30906e386e54ea8803680bff5f0605fd",
+      "task": "gpt_wikitext103",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.0006,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.7138316333293915,
+      "terminal_validation_accuracy": 0.3619384765625
+    },
+    {
+      "run_id": "tune-vit_cifar100-constant_ild-lr1",
+      "sha256": "0e9afde225831690037c2580e9b66ebc8b5112b2bd73627061bd5248dcbe31cc",
+      "task": "vit_cifar100",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 2.6195007202148437,
+      "terminal_validation_accuracy": 0.503600001335144
+    },
+    {
+      "run_id": "tune-convnext_cifar100-constant_ild-lr1",
+      "sha256": "0e1c84574351e0e4fb9392cf1a9e6540d0608adfbb408d9658d5b02780cee7e9",
+      "task": "convnext_cifar100",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.001,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 2.924037322998047,
+      "terminal_validation_accuracy": 0.5781999826431274
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-decreasing_ild-lr1",
+      "sha256": "2bb858843c3b794928f9786336c9d8dd0d86820323685184046d2954c9da21f0",
+      "task": "gpt_wikitext103",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.0006,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.7531092762947083,
+      "terminal_validation_accuracy": 0.3590087890625
+    },
+    {
+      "run_id": "tune-vit_cifar100-decreasing_ild-lr1",
+      "sha256": "2cc16649ba9ff0a5e2ab12fad468424e6ed4fbac5ef4c9f6133ccbcf72b92697",
+      "task": "vit_cifar100",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.0003,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 2.814760144042969,
+      "terminal_validation_accuracy": 0.4867999851703644
+    },
+    {
+      "run_id": "tune-convnext_cifar100-decreasing_ild-lr1",
+      "sha256": "db0f66b0f224b0b7162a6823ace3505b3daccaeada9b446b9504acbfbd876dfc",
+      "task": "convnext_cifar100",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.001,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 3.0644024841308597,
+      "terminal_validation_accuracy": 0.5740000009536743
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-dense-lr2",
+      "sha256": "6221e5c928fb1783e06378a03099f1183bd6372659064e9c5bbad987d0af2b53",
+      "task": "gpt_wikitext103",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.0012,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.5143952518701553,
+      "terminal_validation_accuracy": 0.38333892822265625
+    },
+    {
+      "run_id": "tune-vit_cifar100-dense-lr2",
+      "sha256": "0bd2c1cf1f4d801f21e96fa596801bee9374873a159b5493b2f95607e0d0a5ea",
+      "task": "vit_cifar100",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.001,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 3.36550576171875,
+      "terminal_validation_accuracy": 0.18799999356269836
+    },
+    {
+      "run_id": "tune-convnext_cifar100-dense-lr2",
+      "sha256": "9bd990d007990affe9deddbc6d420297d25dc84fb01f657619acd8245933bc50",
+      "task": "convnext_cifar100",
+      "recipe": "dense",
+      "seed": 1000,
+      "lr": 0.003,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 3.9583864990234376,
+      "terminal_validation_accuracy": 0.5112000107765198
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-constant_ild-lr2",
+      "sha256": "d568c1ccaa12f73a8f9512a4086284dc689f96981a8d92065335e198ca67ba25",
+      "task": "gpt_wikitext103",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.0012,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.679940275847912,
+      "terminal_validation_accuracy": 0.36365509033203125
+    },
+    {
+      "run_id": "tune-vit_cifar100-constant_ild-lr2",
+      "sha256": "feaad4811da30b27f249d8ad5ba3b1845e21ac3ea521ddbe1b5d73c2a51f5b75",
+      "task": "vit_cifar100",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.001,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 3.34673818359375,
+      "terminal_validation_accuracy": 0.19299998879432678
+    },
+    {
+      "run_id": "tune-convnext_cifar100-constant_ild-lr2",
+      "sha256": "1afd3cac34b270ccf375c4736ef560a68f7bbe8db01b7fd3d9199c3dd0cf145d",
+      "task": "convnext_cifar100",
+      "recipe": "constant_ild",
+      "seed": 1000,
+      "lr": 0.003,
+      "terminal_step": 10000,
+      "initial_state_sha256": "14ceace68e98d7bbbdf8c42894b2e2adba144734b024aadad678c73680370af8",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 2.9579732360839843,
+      "terminal_validation_accuracy": 0.5895999670028687
+    },
+    {
+      "run_id": "tune-gpt_wikitext103-decreasing_ild-lr2",
+      "sha256": "cb2ff3fbfe817be70611c9586428786804a5dff1be87e8c7df9677d9a1881667",
+      "task": "gpt_wikitext103",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.0012,
+      "terminal_step": 3200,
+      "initial_state_sha256": "e679f8a3e61cff94dabaa486069b40cb6f3ba3a6bdb65b405791416fcf727de9",
+      "training_data_stream_sha256": "1ec2abc35f5707afee3ed50ca96338b668f3a7b9b936c9d0544281109e7a8a9e",
+      "validation_panel_sha256": "8d0eb2668e1404d5988e5c3bee6cfb20687b565828877f61d7284caa83d33938",
+      "initial_validation_ce": 10.943933963775635,
+      "terminal_validation_ce": 3.728503219783306,
+      "terminal_validation_accuracy": 0.35984039306640625
+    },
+    {
+      "run_id": "tune-vit_cifar100-decreasing_ild-lr2",
+      "sha256": "515c7f0eb71de9ff1f6a26cbef237f153cc2a7817c36f00662b30929564385ab",
+      "task": "vit_cifar100",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.001,
+      "terminal_step": 10240,
+      "initial_state_sha256": "578536e583e0b16734dc14ebd021691865c2ab25880d55421c7b32b2a80383ca",
+      "training_data_stream_sha256": "c86326604f54c809f75f02f17fd9cdd32b8a317a3ce89f4c2bd0434306c9adbf",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.7430312500000005,
+      "terminal_validation_ce": 3.2262690673828125,
+      "terminal_validation_accuracy": 0.2184000015258789
+    },
+    {
+      "run_id": "tune-convnext_cifar100-decreasing_ild-lr2",
+      "sha256": "121d662f943706baf89cf140189b8082ef76dd89a74e34e59ec72440c6155eff",
+      "task": "convnext_cifar100",
+      "recipe": "decreasing_ild",
+      "seed": 1000,
+      "lr": 0.003,
+      "terminal_step": 10000,
+      "initial_state_sha256": "0b281e0b27872b80dabc53a2c9f5de1730e9d2de6801fbcaeeea4ed679d43939",
+      "training_data_stream_sha256": "fa297a0da6b8ea60f49cf09eb5fe8f381c898aa6b51c06f63f12a9f0a71c4a5e",
+      "validation_panel_sha256": "a5a7ef8c64320a8121c42307920d6cc9ccc2281237746d0cafe1f35c23daf79c",
+      "initial_validation_ce": 4.741325,
+      "terminal_validation_ce": 3.1933373657226563,
+      "terminal_validation_accuracy": 0.5902000069618225
+    }
+  ],
+  "budget_snapshot": {
+    "cap_usd": 50.0,
+    "reserved_upper_usd": 39.666098,
+    "reservation_count": 60,
+    "reservation_ceiling_usd": 42.0,
+    "latest_metered_usage": {
+      "metered_cost_usd": 17.23670007,
+      "queried_unix": 1788983376.968173
+    },
+    "ledger_sha256": "4f9b1b7ae619c9eb8ed5718ed50434c2e485b76bd973d7f491009678f19bca52",
+    "interpretation": "Reservations are conservative resource allocations, not invoices or measured spend. Metered usage is a timestamped potentially lagging snapshot, not a final invoice."
+  },
+  "analysis_source_sha256": "4d17d64055933389644103b0ca4a34d8ec499a39082afc1e0560797c4a6843a0"
+}

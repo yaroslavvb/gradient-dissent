@@ -1,0 +1,368 @@
+✓ Initialized. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-lucFYc5CbOaKKymn7NHT7
+r
+✓ Created objects.
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer/modal_app.p
+│   y
+├── 🔨 Created mount 
+│   /Users/yaroslavvb/git/gradient-dissent/experiments/a100_transfer
+├── 🔨 Created function prepare.
+└── 🔨 Created function train.
+RESERVED aggregate $20.5375; absolute ceiling $50.00
+SUBMITTED tune-gpt_wikitext103-constant_ild-lr0 fc-01M23R2B8JM34MJK43P0Z4FTSJ
+SUBMITTED tune-gpt_wikitext103-dense-lr0 fc-01M23R2B8JV44SP56P6ZYP0CVQ
+SUBMITTED tune-convnext_cifar100-dense-lr0 fc-01M23R2BA3EG06FW1GKK48JBJ0
+SUBMITTED tune-vit_cifar100-decreasing_ild-lr0 fc-01M23R2BA1CR3J025ZH2F9CVBR
+SUBMITTED tune-convnext_cifar100-constant_ild-lr0 fc-01M23R2B9WWQB73WH2EKEWDB4M
+SUBMITTED tune-gpt_wikitext103-decreasing_ild-lr0 fc-01M23R2B95NMCB5AT6XEKWK5FX
+SUBMITTED tune-vit_cifar100-constant_ild-lr0 fc-01M23R2BA1MK7P3JJCTGSQHNDW
+SUBMITTED tune-vit_cifar100-dense-lr0 fc-01M23R2BAQYADJTV90YA2KGNJG
+SUBMITTED tune-convnext_cifar100-decreasing_ild-lr0 fc-01M23R2BBJT52JD881GH1MMHY2
+tune-gpt_wikitext103-constant_ild-lr0 step 1 loss 10.9448 seconds 1.3
+tune-gpt_wikitext103-dense-lr0 step 1 loss 10.9378 seconds 1.2
+tune-vit_cifar100-decreasing_ild-lr0 step 1 loss 4.7032 seconds 0.7
+tune-gpt_wikitext103-decreasing_ild-lr0 step 1 loss 10.9603 seconds 2.2
+tune-vit_cifar100-constant_ild-lr0 step 1 loss 4.6498 seconds 0.5
+tune-vit_cifar100-dense-lr0 step 1 loss 4.6424 seconds 0.8
+tune-convnext_cifar100-constant_ild-lr0 step 1 loss 4.7456 seconds 12.5
+tune-convnext_cifar100-dense-lr0 step 1 loss 4.7455 seconds 13.5
+tune-convnext_cifar100-decreasing_ild-lr0 step 1 loss 4.7454 seconds 14.4
+tune-convnext_cifar100-constant_ild-lr0 step 1000 loss 2.6923 seconds 53.9
+tune-convnext_cifar100-dense-lr0 step 1000 loss 2.6115 seconds 58.6
+tune-convnext_cifar100-decreasing_ild-lr0 step 1000 loss 2.7783 seconds 59.1
+tune-gpt_wikitext103-constant_ild-lr0 step 320 loss 5.7967 seconds 89.3
+tune-gpt_wikitext103-dense-lr0 step 320 loss 5.7542 seconds 94.8
+tune-vit_cifar100-decreasing_ild-lr0 step 1024 loss 2.6171 seconds 97.4
+tune-vit_cifar100-constant_ild-lr0 step 1024 loss 2.5598 seconds 89.8
+tune-convnext_cifar100-constant_ild-lr0tune-gpt_wikitext103-decreasing_ild-lr0 step 2000 loss 1.9294 seconds 95.6
+ step 320 loss 5.8405 seconds 95.8
+tune-convnext_cifar100-dense-lr0 step 2000 loss 1.6834 seconds 102.7
+tune-convnext_cifar100-decreasing_ild-lr0 step 2000 loss 2.1121 seconds 103.7
+tune-vit_cifar100-dense-lr0 step 1024 loss 2.4672 seconds 97.2
+tune-convnext_cifar100-constant_ild-lr0 step 3000 loss 1.1968 seconds 137.2
+tune-convnext_cifar100-dense-lr0 step 3000 loss 0.6715 seconds 147.3
+tune-convnext_cifar100-decreasing_ild-lr0 step 3000 loss 1.4465 seconds 149.4
+tune-gpt_wikitext103-constant_ild-lr0 step 640 loss 5.2594 seconds 176.2
+tune-gpt_wikitext103-dense-lr0 step 640 loss 5.0794 seconds 188.8
+tune-convnext_cifar100-constant_ild-lr0 step 4000 loss 0.6524 seconds 179.1
+tune-vit_cifar100-constant_ild-lr0 step 2048 loss 2.1176 seconds 179.9
+tune-vit_cifar100-decreasing_ild-lr0 step 2048 loss 2.2373 seconds 195.3
+tune-gpt_wikitext103-decreasing_ild-lr0 step 640 loss 5.3503 seconds 189.9
+tune-convnext_cifar100-dense-lr0 step 4000 loss 0.2202 seconds 193.9
+tune-convnext_cifar100-decreasing_ild-lr0 step 4000 loss 0.7943 seconds 194.3
+tune-vit_cifar100-dense-lr0 step 2048 loss 2.0194 seconds 194.6
+tune-convnext_cifar100-constant_ild-lr0 step 5000 loss 0.4302 seconds 220.1
+tune-convnext_cifar100-decreasing_ild-lr0 step 5000 loss 0.3938 seconds 239.4
+tune-convnext_cifar100-dense-lr0 step 5000 loss 0.0932 seconds 240.5
+tune-gpt_wikitext103-constant_ild-lr0 step 960 loss 4.9814 seconds 263.0
+tune-convnext_cifar100-constant_ild-lr0 step 6000 loss 0.1973 seconds 260.8
+tune-gpt_wikitext103-dense-lr0 step 960 loss 4.7518 seconds 283.0
+tune-vit_cifar100-constant_ild-lr0 step 3072 loss 1.8243 seconds 269.4
+tune-gpt_wikitext103-decreasing_ild-lr0 step 960 loss 5.1014 seconds 284.1
+tune-convnext_cifar100-decreasing_ild-lr0 step 6000 loss 0.1578 seconds 284.0
+tune-vit_cifar100-decreasing_ild-lr0 step 3072 loss 1.8837 seconds 292.8
+tune-convnext_cifar100-dense-lr0 step 6000 loss 0.0526 seconds 290.8
+tune-vit_cifar100-dense-lr0 step 3072 loss 1.6201 seconds 291.8
+tune-convnext_cifar100-constant_ild-lr0 step 7000 loss 0.1463 seconds 302.0
+tune-convnext_cifar100-decreasing_ild-lr0 step 7000 loss 0.0771 seconds 328.7
+tune-gpt_wikitext103-constant_ild-lr0 step 1280 loss 4.7085 seconds 350.0
+tune-convnext_cifar100-dense-lr0 step 7000 loss 0.0316 seconds 338.1
+tune-convnext_cifar100-constant_ild-lr0 step 8000 loss 0.095 seconds 342.7
+tune-vit_cifar100-constant_ild-lr0 step 4096 loss 1.457 seconds 359.4
+tune-gpt_wikitext103-dense-lr0 step 1280 loss 4.4946 seconds 377.2
+tune-convnext_cifar100-decreasing_ild-lr0 step 8000 loss 0.0187 seconds 372.4
+tune-gpt_wikitext103-decreasing_ild-lr0 step 1280 loss 4.8255 seconds 378.1
+tune-convnext_cifar100-constant_ild-lr0 tune-vit_cifar100-decreasing_ild-lr0 stepstep 9000 loss 0.0527 seconds 383.1
+ 4096 loss 1.5606 seconds 389.7
+tune-convnext_cifar100-dense-lr0 step 8000 loss 0.005 seconds 386.4
+tune-vit_cifar100-dense-lr0 step 4096 loss 1.1664 seconds 388.9
+tune-convnext_cifar100-decreasing_ild-lr0 step 9000 loss 0.012 seconds 416.2
+tune-gpt_wikitext103-constant_ild-lr0 step 1600 loss 4.5643 seconds 437.0
+tune-convnext_cifar100-constant_ild-lr0 step 10000 loss 0.0433 seconds 423.5
+COMPLETED tune-convnext_cifar100-constant_ild-lr0 seconds 458.6
+SUBMITTED tune-gpt_wikitext103-dense-lr1 fc-01M23RGAXPFK7FFF3T5JA6P1TX
+tune-convnext_cifar100-dense-lr0 step 9000 loss 0.0035 seconds 434.1
+tune-vit_cifar100-constant_ild-lr0 step 5120 loss 1.1374 seconds 449.6
+tune-gpt_wikitext103-dense-lr0 step 1600 loss 4.3121 seconds 471.4
+tune-convnext_cifar100-decreasing_ild-lr0 step 10000 loss 0.0046 seconds 460.5
+COMPLETED tune-convnext_cifar100-decreasing_ild-lr0 seconds 496.2
+SUBMITTED tune-vit_cifar100-dense-lr1 fc-01M23RHFK8T33V5RZY0FEY5PKZ
+tune-gpt_wikitext103-decreasing_ild-lr0 step 1600 loss 4.6747 seconds 472.1
+tune-gpt_wikitext103-dense-lr1 step 1 loss 10.9378 seconds 1.1
+tune-vit_cifar100-decreasing_ild-lr0 step 5120 loss 1.2823 seconds 487.5
+tune-convnext_cifar100-dense-lr0 step 10000 loss 0.007 seconds 482.0
+tune-vit_cifar100-dense-lr1 step 1 loss 4.6424 seconds 0.7
+COMPLETED tune-convnext_cifar100-dense-lr0 seconds 516.6
+SUBMITTED tune-convnext_cifar100-dense-lr1 fc-01M23RJ3GAJ4AP93DJF08KCMM3
+tune-convnext_cifar100-dense-lr1 step 1 loss 4.7455 seconds 0.1
+tune-vit_cifar100-dense-lr0 step 5120 loss 0.7427 seconds 486.0
+tune-gpt_wikitext103-constant_ild-lr0 step 1920 loss 4.3854 seconds 524.1
+tune-convnext_cifar100-dense-lr1 step 1000 loss 2.0594 seconds 45.9
+tune-vit_cifar100-constant_ild-lr0 step 6144 loss 0.7158 seconds 539.6
+tune-gpt_wikitext103-dense-lr0 step 1920 loss 4.0911 seconds 565.6
+tune-gpt_wikitext103-decreasing_ild-lr0 step 1920 loss 4.4626 seconds 566.2
+tune-gpt_wikitext103-dense-lr1 step 320 loss 5.6364 seconds 91.1
+tune-vit_cifar100-decreasing_ild-lr0 step 6144 loss 1.0003 seconds 585.2
+tune-vit_cifar100-dense-lr1 step 1024 loss 2.6355 seconds 97.0
+tune-convnext_cifar100-dense-lr1 step 2000 loss 0.7912 seconds 92.7
+tune-vit_cifar100-dense-lr0 step 6144 loss 0.3541 seconds 583.0
+tune-gpt_wikitext103-constant_ild-lr0 step 2240 loss 4.2473 seconds 611.1
+tune-convnext_cifar100-dense-lr1 step 3000 loss 0.2124 seconds 139.9
+tune-vit_cifar100-constant_ild-lr0 step 7168 loss 0.5541 seconds 629.4
+tune-gpt_wikitext103-dense-lr0 step 2240 loss 3.9664 seconds 659.8
+tune-gpt_wikitext103-decreasing_ild-lr0tune-gpt_wikitext103-dense-lr1 step 2240 loss 4.3142 seconds 660.3
+ step 640 loss 4.9418 seconds 181.5
+tune-vit_cifar100-decreasing_ild-lr0 step 7168 loss 0.7265 seconds 683.2
+tune-vit_cifar100-dense-lr1 step 2048 loss 2.1692 seconds 194.4
+tune-convnext_cifar100-dense-lr1 step 4000 loss 0.0983 seconds 187.8
+tune-gpt_wikitext103-constant_ild-lr0 step 2560 loss 4.1799 seconds 698.1
+tune-vit_cifar100-dense-lr0 step 7168 loss 0.1874 seconds 680.2
+tune-vit_cifar100-constant_ild-lr0 step 8192 loss 0.3693 seconds 719.1
+tune-convnext_cifar100-dense-lr1 step 5000 loss 0.0843 seconds 235.7
+tune-gpt_wikitext103-dense-lr0 step 2560 loss 3.9238 seconds 754.1
+tune-gpt_wikitext103-dense-lr1 step 960 loss 4.5945 seconds 272.1
+tune-gpt_wikitext103-decreasing_ild-lr0 step 2560 loss 4.238 seconds 754.6
+tune-gpt_wikitext103-constant_ild-lr0 step 2880 loss 4.2571 seconds 785.2
+tune-convnext_cifar100-dense-lr1 step 6000 loss 0.0144 seconds 282.0
+tune-vit_cifar100-decreasing_ild-lr0 step 8192 loss 0.5471 seconds 780.4
+tune-vit_cifar100-dense-lr1 step 3072 loss 1.81 seconds 292.1
+tune-vit_cifar100-dense-lr0 step 8192 loss 0.0971 seconds 778.5
+tune-vit_cifar100-constant_ild-lr0 step 9216 loss 0.3304 seconds 809.1
+tune-convnext_cifar100-dense-lr1 step 7000 loss 0.0105 seconds 327.3
+tune-gpt_wikitext103-dense-lr0 step 2880 loss 3.9162 seconds 848.4
+tune-gpt_wikitext103-dense-lr1 step 1280 loss 4.3237 seconds 362.6
+tune-gpt_wikitext103-decreasing_ild-lr0 step 2880 loss 4.2287 seconds 848.9
+tune-gpt_wikitext103-constant_ild-lr0 step 3200 loss 4.1311 seconds 872.3
+COMPLETED tune-gpt_wikitext103-constant_ild-lr0 seconds 889.0
+SUBMITTED tune-gpt_wikitext103-constant_ild-lr1 fc-01M23RXF7PX2DT1VB3V85MFHRD
+tune-gpt_wikitext103-constant_ild-lr1 step 1 loss 10.9448 seconds 0.3
+tune-convnext_cifar100-dense-lr1 step 8000 loss 0.0011 seconds 372.9
+tune-vit_cifar100-decreasing_ild-lr0 step 9216 loss 0.4199 seconds 877.5
+tune-vit_cifar100-dense-lr1 step 4096 loss 1.3531 seconds 389.6
+tune-vit_cifar100-dense-lr0 step 9216 loss 0.0608 seconds 876.3
+tune-vit_cifar100-constant_ild-lr0 step 10240 loss 0.2729 seconds 899.2
+COMPLETED tune-vit_cifar100-constant_ild-lr0 seconds 937.9
+SUBMITTED tune-vit_cifar100-constant_ild-lr1 fc-01M23RYYZWPKJRG3415KET5BS9
+tune-convnext_cifar100-dense-lr1 step 9000 loss 0.0005 seconds 419.3
+tune-vit_cifar100-constant_ild-lr1 step 1 loss 4.6498 seconds 0.1
+tune-gpt_wikitext103-dense-lr1 step 1600 loss 4.1449 seconds 453.2
+tune-gpt_wikitext103-dense-lr0 step 3200 loss 3.861 seconds 942.5
+COMPLETED tune-gpt_wikitext103-dense-lr0 seconds 965.8
+SUBMITTED tune-convnext_cifar100-constant_ild-lr1 fc-01M23RZT70Y2NW8GW1RVTEZ6SF
+tune-gpt_wikitext103-decreasing_ild-lr0 step 3200 loss 4.1352 seconds 943.2
+COMPLETED tune-gpt_wikitext103-decreasing_ild-lr0 seconds 977.1
+SUBMITTED tune-gpt_wikitext103-decreasing_ild-lr1 fc-01M23S0577JZTJYKHEZANTZG36
+tune-gpt_wikitext103-constant_ild-lr1 step 320 loss 5.6729 seconds 87.2
+tune-gpt_wikitext103-decreasing_ild-lr1 step 1 loss 10.9603 seconds 0.3
+tune-convnext_cifar100-dense-lr1 step 10000 loss 0.0046 seconds 465.5
+COMPLETED tune-convnext_cifar100-dense-lr1 seconds 474.8
+SUBMITTED tune-vit_cifar100-decreasing_ild-lr1 fc-01M23S0K50F4KBR90E3TXS5RY1
+tune-vit_cifar100-decreasing_ild-lr0 step 10240 loss 0.2248 seconds 974.4
+tune-vit_cifar100-decreasing_ild-lr1 step 1 loss 4.7032 seconds 0.2
+COMPLETED tune-vit_cifar100-decreasing_ild-lr0 seconds 1002.3
+SUBMITTED tune-convnext_cifar100-decreasing_ild-lr1 fc-01M23S0XX4ZARMVBRVVF8XMB5Q
+tune-vit_cifar100-dense-lr1 step 5120 loss 0.9348 seconds 487.4
+tune-convnext_cifar100-decreasing_ild-lr1 step 1 loss 4.7454 seconds 0.1
+tune-vit_cifar100-dense-lr0 step 10240 loss 0.0299 seconds 974.3
+COMPLETED tune-vit_cifar100-dense-lr0 seconds 1017.4
+SUBMITTED tune-gpt_wikitext103-dense-lr2 fc-01M23S1CMB820SE4Q4ZBQ27WZM
+tune-convnext_cifar100-constant_ild-lr1 step 1 loss 4.7456 seconds 14.3
+tune-gpt_wikitext103-dense-lr2 step 1 loss 10.9378 seconds 1.5
+tune-vit_cifar100-constant_ild-lr1 step 1024 loss 2.6864 seconds 89.9
+tune-gpt_wikitext103-dense-lr1 step 1920 loss 3.9322 seconds 543.7
+tune-convnext_cifar100-decreasing_ild-lr1 step 1000 loss 2.4475 seconds 48.1
+tune-convnext_cifar100-constant_ild-lr1 step 1000 loss 2.2992 seconds 63.2
+tune-gpt_wikitext103-constant_ild-lr1 step 640 loss 5.0883 seconds 174.3
+tune-gpt_wikitext103-decreasing_ild-lr1 step 320 loss 5.7234 seconds 94.0
+tune-vit_cifar100-decreasing_ild-lr1 step 1024 loss 2.6852 seconds 96.9
+tune-vit_cifar100-dense-lr1 step 6144 loss 0.4133 seconds 584.9
+tune-convnext_cifar100-decreasing_ild-lr1 step 2000 loss 1.5867 seconds 94.8
+tune-convnext_cifar100-constant_ild-lr1 step 2000 loss 1.2868 seconds 110.6
+tune-gpt_wikitext103-dense-lr2 step 320 loss 5.6119 seconds 95.3
+tune-vit_cifar100-constant_ild-lr1 step 2048 loss 2.1962 seconds 180.0
+tune-gpt_wikitext103-dense-lr1 step 2240 loss 3.7994 seconds 634.3
+tune-convnext_cifar100-decreasing_ild-lr1 step 3000 loss 0.8052 seconds 140.1
+tune-gpt_wikitext103-constant_ild-lr1 step 960 loss 4.7762 seconds 261.6
+tune-convnext_cifar100-constant_ild-lr1 step 3000 loss 0.5925 seconds 156.5
+tune-gpt_wikitext103-decreasing_ild-lr1 step 640 loss 5.1797 seconds 187.9
+tune-vit_cifar100-decreasing_ild-lr1 step 2048 loss 2.3694 seconds 193.4
+tune-convnext_cifar100-decreasing_ild-lr1 step 4000 loss 0.3473 seconds 185.6
+tune-vit_cifar100-dense-lr1 step 7168 loss 0.2298 seconds 682.0
+tune-convnext_cifar100-constant_ild-lr1 step 4000 loss 0.3097 seconds 202.9
+tune-gpt_wikitext103-dense-lr2 step 640 loss 4.8978 seconds 189.6
+tune-vit_cifar100-constant_ild-lr1 step 3072 loss 1.9977 seconds 270.6
+tune-gpt_wikitext103-dense-lr1 step 2560 loss 3.7633 seconds 724.9
+tune-convnext_cifar100-decreasing_ild-lr1 step 5000 loss 0.2093 seconds 230.9
+tune-gpt_wikitext103-constant_ild-lr1 step 1280 loss 4.5007 seconds 348.9
+tune-convnext_cifar100-constant_ild-lr1 step 5000 loss 0.2206 seconds 249.2
+tune-gpt_wikitext103-decreasing_ild-lr1 step 960 loss 4.85 seconds 281.9
+tune-convnext_cifar100-decreasing_ild-lr1 step 6000 loss 0.0928 seconds 278.9
+tune-vit_cifar100-decreasing_ild-lr1 step 3072 loss 2.0914 seconds 289.9
+tune-vit_cifar100-dense-lr1 step 8192 loss 0.1405 seconds 779.6
+tune-convnext_cifar100-constant_ild-lr1 step 6000 loss 0.1385 seconds 294.8
+tune-vit_cifar100-constant_ild-lr1 step 4096 loss 1.6907 seconds 361.2
+tune-gpt_wikitext103-dense-lr2 step 960 loss 4.5664 seconds 283.9
+tune-gpt_wikitext103-dense-lr1 step 2880 loss 3.7428 seconds 815.5
+tune-gpt_wikitext103-constant_ild-lr1 step 1600 loss 4.3288 seconds 435.8
+tune-convnext_cifar100-decreasing_ild-lr1 step 7000 loss 0.0575 seconds 324.3
+tune-convnext_cifar100-constant_ild-lr1 step 7000 loss 0.0523 seconds 341.0
+tune-gpt_wikitext103-decreasing_ild-lr1 step 1280 loss 4.5687 seconds 375.9
+tune-convnext_cifar100-decreasing_ild-lr1 step 8000 loss 0.0085 seconds 369.0
+tune-vit_cifar100-decreasing_ild-lr1 step 4096 loss 1.7784 seconds 386.4
+tune-vit_cifar100-dense-lr1 step 9216 loss 0.0438 seconds 877.4
+tune-convnext_cifar100-constant_ild-lr1 step 8000 loss 0.0307 seconds 389.8
+tune-vit_cifar100-constant_ild-lr1 step 5120 loss 1.2996 seconds 451.7
+tune-gpt_wikitext103-dense-lr2 step 1280 loss 4.2483 seconds 378.3
+tune-gpt_wikitext103-constant_ild-lr1 tune-gpt_wikitext103-dense-lr1 step 3200step 1920 loss 4.1138 seconds 522.8
+ loss 3.6941 seconds 906.1
+COMPLETED tune-gpt_wikitext103-dense-lr1 seconds 960.0
+SUBMITTED tune-vit_cifar100-dense-lr2 fc-01M23SDMCHYXS90CAQBG74SP9A
+tune-convnext_cifar100-decreasing_ild-lr1 step 9000 loss 0.0041 seconds 413.8
+tune-convnext_cifar100-constant_ild-lr1 step 9000 loss 0.0369 seconds 440.8
+tune-gpt_wikitext103-decreasing_ild-lr1 step 1600 loss 4.4125 seconds 469.9
+tune-convnext_cifar100-decreasing_ild-lr1 step 10000 loss 0.0042 seconds 459.2
+tune-vit_cifar100-dense-lr2 step 1 loss 4.6424 seconds 0.7
+COMPLETED tune-convnext_cifar100-decreasing_ild-lr1 seconds 469.1
+SUBMITTED tune-convnext_cifar100-dense-lr2 fc-01M23SF7Z1DH79JS77Q1S12DH3
+tune-convnext_cifar100-dense-lr2 step 1 loss 4.7455 seconds 0.1
+tune-vit_cifar100-decreasing_ild-lr1 step 5120 loss 1.4399 seconds 483.5
+tune-vit_cifar100-constant_ild-lr1 step 6144 loss 0.8633 seconds 542.1
+tune-vit_cifar100-dense-lr1 step 10240 loss 0.0222 seconds 975.0
+COMPLETED tune-vit_cifar100-dense-lr1 seconds 995.7
+SUBMITTED tune-gpt_wikitext103-constant_ild-lr2 fc-01M23SFVYS1R28ENKPD4G0361J
+tune-convnext_cifar100-constant_ild-lr1 step 10000 loss 0.0419 seconds 492.5
+tune-gpt_wikitext103-dense-lr2 step 1600 loss 4.0912 seconds 472.8
+COMPLETED tune-convnext_cifar100-constant_ild-lr1 seconds 534.7
+SUBMITTED tune-vit_cifar100-constant_ild-lr2 fc-01M23SG4BZZZ6YQ31F0JM5PEYW
+tune-gpt_wikitext103-constant_ild-lr1 step 2240 loss 3.9677 seconds 609.8
+tune-gpt_wikitext103-constant_ild-lr2 step 1 loss 10.9448 seconds 1.2
+tune-convnext_cifar100-dense-lr2 step 1000 loss 2.1262 seconds 44.4
+tune-vit_cifar100-constant_ild-lr2 step 1 loss 4.6498 seconds 0.4
+tune-gpt_wikitext103-decreasing_ild-lr1 step 1920 loss 4.1647 seconds 563.9
+tune-convnext_cifar100-dense-lr2 step 2000 loss 0.7441 seconds 88.4
+tune-vit_cifar100-dense-lr2 step 1024 loss 3.3204 seconds 96.5
+tune-vit_cifar100-constant_ild-lr1 step 7168 loss 0.5964 seconds 632.2
+tune-vit_cifar100-decreasing_ild-lr1 step 6144 loss 0.9422 seconds 580.7
+tune-gpt_wikitext103-constant_ild-lr1 step 2560 loss 3.9229 seconds 696.6
+tune-gpt_wikitext103-dense-lr2 step 1920 loss 3.8664 seconds 567.0
+tune-gpt_wikitext103-constant_ild-lr2 step 320 loss 5.6401 seconds 95.0
+tune-convnext_cifar100-dense-lr2 step 3000 loss 0.2846 seconds 132.0
+tune-vit_cifar100-constant_ild-lr2 step 1024 loss 3.3716 seconds 96.1
+tune-gpt_wikitext103-decreasing_ild-lr1 step 2240 loss 4.0107 seconds 657.8
+tune-convnext_cifar100-dense-lr2 step 4000 loss 0.079 seconds 175.6
+tune-vit_cifar100-dense-lr2 step 2048 loss 3.8063 seconds 192.6
+tune-vit_cifar100-constant_ild-lr1 step 8192 loss 0.3597 seconds 722.8
+tune-gpt_wikitext103-constant_ild-lr1 step 2880 loss 3.9643 seconds 783.6
+tune-vit_cifar100-decreasing_ild-lr1 step 7168 loss 0.7208 seconds 677.9
+tune-gpt_wikitext103-dense-lr2 step 2240 loss 3.7285 seconds 661.1
+tune-convnext_cifar100-dense-lr2 step 5000 loss 0.0689 seconds 219.2
+tune-gpt_wikitext103-constant_ild-lr2 step 640 loss 5.0047 seconds 189.1
+tune-vit_cifar100-constant_ild-lr2 step 2048 loss 3.4378 seconds 192.0
+tune-gpt_wikitext103-decreasing_ild-lr1 step 2560 loss 3.9523 seconds 751.6
+tune-convnext_cifar100-dense-lr2 step 6000 loss 0.011 seconds 262.8
+tune-vit_cifar100-dense-lr2 step 3072 loss 3.6884 seconds 289.8
+tune-vit_cifar100-constant_ild-lr1 step 9216 loss 0.3542 seconds 814.1
+tune-gpt_wikitext103-constant_ild-lr1 step 3200 loss 3.8679 seconds 870.5
+COMPLETED tune-gpt_wikitext103-constant_ild-lr1 seconds 877.6
+SUBMITTED tune-convnext_cifar100-constant_ild-lr2 fc-01M23SR87RYKCQPNN7SF93WHS7
+tune-vit_cifar100-decreasing_ild-lr1 step 8192 loss 0.3375 seconds 774.9
+tune-gpt_wikitext103-dense-lr2 step 2560 loss 3.6753 seconds 755.2
+tune-convnext_cifar100-dense-lr2 step 7000 loss 0.0185 seconds 306.2
+tune-gpt_wikitext103-constant_ild-lr2 step 960 loss 4.7271 seconds 283.3
+tune-convnext_cifar100-constant_ild-lr2 step 1 loss 4.7456 seconds 10.6
+tune-vit_cifar100-constant_ild-lr2 step 3072 loss 3.6846 seconds 287.7
+tune-convnext_cifar100-dense-lr2 step 8000 loss 0.0015 seconds 349.6
+tune-gpt_wikitext103-decreasing_ild-lr1 step 2880 loss 3.9213 seconds 845.5
+tune-convnext_cifar100-constant_ild-lr2 step 1000 loss 2.2313 seconds 53.8
+tune-vit_cifar100-constant_ild-lr1 step 10240 loss 0.1504 seconds 905.4
+COMPLETED tune-vit_cifar100-constant_ild-lr1 seconds 916.1
+SUBMITTED tune-gpt_wikitext103-decreasing_ild-lr2 fc-01M23STXJJA5Z15W8GCMRK6EM7
+tune-vit_cifar100-dense-lr2 step 4096 loss 3.8585 seconds 386.2
+tune-convnext_cifar100-dense-lr2 step 9000 loss 0.0008 seconds 393.0
+tune-vit_cifar100-decreasing_ild-lr1 step 9216 loss 0.231 seconds 871.7
+tune-gpt_wikitext103-dense-lr2 step 2880 loss 3.6503 seconds 849.5
+tune-convnext_cifar100-constant_ild-lr2 step 2000 loss 1.3675 seconds 97.0
+tune-gpt_wikitext103-decreasing_ild-lr2 step 1 loss 10.9603 seconds 2.7
+tune-gpt_wikitext103-constant_ild-lr2 step 1280 loss 4.4866 seconds 377.4
+tune-convnext_cifar100-dense-lr2 step 10000 loss 0.0014 seconds 436.4
+tune-vit_cifar100-constant_ild-lr2 step 4096 loss 3.5375 seconds 383.1
+COMPLETED tune-convnext_cifar100-dense-lr2 seconds 445.0
+SUBMITTED tune-vit_cifar100-decreasing_ild-lr2 fc-01M23SWTJRDC31FBTNW8MT47AS
+tune-gpt_wikitext103-decreasing_ild-lr1 step 3200 loss 3.8474 seconds 939.4
+COMPLETED tune-gpt_wikitext103-decreasing_ild-lr1 seconds 948.9
+SUBMITTED tune-convnext_cifar100-decreasing_ild-lr2 fc-01M23SX3WRYVE0DWCANQ1VYWPA
+tune-convnext_cifar100-constant_ild-lr2 step 3000 loss 0.6734 seconds 140.0
+tune-convnext_cifar100-decreasing_ild-lr2 step 1 loss 4.7454 seconds 0.1
+tune-vit_cifar100-decreasing_ild-lr2 step 1 loss 4.7032 seconds 1.7
+tune-vit_cifar100-dense-lr2 step 5120 loss 3.766 seconds 482.6
+tune-gpt_wikitext103-dense-lr2 step 3200 loss 3.5966 seconds 943.8
+tune-vit_cifar100-decreasing_ild-lr1 step 10240 loss 0.0798 seconds 968.9
+COMPLETED tune-gpt_wikitext103-dense-lr2 seconds 954.3
+tune-convnext_cifar100-constant_ild-lr2 step 4000 loss 0.4231 seconds 183.2
+COMPLETED tune-vit_cifar100-decreasing_ild-lr1 seconds 980.8
+tune-convnext_cifar100-decreasing_ild-lr2 step 1000 loss 2.2774 seconds 43.5
+tune-gpt_wikitext103-decreasing_ild-lr2 step 320 loss 5.6748 seconds 96.1
+tune-gpt_wikitext103-constant_ild-lr2 step 1600 loss 4.3072 seconds 471.8
+tune-vit_cifar100-constant_ild-lr2 step 5120 loss 3.5757 seconds 478.6
+tune-convnext_cifar100-constant_ild-lr2 step 5000 loss 0.3057 seconds 226.4
+tune-convnext_cifar100-decreasing_ild-lr2 step 2000 loss 1.5567 seconds 86.7
+tune-vit_cifar100-decreasing_ild-lr2 step 1024 loss 3.3772 seconds 98.5
+tune-vit_cifar100-dense-lr2 step 6144 loss 3.5637 seconds 578.6
+tune-convnext_cifar100-constant_ild-lr2 step 6000 loss 0.1563 seconds 269.6
+tune-convnext_cifar100-decreasing_ild-lr2 step 3000 loss 0.8792 seconds 129.7
+tune-gpt_wikitext103-decreasing_ild-lr2 step 640 loss 5.0861 seconds 189.9
+tune-gpt_wikitext103-constant_ild-lr2 step 1920 loss 4.095 seconds 565.9
+tune-convnext_cifar100-constant_ild-lr2 step 7000 loss 0.0867 seconds 312.7
+tune-convnext_cifar100-decreasing_ild-lr2 step 4000 loss 0.4264 seconds 172.7
+tune-vit_cifar100-constant_ild-lr2 step 6144 loss 3.5309 seconds 574.0
+tune-vit_cifar100-decreasing_ild-lr2 step 2048 loss 3.2851 seconds 195.3
+tune-convnext_cifar100-constant_ild-lr2 step 8000 loss 0.0618 seconds 356.0
+tune-vit_cifar100-dense-lr2 step 7168 loss 3.6175 seconds 675.0
+tune-convnext_cifar100-decreasing_ild-lr2 step 5000 loss 0.2081 seconds 215.8
+tune-gpt_wikitext103-decreasing_ild-lr2 step 960 loss 4.8072 seconds 284.1
+tune-gpt_wikitext103-constant_ild-lr2 step 2240 loss 3.9459 seconds 660.3
+tune-convnext_cifar100-constant_ild-lr2 step 9000 loss 0.0293 seconds 399.2
+tune-convnext_cifar100-decreasing_ild-lr2 step 6000 loss 0.1483 seconds 258.9
+tune-vit_cifar100-constant_ild-lr2 step 7168 loss 3.4749 seconds 669.7
+tune-convnext_cifar100-constant_ild-lr2 step 10000 loss 0.0254 seconds 442.6
+tune-vit_cifar100-decreasing_ild-lr2 step 3072 loss 3.4812 seconds 292.3
+COMPLETED tune-convnext_cifar100-constant_ild-lr2 seconds 466.8
+tune-convnext_cifar100-decreasing_ild-lr2 step 7000 loss 0.0392 seconds 301.9
+tune-vit_cifar100-dense-lr2 step 8192 loss 3.3358 seconds 771.0
+tune-gpt_wikitext103-decreasing_ild-lr2 step 1280 loss 4.5594 seconds 378.3
+tune-gpt_wikitext103-constant_ild-lr2 step 2560 loss 3.8956 seconds 754.3
+tune-convnext_cifar100-decreasing_ild-lr2 step 8000 loss 0.0105 seconds 345.4
+tune-vit_cifar100-constant_ild-lr2 step 8192 loss 3.3684 seconds 765.3
+tune-convnext_cifar100-decreasing_ild-lr2 step 9000 loss 0.0148 seconds 388.8
+tune-vit_cifar100-decreasing_ild-lr2 step 4096 loss 3.6483 seconds 389.6
+tune-vit_cifar100-dense-lr2 step 9216 loss 3.5441 seconds 867.5
+tune-gpt_wikitext103-decreasing_ild-lr2 step 1600 loss 4.4015 seconds 472.7
+tune-gpt_wikitext103-constant_ild-lr2 step 2880 loss 3.9106 seconds 848.6
+tune-convnext_cifar100-decreasing_ild-lr2 step 10000 loss 0.0047 seconds 431.9
+COMPLETED tune-convnext_cifar100-decreasing_ild-lr2 seconds 440.5
+tune-vit_cifar100-constant_ild-lr2 step 9216 loss 3.5394 seconds 860.9
+tune-vit_cifar100-decreasing_ild-lr2 step 5120 loss 3.6406 seconds 486.3
+tune-vit_cifar100-dense-lr2 step 10240 loss 3.2726 seconds 963.9
+COMPLETED tune-vit_cifar100-dense-lr2 seconds 1020.4
+tune-gpt_wikitext103-decreasing_ild-lr2 step 1920 loss 4.1609 seconds 567.1
+tune-gpt_wikitext103-constant_ild-lr2 step 3200 loss 3.8228 seconds 942.8
+COMPLETED tune-gpt_wikitext103-constant_ild-lr2 seconds 965.9
+tune-vit_cifar100-constant_ild-lr2 step 10240 loss 3.2598 seconds 956.7
+COMPLETED tune-vit_cifar100-constant_ild-lr2 seconds 992.0
+tune-vit_cifar100-decreasing_ild-lr2 step 6144 loss 3.4152 seconds 583.2
+tune-gpt_wikitext103-decreasing_ild-lr2 step 2240 loss 4.0039 seconds 661.4
+tune-vit_cifar100-decreasing_ild-lr2 step 7168 loss 3.4305 seconds 680.0
+tune-gpt_wikitext103-decreasing_ild-lr2 step 2560 loss 3.9332 seconds 755.8
+tune-vit_cifar100-decreasing_ild-lr2 step 8192 loss 3.2848 seconds 776.5
+tune-gpt_wikitext103-decreasing_ild-lr2 step 2880 loss 3.8942 seconds 850.4
+tune-vit_cifar100-decreasing_ild-lr2 step 9216 loss 3.3805 seconds 873.0
+tune-gpt_wikitext103-decreasing_ild-lr2 step 3200 loss 3.8259 seconds 945.0
+COMPLETED tune-gpt_wikitext103-decreasing_ild-lr2 seconds 979.3
+tune-vit_cifar100-decreasing_ild-lr2 step 10240 loss 3.032 seconds 969.4
+COMPLETED tune-vit_cifar100-decreasing_ild-lr2 seconds 995.4
+STAGE COMPLETE tune jobs 27 errors 0
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/yaroslavvb/gradient-dissent-a100/ap-lucFYc5CbOaKKymn7NHT7
+r
