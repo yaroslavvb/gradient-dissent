@@ -1,0 +1,24 @@
+{
+  "source_sha256": "8ae2acb6941b77c2c25999fc7daa7766c51aad3bd2a112764b6c15355d9d7429",
+  "checks": [
+    {
+      "config": "dense6",
+      "seed": 100,
+      "regime": "matched_expected_active_budget",
+      "test_mse_absolute_repeat_difference": 0.0,
+      "active_count_exact_match": true
+    },
+    {
+      "config": "decreasing_ild",
+      "seed": 100,
+      "regime": "matched_expected_active_budget",
+      "test_mse_absolute_repeat_difference": 0.0,
+      "active_count_exact_match": true
+    },
+    {
+      "raw_and_report_json_identical": true,
+      "tuning_rows": 100,
+      "evaluation_rows": 60
+    }
+  ]
+}

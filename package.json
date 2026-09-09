@@ -1,0 +1,15 @@
+{
+  "name": "gradient-dissent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive critical review and reproducible experiments for arXiv:2609.05275",
+  "scripts": {
+    "build": "python3 scripts/build_report.py && node scripts/render_math.cjs",
+    "check": "node --check docs/app.js && node scripts/check_site.cjs",
+    "serve": "python3 -m http.server 8765 --directory docs"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1",
+    "katex": "^0.18.7"
+  }
+}

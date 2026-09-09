@@ -1,0 +1,147 @@
+{
+  "protocol": "Exact mask enumeration, float64 arithmetic; scalar inputs x=1,a=0.5,b=0.4,target=0.7; half-MSE loss.",
+  "claims": [
+    "Inverted dropout preserves an isolated residual branch's conditional mean.",
+    "The Eq.6 shared mask biases even an affine two-sublayer block's mean by ab*p/(1-p)*x.",
+    "Independent masks remove that affine covariance, but nonlinear composition still creates mean bias.",
+    "Even one branch with an unbiased mean adds a dropout-dependent MSE penalty and changes its expected gradient."
+  ],
+  "rows": [
+    {
+      "dropout_p": 0.0,
+      "density": 1.0,
+      "single_residual_mean": 1.5,
+      "single_residual_dense": 1.5,
+      "shared_mask_dense_prediction": 2.0999999999999996,
+      "shared_mask_expected_prediction": 2.1,
+      "shared_mask_prediction_bias": 4.440892098500626e-16,
+      "shared_mask_expected_half_mse": 0.9800000000000002,
+      "shared_mask_dense_half_mse": 0.9799999999999995,
+      "shared_mask_expected_gradient_da": 1.96,
+      "shared_mask_dense_gradient_da": 1.9599999999999995,
+      "independent_linear_mean": 2.1,
+      "independent_nonlinear_dense": 2.4,
+      "independent_nonlinear_mean": 2.4000000000000004,
+      "single_residual_loss_penalty": 0.0,
+      "single_residual_expected_gradient_da": 0.8,
+      "single_residual_dense_gradient_da": 0.8
+    },
+    {
+      "dropout_p": 0.1,
+      "density": 0.9,
+      "single_residual_mean": 1.5000000000000002,
+      "single_residual_dense": 1.5,
+      "shared_mask_dense_prediction": 2.0999999999999996,
+      "shared_mask_expected_prediction": 2.1222222222222227,
+      "shared_mask_prediction_bias": 0.02222222222222303,
+      "shared_mask_expected_half_mse": 1.0813237311385462,
+      "shared_mask_dense_half_mse": 0.9799999999999995,
+      "shared_mask_expected_gradient_da": 2.23443072702332,
+      "shared_mask_dense_gradient_da": 1.9599999999999995,
+      "independent_linear_mean": 2.1000000000000005,
+      "independent_nonlinear_dense": 2.4,
+      "independent_nonlinear_mean": 2.4111111111111114,
+      "single_residual_loss_penalty": 0.01388888888888889,
+      "single_residual_expected_gradient_da": 0.8555555555555556,
+      "single_residual_dense_gradient_da": 0.8
+    },
+    {
+      "dropout_p": 0.2,
+      "density": 0.8,
+      "single_residual_mean": 1.5,
+      "single_residual_dense": 1.5,
+      "shared_mask_dense_prediction": 2.0999999999999996,
+      "shared_mask_expected_prediction": 2.1500000000000004,
+      "shared_mask_prediction_bias": 0.05000000000000071,
+      "shared_mask_expected_half_mse": 1.2165625,
+      "shared_mask_dense_half_mse": 0.9799999999999995,
+      "shared_mask_expected_gradient_da": 2.60625,
+      "shared_mask_dense_gradient_da": 1.9599999999999995,
+      "independent_linear_mean": 2.1000000000000005,
+      "independent_nonlinear_dense": 2.4,
+      "independent_nonlinear_mean": 2.4250000000000007,
+      "single_residual_loss_penalty": 0.03125,
+      "single_residual_expected_gradient_da": 0.925,
+      "single_residual_dense_gradient_da": 0.8
+    },
+    {
+      "dropout_p": 0.4,
+      "density": 0.6,
+      "single_residual_mean": 1.5,
+      "single_residual_dense": 1.5,
+      "shared_mask_dense_prediction": 2.0999999999999996,
+      "shared_mask_expected_prediction": 2.2333333333333334,
+      "shared_mask_prediction_bias": 0.13333333333333375,
+      "shared_mask_expected_half_mse": 1.6825925925925933,
+      "shared_mask_dense_half_mse": 0.9799999999999995,
+      "shared_mask_expected_gradient_da": 3.925925925925927,
+      "shared_mask_dense_gradient_da": 1.9599999999999995,
+      "independent_linear_mean": 2.1,
+      "independent_nonlinear_dense": 2.4,
+      "independent_nonlinear_mean": 2.466666666666667,
+      "single_residual_loss_penalty": 0.08333333333333334,
+      "single_residual_expected_gradient_da": 1.1333333333333333,
+      "single_residual_dense_gradient_da": 0.8
+    },
+    {
+      "dropout_p": 0.6,
+      "density": 0.4,
+      "single_residual_mean": 1.5,
+      "single_residual_dense": 1.5,
+      "shared_mask_dense_prediction": 2.0999999999999996,
+      "shared_mask_expected_prediction": 2.4,
+      "shared_mask_prediction_bias": 0.30000000000000027,
+      "shared_mask_expected_half_mse": 2.915,
+      "shared_mask_dense_half_mse": 0.9799999999999995,
+      "shared_mask_expected_gradient_da": 7.6,
+      "shared_mask_dense_gradient_da": 1.9599999999999995,
+      "independent_linear_mean": 2.1,
+      "independent_nonlinear_dense": 2.4,
+      "independent_nonlinear_mean": 2.55,
+      "single_residual_loss_penalty": 0.18749999999999997,
+      "single_residual_expected_gradient_da": 1.5499999999999998,
+      "single_residual_dense_gradient_da": 0.8
+    },
+    {
+      "dropout_p": 0.8,
+      "density": 0.19999999999999996,
+      "single_residual_mean": 1.5,
+      "single_residual_dense": 1.5,
+      "shared_mask_dense_prediction": 2.0999999999999996,
+      "shared_mask_expected_prediction": 2.9000000000000004,
+      "shared_mask_prediction_bias": 0.8000000000000007,
+      "shared_mask_expected_half_mse": 9.640000000000006,
+      "shared_mask_dense_half_mse": 0.9799999999999995,
+      "shared_mask_expected_gradient_da": 29.400000000000016,
+      "shared_mask_dense_gradient_da": 1.9599999999999995,
+      "independent_linear_mean": 2.1,
+      "independent_nonlinear_dense": 2.4,
+      "independent_nonlinear_mean": 2.8000000000000003,
+      "single_residual_loss_penalty": 0.5000000000000001,
+      "single_residual_expected_gradient_da": 2.8000000000000007,
+      "single_residual_dense_gradient_da": 0.8
+    }
+  ],
+  "schedule_check": {
+    "layers": 6,
+    "steps": 240,
+    "pmax": 0.8,
+    "measured_mean_dropout": 0.20000000000000004,
+    "expected_pmax_over_4": 0.2
+  },
+  "optimizer_skip_check": {
+    "protocol": "Scalar float64 AdamW, parameter initialized1, lr.1, weight_decay.1, default betas. First gradient1 initializes identical momentum. Second dropped step passes either zero or absent gradient; no optimizer synchronization policy is imposed.",
+    "outcomes": {
+      "zero_gradient": {
+        "before_skipped_step": 0.890000001,
+        "after_skipped_step": 0.8140941765241887
+      },
+      "absent_gradient": {
+        "before_skipped_step": 0.890000001,
+        "after_skipped_step": 0.890000001
+      }
+    },
+    "interpretation": "Compute-then-mask and true skips need an explicit optimizer update policy to give the same training trajectory, even when forward outputs and mathematical gradients agree."
+  },
+  "all_assertions_passed": true
+}
