@@ -4,6 +4,7 @@ An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity 
 
 - [Interactive report and 16-chapter slide view](https://yaroslavvb.github.io/gradient-dissent/)
 - [How layer dropout works](https://yaroslavvb.github.io/gradient-dissent/dropout-animation/): animated per-sequence paths, shared attention/FFN masks, inverse-survival scaling, depth/time scheduling, and fixed inference modes.
+- [Stochastic depth after 2016](https://yaroslavvb.github.io/gradient-dissent/stochastic-depth-history/): the original authors, successful vision/speech applications, language-model descendants, and a critical novelty comparison with the new paper.
 - [Extended review](https://yaroslavvb.github.io/gradient-dissent/review.html)
 - [Separate depth-robustness experiment report](https://yaroslavvb.github.io/gradient-dissent/depth-robustness/): a tiny causal transformer and 8×8 digit classifier, five seeds per treatment, exact layer-subset enumeration, and $0 cloud spend.
 - [Larger A100 transfer experiment report](https://yaroslavvb.github.io/gradient-dissent/a100-transfer/): 124M-parameter nanoGPT-style language model, 85M-parameter vision transformer, and 28M-parameter ConvNeXt on WikiText-103 and CIFAR-100. Three paired final seeds, nine fixed pruning interventions, and a $50 experiment ceiling.
@@ -58,3 +59,5 @@ The significance overview uses the verified saved A100 summary: `npm run build:s
 The standalone dropout animation is authored in `docs/dropout-animation/`. Run `npm run check:dropout` to check the exact schedule, sampling/scaling, inference settings, and interactive controls. Its four sequences and twelve blocks are schematic; it performs no training or paid calls.
 
 Build the independent paper from saved results with `python3 scripts/build_paper.py` (TeX Live 2026). See `paper/README.md` for figure regeneration and rendering.
+
+Rebuild the stochastic-depth history from its cited Markdown source with `npm run build:history`; validate navigation and source links with `npm run check:history`.
