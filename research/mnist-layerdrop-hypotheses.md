@@ -6,6 +6,14 @@ The evidence supports a specific claim: stochastic-depth training can create fun
 
 The broader story is less favorable. The apparent advantage of digit 1 over digits 4 and 9 became uncertain after margin adjustment. Direct gradient predictions ranked deletion damage well at selected checkpoints, but their ranking deteriorated at the final checkpoint and the finite-difference directional probes had substantial numerical error. A shallow input router saved nominal MACs, yet exceeded its test error tolerance in five of nine primary cases and ran slower than dense inference. These distinctions matter when translating an appealing geometric explanation into an actual inference policy.
 
+## Reading the controls
+
+**All boxes unchecked does not remove the whole network.** Only the four middle affine branches are skipped. The learned feature layer (stem) still maps 784 pixels to 2,500 ReLU features; crop bypasses retain the first 500, and the learned classifier maps them to ten digit scores. This remains a trained one-hidden-layer predictor, using **16.42% of the counted affine work**. Ten percent is the expectation for uniform random guessing, not for this remaining trained network.
+
+**SD means stochastic depth: randomly skipping whole branches during training.** “Constant SD” uses fixed drop probabilities of **10%, 20%, 30%, 40%**, from the first to last branch. “Decreasing SD” starts at **20%, 40%, 60%, 80%** and reduces them linearly to zero by epoch 100. Its average number of active middle branches therefore **increases from two to four**. Both recipes drop later branches more often; “decreasing” refers to drop probability over training, not to the number of active layers. No recipe that increases dropout over time was tested here.
+
+The method selector chooses already-trained weights. The checkboxes then choose a fixed **inference mask**, without retraining or random sampling. Retained branches use gain one (no rescaling). A validation-selected checkpoint can occur before the decreasing schedule reaches zero.
+
 ## What was tested
 
 The [frozen protocol](https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md) specifies five tests: deletion resilience, class differences after margin adjustment, directional sensitivity, mask interactions, and adaptive routing. The starting checkpoints come from the [controlled stochastic-depth study](https://github.com/yaroslavvb/gradient-dissent/blob/main/research/ciresan-stochastic-depth.md), with seeds 101–103. Residual dense, constant SD, and decreasing SD supply the central 18 checkpoint states: three recipes × three seeds × two endpoints. Residual plus unit dropout supplies six secondary states; six plain-MLP states supply a deliberately disruptive surgery diagnostic.

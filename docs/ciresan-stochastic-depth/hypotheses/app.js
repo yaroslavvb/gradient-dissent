@@ -2,11 +2,18 @@
 (() => {
   const D=window.HYPOTHESIS_DATA,$=id=>document.getElementById(id);
   if(!D || !D.models.length) { $('model-note').textContent='The experiment data could not be loaded. Use the report or raw-data links below.';return; }
-  const names={residual:'Residual, no dropout',sd_constant:'Stochastic depth, constant',sd_annealed:'Stochastic depth, decreasing',residual_unit_dropout:'Residual + unit dropout',plain:'Plain MLP, forced crop surgery'};
+  const names={residual:'Residual, no dropout',sd_constant:'SD, fixed drop rates',sd_annealed:'SD, drop rates decay to zero',residual_unit_dropout:'Residual + unit dropout',plain:'Plain MLP, forced crop bypass'};
+  const methods={
+    sd_constant:'Training: skip branches 1–4 with probabilities 10%, 20%, 30%, 40% on each minibatch. These rates stay fixed across epochs: three of the four middle branches run on average.',
+    sd_annealed:'Training: drop rates for branches 1–4 start at 20%, 40%, 60%, 80% and fall linearly to zero by epoch 100. The average number of active middle branches rises from two to four.',
+    residual:'Training: every branch runs. Residual bypasses carry existing features alongside each learned transformation, but this model was never trained with branches skipped.',
+    residual_unit_dropout:'Training: randomly zero 20% of individual hidden activations, rather than skipping whole branches. Every branch is computed; this unit dropout is switched off for the inference audit.',
+    plain:'Training: an ordinary fully connected network, with no residual bypasses or branch dropout. Unchecking a box inserts a crop bypass that these weights were never trained to use.'
+  };
   const pct=x=>(100*x).toFixed(2)+'%', bits=m=>[0,1,2,3].map(i=>(m>>i)&1).join('');
   let mask=15,focusIndex=null,timer=null,model=null;
   const cost=[5,3,1.5,.5];
-  $('mask-controls').innerHTML=cost.map((c,i)=>`<label><input type="checkbox" data-branch="${i}" checked> Branch ${i+1}<small>${c}M MACs · ${[2500,2000,1500,1000][i]} → ${[2000,1500,1000,500][i]}</small></label>`).join('');
+  $('mask-controls').innerHTML=cost.map((c,i)=>`<label title="Unchecked: skip this learned transformation and crop to the first ${[2000,1500,1000,500][i]} features. The feature layer and classifier remain."><input type="checkbox" data-branch="${i}" checked> Keep branch ${i+1}<small>${c}M MACs · ${[2500,2000,1500,1000][i]} → ${[2000,1500,1000,500][i]}</small></label>`).join('');
   function drawDigit(canvas,index){
     const encoded=D.images[String(index)];if(!encoded)return;
     const bytes=atob(encoded),context=canvas.getContext('2d');
@@ -26,9 +33,9 @@
       if(model.recipe==='plain'&&on)parts.push(`<path d="M${x-69} 130 H${x+69}" stroke="white" stroke-width="9"/>`);
       parts.push(`<g class="branch"><path d="M${x-72} 130 Q${x-68} 52 ${x-36} 52 H${x+36} Q${x+69} 52 ${x+72} 130" fill="none" stroke="${on?'#098278':'#ccd5d2'}" stroke-width="${on?4:2}" ${on?'':'stroke-dasharray="6 5"'}/><rect x="${x-48}" y="31" width="96" height="43" rx="5" fill="${on?'#098278':'#edf1ef'}"/><text x="${x}" y="57" text-anchor="middle" style="fill:${on?'#fff':'#71847f'}">${on?'Affine '+(i+1):'Skipped'}</text><circle cx="${x+72}" cy="130" r="5" fill="#476e62"/><text x="${x}" y="161" text-anchor="middle">${model.recipe==='plain'&&on?'ReLU':'crop + ReLU'}</text><text x="${x}" y="183" text-anchor="middle" style="font-size:12px">${[2000,1500,1000,500][i]} units</text></g>`);
     }
-    for(const [x,label,width] of [[75,'Stem',2500],[925,'Head',10]])parts.push(`<rect x="${x-42}" y="104" width="84" height="52" rx="5" fill="#173942"/><text x="${x}" y="135" text-anchor="middle" style="fill:#fff">${label}</text><text x="${x}" y="183" text-anchor="middle">${width} units</text>`);
+    for(const [x,label,width] of [[75,'Features',2500],[925,'Classifier',10]])parts.push(`<g><title>Learned ${label.toLowerCase()} layer: always active, even with mask 0000</title><rect x="${x-60}" y="104" width="120" height="52" rx="5" fill="#173942"/><text x="${x}" y="135" text-anchor="middle" style="fill:#fff">${label}</text><text x="${x}" y="183" text-anchor="middle">${width} units</text><text x="${x}" y="206" text-anchor="middle" style="font-size:14px;font-weight:650;fill:#173942">always on</text></g>`);
     $('network').innerHTML=parts.join('');
-    $('network').setAttribute('aria-label',`${names[model.recipe]}; mask ${bits(mask)}, shallow to deep; stem and classifier always present.`);
+    $('network').setAttribute('aria-label',`${names[model.recipe]}; mask ${bits(mask)}, first to last branch; learned feature layer and classifier always active.`);
   }
   function frontier(){
     const x=f=>75+f*880,y=a=>272-a*225,parts=[];
@@ -67,14 +74,20 @@
     $('gallery').querySelectorAll('button').forEach(b=>{drawDigit(b.querySelector('canvas'),Number(b.dataset.index));b.onclick=()=>{focusIndex=Number(b.dataset.index);renderFocus();};});
   }
   function renderMask(){
-    const m=model.masks[mask];$('mask-status').textContent=`Mask ${bits(mask)} · ${m.retained} of 4 branches present`;
+    const m=model.masks[mask];$('mask-status').textContent=`Mask ${bits(mask)} · ${m.retained}/4 optional branches kept · ${m.retained+2}/6 learned layers still run`;
+    $('remaining-note').hidden=mask!==0;
+    $('remaining-note').textContent=mask===0
+      ?`Two learned layers remain: 784 pixels → 2,500 ReLU features → crop to 500 → 10 digit scores. This trained shallow classifier uses ${pct(m.cost)} of counted arithmetic and scores ${pct(m.accuracy)}. Uniform random guessing averages 10%; these weights still classify digits.`
+      :'';
+    $('remaining-note').classList.toggle('all-skipped',mask===0);
     $('mask-accuracy').textContent=pct(m.accuracy);$('mask-macs').textContent=pct(m.cost);
     network();frontier();classTable();gallery();renderFocus();
   }
   function renderModel(){
     const id=`${$('recipe').value}-${$('state').value}-s${$('seed').value}`;model=D.models.find(m=>m.id===id);
     if(!model)throw new Error('Missing planned checkpoint: '+id);
-    $('model-note').textContent=`${names[model.recipe]} · epoch ${model.epoch} · all-kept accuracy ${pct(model.dense_accuracy)}. `+(model.recipe==='plain'?'This plain MLP was never trained with bypasses: dropped layers undergo forced crop surgery.':'Surviving branches have gain one; inference unit dropout is disabled.');
+    $('method-note').textContent=methods[model.recipe];
+    $('model-note').textContent=`Saved weights: epoch ${model.epoch} · accuracy with all four branches kept: ${pct(model.dense_accuracy)}. Kept branches are not rescaled, and unit dropout is off during inference.`;
     $('mask-table').innerHTML='<caption>All 16 interventions for the selected checkpoint</caption><thead><tr><th>Mask</th><th>Kept</th><th>MACs</th><th>Accuracy</th><th>CE</th><th>Harmed</th><th>Repaired</th></tr></thead><tbody>'+model.masks.map(m=>`<tr><td>${bits(m.id)}</td><td>${m.retained}</td><td>${pct(m.cost)}</td><td>${pct(m.accuracy)}</td><td>${m.ce.toFixed(4)}</td><td>${pct(m.harm)}</td><td>${pct(m.repair)}</td></tr>`).join('')+'</tbody>';
     renderMask();
   }
