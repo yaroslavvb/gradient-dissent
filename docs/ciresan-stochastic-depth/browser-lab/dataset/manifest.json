@@ -1,0 +1,231 @@
+{
+  "asset_version": "browser-v1",
+  "attribution": {
+    "authors": [
+      "Yann LeCun",
+      "Corinna Cortes",
+      "Christopher J.C. Burges"
+    ],
+    "homepage": "https://yann.lecun.org/exdb/mnist/index.html",
+    "license": "CC BY-SA 3.0",
+    "license_documentation": "https://keras.io/api/datasets/mnist/",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "licensed_mirror_description": "https://github.com/cvdfoundation/mnist",
+    "modification": "Selected balanced subsets from the existing experiment split and repacked unchanged grayscale images into browser binary files.",
+    "reference": "LeCun, Bottou, Bengio, and Haffner (1998). Gradient-Based Learning Applied to Document Recognition. Proceedings of the IEEE 86(11):2278\u20132324. DOI:10.1109/5.726791.",
+    "title": "The MNIST Database of Handwritten Digits"
+  },
+  "dataset": "MNIST",
+  "default_total_bytes": 11046096,
+  "default_total_gzip_bytes": 2296866,
+  "description": "Small stratified browser subset; not the full 50000-example A100 experiment.",
+  "evaluation_note": "The default test subset is class balanced: its overall accuracy equally weights the ten digits. It is exploratory when repeatedly consulted. Do not tune hyperparameters or choose epochs on test accuracy; use validation.",
+  "format": {
+    "body": [
+      "count*784 uint8 pixels, images row-major",
+      "count uint8 labels in 0..9",
+      "0..3 zero padding bytes to 4-byte alignment",
+      "count uint32 original indices"
+    ],
+    "compression": "The .bin.gz file is the exact .bin payload wrapped in deterministic gzip; browsers may use DecompressionStream(\"gzip\"). SHA256 values are given for both forms.",
+    "endianness": "little",
+    "header": [
+      "0..7: ASCII magic GDMNIST1",
+      "8: uint32 count",
+      "12: uint32 rows=28",
+      "16: uint32 columns=28",
+      "20: uint32 pixel offset=32",
+      "24: uint32 label offset",
+      "28: uint32 original-index offset"
+    ],
+    "header_bytes": 32,
+    "index_semantics": "Zero-based index within source_collection; train and validation refer to official-training-60000, while test and test-full refer to official-test-10000.",
+    "magic_ascii": "GDMNIST1"
+  },
+  "input": {
+    "pixels": "uint8",
+    "range": [
+      0,
+      255
+    ],
+    "recommended_normalization": "Convert to float32 and divide by 255. No fitted preprocessing.",
+    "shape": [
+      28,
+      28
+    ]
+  },
+  "optional_splits": {
+    "test_full": {
+      "bytes": 7890032,
+      "class_counts": [
+        980,
+        1135,
+        1032,
+        1010,
+        982,
+        892,
+        958,
+        1028,
+        974,
+        1009
+      ],
+      "count": 10000,
+      "file": "test-full.bin",
+      "gzip_bytes": 1622145,
+      "gzip_file": "test-full.bin.gz",
+      "gzip_sha256": "0e04414e49b81961ce7994768709c5b3adba9fb72f4b7b79023cd8438791a8c3",
+      "id": "test-full",
+      "label_offset": 7840032,
+      "optional": true,
+      "original_index_offset": 7850032,
+      "original_indices_sha256_uint32_le": "9140e019602b8628f6f4a6aac3658bf206e332a92943eb113fb2b465fecc55d6",
+      "pixel_offset": 32,
+      "selection": "All 10000 official test images, in their original order; natural class frequencies.",
+      "sha256": "b1666e5ed9f4a197d176630fe8791b487392c30fdeb0863277c2d76897f0ed85",
+      "source_collection": "official-test-10000"
+    }
+  },
+  "preview": {
+    "bytes": 23371,
+    "count": 20,
+    "file": "preview.json",
+    "sha256": "fae49e8e0e420f27126610f1cb4983f8f069406a4846e0458a980d4ac8c3fea8"
+  },
+  "producer": {
+    "numpy": "2.5.3",
+    "script": "build_dataset.py",
+    "script_sha256": "e032d821630328d7aec1756235f42e5d57586a478078c5d44614a98473614c26",
+    "torch": "2.14.0"
+  },
+  "schema_version": 1,
+  "split_provenance": {
+    "archive_data_path": "experiments/ciresan_stochastic_depth/results/hypotheses/hypothesis-audit-s101-v1/data.npz",
+    "archive_data_sha256": "a1fd3ff9a366d413863f7416b9b8eeb869ad40ad01569d721c61d788fc36281f",
+    "archive_record_path": "experiments/ciresan_stochastic_depth/results/hypotheses/hypothesis-audit-s101-v1/result.json",
+    "archive_record_sha256": "3357ab27f559fefab96798d7a7024fe4ebf413cf4367ac0f3990023a007c29c9",
+    "balanced_prefixes": "Every split is interleaved 0..9, so any prefix with size divisible by 10 is exactly class balanced (except optional test-full). Shuffle training minibatches before each epoch.",
+    "cached_source_directory": "/tmp/ciresan-hypothesis-data",
+    "files": {
+      "t10k-images-idx3-ubyte.gz": {
+        "bytes": 1648877,
+        "md5": "9fb629c4189551a2d022fa330f9573f3",
+        "sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz"
+      },
+      "t10k-labels-idx1-ubyte.gz": {
+        "bytes": 4542,
+        "md5": "ec29112dd5afa0611ce80d1b7f02629c",
+        "sha256": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6",
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz"
+      },
+      "train-images-idx3-ubyte.gz": {
+        "bytes": 9912422,
+        "md5": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+        "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz"
+      },
+      "train-labels-idx1-ubyte.gz": {
+        "bytes": 28881,
+        "md5": "d53e105ee54ea40749a09fcbcd1e9432",
+        "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+        "url": "https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz"
+      }
+    },
+    "parent_split": "torch.randperm(60000), first 50000 for train, final 10000 for validation",
+    "separation_verified": true,
+    "split_seed": 20260909,
+    "test_archive_equal_to_verified_idx": true,
+    "test_selection_policy": "Official test data was decoded only after train and validation selections were complete. Test labels were used only to construct the declared balanced test subset.",
+    "train_pool_indices_sha256_int64_le": "1083febc455815d0a5d7e9a387b9744d8b456a344b7088c7a9ca1235dade5fdf",
+    "validation_pool_indices_sha256_int64_le": "90bec5b643d05f06c9863616b685340f4bdb8a5647dbd51ecf30523f138d9b98"
+  },
+  "splits": {
+    "test": {
+      "bytes": 1578032,
+      "class_counts": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "count": 2000,
+      "file": "test.bin",
+      "gzip_bytes": 320365,
+      "gzip_file": "test.bin.gz",
+      "gzip_sha256": "9c6c4d5d44d5c893d7aab31f8039094047136f41e9ed9b87c53fe64885671675",
+      "id": "test",
+      "label_offset": 1568032,
+      "optional": false,
+      "original_index_offset": 1570032,
+      "original_indices_sha256_uint32_le": "1de7eb5a1a9ab238b202259aac15721e306ae962292c62fc3ccae77471d60a35",
+      "pixel_offset": 32,
+      "selection": "First 200 examples per digit in the original official test order; interleaved by digit 0..9. Never used to select training or validation.",
+      "sha256": "7e6f5d26ef7ba2d654166378dab39f9ba1a92fd928c59b1fb0ba0bcbecdee386",
+      "source_collection": "official-test-10000"
+    },
+    "train": {
+      "bytes": 7890032,
+      "class_counts": [
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "count": 10000,
+      "file": "train.bin",
+      "gzip_bytes": 1647559,
+      "gzip_file": "train.bin.gz",
+      "gzip_sha256": "7aa3f28416ea48f8e27a5abd8b08194b40aae4198f4e579aac0986f9e4ac6be6",
+      "id": "train",
+      "label_offset": 7840032,
+      "optional": false,
+      "original_index_offset": 7850032,
+      "original_indices_sha256_uint32_le": "36e48b4dc4c95197ddc8a6be35b175e33bb60b2036551ec53b6f4056e4583d26",
+      "pixel_offset": 32,
+      "selection": "First 1000 examples per digit within the original seeded 50000 training pool; interleaved by digit 0..9.",
+      "sha256": "13df23663e03e6c82b1abd10f96b9d7fec1c123abe21dff07bf4bfe6aa6a73e4",
+      "source_collection": "official-training-60000"
+    },
+    "validation": {
+      "bytes": 1578032,
+      "class_counts": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "count": 2000,
+      "file": "validation.bin",
+      "gzip_bytes": 328942,
+      "gzip_file": "validation.bin.gz",
+      "gzip_sha256": "b3160bc7c0b9781f530373d2d3589580a3a6808b103a6db54dd553cc0227cbcc",
+      "id": "validation",
+      "label_offset": 1568032,
+      "optional": false,
+      "original_index_offset": 1570032,
+      "original_indices_sha256_uint32_le": "31ee12927d60d9cfd329b5ddea744807b71f2e2269e1c3b0e0fc31c16b409151",
+      "pixel_offset": 32,
+      "selection": "First 200 examples per digit within the original seeded 10000 validation pool; interleaved by digit 0..9.",
+      "sha256": "ad4219367538e85183f22794f637be7975a98b231da4754b845bc7f0e4990aa8",
+      "source_collection": "official-training-60000"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),zlib=require('node:zlib');
+const root=path.resolve(__dirname,'../../docs/ciresan-stochastic-depth/browser-lab'),modulePath=path.join(root,'dataset.js'),manifest=JSON.parse(fs.readFileSync(path.join(root,'dataset/manifest.json')));
+let mode='normal',calls=0,waiting;global.fetch=async(url,{signal}={})=>{calls++;if(mode==='stall-manifest'||(mode==='stall-body'&&url.endsWith('.gz')))return new Promise((resolve,reject)=>{signal.addEventListener('abort',()=>reject(new DOMException('Aborted','AbortError')),{once:true});waiting();});const bytes=fs.readFileSync(path.join(root,url));if(mode==='corrupt'&&url.endsWith('.gz')){bytes[100]^=255;return new Response(bytes);}return new Response(mode==='decompressed'&&url.endsWith('.gz')?zlib.gunzipSync(bytes):bytes);};
+function fresh(){delete require.cache[require.resolve(modulePath)];return require(modulePath);}const tick=()=>new Promise(resolve=>setImmediate(resolve));let checks=0;function ok(x){assert(x);checks++;}
+(async()=>{
+ let data=fresh();const [train,val,test,full]=await Promise.all(['train','validation','test','test_full'].map(n=>data.load(n)));ok(train.count===10000&&val.count===2000&&test.count===2000&&full.count===10000);ok(calls===5);const before=calls;await data.load('test');ok(calls===before);
+ const trainIds=new Set(train.indices);ok(!val.indices.some(i=>trainIds.has(i)));ok(test.labels.every((y,i)=>y===i%10));ok(full.indices.every((id,i)=>id===i));ok(await data.sha(train.pixels)!==await data.sha(test.pixels));
+ const raw=zlib.gunzipSync(fs.readFileSync(path.join(root,'dataset/test.bin.gz')));ok((await data.sha(raw))===manifest.splits.test.sha256);const invalid=Uint8Array.from(raw);invalid[0]=0;assert.throws(()=>data.decode(invalid.buffer));checks++;
+ mode='decompressed';data=fresh();ok((await data.load('test')).sha256===test.sha256);
+ mode='corrupt';data=fresh();await assert.rejects(data.load('test'),/hash mismatch/);checks++;mode='normal';ok((await data.load('test')).count===2000);
+ for(const stalled of ['stall-manifest','stall-body']){mode=stalled;data=fresh();let ready=new Promise(resolve=>waiting=resolve);const pending=data.load('test');const rejection=assert.rejects(pending,e=>e.name==='AbortError');await ready;data.abortPending();await rejection;checks++;await tick();mode='normal';ok((await data.load('test')).count===2000);}
+ const report={status:'passed',runtime:'Node dataset loader tests including download cancellation, cache retry, compressed and decoded responses',checks};fs.writeFileSync(path.join(__dirname,'test-dataset.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+})().catch(e=>{console.error(e);process.exit(1);});

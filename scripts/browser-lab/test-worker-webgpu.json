@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "runtime": "Node execution of production worker; actual Dawn Metal WebGPU, no browser UI automation",
+  "tfjs": "4.22.0",
+  "pairedConfig": {
+    "preset": "small",
+    "plan": "paired",
+    "mask": 15,
+    "trainN": 4000,
+    "testN": 2000,
+    "epochs": 5,
+    "lr": 0.03,
+    "seed": 201,
+    "dropRate": 0.5,
+    "batchSize": 64,
+    "backend": "webgpu",
+    "order": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "pairedResults": [
+    {
+      "mask": 0,
+      "selectedAccuracy": 0.911,
+      "finalAccuracy": 0.911,
+      "selectedCE": 0.3135050026879659,
+      "finalCE": 0.3135050026879659,
+      "bestEpoch": 5,
+      "timing": {
+        "trainingSeconds": 0.9089896249999998,
+        "initializationSeconds": 0.012930916999999993,
+        "evaluationSeconds": 0.07752266599999996,
+        "totalSeconds": 1.03256625
+      },
+      "provenance": {
+        "initializationSHA256": "e5a01569dcfed3bf580f4b53c466f42dae85104b365fd3650d0c7a8d0a5684fc",
+        "orderHash": "28a3f391",
+        "gateDrawHash": "990379bd",
+        "trainSHA256": "13df23663e03e6c82b1abd10f96b9d7fec1c123abe21dff07bf4bfe6aa6a73e4",
+        "validationSHA256": "ad4219367538e85183f22794f637be7975a98b231da4754b845bc7f0e4990aa8",
+        "testSHA256": "7e6f5d26ef7ba2d654166378dab39f9ba1a92fd928c59b1fb0ba0bcbecdee386",
+        "testSource": "balanced official test subset",
+        "selection": "earliest minimum validation CE, evaluated each completed epoch",
+        "testAccess": "only after training and checkpoint selection"
+      }
+    },
+    {
+      "mask": 15,
+      "selectedAccuracy": 0.8945,
+      "finalAccuracy": 0.8945,
+      "selectedCE": 0.3745294091787232,
+      "finalCE": 0.3745294091787232,
+      "bestEpoch": 5,
+      "timing": {
+        "trainingSeconds": 0.6627425829999998,
+        "initializationSeconds": 0.015703792000000022,
+        "evaluationSeconds": 0.0678977930000001,
+        "totalSeconds": 0.754910791
+      },
+      "provenance": {
+        "initializationSHA256": "e5a01569dcfed3bf580f4b53c466f42dae85104b365fd3650d0c7a8d0a5684fc",
+        "orderHash": "28a3f391",
+        "gateDrawHash": "990379bd",
+        "trainSHA256": "13df23663e03e6c82b1abd10f96b9d7fec1c123abe21dff07bf4bfe6aa6a73e4",
+        "validationSHA256": "ad4219367538e85183f22794f637be7975a98b231da4754b845bc7f0e4990aa8",
+        "testSHA256": "7e6f5d26ef7ba2d654166378dab39f9ba1a92fd928c59b1fb0ba0bcbecdee386",
+        "testSource": "balanced official test subset",
+        "selection": "earliest minimum validation CE, evaluated each completed epoch",
+        "testAccess": "only after training and checkpoint selection"
+      }
+    }
+  ],
+  "maskedInference": {
+    "active": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "accuracy": 0.875,
+    "ce": 0.46399217431677053
+  },
+  "stopDuringStalledDownload": true,
+  "stopAndRestart": true,
+  "fullInferenceParity": true,
+  "noTensorLeakAcrossEvaluation": true,
+  "seconds": 2.072
+}

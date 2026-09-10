@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "backend": "webgpu",
+  "tfjs": "4.22.0",
+  "activeMasks": 16,
+  "momentumSequence": [
+    15,
+    0,
+    5,
+    10,
+    15
+  ],
+  "scalarComparisons": 1367,
+  "maxAbsoluteDifference": 2.384185791015625e-7,
+  "remainingTensors": 0,
+  "seconds": 0.25437416700000004,
+  "nativeWebGPU": "Dawn Metal (kernel test, not browser UI test)"
+}

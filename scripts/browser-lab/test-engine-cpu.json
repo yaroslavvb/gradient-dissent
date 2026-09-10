@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "backend": "cpu",
+  "tfjs": "4.22.0",
+  "activeMasks": 16,
+  "momentumSequence": [
+    15,
+    0,
+    5,
+    10,
+    15
+  ],
+  "scalarComparisons": 1367,
+  "maxAbsoluteDifference": 1.7881393432617188e-7,
+  "remainingTensors": 0,
+  "seconds": 0.039655292,
+  "nativeWebGPU": null
+}

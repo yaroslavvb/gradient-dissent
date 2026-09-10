@@ -23,10 +23,18 @@
     "build:layerdrop": "python3 scripts/build_mnist_layerdrop_report.py",
     "check:layerdrop": "node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_page.cjs && node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_full_depth_page.cjs",
     "build:halfdrop": "uv run python scripts/build_mnist_halfdrop_report.py",
-    "check:halfdrop": "node experiments/ciresan_stochastic_depth/halfdrop/test_page.cjs"
+    "check:halfdrop": "node experiments/ciresan_stochastic_depth/halfdrop/test_page.cjs",
+    "build:browser": "python3 scripts/build_browser_lab.py",
+    "check:browser": "node scripts/browser-lab/test-engine.mjs && node scripts/browser-lab/test-dataset.cjs && node scripts/browser-lab/test-page.cjs",
+    "check:browser:gpu": "node scripts/browser-lab/test-engine.mjs --gpu && node scripts/browser-lab/test-worker.mjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1",
-    "katex": "^0.18.7"
+    "katex": "^0.18.7",
+    "webgpu": "0.6.0"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "4.22.0",
+    "@tensorflow/tfjs-backend-webgpu": "4.22.0"
   }
 }

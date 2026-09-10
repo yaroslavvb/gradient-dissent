@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "checks": [
+    "test: compressed/raw hashes, sizes, schema, unique bounded indices, class counts and ordering",
+    "train: compressed/raw hashes, sizes, schema, unique bounded indices, class counts and ordering",
+    "validation: compressed/raw hashes, sizes, schema, unique bounded indices, class counts and ordering",
+    "test_full: compressed/raw hashes, sizes, schema, unique bounded indices, class counts and ordering",
+    "training/validation original indices disjoint",
+    "all 20 preview images and labels match exact training assets"
+  ],
+  "dataset_manifest_sha256": "56a51f84f9458fc49c7b472ee5af6ad7ad8afec959dcb1825155cf02238fc12b",
+  "default_gzip_bytes": 2296866
+}

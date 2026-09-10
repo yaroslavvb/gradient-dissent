@@ -1,0 +1,5 @@
+{
+  "status": "passed",
+  "runtime": "jsdom offline UI integration with simulated worker events; real MNIST assets; not a browser GPU benchmark",
+  "checks": 57
+}
