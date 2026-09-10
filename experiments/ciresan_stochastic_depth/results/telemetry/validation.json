@@ -15,10 +15,15 @@
   "published_artifact_sha256": {
     "ciresan-stochastic-depth/telemetry/app.js": "e0c8ddc848501852a89e6b2d2cf0cd0d712a306e68be1e26e568a56ccb7f924b",
     "ciresan-stochastic-depth/telemetry/data.js": "c8e8da4f919a7d3cad9d65851e235b89aa8f49de2b012ad5ee8b4c25b9805ece",
-    "ciresan-stochastic-depth/telemetry/index.html": "8d37c66c3663f80ed5381f8be38fbaccda1f035a65a6a5354adab8ecd2b214be",
+    "ciresan-stochastic-depth/telemetry/index.html": "695aac3aadb7478f37799ec80c92fe296677d2e49c2382bac8b9b4ea3f74c95f",
     "ciresan-stochastic-depth/telemetry/metric-plan.html": "43de28dace7be50c0bedbe7d0ebe26862dbdf7a44f8e7f75fa461448a3619902",
     "ciresan-stochastic-depth/telemetry/report.md": "feb766c251448c9ed5d0ec052034eb5287383680607a5eb4fd7b24a0006f3b4a",
     "ciresan-stochastic-depth/telemetry/style.css": "0d8f8e186881a155c5e860ab875ce62d6790fd3885663b452a00618fdc192222"
   },
-  "plot_interpolation_note": "Lines join consecutive scheduled measurements; genuinely undefined values at a diagnostic checkpoint still break the line."
+  "plot_interpolation_note": "Lines join consecutive scheduled measurements; genuinely undefined values at a diagnostic checkpoint still break the line.",
+  "navigation_revision": {
+    "checked_at_unix": 1788999037.703578,
+    "note": "Added the practical conclusions link; scientific data and application code unchanged. Original check timestamp refers to telemetry validation.",
+    "index_sha256": "695aac3aadb7478f37799ec80c92fe296677d2e49c2382bac8b9b4ea3f74c95f"
+  }
 }

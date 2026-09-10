@@ -1,10 +1,10 @@
 # W&B export and chart integration
 
-Checked 9 September 2026. The exporter is ready for completed rerun results. No W&B upload, project creation, SDK installation, login, or paid compute was performed for this integration. The JSONL path works without W&B and does not block the public Pages report.
+Checked 9 September 2026. The exporter is ready for completed rerun results. Following the explicit request for W&B run links, W&B SDK 0.30.0 was installed in the experiment virtual environment and its offline export path was tested. No online upload, project creation, login, or paid compute was performed during preparation. The JSONL path works without W&B and does not block the public Pages report.
 
 ## Availability and historical provenance
 
-Presence-only checks found no installed `wandb` SDK in the default Python or experiment virtual environment; no configured W&B API-key environment variable, usual settings/credentials file, or netrc login. Read-only Modal secret-name inventories found no W&B-named secret in either the experiment environment or the default environment. Secret values were not read. This is an availability snapshot, not a claim about every possible account or machine.
+Initial presence-only checks found no installed `wandb` SDK and no configured W&B API-key environment variable, usual settings/credentials file, or netrc login. Read-only Modal secret-name inventories found no W&B-named secret in either the experiment environment or the default environment. The SDK was subsequently installed; the last preparation-time authentication recheck still found no configured login. Secret values were never printed or retained in repository artifacts. This is an availability snapshot, not a claim about every possible account or machine.
 
 The existing [history inventory](../history/README.md), `run-metadata.json`, `selected-histories.json`, and `source-audit.json` already preserve the useful sanitized evidence from [yaroslavvb/train_ciresan](https://wandb.ai/yaroslavvb/train_ciresan). They contain all 327 run summaries and selected extrema/evaluation records, not complete per-layer diagnostic curves. No maintained local history-retrieval script or W&B connector was found. The earlier inventory used public GraphQL `sampledHistory` with row-count checks; sampled summaries must not be drawn as a reconstructed dense history.
 
@@ -40,8 +40,22 @@ W&B offers programmatic report and workspace creation through the separate `wand
 
 ## Verification
 
-Fifteen CPU tests pass using a fake SDK, with no network calls. They cover source immutability, clock preservation, absent-axis refusal, units and test/validation aliases, finite values, safe configuration, new run IDs, JSONL checksums, historical-project rejection, metadata controls and custom-axis logging. The actual recorded 837-metric row also passes: the sanity bound is 2,048 total fields to include its additional scalar diagnostics, with no truncation. All 18 completed reruns were exported as JSONL, and every original finite metric, recorded clock, source hash and JSONL hash was checked. The actual optional SDK path is not integration-tested because the SDK and authentication are absent. Run the tests with:
+Fifteen exporter CPU tests pass using a fake SDK, with no network calls. They cover source immutability, clock preservation, absent-axis refusal, units and test/validation aliases, finite values, safe configuration, new run IDs, JSONL checksums, historical-project rejection, metadata controls and custom-axis logging. The actual recorded 837-metric row also passes: the sanity bound is 2,048 total fields to include its additional scalar diagnostics, with no truncation. All 18 completed reruns were exported as JSONL, and every original finite metric, recorded clock, source hash and JSONL hash was checked. A real SDK offline smoke test produced a native W&B file from a complete 22-row run in a temporary directory; it uploaded nothing and the temporary files were removed. Online behavior still awaits authentication. Run the tests with:
 
 ```sh
 python -m unittest experiments.ciresan_stochastic_depth.telemetry.test_wandb_export -v
 ```
+
+## Verified run-link publication
+
+`upload_wandb.py` prepares `results/telemetry/wandb-upload-manifest.json`, an 18-entry registry whose `verified_wandb_url` fields start as null. It also copies frozen validation-selected and final test endpoints, target-reaching timestamps where available, and measured training/run/telemetry times into an explicit scientific summary. These additions do not change the existing history hashes or content-derived IDs. There is no new checkpoint or hyperparameter selection.
+
+After the user has authenticated locally, the upload command is:
+
+```sh
+experiments/.venv/bin/python experiments/ciresan_stochastic_depth/telemetry/upload_wandb.py --upload
+```
+
+The driver verifies existing runs before writing. A complete matching run is reused; a conflicting run is refused; an active partial run is left alone. A non-active partial run can resume only after its config and contiguous metric/clock prefix match the exact source. Each worker has a 180-second wall limit and each source gets at most three attempts per invocation. Uncertain writes are read back under the same ID before retries. An interrupted driver lock requires inspection of the process before removal; do not run competing upload drivers.
+
+The registry exposes the SDK-returned URL only after the public API retrieves the actual finished run, every expected scalar/clock cell, all source hashes, and frozen endpoint summaries. `scan_history` is used without key intersection or cached history so sparse metrics are retained. Eight additional CPU tests exercise prefix conflicts, completion and URL gating, endpoint units, and the exact 18-source registry. No model weights or checkpoints are uploaded. [Public API](https://docs.wandb.ai/models/ref/python/public-api/api), [run-history interface](https://docs.wandb.ai/models/ref/python/public-api/run).

@@ -1,0 +1,21 @@
+{
+  "checked_at_unix": 1788999037.703072,
+  "training_runs_source_hash_verified": 18,
+  "mask_checkpoint_states_verified": 30,
+  "displayed_mask_aggregates": 6,
+  "jsdom_checks_passed": 30,
+  "wandb_export_upload_cpu_tests_passed": 23,
+  "verified_wandb_runs": 0,
+  "wandb_status": "blocked_login",
+  "local_http_status": 200,
+  "relative_links_checked": 67,
+  "missing_links": [],
+  "browser_visual_qa_performed": false,
+  "artifact_sha256": {
+    "ciresan-stochastic-depth/conclusions/app.js": "ba5320cf42014b194db86aa761507431a8cfa25d8ead8744ae283b278c6e94b1",
+    "ciresan-stochastic-depth/conclusions/data.js": "b002404f43562c0ca4ae63995bfafaf667cfb30039049e87cae404905338997a",
+    "ciresan-stochastic-depth/conclusions/index.html": "0b806b6e4b9d7b56a0801eaa592e38b4613d07ea53f70fa79f64d3d118cbe2a5",
+    "ciresan-stochastic-depth/conclusions/report.md": "7c25e451f86bbb0d9a1edee480051292652783f00856e1b9a21a85300883d871",
+    "ciresan-stochastic-depth/conclusions/style.css": "8d9062c7dce89603a87fc439929d86feb71aa9ed964eab6e140d52c124cb2dde"
+  }
+}
