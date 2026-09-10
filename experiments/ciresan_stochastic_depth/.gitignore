@@ -1,4 +1,5 @@
 data/
 checkpoints/
 results/.budget.lock
+results/telemetry/wandb-upload-manifest.lock
 *.pt

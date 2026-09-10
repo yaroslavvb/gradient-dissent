@@ -1445,7 +1445,7 @@
   ],
   "name": "telemetry-main-residual_unit_dropout-s103-v1",
   "omitted_null_or_nonscalar_diagnostics_count": 397,
-  "project": "gradient-dissent-ciresan",
+  "project": "gradient-dissent",
   "run_id": "telemetry-4b18358d8131574c1fd5",
   "schema_version": 1,
   "source_sha256": "bc27fe0bca01a0608d8422afaf5e85dd2f8724be83548a18bdd2c1a277b76d97"

@@ -1445,7 +1445,7 @@
   ],
   "name": "telemetry-main-plain-s103-v1",
   "omitted_null_or_nonscalar_diagnostics_count": 397,
-  "project": "gradient-dissent-ciresan",
+  "project": "gradient-dissent",
   "run_id": "telemetry-a6c0d5270fbf2fcc92ef",
   "schema_version": 1,
   "source_sha256": "71c1129524300559d85a3a526a8755eee48d7ad2c508528aa607a22b7c7d780b"

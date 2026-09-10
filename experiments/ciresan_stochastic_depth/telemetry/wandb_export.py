@@ -19,7 +19,7 @@ from pathlib import Path
 import re
 
 
-DEFAULT_PROJECT = "gradient-dissent-ciresan"
+DEFAULT_PROJECT = "gradient-dissent"
 DEFAULT_GROUP = "ciresan-telemetry-20260909"
 # A detailed six-layer record includes ~837 named metrics plus ~565 nested
 # diagnostic scalars. Keep all of them; this is a sanity bound, not truncation.

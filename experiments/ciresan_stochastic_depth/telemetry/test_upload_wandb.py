@@ -33,6 +33,20 @@ class FakeApi:
 
 
 class UploadTests(unittest.TestCase):
+    def test_missing_run_handles_sdk_wrapper_but_propagates_other_api_errors(self):
+        from wandb.apis.public.runs import RunNotFoundError
+        from wandb.errors import CommError
+        class MissingApi:
+            def __init__(self, error): self.error = error
+            def flush(self): pass
+            def run(self, path): raise self.error
+        missing = RunNotFoundError('not found')
+        for error in (missing, CommError('not found', missing)):
+            self.assertEqual(upload.inspect_remote(MissingApi(error), payload()), {'exists': False})
+        for error in (CommError('permission denied'), CommError('network error', TimeoutError())):
+            with self.assertRaises(CommError):
+                upload.inspect_remote(MissingApi(error), payload())
+
     def test_prefix_accepts_only_matching_measured_cells(self):
         p = payload()
         first = [{**p["rows"][0], "_step": 0., "_runtime": 1000}]
@@ -107,6 +121,17 @@ class UploadTests(unittest.TestCase):
         registry = upload.make_registry()
         registry["runs"][0]["source_sha256"] = "0"*64
         with self.assertRaises(upload.IntegrityError): upload.make_registry(registry)
+
+    def test_destination_change_requires_fresh_verification(self):
+        registry = upload.make_registry()
+        for r in registry['runs']:
+            r.update(project='former-project', status='verified', verified_wandb_url='https://wandb.ai/old')
+        changed = upload.make_registry(registry)
+        self.assertFalse(changed['complete'])
+        self.assertEqual(changed['verified_run_count'], 0)
+        for r in changed['runs']:
+            self.assertIsNone(r['verified_wandb_url'])
+            self.assertEqual(r['previous_destination']['project'], 'former-project')
 
 
 if __name__ == "__main__": unittest.main()

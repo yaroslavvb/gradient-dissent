@@ -15,6 +15,7 @@ def main():
  assert training['complete'] and training['counts']['verified']==18
  assert audit['verification']['passed'] and audit['verification']['state_count']==30
  assert registry['expected_run_count']==18 and len(registry['runs'])==18
+ assert registry['project']=='gradient-dissent' and registry['complete'] and registry['verified_run_count']==18,'Publishing this report requires all18 verified W&B runs in the requested project'
  source=ROOT/'research/ciresan-stochastic-depth-conclusions.md'
  body=markdown.markdown(source.read_text(),extensions=['tables','fenced_code'])
  body=body.replace('<h1>','<h2>').replace('</h1>','</h2>')

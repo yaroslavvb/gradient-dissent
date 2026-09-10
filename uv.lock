@@ -495,6 +495,7 @@ dependencies = [
     { name = "scipy" },
     { name = "torch" },
     { name = "wandb" },
+    { name = "wandb-workspaces" },
 ]
 
 [package.metadata]
@@ -507,6 +508,7 @@ requires-dist = [
     { name = "scipy", specifier = "==1.18.1" },
     { name = "torch", specifier = "==2.14.0" },
     { name = "wandb", specifier = "==0.30.0" },
+    { name = "wandb-workspaces", specifier = ">=0.4.11" },
 ]
 
 [[package]]
@@ -1705,6 +1707,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/05/77/5eddd97f33f581f4d167f41bbf4736f2a51ad7271b9c9ed5dceb6994cbd6/wandb-0.30.0-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:e7dc3b0b1567f6a121d8f7a58131b5d085861139a653ef8bed1569c9be796721", size = 26320243, upload-time = "2026-09-09T00:16:32.878Z" },
     { url = "https://files.pythonhosted.org/packages/2f/e7/821c363f0a74aa9826ca058d3f6f8f8e41697001a0a869b5ccc7eca5b0e4/wandb-0.30.0-py3-none-win_amd64.whl", hash = "sha256:217bde0a7c49482f26166a1a7bee760bb9e2658135b2d45a33aacabffec68817", size = 24083356, upload-time = "2026-09-09T00:16:36.766Z" },
     { url = "https://files.pythonhosted.org/packages/3a/60/fd40e8b1a6136f4df97739a503c239fb4dab67f093cb9cccb5a1dd9d1895/wandb-0.30.0-py3-none-win_arm64.whl", hash = "sha256:36d6d8a5b88b36ad82b0f7ffab79033a8bbba047b5a90c0b7e26d0cf3a09f0b6", size = 21788859, upload-time = "2026-09-09T00:16:39.088Z" },
+]
+
+[[package]]
+name = "wandb-workspaces"
+version = "0.4.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "wandb" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/60/9e/61fb99f482efc17397817d5dec171551f41e73bcd8ec922716c82033210b/wandb_workspaces-0.4.11.tar.gz", hash = "sha256:ac69e1dea4d9aacce2398c4c849df35981074732b8ecedf520ada80ea2ab9bea", size = 229028, upload-time = "2026-09-01T13:37:51.404Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/3d/72c3dc08194a8d5a101bbc4fdbb722f593c37c996fb8185dcc562bc24c2f/wandb_workspaces-0.4.11-py3-none-any.whl", hash = "sha256:5dd8031a1111eef0b110cc5402d57fabe97094ef1d698aedc7c426fd2778ed6b", size = 115843, upload-time = "2026-09-01T13:37:50.143Z" },
 ]
 
 [[package]]

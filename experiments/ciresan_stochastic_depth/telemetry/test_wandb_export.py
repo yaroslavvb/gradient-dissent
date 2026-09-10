@@ -212,7 +212,7 @@ class ExportTests(unittest.TestCase):
         sdk = FakeSDK()
         with tempfile.TemporaryDirectory() as directory:
             status = exporter.publish(payload, mode="online", entity="test", sdk_directory=directory, wandb_module=sdk)
-        self.assertEqual(sdk.kwargs["project"], "gradient-dissent-ciresan")
+        self.assertEqual(sdk.kwargs["project"], "gradient-dissent")
         self.assertEqual(sdk.kwargs["resume"], "never")
         self.assertEqual(sdk.kwargs["reinit"], "create_new")
         self.assertTrue(sdk.kwargs["force"])

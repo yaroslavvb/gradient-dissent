@@ -1,0 +1,320 @@
+{
+  "entity": "yaroslavvb",
+  "group": "ciresan-telemetry-20260909",
+  "identifier": "gradient-dissent-ciresan-curated-v1",
+  "panel_count": 8,
+  "plan_sha256": "2e2414fa0727555ca99206ea80a1ea9bb9859c4dd8c34976b918ae925aac337a",
+  "project": "gradient-dissent",
+  "reused_existing_report": false,
+  "schema_version": 1,
+  "status": "verified",
+  "title": "Ciresan MNIST: measured training curves \u00b7 2026-09-09",
+  "upload_registry_sha256": "2f52ee405509eeb0fd47000ebb7813de51b07b0aca281f63f9838af1b387a527",
+  "verification": "Saved report reloaded through the official API; project/title, eight panel axes/metrics, exact run filters (canonical trees), smoothing and aggregation settings match.",
+  "verified_at_utc": "2026-09-10T00:33:14.837528+00:00",
+  "verified_panel_configuration": {
+    "description": "gradient-dissent-ciresan-curated-v1; verified 18-run group ciresan-telemetry-20260909. Measured clocks, separate held-out validation and official-test target replay.",
+    "entity": "yaroslavvb",
+    "grids": [
+      {
+        "panels": [
+          {
+            "aggregate": false,
+            "log_y": true,
+            "max_runs_to_show": 15,
+            "range_y": [
+              null,
+              null
+            ],
+            "smoothing_type": "none",
+            "title": "Validation cross-entropy",
+            "x": "training_seconds",
+            "y": [
+              "validation/loss"
+            ]
+          },
+          {
+            "aggregate": false,
+            "log_y": false,
+            "max_runs_to_show": 15,
+            "range_y": [
+              0.0,
+              100.0
+            ],
+            "smoothing_type": "none",
+            "title": "Validation accuracy",
+            "x": "training_seconds",
+            "y": [
+              "validation/accuracy_pct"
+            ]
+          },
+          {
+            "aggregate": false,
+            "log_y": true,
+            "max_runs_to_show": 15,
+            "range_y": [
+              null,
+              null
+            ],
+            "smoothing_type": "none",
+            "title": "Full training-set cross-entropy",
+            "x": "training_seconds",
+            "y": [
+              "train/loss"
+            ]
+          },
+          {
+            "aggregate": false,
+            "log_y": false,
+            "max_runs_to_show": 15,
+            "range_y": [
+              0.0,
+              100.0
+            ],
+            "smoothing_type": "none",
+            "title": "Full training-set accuracy",
+            "x": "training_seconds",
+            "y": [
+              "train/accuracy_pct"
+            ]
+          }
+        ],
+        "runsets": [
+          {
+            "entity": "yaroslavvb",
+            "filters": {
+              "filterFormat": "filterV2",
+              "filters": [
+                {
+                  "disabled": false,
+                  "key": {
+                    "name": "group",
+                    "section": "run"
+                  },
+                  "op": "=",
+                  "value": "ciresan-telemetry-20260909"
+                },
+                {
+                  "connector": "AND",
+                  "disabled": false,
+                  "key": {
+                    "name": "state",
+                    "section": "run"
+                  },
+                  "op": "=",
+                  "value": "finished"
+                },
+                {
+                  "connector": "AND",
+                  "disabled": false,
+                  "key": {
+                    "name": "scientific_run_id",
+                    "section": "config"
+                  },
+                  "op": "IN",
+                  "value": [
+                    "telemetry-main-plain-s101-v1",
+                    "telemetry-main-plain-s102-v1",
+                    "telemetry-main-plain-s103-v1",
+                    "telemetry-main-residual-s101-v1",
+                    "telemetry-main-residual-s102-v1",
+                    "telemetry-main-residual-s103-v1",
+                    "telemetry-main-residual_unit_dropout-s101-v1",
+                    "telemetry-main-residual_unit_dropout-s102-v1",
+                    "telemetry-main-residual_unit_dropout-s103-v1",
+                    "telemetry-main-sd_annealed-s101-v1",
+                    "telemetry-main-sd_annealed-s102-v1",
+                    "telemetry-main-sd_annealed-s103-v1",
+                    "telemetry-main-sd_constant-s101-v1",
+                    "telemetry-main-sd_constant-s102-v1",
+                    "telemetry-main-sd_constant-s103-v1"
+                  ]
+                }
+              ]
+            },
+            "project": "gradient-dissent"
+          }
+        ]
+      },
+      {
+        "panels": [
+          {
+            "aggregate": false,
+            "log_y": true,
+            "max_runs_to_show": 15,
+            "range_y": [
+              null,
+              null
+            ],
+            "smoothing_type": "none",
+            "title": "First body branch: dense-probe gradient norm",
+            "x": "training_seconds",
+            "y": [
+              "layer-1/probe/grad_l2"
+            ]
+          },
+          {
+            "aggregate": false,
+            "log_y": true,
+            "max_runs_to_show": 15,
+            "range_y": [
+              null,
+              null
+            ],
+            "smoothing_type": "none",
+            "title": "First body branch: gradient diversity",
+            "x": "training_seconds",
+            "y": [
+              "layer-1/probe/weight_grad_diversity"
+            ]
+          }
+        ],
+        "runsets": [
+          {
+            "entity": "yaroslavvb",
+            "filters": {
+              "filterFormat": "filterV2",
+              "filters": [
+                {
+                  "disabled": false,
+                  "key": {
+                    "name": "group",
+                    "section": "run"
+                  },
+                  "op": "=",
+                  "value": "ciresan-telemetry-20260909"
+                },
+                {
+                  "connector": "AND",
+                  "disabled": false,
+                  "key": {
+                    "name": "state",
+                    "section": "run"
+                  },
+                  "op": "=",
+                  "value": "finished"
+                },
+                {
+                  "connector": "AND",
+                  "disabled": false,
+                  "key": {
+                    "name": "scientific_run_id",
+                    "section": "config"
+                  },
+                  "op": "IN",
+                  "value": [
+                    "telemetry-main-plain-s101-v1",
+                    "telemetry-main-plain-s102-v1",
+                    "telemetry-main-plain-s103-v1",
+                    "telemetry-main-residual-s101-v1",
+                    "telemetry-main-residual-s102-v1",
+                    "telemetry-main-residual-s103-v1",
+                    "telemetry-main-residual_unit_dropout-s101-v1",
+                    "telemetry-main-residual_unit_dropout-s102-v1",
+                    "telemetry-main-residual_unit_dropout-s103-v1",
+                    "telemetry-main-sd_annealed-s101-v1",
+                    "telemetry-main-sd_annealed-s102-v1",
+                    "telemetry-main-sd_annealed-s103-v1",
+                    "telemetry-main-sd_constant-s101-v1",
+                    "telemetry-main-sd_constant-s102-v1",
+                    "telemetry-main-sd_constant-s103-v1"
+                  ]
+                }
+              ]
+            },
+            "project": "gradient-dissent"
+          }
+        ]
+      },
+      {
+        "panels": [
+          {
+            "aggregate": false,
+            "log_y": false,
+            "max_runs_to_show": 3,
+            "range_y": [
+              0.0,
+              100.0
+            ],
+            "smoothing_type": "none",
+            "title": "Official-test target replay: 98.63% target",
+            "x": "training_seconds",
+            "y": [
+              "test/accuracy_pct"
+            ]
+          },
+          {
+            "aggregate": false,
+            "log_y": false,
+            "max_runs_to_show": 3,
+            "range_y": [
+              0.0,
+              100.0
+            ],
+            "smoothing_type": "none",
+            "title": "Same official-test replay including setup and telemetry",
+            "x": "run_elapsed_seconds",
+            "y": [
+              "test/accuracy_pct"
+            ]
+          }
+        ],
+        "runsets": [
+          {
+            "entity": "yaroslavvb",
+            "filters": {
+              "filterFormat": "filterV2",
+              "filters": [
+                {
+                  "disabled": false,
+                  "key": {
+                    "name": "group",
+                    "section": "run"
+                  },
+                  "op": "=",
+                  "value": "ciresan-telemetry-20260909"
+                },
+                {
+                  "connector": "AND",
+                  "disabled": false,
+                  "key": {
+                    "name": "state",
+                    "section": "run"
+                  },
+                  "op": "=",
+                  "value": "finished"
+                },
+                {
+                  "connector": "AND",
+                  "disabled": false,
+                  "key": {
+                    "name": "scientific_run_id",
+                    "section": "config"
+                  },
+                  "op": "IN",
+                  "value": [
+                    "telemetry-baseline-s101-v1",
+                    "telemetry-baseline-s102-v1",
+                    "telemetry-baseline-s103-v1"
+                  ]
+                }
+              ]
+            },
+            "project": "gradient-dissent"
+          }
+        ]
+      }
+    ],
+    "project": "gradient-dissent",
+    "title": "Ciresan MNIST: measured training curves \u00b7 2026-09-09"
+  },
+  "verified_report_url": "https://wandb.ai/yaroslavvb/gradient-dissent/reports/Ciresan-MNIST:-measured-training-curves-\u00b7-2026-09-09--VmlldzoxNzkwNDAzNA==",
+  "verified_run_count": 18,
+  "visibility": {
+    "anonymous_access_verified": false,
+    "note": "Verified through the authenticated W&B account; anonymous access has not been established.",
+    "server_project_public_setting": null,
+    "setting_changed": false,
+    "setting_read_status": "unavailable_null"
+  }
+}

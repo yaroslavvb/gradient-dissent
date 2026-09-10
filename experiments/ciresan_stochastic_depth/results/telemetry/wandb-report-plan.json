@@ -1,0 +1,207 @@
+{
+  "aggregation": "Individual seed traces; no smoothing, grouped mean, or confidence band.",
+  "clock_semantics": "training_seconds is measured optimization time; run_elapsed_seconds includes setup, evaluation and telemetry; W&B importer runtime is never used.",
+  "description": "gradient-dissent-ciresan-curated-v1; verified 18-run group ciresan-telemetry-20260909. Measured clocks, separate held-out validation and official-test target replay.",
+  "entity": "yaroslavvb",
+  "filters": {
+    "baseline": "Group == 'ciresan-telemetry-20260909' and State == 'finished' and Config('scientific_run_id') in ['telemetry-baseline-s101-v1', 'telemetry-baseline-s102-v1', 'telemetry-baseline-s103-v1']",
+    "controlled": "Group == 'ciresan-telemetry-20260909' and State == 'finished' and Config('scientific_run_id') in ['telemetry-main-plain-s101-v1', 'telemetry-main-plain-s102-v1', 'telemetry-main-plain-s103-v1', 'telemetry-main-residual-s101-v1', 'telemetry-main-residual-s102-v1', 'telemetry-main-residual-s103-v1', 'telemetry-main-residual_unit_dropout-s101-v1', 'telemetry-main-residual_unit_dropout-s102-v1', 'telemetry-main-residual_unit_dropout-s103-v1', 'telemetry-main-sd_annealed-s101-v1', 'telemetry-main-sd_annealed-s102-v1', 'telemetry-main-sd_annealed-s103-v1', 'telemetry-main-sd_constant-s101-v1', 'telemetry-main-sd_constant-s102-v1', 'telemetry-main-sd_constant-s103-v1']",
+    "diagnostics": "Group == 'ciresan-telemetry-20260909' and State == 'finished' and Config('scientific_run_id') in ['telemetry-main-plain-s101-v1', 'telemetry-main-plain-s102-v1', 'telemetry-main-plain-s103-v1', 'telemetry-main-residual-s101-v1', 'telemetry-main-residual-s102-v1', 'telemetry-main-residual-s103-v1', 'telemetry-main-residual_unit_dropout-s101-v1', 'telemetry-main-residual_unit_dropout-s102-v1', 'telemetry-main-residual_unit_dropout-s103-v1', 'telemetry-main-sd_annealed-s101-v1', 'telemetry-main-sd_annealed-s102-v1', 'telemetry-main-sd_annealed-s103-v1', 'telemetry-main-sd_constant-s101-v1', 'telemetry-main-sd_constant-s102-v1', 'telemetry-main-sd_constant-s103-v1']"
+  },
+  "group": "ciresan-telemetry-20260909",
+  "identifier": "gradient-dissent-ciresan-curated-v1",
+  "panels": [
+    {
+      "axis": "training_seconds",
+      "cohort": "controlled",
+      "log_y": true,
+      "metric": "validation/loss",
+      "title": "Validation cross-entropy",
+      "ylabel": "Mean cross-entropy (nats)"
+    },
+    {
+      "axis": "training_seconds",
+      "cohort": "controlled",
+      "metric": "validation/accuracy_pct",
+      "range_y": [
+        0,
+        100
+      ],
+      "title": "Validation accuracy",
+      "ylabel": "Accuracy (%)"
+    },
+    {
+      "axis": "training_seconds",
+      "cohort": "controlled",
+      "log_y": true,
+      "metric": "train/loss",
+      "title": "Full training-set cross-entropy",
+      "ylabel": "Mean cross-entropy (nats)"
+    },
+    {
+      "axis": "training_seconds",
+      "cohort": "controlled",
+      "metric": "train/accuracy_pct",
+      "range_y": [
+        0,
+        100
+      ],
+      "title": "Full training-set accuracy",
+      "ylabel": "Accuracy (%)"
+    },
+    {
+      "axis": "training_seconds",
+      "cohort": "diagnostics",
+      "log_y": true,
+      "metric": "layer-1/probe/grad_l2",
+      "title": "First body branch: dense-probe gradient norm",
+      "ylabel": "L2 norm of mean weight gradient"
+    },
+    {
+      "axis": "training_seconds",
+      "cohort": "diagnostics",
+      "log_y": true,
+      "metric": "layer-1/probe/weight_grad_diversity",
+      "title": "First body branch: gradient diversity",
+      "ylabel": "E\u2016g\u1d62\u2016\u00b2 / \u2016E g\u1d62\u2016\u00b2"
+    },
+    {
+      "axis": "training_seconds",
+      "cohort": "baseline",
+      "metric": "test/accuracy_pct",
+      "range_y": [
+        0,
+        100
+      ],
+      "title": "Official-test target replay: 98.63% target",
+      "ylabel": "Official-test accuracy (%)"
+    },
+    {
+      "axis": "run_elapsed_seconds",
+      "cohort": "baseline",
+      "metric": "test/accuracy_pct",
+      "range_y": [
+        0,
+        100
+      ],
+      "title": "Same official-test replay including setup and telemetry",
+      "ylabel": "Official-test accuracy (%)"
+    }
+  ],
+  "plan_sha256": "2e2414fa0727555ca99206ea80a1ea9bb9859c4dd8c34976b918ae925aac337a",
+  "project": "gradient-dissent",
+  "schema_version": 1,
+  "source_runs": [
+    {
+      "content_sha256": "9d454f1019eec27a95f5912c0f54d6fe49ffd551ba9e1d8e084a512da306ac93",
+      "scientific_run_id": "telemetry-main-plain-s101-v1",
+      "source_sha256": "0d24ea0eb4627c03e5e9d7e3625d0f7b126ef5549f3f386a01e0e98f1d036bf7",
+      "wandb_run_id": "telemetry-9d454f1019eec27a95f5"
+    },
+    {
+      "content_sha256": "daedf8df04bb8bf03ef4b2d0884fd38addd0c4db19a546cba849d902c96dbdb1",
+      "scientific_run_id": "telemetry-main-plain-s102-v1",
+      "source_sha256": "60abc20449e4e34e89bfda3389e345822a6bb062b7e956813bb467291821dd43",
+      "wandb_run_id": "telemetry-daedf8df04bb8bf03ef4"
+    },
+    {
+      "content_sha256": "a6c0d5270fbf2fcc92efcdfee0ed92e0a1e0f35cc4356a7c54c0b8549e016b04",
+      "scientific_run_id": "telemetry-main-plain-s103-v1",
+      "source_sha256": "71c1129524300559d85a3a526a8755eee48d7ad2c508528aa607a22b7c7d780b",
+      "wandb_run_id": "telemetry-a6c0d5270fbf2fcc92ef"
+    },
+    {
+      "content_sha256": "fb95578abb2f012cc936d1fec44c36a52107e1bd83e6234a8a44b1d9467fe036",
+      "scientific_run_id": "telemetry-main-residual-s101-v1",
+      "source_sha256": "d6f66d3ca4e4055ed0dbc8c3815fa0f6f642e3f620201b83147407e46b3d453f",
+      "wandb_run_id": "telemetry-fb95578abb2f012cc936"
+    },
+    {
+      "content_sha256": "606b04ceacd0f5af172784d926533014bcd832581fd0f75fe078071d9b657e7e",
+      "scientific_run_id": "telemetry-main-residual-s102-v1",
+      "source_sha256": "e4c36ef6a4574b602e506debe1df7c777ed88aa7089cc20286bf4590801efdeb",
+      "wandb_run_id": "telemetry-606b04ceacd0f5af1727"
+    },
+    {
+      "content_sha256": "37aad9da68cdc89891e6d255bef294ffe7ea973488300d91516eb8608fe79ae6",
+      "scientific_run_id": "telemetry-main-residual-s103-v1",
+      "source_sha256": "b3a70fc53ed007037a00c02c70c4cfbf03c464e56442b571b4407e4b747aea5e",
+      "wandb_run_id": "telemetry-37aad9da68cdc89891e6"
+    },
+    {
+      "content_sha256": "dfb9bb1f93f682af3249b72e7f523d29bb277d668f0df8c9a1e0f302a8bd16c0",
+      "scientific_run_id": "telemetry-main-sd_constant-s101-v1",
+      "source_sha256": "c19186a1d830421f66b5523c8075183af80a04041ee059873482c17d6a74fa8d",
+      "wandb_run_id": "telemetry-dfb9bb1f93f682af3249"
+    },
+    {
+      "content_sha256": "ce7a10d76fe8519cb07083f3e70f2063c71f947da31f73cfe2f8e0b2912f0d53",
+      "scientific_run_id": "telemetry-main-sd_constant-s102-v1",
+      "source_sha256": "52e836f813eb6ed196be541735e9f04cb990da2b1e248cb16acff4f81750ecec",
+      "wandb_run_id": "telemetry-ce7a10d76fe8519cb070"
+    },
+    {
+      "content_sha256": "3ffc2fe56fc53e01789aeda371f8142ba2851836ead543f1935b77c5464c97c0",
+      "scientific_run_id": "telemetry-main-sd_constant-s103-v1",
+      "source_sha256": "c50851beb31e8ac87e63aa6056486845f710c366a01aaf3d84fb3f94db52286b",
+      "wandb_run_id": "telemetry-3ffc2fe56fc53e01789a"
+    },
+    {
+      "content_sha256": "00ae8a29680efda6d4106997ff9468e2e7eff0cf1a8f64cf3c0715dd72c6a0fe",
+      "scientific_run_id": "telemetry-main-sd_annealed-s101-v1",
+      "source_sha256": "34b75f3529ceae1264b00f1100f9c0fadff50f9cc61f6b2d1fe9744b481424ca",
+      "wandb_run_id": "telemetry-00ae8a29680efda6d410"
+    },
+    {
+      "content_sha256": "18a9aba3779e2fca363582618342fad9a2cf19948b132246da00b60cb9ded707",
+      "scientific_run_id": "telemetry-main-sd_annealed-s102-v1",
+      "source_sha256": "c69a46113c32a5ee0a780f9891b89618dbfad156029d46a8d62e2f2bf7df0bca",
+      "wandb_run_id": "telemetry-18a9aba3779e2fca3635"
+    },
+    {
+      "content_sha256": "b72c825fc9e25a56e794274011b640031326ca73da841d609716bee794c20725",
+      "scientific_run_id": "telemetry-main-sd_annealed-s103-v1",
+      "source_sha256": "aad0673ef9727bea8a29f0f8889cad08e47b463f8a21ee1bcd2141a41ec6f3db",
+      "wandb_run_id": "telemetry-b72c825fc9e25a56e794"
+    },
+    {
+      "content_sha256": "1aae32604679aff85ee9a7f74fdb61dbe68c9b134d059c6479df678b17243f71",
+      "scientific_run_id": "telemetry-main-residual_unit_dropout-s101-v1",
+      "source_sha256": "e8ee42b873c90bf3d7f547914b00065ac1a372921897c6a8404ad769e1f4a2ed",
+      "wandb_run_id": "telemetry-1aae32604679aff85ee9"
+    },
+    {
+      "content_sha256": "801661223af82e37574dea8f2b368ac3c65ee1d6fba25be55bb28f78b9accd04",
+      "scientific_run_id": "telemetry-main-residual_unit_dropout-s102-v1",
+      "source_sha256": "61475d215493ba884910abd70e45f8e02bbd05580f0d101eddbb13ec55d262f0",
+      "wandb_run_id": "telemetry-801661223af82e37574d"
+    },
+    {
+      "content_sha256": "4b18358d8131574c1fd5c19cfb8194e0bf8bb8b75b7941143a363463e3a83a62",
+      "scientific_run_id": "telemetry-main-residual_unit_dropout-s103-v1",
+      "source_sha256": "bc27fe0bca01a0608d8422afaf5e85dd2f8724be83548a18bdd2c1a277b76d97",
+      "wandb_run_id": "telemetry-4b18358d8131574c1fd5"
+    },
+    {
+      "content_sha256": "9f4cbc11857ae9687a4307633cbb844c000d8eee5cec5c622aef925c3d431e44",
+      "scientific_run_id": "telemetry-baseline-s101-v1",
+      "source_sha256": "df713f4ce55dba2a0b7984bdc2bd408810868bd50e00a286a4b55a361ab6fce2",
+      "wandb_run_id": "telemetry-9f4cbc11857ae9687a43"
+    },
+    {
+      "content_sha256": "e4f74516177cf68084101ea5793be3363e30f89bfedb796944da2576e644bbf2",
+      "scientific_run_id": "telemetry-baseline-s102-v1",
+      "source_sha256": "64130fccd222240000ed3449dd76db9171129147088359a08461f048bc7188b6",
+      "wandb_run_id": "telemetry-e4f74516177cf6808410"
+    },
+    {
+      "content_sha256": "fe31d7b63af1f86f11d825f56eb6dddf0437e165ef0c7f1b163a0067759bdb6b",
+      "scientific_run_id": "telemetry-baseline-s103-v1",
+      "source_sha256": "c5615aadb62089fa2d7069a37548a0de59069c5713416a35a364862aa112f974",
+      "wandb_run_id": "telemetry-fe31d7b63af1f86f11d8"
+    }
+  ],
+  "status": "ready_to_publish",
+  "target_semantics": "98.63% official-test target is a labeled stopping goal, not a training-accuracy goal; no synthetic constant metric is added.",
+  "title": "Ciresan MNIST: measured training curves \u00b7 2026-09-09"
+}

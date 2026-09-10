@@ -116,8 +116,17 @@ def make_registry(previous=None):
             for key in ("wandb_run_id", "source_sha256", "content_sha256"):
                 if prior.get(key) != record[key]:
                     raise IntegrityError("Source changed after creation of the upload registry")
+            if prior.get('entity') != ENTITY or prior.get('project') != DEFAULT_PROJECT:
+                record['previous_destination'] = {
+                    'entity': prior.get('entity'), 'project': prior.get('project'),
+                    'status_before_switch': prior.get('status'),
+                    'attempts_before_switch': prior.get('attempts', 0),
+                }
+                # A moved run must be read back at its new destination.
+                prior = None
+        if prior:
             # Preparation never fabricates links or erases a prior verified result.
-            for key in ("status", "verified_wandb_url", "verification", "attempts", "last_attempt_utc", "error_class"):
+            for key in ("status", "verified_wandb_url", "verification", "attempts", "last_attempt_utc", "error_class", "previous_destination"):
                 if key in prior:
                     record[key] = prior[key]
         runs.append(record)
@@ -187,10 +196,16 @@ def verified_prefix(expected_rows, actual_rows):
 
 def inspect_remote(api, payload):
     from wandb.apis.public.runs import RunNotFoundError
+    from wandb.errors import CommError
     api.flush()
     try:
         run = api.run(f"{ENTITY}/{DEFAULT_PROJECT}/{payload['run_id']}")
-    except RunNotFoundError:
+    except (RunNotFoundError, CommError) as exc:
+        # SDK 0.30 normalizes RunNotFoundError into CommError, retaining
+        # the original typed exception in .exc. Other API errors must not
+        # be mistaken for absence, especially auth/network failures.
+        if not isinstance(exc, RunNotFoundError) and not isinstance(exc.exc, RunNotFoundError):
+            raise
         # If this is a permissions failure disguised as absence, resume=never
         # still cannot overwrite an existing run and the write will fail.
         return {"exists": False}
@@ -357,6 +372,8 @@ def main():
             for attempt in range(MAX_ATTEMPTS):
                 outcome = bounded_worker(record["scientific_run_id"])
                 record.update({k: v for k, v in outcome.items() if k != "retryable"})
+                if record['status'] == 'verified':
+                    record.pop('error_class', None)
                 record["attempts"] = record.get("attempts", 0) + 1
                 record["last_attempt_utc"] = now()
                 registry["updated_utc"] = now()

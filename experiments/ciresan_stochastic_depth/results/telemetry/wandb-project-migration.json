@@ -1,0 +1,43 @@
+{
+  "destination_project": "gradient-dissent",
+  "destination_run_count": 15,
+  "entity": "yaroslavvb",
+  "final_verification": "All15 moved IDs were subsequently re-read and fully verified in the destination by upload_wandb.py. All18 requested runs, including3new baseline imports, are verified in the final upload registry.",
+  "mutation": "mutation MoveTelemetry($input:MoveRunsInput!) { moveRuns(input:$input) { task { id name state progress } } }",
+  "note": "Only these exact scalar-import IDs were selected. No model artifacts were uploaded.",
+  "requested_utc": "2026-09-10T00:31:06.878246+00:00",
+  "run_ids": [
+    "telemetry-00ae8a29680efda6d410",
+    "telemetry-18a9aba3779e2fca3635",
+    "telemetry-1aae32604679aff85ee9",
+    "telemetry-37aad9da68cdc89891e6",
+    "telemetry-3ffc2fe56fc53e01789a",
+    "telemetry-4b18358d8131574c1fd5",
+    "telemetry-606b04ceacd0f5af1727",
+    "telemetry-801661223af82e37574d",
+    "telemetry-9d454f1019eec27a95f5",
+    "telemetry-a6c0d5270fbf2fcc92ef",
+    "telemetry-b72c825fc9e25a56e794",
+    "telemetry-ce7a10d76fe8519cb070",
+    "telemetry-daedf8df04bb8bf03ef4",
+    "telemetry-dfb9bb1f93f682af3249",
+    "telemetry-fb95578abb2f012cc936"
+  ],
+  "source_metadata_preflight_verified": true,
+  "source_project": "gradient-dissent-ciresan",
+  "source_remaining_count": 0,
+  "status": "moved",
+  "task_at_submission": {
+    "id": "VGFzazoyNzc0MDg0NTY1",
+    "name": "Moving runs between projects",
+    "progress": 0,
+    "state": "PENDING"
+  },
+  "variables": {
+    "destinationEntityName": "yaroslavvb",
+    "destinationProjectName": "gradient-dissent",
+    "filters": "{\"$and\": [{\"name\": {\"$in\": [\"telemetry-00ae8a29680efda6d410\", \"telemetry-18a9aba3779e2fca3635\", \"telemetry-1aae32604679aff85ee9\", \"telemetry-37aad9da68cdc89891e6\", \"telemetry-3ffc2fe56fc53e01789a\", \"telemetry-4b18358d8131574c1fd5\", \"telemetry-606b04ceacd0f5af1727\", \"telemetry-801661223af82e37574d\", \"telemetry-9d454f1019eec27a95f5\", \"telemetry-a6c0d5270fbf2fcc92ef\", \"telemetry-b72c825fc9e25a56e794\", \"telemetry-ce7a10d76fe8519cb070\", \"telemetry-daedf8df04bb8bf03ef4\", \"telemetry-dfb9bb1f93f682af3249\", \"telemetry-fb95578abb2f012cc936\"]}}, {\"group\": \"ciresan-telemetry-20260909\"}]}",
+    "sourceEntityName": "yaroslavvb",
+    "sourceProjectName": "gradient-dissent-ciresan"
+  }
+}

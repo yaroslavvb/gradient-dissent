@@ -1247,7 +1247,7 @@
   ],
   "name": "telemetry-baseline-s103-v1",
   "omitted_null_or_nonscalar_diagnostics_count": 117,
-  "project": "gradient-dissent-ciresan",
+  "project": "gradient-dissent",
   "run_id": "telemetry-fe31d7b63af1f86f11d8",
   "schema_version": 1,
   "source_sha256": "c5615aadb62089fa2d7069a37548a0de59069c5713416a35a364862aa112f974"
