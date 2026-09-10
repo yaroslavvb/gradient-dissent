@@ -1,0 +1,8 @@
+{
+  "approved": true,
+  "reviewer": "root",
+  "manifest_sha256": "106a4207be367d611259b439d5199444d8a035123baa64160d87d631c166a221",
+  "source_freeze_sha256": "aebaf02956d4d22e70e6ddc245ffd32a89d8e962357cb7c8a5bdbec147a0b459",
+  "qualification_result_sha256": "4a503d49c17e1f5ea09172211a86b568656be6fdbbbcf567e2ee03aea04f2e49",
+  "note": "Root reviewed complete48subset/seed panel, fixedLR and100epochs, no-test GPU qualification, matched RNG and parameters, source hashes, per-call resource limits and shared budget. Authorized main dispatch under existing user request/cap."
+}

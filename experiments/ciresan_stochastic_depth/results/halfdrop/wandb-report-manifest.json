@@ -1,0 +1,228 @@
+{
+  "status": "verified",
+  "verified_report_url": "https://wandb.ai/yaroslavvb/gradient-dissent/reports/MNIST:-50%-training-dropout,-full-depth-testing-\u00b7-48-runs--VmlldzoxNzkwNDI4NQ==",
+  "panel_count": 8,
+  "verified_runs": 48,
+  "verified_at_utc": "2026-09-10T01:38:10.419491+00:00",
+  "registry_sha256": "0db7f7b0435b9ef15238ea4e1d71e92c54d023f8dfa0ec47730a5e56e003c445",
+  "signature": {
+    "entity": "yaroslavvb",
+    "project": "gradient-dissent",
+    "title": "MNIST: 50% training dropout, full-depth testing \u00b7 48 runs",
+    "description": "gradient-dissent-halfdrop-48-v1; exact verified 48-run group; train-time eligibility only.",
+    "grids": [
+      {
+        "runsets": [
+          {
+            "entity": "yaroslavvb",
+            "project": "gradient-dissent",
+            "filters": {
+              "filterFormat": "filterV2",
+              "filters": [
+                {
+                  "key": {
+                    "section": "run",
+                    "name": "group"
+                  },
+                  "op": "=",
+                  "value": "ciresan-halfdrop-20260909",
+                  "disabled": false
+                },
+                {
+                  "key": {
+                    "section": "run",
+                    "name": "state"
+                  },
+                  "op": "=",
+                  "value": "finished",
+                  "disabled": false,
+                  "connector": "AND"
+                },
+                {
+                  "key": {
+                    "section": "config",
+                    "name": "scientific_run_id"
+                  },
+                  "op": "IN",
+                  "value": [
+                    "halfdrop-m00-s201-v1",
+                    "halfdrop-m00-s202-v1",
+                    "halfdrop-m00-s203-v1",
+                    "halfdrop-m01-s201-v1",
+                    "halfdrop-m01-s202-v1",
+                    "halfdrop-m01-s203-v1",
+                    "halfdrop-m02-s201-v1",
+                    "halfdrop-m02-s202-v1",
+                    "halfdrop-m02-s203-v1",
+                    "halfdrop-m03-s201-v1",
+                    "halfdrop-m03-s202-v1",
+                    "halfdrop-m03-s203-v1",
+                    "halfdrop-m04-s201-v1",
+                    "halfdrop-m04-s202-v1",
+                    "halfdrop-m04-s203-v1",
+                    "halfdrop-m05-s201-v1",
+                    "halfdrop-m05-s202-v1",
+                    "halfdrop-m05-s203-v1",
+                    "halfdrop-m06-s201-v1",
+                    "halfdrop-m06-s202-v1",
+                    "halfdrop-m06-s203-v1",
+                    "halfdrop-m07-s201-v1",
+                    "halfdrop-m07-s202-v1",
+                    "halfdrop-m07-s203-v1",
+                    "halfdrop-m08-s201-v1",
+                    "halfdrop-m08-s202-v1",
+                    "halfdrop-m08-s203-v1",
+                    "halfdrop-m09-s201-v1",
+                    "halfdrop-m09-s202-v1",
+                    "halfdrop-m09-s203-v1",
+                    "halfdrop-m10-s201-v1",
+                    "halfdrop-m10-s202-v1",
+                    "halfdrop-m10-s203-v1",
+                    "halfdrop-m11-s201-v1",
+                    "halfdrop-m11-s202-v1",
+                    "halfdrop-m11-s203-v1",
+                    "halfdrop-m12-s201-v1",
+                    "halfdrop-m12-s202-v1",
+                    "halfdrop-m12-s203-v1",
+                    "halfdrop-m13-s201-v1",
+                    "halfdrop-m13-s202-v1",
+                    "halfdrop-m13-s203-v1",
+                    "halfdrop-m14-s201-v1",
+                    "halfdrop-m14-s202-v1",
+                    "halfdrop-m14-s203-v1",
+                    "halfdrop-m15-s201-v1",
+                    "halfdrop-m15-s202-v1",
+                    "halfdrop-m15-s203-v1"
+                  ],
+                  "disabled": false,
+                  "connector": "AND"
+                }
+              ]
+            }
+          }
+        ],
+        "panels": [
+          {
+            "type": "ScatterPlot",
+            "title": "Primary full-test accuracy (%) vs droppable branch count",
+            "x": {
+              "type": "Config",
+              "name": "eligible_count"
+            },
+            "y": {
+              "type": "SummaryMetric",
+              "name": "selected/test_accuracy_pct"
+            },
+            "z": {
+              "type": "Config",
+              "name": "eligible_mask"
+            },
+            "regression": false
+          },
+          {
+            "type": "ScatterPlot",
+            "title": "Epoch 100 full-test accuracy (%) vs droppable branch count",
+            "x": {
+              "type": "Config",
+              "name": "eligible_count"
+            },
+            "y": {
+              "type": "SummaryMetric",
+              "name": "final/test_accuracy_pct"
+            },
+            "z": {
+              "type": "Config",
+              "name": "eligible_mask"
+            },
+            "regression": false
+          },
+          {
+            "type": "ScatterPlot",
+            "title": "100-epoch training seconds vs droppable branch count",
+            "x": {
+              "type": "Config",
+              "name": "eligible_count"
+            },
+            "y": {
+              "type": "SummaryMetric",
+              "name": "time/training_seconds"
+            },
+            "z": {
+              "type": "Config",
+              "name": "eligible_mask"
+            },
+            "regression": false
+          },
+          {
+            "type": "ScatterPlot",
+            "title": "Epoch 100 test CE vs droppable branch count",
+            "x": {
+              "type": "Config",
+              "name": "eligible_count"
+            },
+            "y": {
+              "type": "SummaryMetric",
+              "name": "final/test_loss"
+            },
+            "z": {
+              "type": "Config",
+              "name": "eligible_mask"
+            },
+            "regression": false
+          },
+          {
+            "type": "LinePlot",
+            "title": "Validation accuracy over training",
+            "x": "epoch",
+            "y": [
+              "validation/accuracy_pct"
+            ],
+            "aggregate": false,
+            "smoothing_type": "none",
+            "max_runs_to_show": 48
+          },
+          {
+            "type": "LinePlot",
+            "title": "Validation cross-entropy over training",
+            "x": "epoch",
+            "y": [
+              "validation/loss"
+            ],
+            "aggregate": false,
+            "smoothing_type": "none",
+            "max_runs_to_show": 48
+          },
+          {
+            "type": "LinePlot",
+            "title": "Dense full-training-set accuracy",
+            "x": "epoch",
+            "y": [
+              "train/accuracy_pct"
+            ],
+            "aggregate": false,
+            "smoothing_type": "none",
+            "max_runs_to_show": 48
+          },
+          {
+            "type": "LinePlot",
+            "title": "Stochastic minibatch training loss",
+            "x": "epoch",
+            "y": [
+              "train/stochastic_minibatch_loss"
+            ],
+            "aggregate": false,
+            "smoothing_type": "none",
+            "max_runs_to_show": 48
+          }
+        ]
+      }
+    ]
+  },
+  "visibility": {
+    "setting_changed": false,
+    "anonymous_access_verified": false,
+    "note": "Verified through the authenticated W&B account; anonymous access has not been established.",
+    "server_project_public_setting": null,
+    "setting_read_status": "unavailable_null"
+  }
+}

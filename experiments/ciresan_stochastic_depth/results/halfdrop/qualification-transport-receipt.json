@@ -1,0 +1,15 @@
+{
+  "records": [
+    {
+      "run_id": "halfdrop-pilot-m00-s201-v1",
+      "status": "complete",
+      "artifact_count": 7
+    },
+    {
+      "run_id": "halfdrop-pilot-m15-s201-v1",
+      "status": "complete",
+      "artifact_count": 7
+    }
+  ],
+  "note": "Transport failures require only a CPU download retry, never a repeated GPU experiment."
+}

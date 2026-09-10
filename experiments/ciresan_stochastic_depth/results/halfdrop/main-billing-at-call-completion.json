@@ -1,0 +1,9 @@
+{
+  "environment": "gradient-dissent-ciresan",
+  "metered_cost_usd": 7.1652053,
+  "queried_unix": 1789003998.555726,
+  "spend_guard_usd": 24.0,
+  "metered_opening_usd": 5.11283205,
+  "metered_increment_at_call_completion_usd": 2.0523732500000005,
+  "note": "Preliminary meter; app shutdown and billing lag checked separately."
+}

@@ -1,0 +1,891 @@
+{
+  "created_utc": "2026-09-10T01:33:45.766860+00:00",
+  "analyzer_sha256_at_freeze": "cdca79d3c31fb819ddb488725375abd5138be6fc506fb4b56720d881a9f91397",
+  "frozen_inputs": {
+    "schema_version": 1,
+    "criterion": "Mean selected-checkpoint validation error over k1..3 and three seeds; tie mean validation CE then lexicographic branch indices",
+    "manifest": {
+      "path": "experiments/ciresan_stochastic_depth/results/halfdrop/main-manifest.json",
+      "sha256": "106a4207be367d611259b439d5199444d8a035123baa64160d87d631c166a221"
+    },
+    "source_freeze": {
+      "path": "experiments/ciresan_stochastic_depth/results/halfdrop/main-source-freeze.json",
+      "sha256": "aebaf02956d4d22e70e6ddc245ffd32a89d8e962357cb7c8a5bdbec147a0b459"
+    },
+    "protocol_sha256": "df08078a381f077c1896420f0186a4912b94a7603c8c0a6c6b37bfa1ac302f44",
+    "validation_files": [
+      {
+        "run_id": "halfdrop-m00-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m00-s201-v1-validation.json",
+        "sha256": "ca14184bffa9e7758e7ced98556cb96c3499f1d5f477413ee9b318049d579e3d"
+      },
+      {
+        "run_id": "halfdrop-m01-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m01-s201-v1-validation.json",
+        "sha256": "2c0473f8facafef8a136b1e47866acf2de96b070d305914dd8fee4702b067bde"
+      },
+      {
+        "run_id": "halfdrop-m02-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m02-s201-v1-validation.json",
+        "sha256": "fed3ac4ec4dca64dce783bb966df2b5ed32ff37d4b5d37ea81fe8ac7dd8e6719"
+      },
+      {
+        "run_id": "halfdrop-m03-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m03-s201-v1-validation.json",
+        "sha256": "f31776eef7400ba56ce1f4f5048ee7279471635354b69dc4483699393a72bc0b"
+      },
+      {
+        "run_id": "halfdrop-m04-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m04-s201-v1-validation.json",
+        "sha256": "3149a3a0d4f2ac38a27731bb5751feb858376a2f71d440c03d317c0f40cc862f"
+      },
+      {
+        "run_id": "halfdrop-m05-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m05-s201-v1-validation.json",
+        "sha256": "97adf27d31b0e18251540252edb41641fe837c5a02bede916564e5d2c799b059"
+      },
+      {
+        "run_id": "halfdrop-m06-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m06-s201-v1-validation.json",
+        "sha256": "8e1afad7d19d652479e0d808c05c28d905b33ecbdda073e3f60256ec1a52768f"
+      },
+      {
+        "run_id": "halfdrop-m07-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m07-s201-v1-validation.json",
+        "sha256": "5043a5c8558807154acb41aad5e4c74a8481cc5f8086f36e13c637586755b24a"
+      },
+      {
+        "run_id": "halfdrop-m08-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m08-s201-v1-validation.json",
+        "sha256": "168c639d85a469c50b153d6f067685b331019d3f9cce5e073e3f9dfaa6241f44"
+      },
+      {
+        "run_id": "halfdrop-m09-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m09-s201-v1-validation.json",
+        "sha256": "057749479a6271400d92f078b24a9152285761e9a03af73abe918848a0bfcb06"
+      },
+      {
+        "run_id": "halfdrop-m10-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m10-s201-v1-validation.json",
+        "sha256": "a0901d310c66ef54aba0649648c1e77483ed963528b1f7bce9566f14b6359e6e"
+      },
+      {
+        "run_id": "halfdrop-m11-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m11-s201-v1-validation.json",
+        "sha256": "a328f3bc15a6cfa6745632ba5bfce6071fe7d43b68c92109ef2e3a241b30d317"
+      },
+      {
+        "run_id": "halfdrop-m12-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m12-s201-v1-validation.json",
+        "sha256": "73ab74267fae3467c9ac89c2201d62f49156682ef92f2ed6d05b1b57f627332a"
+      },
+      {
+        "run_id": "halfdrop-m13-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m13-s201-v1-validation.json",
+        "sha256": "61f9fa20cdeb67e9feb190a4c5dc55efddbb802aae822b6d9b55008a2344236f"
+      },
+      {
+        "run_id": "halfdrop-m14-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m14-s201-v1-validation.json",
+        "sha256": "02ab9da9c783145156c516530ee78e9e579624d469c7b4bbc09cf8089275a306"
+      },
+      {
+        "run_id": "halfdrop-m15-s201-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m15-s201-v1-validation.json",
+        "sha256": "690a665e9e235943f0519d6f7355b97067add6d14d18da6ee15f1b2532f7f12a"
+      },
+      {
+        "run_id": "halfdrop-m00-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m00-s202-v1-validation.json",
+        "sha256": "3a4c83798e367f22ae53b8d18785dc923e06d176be81496ffe21094f76c3d0df"
+      },
+      {
+        "run_id": "halfdrop-m01-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m01-s202-v1-validation.json",
+        "sha256": "e18de8bf71d42e8bf77ce8b7a45b03bf5aae5263ca9b5c26b72b2d9d6462c115"
+      },
+      {
+        "run_id": "halfdrop-m02-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m02-s202-v1-validation.json",
+        "sha256": "a34022b946ea0f79e15bc317b3dd47dcd7196cc437b1f00433ea88f869839ffb"
+      },
+      {
+        "run_id": "halfdrop-m03-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m03-s202-v1-validation.json",
+        "sha256": "f32f059056b8c20e7082d1ebad3ba1f0b493235fca6c423bf0e0ef3e15c18848"
+      },
+      {
+        "run_id": "halfdrop-m04-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m04-s202-v1-validation.json",
+        "sha256": "7dc0ada4615e0365c0878d60397f4d19c32093a0f835aa162f9f7af2215227ef"
+      },
+      {
+        "run_id": "halfdrop-m05-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m05-s202-v1-validation.json",
+        "sha256": "22ec974404843bef1b5903ccfa9636cfd2d8964f301faadbde21bbbe51ee8e1e"
+      },
+      {
+        "run_id": "halfdrop-m06-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m06-s202-v1-validation.json",
+        "sha256": "64ed1e4afa83c1f35f919222dc3b91254e9693ad66e5e779600f2a00e85bbe8b"
+      },
+      {
+        "run_id": "halfdrop-m07-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m07-s202-v1-validation.json",
+        "sha256": "7336f1bc1f0092c50c841ce46c2abb7dbd904c149919d0d472ac521efd76d2ae"
+      },
+      {
+        "run_id": "halfdrop-m08-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m08-s202-v1-validation.json",
+        "sha256": "46a3f4ee050b4eb3dd94ab80db9204b7f38f63f099494abc46e1508d6aa5fc52"
+      },
+      {
+        "run_id": "halfdrop-m09-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m09-s202-v1-validation.json",
+        "sha256": "4b1dd2421f36e1c8ec67c0c7f640a5a219909f796ca478842b70583c0feb5e63"
+      },
+      {
+        "run_id": "halfdrop-m10-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m10-s202-v1-validation.json",
+        "sha256": "c524907c64a78e8ea19e9729679ddbeb805495e0210d423a4684cc3a3395afa4"
+      },
+      {
+        "run_id": "halfdrop-m11-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m11-s202-v1-validation.json",
+        "sha256": "3c3282bcaf0d262f068d2c692261e013927d73c50a00e7652ec071b15d408ec8"
+      },
+      {
+        "run_id": "halfdrop-m12-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m12-s202-v1-validation.json",
+        "sha256": "554571464643aeb9f4dcf6fc3aa5312bc807eeea98f67e56336d722fdb20fcf3"
+      },
+      {
+        "run_id": "halfdrop-m13-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m13-s202-v1-validation.json",
+        "sha256": "d575cf066b79786d71c8c19d8023efaf1eedd2f4a637a42286829345188493f3"
+      },
+      {
+        "run_id": "halfdrop-m14-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m14-s202-v1-validation.json",
+        "sha256": "1179947781656c2932204fd1ceee5f717da836da6d4ea2911cab00780dbb2b84"
+      },
+      {
+        "run_id": "halfdrop-m15-s202-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m15-s202-v1-validation.json",
+        "sha256": "e73fa3977abb71f954e366d350332d06da9a2f49bbcba77a6fb8602cb125d97e"
+      },
+      {
+        "run_id": "halfdrop-m00-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m00-s203-v1-validation.json",
+        "sha256": "ec47003d38460cda7d8409169fec48804eb3541f54d7474d7cf94016cb502896"
+      },
+      {
+        "run_id": "halfdrop-m01-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m01-s203-v1-validation.json",
+        "sha256": "c63685ee82d69a0e80bb028ef51e137dfa599494dd6dc6f7693f68ebfc98f753"
+      },
+      {
+        "run_id": "halfdrop-m02-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m02-s203-v1-validation.json",
+        "sha256": "ec2aa6fd5f886dbc3e40da5d5b99b86c37bd90aae9b187bdc66b6954b560e14e"
+      },
+      {
+        "run_id": "halfdrop-m03-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m03-s203-v1-validation.json",
+        "sha256": "f8c25a05c08a42326442d8e3bc371e35d9516746ccbf0db5358a3a7ab32bd902"
+      },
+      {
+        "run_id": "halfdrop-m04-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m04-s203-v1-validation.json",
+        "sha256": "3b72f635add0610fb526519c27efefe6453f77d951655b3b33e1e4d2a3082a93"
+      },
+      {
+        "run_id": "halfdrop-m05-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m05-s203-v1-validation.json",
+        "sha256": "1782ecd24c842320f80c9eabe1b17d7d0c8129b23bbe70d96b018b384c1f10e8"
+      },
+      {
+        "run_id": "halfdrop-m06-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m06-s203-v1-validation.json",
+        "sha256": "adb8445f3b2fd9d6c094bae029ab2c62e991fcaff20dfa157fa848d49d1a85ef"
+      },
+      {
+        "run_id": "halfdrop-m07-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m07-s203-v1-validation.json",
+        "sha256": "6b86dd5eb9af051f3da19e56e944f422ed5d255961078c57e36161cb1c6b4b83"
+      },
+      {
+        "run_id": "halfdrop-m08-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m08-s203-v1-validation.json",
+        "sha256": "b0bf75fd74fb22e3fb202090728fac1d52edb152bd859ff67d61fb3f57c8e8bc"
+      },
+      {
+        "run_id": "halfdrop-m09-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m09-s203-v1-validation.json",
+        "sha256": "c8c4809f908c1b8739deae01601adadb5e95adc50f5343f7d212b8f78e520f7b"
+      },
+      {
+        "run_id": "halfdrop-m10-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m10-s203-v1-validation.json",
+        "sha256": "81b3e6a9feb0441e28b1650d5627cd171f28b2b80313ddfd47ed88c3ee0a8357"
+      },
+      {
+        "run_id": "halfdrop-m11-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m11-s203-v1-validation.json",
+        "sha256": "0b3695e6b4a43bdacf416a91f04bf55719cf900ed9f99048570ede732e37d230"
+      },
+      {
+        "run_id": "halfdrop-m12-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m12-s203-v1-validation.json",
+        "sha256": "06b604d084e2d00d9ce6f3f842f7ee4b5bf6c85fc605f448ae738705267c8cc0"
+      },
+      {
+        "run_id": "halfdrop-m13-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m13-s203-v1-validation.json",
+        "sha256": "25f98a170eac16cfe4a4882452ec4dbd9dd030c5170620a6caff0445a6d41cac"
+      },
+      {
+        "run_id": "halfdrop-m14-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m14-s203-v1-validation.json",
+        "sha256": "a427d7ed4b3fc39470e4d923124f20ac14cb879f4f4eac6cc5c392067c0b1a0d"
+      },
+      {
+        "run_id": "halfdrop-m15-s203-v1",
+        "path": "experiments/ciresan_stochastic_depth/results/halfdrop/halfdrop-m15-s203-v1-validation.json",
+        "sha256": "b0cf9fef88d46405a4a98645a3f79848faacd64a7564576d0f5fb5e126d3c104"
+      }
+    ],
+    "pairing": [
+      {
+        "seed": 201,
+        "n": 16,
+        "initial_parameters_sha256": "c9c3313290fbce157db15395e09dcb12a756f952e369accc61289a15a48cf27e",
+        "training_data_sha256": "db25eee67973dd887c79eb5b31e7466c2b0717df28dcdd5ca60c87116de2b25d",
+        "executed_epoch_order_sha256": "4f69b6ac6ce124b934acd94a9e997a17c04b0ac6f5c085b4ea536e63d5d8d84d",
+        "raw_mask_draws_sha256": "20c62cd0a76bf5f7129889e9382f23913ac9cc811c0dae310708ae81daa80002",
+        "passed": true
+      },
+      {
+        "seed": 202,
+        "n": 16,
+        "initial_parameters_sha256": "4001ac95fe471ba7e4c06a77422c20fa3238a75146cba177d381b91ca35b7e36",
+        "training_data_sha256": "db25eee67973dd887c79eb5b31e7466c2b0717df28dcdd5ca60c87116de2b25d",
+        "executed_epoch_order_sha256": "7c21568fdf81b4c16c8589a5e9505272006c581d8a4966d281bca05bdf688187",
+        "raw_mask_draws_sha256": "ec3ec32b1e50367a1415eb3b62687b3961c04d063d1387590a9ee2d9ab7ec3f8",
+        "passed": true
+      },
+      {
+        "seed": 203,
+        "n": 16,
+        "initial_parameters_sha256": "fcb63e7e53502fb9344295e25cba3a084d73239f47546ee4e286902af604fad4",
+        "training_data_sha256": "db25eee67973dd887c79eb5b31e7466c2b0717df28dcdd5ca60c87116de2b25d",
+        "executed_epoch_order_sha256": "b444a2fcae98f37163082811e712752fcfe2645de7669c2e6c74ad093d859849",
+        "raw_mask_draws_sha256": "34bc3879d52dfc26d28b2b24465267ab6997ee24de73f8ca19adeed77750a937",
+        "passed": true
+      }
+    ],
+    "paths": [
+      {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "masks": [
+          0,
+          1,
+          3,
+          7,
+          15
+        ],
+        "validation_error": 0.022977777777777778,
+        "validation_error_count": 2068,
+        "validation_observations": 90000,
+        "validation_ce": 0.07941181572808159,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "masks": [
+          0,
+          1,
+          3,
+          11,
+          15
+        ],
+        "validation_error": 0.023311111111111112,
+        "validation_error_count": 2098,
+        "validation_observations": 90000,
+        "validation_ce": 0.07938126424153646,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "masks": [
+          0,
+          1,
+          5,
+          7,
+          15
+        ],
+        "validation_error": 0.022044444444444443,
+        "validation_error_count": 1984,
+        "validation_observations": 90000,
+        "validation_ce": 0.07948436889648437,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          0,
+          2,
+          3,
+          1
+        ],
+        "masks": [
+          0,
+          1,
+          5,
+          13,
+          15
+        ],
+        "validation_error": 0.021266666666666666,
+        "validation_error_count": 1914,
+        "validation_observations": 90000,
+        "validation_ce": 0.07854847412109375,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "masks": [
+          0,
+          1,
+          9,
+          11,
+          15
+        ],
+        "validation_error": 0.022444444444444444,
+        "validation_error_count": 2020,
+        "validation_observations": 90000,
+        "validation_ce": 0.07732143961588542,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          0,
+          3,
+          2,
+          1
+        ],
+        "masks": [
+          0,
+          1,
+          9,
+          13,
+          15
+        ],
+        "validation_error": 0.021333333333333333,
+        "validation_error_count": 1920,
+        "validation_observations": 90000,
+        "validation_ce": 0.07641609632703993,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "masks": [
+          0,
+          2,
+          3,
+          7,
+          15
+        ],
+        "validation_error": 0.02201111111111111,
+        "validation_error_count": 1981,
+        "validation_observations": 90000,
+        "validation_ce": 0.07893482055664063,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "masks": [
+          0,
+          2,
+          3,
+          11,
+          15
+        ],
+        "validation_error": 0.022344444444444445,
+        "validation_error_count": 2011,
+        "validation_observations": 90000,
+        "validation_ce": 0.07890426907009548,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "masks": [
+          0,
+          2,
+          6,
+          7,
+          15
+        ],
+        "validation_error": 0.021122222222222223,
+        "validation_error_count": 1901,
+        "validation_observations": 90000,
+        "validation_ce": 0.07855936347113715,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "masks": [
+          0,
+          2,
+          6,
+          14,
+          15
+        ],
+        "validation_error": 0.02108888888888889,
+        "validation_error_count": 1898,
+        "validation_observations": 90000,
+        "validation_ce": 0.07889935980902778,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ],
+        "masks": [
+          0,
+          2,
+          10,
+          11,
+          15
+        ],
+        "validation_error": 0.021488888888888887,
+        "validation_error_count": 1934,
+        "validation_observations": 90000,
+        "validation_ce": 0.07754535658094619,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "masks": [
+          0,
+          2,
+          10,
+          14,
+          15
+        ],
+        "validation_error": 0.021122222222222223,
+        "validation_error_count": 1901,
+        "validation_observations": 90000,
+        "validation_ce": 0.07791590440538194,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "masks": [
+          0,
+          4,
+          5,
+          7,
+          15
+        ],
+        "validation_error": 0.021866666666666666,
+        "validation_error_count": 1968,
+        "validation_observations": 90000,
+        "validation_ce": 0.07935344509548611,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          2,
+          0,
+          3,
+          1
+        ],
+        "masks": [
+          0,
+          4,
+          5,
+          13,
+          15
+        ],
+        "validation_error": 0.02108888888888889,
+        "validation_error_count": 1898,
+        "validation_observations": 90000,
+        "validation_ce": 0.07841755032009548,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          2,
+          1,
+          0,
+          3
+        ],
+        "masks": [
+          0,
+          4,
+          6,
+          7,
+          15
+        ],
+        "validation_error": 0.02191111111111111,
+        "validation_error_count": 1972,
+        "validation_observations": 90000,
+        "validation_ce": 0.07890543484157986,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          2,
+          1,
+          3,
+          0
+        ],
+        "masks": [
+          0,
+          4,
+          6,
+          14,
+          15
+        ],
+        "validation_error": 0.021877777777777777,
+        "validation_error_count": 1969,
+        "validation_observations": 90000,
+        "validation_ce": 0.07924543117947049,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          2,
+          3,
+          0,
+          1
+        ],
+        "masks": [
+          0,
+          4,
+          12,
+          13,
+          15
+        ],
+        "validation_error": 0.021433333333333332,
+        "validation_error_count": 1929,
+        "validation_observations": 90000,
+        "validation_ce": 0.07847339680989583,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          2,
+          3,
+          1,
+          0
+        ],
+        "masks": [
+          0,
+          4,
+          12,
+          14,
+          15
+        ],
+        "validation_error": 0.02217777777777778,
+        "validation_error_count": 1996,
+        "validation_observations": 90000,
+        "validation_ce": 0.07974928792317708,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          3,
+          0,
+          1,
+          2
+        ],
+        "masks": [
+          0,
+          8,
+          9,
+          11,
+          15
+        ],
+        "validation_error": 0.02178888888888889,
+        "validation_error_count": 1961,
+        "validation_observations": 90000,
+        "validation_ce": 0.07646056789822049,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "masks": [
+          0,
+          8,
+          9,
+          13,
+          15
+        ],
+        "validation_error": 0.020677777777777778,
+        "validation_error_count": 1861,
+        "validation_observations": 90000,
+        "validation_ce": 0.075555224609375,
+        "validation_selected": true
+      },
+      {
+        "order": [
+          3,
+          1,
+          0,
+          2
+        ],
+        "masks": [
+          0,
+          8,
+          10,
+          11,
+          15
+        ],
+        "validation_error": 0.0218,
+        "validation_error_count": 1962,
+        "validation_observations": 90000,
+        "validation_ce": 0.07716148003472223,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          3,
+          1,
+          2,
+          0
+        ],
+        "masks": [
+          0,
+          8,
+          10,
+          14,
+          15
+        ],
+        "validation_error": 0.021433333333333332,
+        "validation_error_count": 1929,
+        "validation_observations": 90000,
+        "validation_ce": 0.07753202785915798,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          3,
+          2,
+          0,
+          1
+        ],
+        "masks": [
+          0,
+          8,
+          12,
+          13,
+          15
+        ],
+        "validation_error": 0.020955555555555557,
+        "validation_error_count": 1886,
+        "validation_observations": 90000,
+        "validation_ce": 0.07774344889322916,
+        "validation_selected": false
+      },
+      {
+        "order": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "masks": [
+          0,
+          8,
+          12,
+          14,
+          15
+        ],
+        "validation_error": 0.0217,
+        "validation_error_count": 1953,
+        "validation_observations": 90000,
+        "validation_ce": 0.07901934000651041,
+        "validation_selected": false
+      }
+    ],
+    "gallery": {
+      "definition": "First10 original test indices per true digit; no new model outcome used",
+      "archive": {
+        "path": "experiments/ciresan_stochastic_depth/results/hypotheses/hypothesis-audit-s101-v1/data.npz",
+        "sha256": "a1fd3ff9a366d413863f7416b9b8eeb869ad40ad01569d721c61d788fc36281f"
+      },
+      "archive_manifest": {
+        "path": "experiments/ciresan_stochastic_depth/results/hypotheses/hypothesis-audit-s101-v1/result.json",
+        "sha256": "3357ab27f559fefab96798d7a7024fe4ebf413cf4367ac0f3990023a007c29c9"
+      },
+      "official_test_files_sha256": {
+        "t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+        "t10k-labels-idx1-ubyte.gz": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6"
+      },
+      "labels_uint8_sha256": "ddeff807876a9661a1110d45c266c86239a3a1b7d37da0c3716a7a683c852ff5",
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        66,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        75,
+        76,
+        77,
+        78,
+        81,
+        82,
+        84,
+        87,
+        88,
+        90,
+        91,
+        92,
+        98,
+        101,
+        102,
+        106,
+        110,
+        119,
+        120,
+        126,
+        127,
+        128,
+        134,
+        146,
+        177,
+        179,
+        181,
+        184
+      ]
+    },
+    "selected_endpoint": "validation-CE-selected checkpoint",
+    "reuse_order_for_final": true,
+    "new_test_outcomes_read": false
+  }
+}

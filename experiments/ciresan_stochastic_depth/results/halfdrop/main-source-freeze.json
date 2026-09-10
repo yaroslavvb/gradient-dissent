@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "frozen_unix": 1789003027.036156,
+  "manifest_sha256": "106a4207be367d611259b439d5199444d8a035123baa64160d87d631c166a221",
+  "source_sha256": {
+    "halfdrop/trainer.py": "e4b5d483d4f426b65d287d06f75addd38fba739ebe5ff56c9c42825dad0de055",
+    "halfdrop/test_trainer.py": "1504a41de4762f189d68b704cf463a7d1265700acaf43d4a09c7aaaeb7533318",
+    "halfdrop/PROTOCOL.md": "df08078a381f077c1896420f0186a4912b94a7603c8c0a6c6b37bfa1ac302f44",
+    "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd",
+    "optimization/stochastic_graph.py": "7844db46e84f39809feb7dbf3684e95a199b01773b6a3dc800127fb84c274a1a",
+    "optimization/test_stochastic_graph.py": "fed8f7d61ce10d4f3c2ab0942bc5a245b0e2b8e4b50d253ee65ab5d45b813d11",
+    "telemetry/recorder.py": "8645b826e184573a009ad9ce7b58bbf50c2e6716da8f8712d0e0168f0f83b9cb",
+    "telemetry/metrics.py": "93443a401ecfc78358a39c1c7dde8689fc6f6cf950cb62b21d0bee278d07013e",
+    "halfdrop_app.py": "7d7ec62391ee7ceef329259676ba70f6137008cac8262933fb307f57b0fb41d7",
+    "telemetry_app.py": "876674f6b653f73f42c7ae9727c7eadcd4a911f7c513e56c70b13d38f0159158"
+  },
+  "cpu_qualification": {
+    "passed": true,
+    "test_count": 11,
+    "trainer_tests": 8,
+    "launcher_tests": 3,
+    "isolated_remote_import_passed": true,
+    "launcher_test_sha256": "1af71f3b84fba40f4d6e7d36914b563a5d77dfba62cf109003f4bcbc0cd0ec20"
+  },
+  "gpu_qualification": {
+    "passed": true,
+    "result_file": "halfdrop-qualification-v1.json",
+    "result_sha256": "4a503d49c17e1f5ea09172211a86b568656be6fdbbbcf567e2ee03aea04f2e49",
+    "source_freeze_sha256": "e34b859a3a91670a3ece7b85959ca80d4200049734839d37e2a38cbd6d79a77c",
+    "kernel_tests": 6,
+    "kernel_failures": 0,
+    "kernel_errors": 0,
+    "kernel_skips": 0,
+    "paired_initialization_and_order_draw_hashes_match": true,
+    "official_test_accessed": false,
+    "pilot_subruns": [
+      "halfdrop-pilot-m00-s201-v1",
+      "halfdrop-pilot-m15-s201-v1"
+    ]
+  },
+  "protocol": {
+    "main_runs": 48,
+    "eligibility_subsets": 16,
+    "seeds": [
+      201,
+      202,
+      203
+    ],
+    "epochs": 100,
+    "lr": 0.01,
+    "batch_size": 64,
+    "momentum": 0.9,
+    "selection": "earliest minimum fixed-cadence validation CE checkpoint; epoch100 secondary",
+    "inference": "all branches retained at gain1; no test-based recipe selection",
+    "main_manifest_frozen_before_new_test_access": true
+  },
+  "resources": {
+    "gpu": "A100-40GB",
+    "cpu_limit": 2,
+    "ram_limit_gib": 8,
+    "runtime_timeout_seconds": 180,
+    "startup_timeout_seconds": 90,
+    "max_containers": 4,
+    "retries": 0,
+    "scaledown_window_seconds": 2
+  },
+  "budget": {
+    "shared_absolute_cap_usd": 30,
+    "metered_guard_usd": 24,
+    "shared_ledger": "results/telemetry/budget-ledger.json",
+    "shared_ledger_sha256_before_main": "9548dcb6e3e84d5fee313a07cbcdbfa1e837c843fbdb71f0e0c26ba0ace26625",
+    "new_reserved_upper_usd": 9.3291648,
+    "rate_usd_per_second": 0.00062696,
+    "startup_idle_allowance_seconds": 130,
+    "pricing_source": "https://modal.com/pricing",
+    "pricing_checked_date": "2026-09-09"
+  },
+  "awaiting_root_review": true
+}

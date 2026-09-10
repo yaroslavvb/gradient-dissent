@@ -1,0 +1,19 @@
+{
+  "closed_unix": 1789003082.300138,
+  "app": {
+    "app_id": "ap-9r0MEf5TGgqquG4f52Ddxr",
+    "description": "gradient-dissent-ciresan-halfdrop",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 18:15:45-07:00",
+    "stopped_at": "2026-09-09 18:16:30-07:00"
+  },
+  "owned_app_stopped": true,
+  "metered_total_usd": 5.11283205,
+  "metered_opening_usd": 5.0889913,
+  "metered_increment_qualification_usd": 0.023840749999999744,
+  "qualification_test_accessed": false,
+  "new_reserved_upper_usd": 0.1943576,
+  "shared_reserved_upper_usd": 10.62417485,
+  "note": "Provider meter snapshot after qualification app stopped; reservation retained."
+}

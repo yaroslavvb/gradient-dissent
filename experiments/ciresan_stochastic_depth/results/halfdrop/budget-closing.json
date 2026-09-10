@@ -1,0 +1,137 @@
+{
+  "complete": true,
+  "closed_unix": 1789004045.279257,
+  "environment": "gradient-dissent-ciresan",
+  "main_runs_complete": 48,
+  "main_runs_expected": 48,
+  "qualification_gpu_calls": 1,
+  "qualification_two_epoch_subruns": 2,
+  "qualification_official_test_accessed": false,
+  "all_owned_apps_stopped": true,
+  "owned_apps": [
+    {
+      "app_id": "ap-Yqwr8XejnPAugd01XdJ4bM",
+      "description": "gradient-dissent-ciresan-halfdrop",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 18:19:10-07:00",
+      "stopped_at": "2026-09-09 18:33:18-07:00"
+    },
+    {
+      "app_id": "ap-9r0MEf5TGgqquG4f52Ddxr",
+      "description": "gradient-dissent-ciresan-halfdrop",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 18:15:45-07:00",
+      "stopped_at": "2026-09-09 18:16:30-07:00"
+    }
+  ],
+  "all_returned_apps_stopped": true,
+  "all_returned_apps": [
+    {
+      "app_id": "ap-Yqwr8XejnPAugd01XdJ4bM",
+      "description": "gradient-dissent-ciresan-halfdrop",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 18:19:10-07:00",
+      "stopped_at": "2026-09-09 18:33:18-07:00"
+    },
+    {
+      "app_id": "ap-9r0MEf5TGgqquG4f52Ddxr",
+      "description": "gradient-dissent-ciresan-halfdrop",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 18:15:45-07:00",
+      "stopped_at": "2026-09-09 18:16:30-07:00"
+    },
+    {
+      "app_id": "ap-VLbosXNmtNgoNgEHTfTYic",
+      "description": "gradient-dissent-ciresan-full-depth",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 17:54:00-07:00",
+      "stopped_at": "2026-09-09 17:54:53-07:00"
+    },
+    {
+      "app_id": "ap-fRasL1PMWltnLB8KTxxpPk",
+      "description": "gradient-dissent-ciresan-full-depth",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 17:52:03-07:00",
+      "stopped_at": "2026-09-09 17:52:46-07:00"
+    },
+    {
+      "app_id": "ap-ZiLkzahzDvoMXsjolCh5uN",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:51:40-07:00",
+      "stopped_at": "2026-09-09 16:52:19-07:00"
+    },
+    {
+      "app_id": "ap-d0QwKNTHEBp0pOaxN0kw1X",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:51:09-07:00",
+      "stopped_at": "2026-09-09 16:51:42-07:00"
+    },
+    {
+      "app_id": "ap-hwGMCOliVDcZ685JvWHtKw",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:50:36-07:00",
+      "stopped_at": "2026-09-09 16:51:29-07:00"
+    },
+    {
+      "app_id": "ap-3FadyQDjCt3XSiewFSYkws",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:46:02-07:00",
+      "stopped_at": "2026-09-09 16:51:06-07:00"
+    },
+    {
+      "app_id": "ap-cDy8KB773QCLpZiMhpm5CN",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:44:06-07:00",
+      "stopped_at": "2026-09-09 16:45:49-07:00"
+    },
+    {
+      "app_id": "ap-oi62aGBOuWE8sp2ZuSLtgs",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:40:26-07:00",
+      "stopped_at": "2026-09-09 16:42:08-07:00"
+    }
+  ],
+  "metered_opening_environment_usd": 5.0889913,
+  "metered_main_opening_environment_usd": 5.11283205,
+  "metered_closing_environment_usd": 7.1652053,
+  "metered_environment_increment_main_snapshot_usd": 2.0523732500000005,
+  "metered_environment_increment_qualification_and_main_snapshot_usd": 2.0762140000000002,
+  "metered_qualification_increment_snapshot_usd": 0.023840749999999744,
+  "main_new_reserved_upper_usd": 9.3291648,
+  "qualification_new_reserved_upper_usd": 0.1943576,
+  "shared_reserved_upper_usd": 19.95333965,
+  "reservation_stop_guard_usd": 24.0,
+  "user_shared_cap_usd": 30.0,
+  "no_reservations_released": true,
+  "timing_totals_seconds": {
+    "training_seconds": 2584.3422070950005,
+    "epoch_preparation_seconds": 17.483997056004917,
+    "graph_setup_seconds": 62.433749783999765,
+    "test_export_seconds": 41.819095154000124,
+    "total_run_seconds": 3058.2523966950002,
+    "local_dispatch_elapsed_seconds": 3267.8286559581757,
+    "telemetry_seconds": 53.56175971699766
+  },
+  "first_submission_to_last_local_result_seconds": 840.941929101944,
+  "timing_definition": "Totals sum overlapping calls; they are not elapsed study wall time or invoice measurements. Training_seconds excludes telemetry, setup, and evaluation. Total_run_seconds is the trainer clock; local_dispatch_elapsed_seconds additionally includes dispatch/startup/return. Test-export_seconds is already included in total_run_seconds.",
+  "attribution_caveat": "Before/after environment meter snapshots, not an itemized invoice for this cohort. Provider posting can lag; unseen concurrent activity can also affect environment differences. Opening and mid-study app snapshots found no other active apps, and the closing states are included. These differences must not be described as exact settled cohort charges.",
+  "gpu_jobs_created_by_closing_check": 0
+}

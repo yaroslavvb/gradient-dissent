@@ -1,0 +1,9 @@
+{
+  "shared_ledger": "results/telemetry/budget-ledger.json",
+  "shared_ledger_sha256_after_reservation": "9548dcb6e3e84d5fee313a07cbcdbfa1e837c843fbdb71f0e0c26ba0ace26625",
+  "reserved_upper_usd": 10.62417485,
+  "new_run_ids": [
+    "halfdrop-qualification-v1"
+  ],
+  "no_reservations_released": true
+}

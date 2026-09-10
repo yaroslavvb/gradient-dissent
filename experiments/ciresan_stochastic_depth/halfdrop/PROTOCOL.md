@@ -1,0 +1,47 @@
+# Half-drop training eligibility: exhaustive four-branch study
+
+This protocol must be frozen with source hashes before the main dispatch. It specifies 48 new training runs: every subset of the four middle residual branches, crossed with seeds 201, 202 and 203. No test outcome selects a learning rate, checkpoint, subset, ordering or training recipe. The official MNIST test set has been used elsewhere in this project; this remains an exploratory follow-up, not an untouched confirmatory benchmark.
+
+## Intervention and fixed training recipe
+
+Use the existing normalized-input, linear-logit tapered residual MLP, with affine widths 784→2500→2000→1500→1000→500→10 and four prefix-crop residual bypasses. The learned stem and classifier are compulsory during training and evaluation. Their omission, alternative input embeddings and abstention are outside this study.
+
+Bits 0–3 of eligibility mask S identify the four middle branches in shallow-to-deep order. Evaluate all 16 eligibility masks, including S=0. Each eligible branch is independently dropped with probability 0.5 per minibatch; an ineligible branch always executes. The branch gate is shared across that minibatch. Surviving eligible branches have gain 2 during training, while ineligible branches have gain 1. Actual skipped branches omit their affine forward/backward computation and parameter update. This is branch dropout, not unit dropout or computing a branch before masking its output.
+
+Each eligibility subset trains its own network. All evaluations use every learned affine at gain one: **50% drop probability in eligible training branches, 100% branch retention at evaluation**. A plotted training-eligibility mask must never be labeled an inference deletion mask. Nominal MACs at evaluation are identical across subsets.
+
+Fix SGD learning rate 0.01, momentum 0.9, batch size 64, 100 epochs, FP32 parameters with the existing qualified graph/TF32 execution, no augmentation, no weight decay and no ordinary unit dropout. Use the existing fixed 50,000/10,000 fitting/validation split and separate official 10,000 test examples. Keep the original drop-last convention: 781 updates and 49,984 training presentations per epoch. Matching seeds across all 16 subsets must produce identical initial parameters and training-example order; gate randomness must not change the data-order generator. Record and verify initialization, split/data/order, executed-source and checkpoint hashes. Recipe metadata may retain `sd_constant` and `pmax=0` for compatibility, but the authoritative intervention is the explicit four-entry vector, each value exactly 0 or 0.5.
+
+These settings compare eligibility subsets conditional on one fixed learning rate and horizon. They do not find each subset's optimally tuned performance. Seed 201–203 identities are fixed before this study; earlier experiments used other seed sets. Qualification or failed attempts must be recorded separately and may not be silently replaced by successful runs. The parent controls compute authorization, resource limits, budget reservations and retries; this protocol does not itself authorize any paid invocation.
+
+## Endpoints and complete subset panel
+
+The primary checkpoint is the minimum validation-CE checkpoint among the fixed evaluation cadence, with the runner's predeclared earliest-epoch tie rule. Final epoch 100 is a separately reported secondary endpoint and must remain readily visible because the requested experiment trains for the full 100 epochs. Neither endpoint replaces the other according to results. Save full training/validation metrics, timing, and selected/final dense test predictions and error indices.
+
+For k=0,1,2,3,4 eligible branches, retain all C(4,k) subsets. Plot every subset's accuracy and CE. At each k, first average subsets within each seed, then report the three-seed mean and paired-seed uncertainty. Also report the range of subset means across seeds; this range is variation across choices of layers, not a confidence interval. Do not make observations independent by counting subsets, epochs, images or path appearances as additional training seeds.
+
+Use Student's t intervals on three seed-level values or differences, with two degrees of freedom and critical value 4.3026527299. Report n, values and interval endpoints without clipping intervals or forcing monotonic curves. Accuracy differences use percentage points. All intervals are descriptive and unadjusted for the many comparisons.
+
+## What “natural order” means
+
+An order is one of the 24 permutations of four branch identities. Its prefixes specify five independently trained eligibility subsets, from none to all four. It is **not** the temporal order of dropping branches within training, sequential finetuning, or a curriculum. All 24 static paths are retained; no training is performed along a path.
+
+Choose one validation-derived path before test analysis. For each permutation, average validation error over its three intermediate prefixes k=1,2,3 and seeds 201–203, using each run's validation-CE-selected checkpoint. Minimize this mean error; break exact ties by the corresponding mean validation CE, then lexicographic shallow-to-deep branch index order. The common k=0 and k=4 endpoints cannot distinguish paths and are excluded. Store all 24 validation scores and the selected order in a hashed manifest, with source validation artifact hashes, before reading test arrays or test outcome fields. Use this same frozen order for both selected and final test curves. No final-endpoint validation re-selection is allowed.
+
+Every path's test curve is descriptive. The validation-derived order is not asserted to be test-optimal, and showing the other 23 paths does not authorize selecting the favorable one afterward. A UI may let readers inspect any path, with this distinction explicit.
+
+## Conditional layer effects and per-example harm
+
+Enumerate all 32 directed subset edges S→S∪{j}, where branch j was ineligible in S. Each edge compares enabling 50% training dropout for one additional branch while holding the other eligible branches fixed. For each seed and endpoint, report accuracy/CE change, harmed examples and repaired examples. Average a branch's effect uniformly over all eight contexts; also report results separately by the number of other eligible branches. These are conditional context effects, not an assumption that layer effects add independently.
+
+For every subset, also compare with S=0 trained under the same seed. Harm means baseline-correct→treatment-wrong on the same official test image; repair is baseline-wrong→treatment-correct. Report counts and unconditional rates with all 10,000 images as denominator, plus harm conditional on baseline correctness. Preserve the identity treatment accuracy minus baseline accuracy = repair rate minus harm rate. Give three-seed intervals for paired accuracy differences and for seed-level harm/repair rates. Denominators must be explicit for per-class and conditional metrics; a zero denominator gives an undefined/null rate, not zero.
+
+Per-digit tables cover all ten digits for all subsets. No new digit ordering or preferred class is predeclared. These results describe dependence on training eligibility and cannot establish that a digit intrinsically needs fewer inference layers, because every inference here uses full depth.
+
+## Examples, provenance and publication
+
+Retain an outcome-independent reference gallery for this new experiment: the first ten original test indices of each true digit, giving 100 fixed images. Determine these from an existing archived official-test label vector; freeze its source SHA-256 and the index list before new test analysis. This selection uses labels but no model outcomes. In addition, for each subset-versus-S=0 comparison, seed, endpoint and digit, expose the first two harmed and first two repaired original test indices, ordered numerically. These additional examples are explicitly **outcome-selected illustrations**, not a population sample or new evidence of effect size. Empty categories remain empty. Deduplicate the union (at most 140 images per state), preserve selection annotations, and export both treatment and same-seed baseline probabilities for each displayed image. Probabilities are full-depth softmax outputs, not an ensemble over training gates.
+
+The analyzer has separate phases. Validation preparation consumes validation-only records, freezes the natural order and fixed-gallery indices, and does not access test outcomes. Final analysis requires that manifest and verifies the complete expected run list, source/data/initialization/order hashes, model identities, and test labels/order. It then writes complete analysis JSON and Markdown; the compact page export contains all subset means and seed values, all 24 paths, all conditional edges, class/harm summaries and labeled gallery examples. JSON uses null for undefined quantities and never NaN/Infinity. Raw per-example predictions remain linked reproducibility artifacts; no checkpoints or private metadata are copied into page data.
+
+Incomplete, failed and censored attempts remain visible and prevent a report labeled complete. A partial diagnostic may be produced only with explicit incomplete status and no substituted seeds or omitted unfavorable subsets. Actual synchronized training time, full invocation time and reservations/metered cost are separate quantities. Affine-work estimates are not measurements of energy or end-to-end latency.

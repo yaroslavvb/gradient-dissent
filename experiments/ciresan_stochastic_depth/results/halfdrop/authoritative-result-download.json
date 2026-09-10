@@ -1,0 +1,296 @@
+{
+  "complete": true,
+  "gpu_calls": 0,
+  "files": [
+    {
+      "run_id": "halfdrop-m00-s201-v1",
+      "file": "raw/halfdrop-m00-s201-v1/result.json",
+      "sha256": "91fa4cad30e38872c2b0f8ced466e81783f2d63ef06b23a9a4bceeda725c8f93",
+      "bytes": 2866005
+    },
+    {
+      "run_id": "halfdrop-m00-s202-v1",
+      "file": "raw/halfdrop-m00-s202-v1/result.json",
+      "sha256": "d9ffc269ba554d4d1af430b17c1ac8f9e2e04d45cb0bf1588cb60fe9cac59ac4",
+      "bytes": 2874272
+    },
+    {
+      "run_id": "halfdrop-m00-s203-v1",
+      "file": "raw/halfdrop-m00-s203-v1/result.json",
+      "sha256": "b6c61bae91ea5fc882725663af491d0d3b9f52ee81a076cfe7b06366a89c5f36",
+      "bytes": 2867880
+    },
+    {
+      "run_id": "halfdrop-m01-s201-v1",
+      "file": "raw/halfdrop-m01-s201-v1/result.json",
+      "sha256": "2e1bfa782c0664b0d6dd5192138fb07cf29aa8db65cee8a1ad00fdc487e4aba5",
+      "bytes": 2843315
+    },
+    {
+      "run_id": "halfdrop-m01-s202-v1",
+      "file": "raw/halfdrop-m01-s202-v1/result.json",
+      "sha256": "d3f0102bb06460053d2c26d15985347c1c9e5d64c913926157b13c128cad4025",
+      "bytes": 2859576
+    },
+    {
+      "run_id": "halfdrop-m01-s203-v1",
+      "file": "raw/halfdrop-m01-s203-v1/result.json",
+      "sha256": "36e168d97b9aefaddd9e9c09abfeaaa9a3e9989cc17f05e8630267c7222b5c17",
+      "bytes": 2848526
+    },
+    {
+      "run_id": "halfdrop-m02-s201-v1",
+      "file": "raw/halfdrop-m02-s201-v1/result.json",
+      "sha256": "fe994a940a3a42159941bec610bf728e2a4e6fe88b39e23477da5366e9d71a96",
+      "bytes": 2851434
+    },
+    {
+      "run_id": "halfdrop-m02-s202-v1",
+      "file": "raw/halfdrop-m02-s202-v1/result.json",
+      "sha256": "f6641c1b566bb2a1a7d5f6d63f02592d360d981c273663e3d0b8299a52f15ff3",
+      "bytes": 2852842
+    },
+    {
+      "run_id": "halfdrop-m02-s203-v1",
+      "file": "raw/halfdrop-m02-s203-v1/result.json",
+      "sha256": "80492ecfe2cb632245bbddb71add11a511295e4e8b28e44d140ff9b1186d98e2",
+      "bytes": 2853672
+    },
+    {
+      "run_id": "halfdrop-m03-s201-v1",
+      "file": "raw/halfdrop-m03-s201-v1/result.json",
+      "sha256": "77b0fdc51afcd45a6d25abb06f6801cf00aaa21cd8c2c599b544a99575c455e8",
+      "bytes": 2827688
+    },
+    {
+      "run_id": "halfdrop-m03-s202-v1",
+      "file": "raw/halfdrop-m03-s202-v1/result.json",
+      "sha256": "212e584a1c68cff92939195788e09583412cee1578fbc427392b9449cb563ec5",
+      "bytes": 2833761
+    },
+    {
+      "run_id": "halfdrop-m03-s203-v1",
+      "file": "raw/halfdrop-m03-s203-v1/result.json",
+      "sha256": "0f95938aa13f300d7f58212e4a408d27484b4e389c8cd8ebea351b135424cd20",
+      "bytes": 2832081
+    },
+    {
+      "run_id": "halfdrop-m04-s201-v1",
+      "file": "raw/halfdrop-m04-s201-v1/result.json",
+      "sha256": "bea1e6db2f50bccac262397592e098f10240339c1d412a90e50b10d8dae3326c",
+      "bytes": 2848564
+    },
+    {
+      "run_id": "halfdrop-m04-s202-v1",
+      "file": "raw/halfdrop-m04-s202-v1/result.json",
+      "sha256": "67209de8a101053d72f07bd5bbba6757599ce6d85c7a0e8bc31b41126e1662dc",
+      "bytes": 2856859
+    },
+    {
+      "run_id": "halfdrop-m04-s203-v1",
+      "file": "raw/halfdrop-m04-s203-v1/result.json",
+      "sha256": "28ffafcb26fbee8183d4f73baf66329e2de397e2283d3e710161212d369262ee",
+      "bytes": 2848456
+    },
+    {
+      "run_id": "halfdrop-m05-s201-v1",
+      "file": "raw/halfdrop-m05-s201-v1/result.json",
+      "sha256": "1f8249322386f02fda2274b3a8d171af7150eb4c407ed1162a37380409d1af7e",
+      "bytes": 2824565
+    },
+    {
+      "run_id": "halfdrop-m05-s202-v1",
+      "file": "raw/halfdrop-m05-s202-v1/result.json",
+      "sha256": "758c827548f38b8a9167a18a5fd8adb183aa7641067a507bf4e2f2e6d25061d9",
+      "bytes": 2836115
+    },
+    {
+      "run_id": "halfdrop-m05-s203-v1",
+      "file": "raw/halfdrop-m05-s203-v1/result.json",
+      "sha256": "a44c64187fe302c574491134fae71706f78ef41461422f117a3e2579ae0fb53b",
+      "bytes": 2831715
+    },
+    {
+      "run_id": "halfdrop-m06-s201-v1",
+      "file": "raw/halfdrop-m06-s201-v1/result.json",
+      "sha256": "72247b422550b3930e80b9bdc8581f98d37d3d4ec90b1a07a1a38d50d1cb807f",
+      "bytes": 2830420
+    },
+    {
+      "run_id": "halfdrop-m06-s202-v1",
+      "file": "raw/halfdrop-m06-s202-v1/result.json",
+      "sha256": "db4fb2918a49a85dbed7846c58136a5abb8f86038ced334017389801b9d649bc",
+      "bytes": 2836503
+    },
+    {
+      "run_id": "halfdrop-m06-s203-v1",
+      "file": "raw/halfdrop-m06-s203-v1/result.json",
+      "sha256": "5f80a1f6d2c0195ddcf083852f865d431a7ccd506749d6e7c4d8fd63dd788466",
+      "bytes": 2831921
+    },
+    {
+      "run_id": "halfdrop-m07-s201-v1",
+      "file": "raw/halfdrop-m07-s201-v1/result.json",
+      "sha256": "88bfc439c932d40341fe832a84fe6805a3d3f8c1c8b635cd8cacb083e4e9c28b",
+      "bytes": 2813380
+    },
+    {
+      "run_id": "halfdrop-m07-s202-v1",
+      "file": "raw/halfdrop-m07-s202-v1/result.json",
+      "sha256": "dd88f090d1b67642a0bf3ff5415eae2f5f26035c5c7e4f61240b2a1c4431d521",
+      "bytes": 2823196
+    },
+    {
+      "run_id": "halfdrop-m07-s203-v1",
+      "file": "raw/halfdrop-m07-s203-v1/result.json",
+      "sha256": "e4bcd96c0098a3e7757b0eeed1537f038cb1c9223eeef2066a551be696edbaa3",
+      "bytes": 2812019
+    },
+    {
+      "run_id": "halfdrop-m08-s201-v1",
+      "file": "raw/halfdrop-m08-s201-v1/result.json",
+      "sha256": "2f0762149c2a26ac1e17efee083b515f88fbc77de88c55531513969fd0e4f179",
+      "bytes": 2839226
+    },
+    {
+      "run_id": "halfdrop-m08-s202-v1",
+      "file": "raw/halfdrop-m08-s202-v1/result.json",
+      "sha256": "8772a446d707d56750067f24b853b12449d99676ad1c03b2c865324c587da5e4",
+      "bytes": 2845789
+    },
+    {
+      "run_id": "halfdrop-m08-s203-v1",
+      "file": "raw/halfdrop-m08-s203-v1/result.json",
+      "sha256": "2a365d60eac92d2df39272703ac8e9da87608ce18b54ab1d4381b02f13470c7c",
+      "bytes": 2849336
+    },
+    {
+      "run_id": "halfdrop-m09-s201-v1",
+      "file": "raw/halfdrop-m09-s201-v1/result.json",
+      "sha256": "363b115f3ee61042d58ec0ea72c6444319f6a0ff3e4492479505135f17a4ce3d",
+      "bytes": 2815671
+    },
+    {
+      "run_id": "halfdrop-m09-s202-v1",
+      "file": "raw/halfdrop-m09-s202-v1/result.json",
+      "sha256": "254b86fac952e8a9a2fdc07caaf1bf2c42687f1e765f912e88d6493ac01aec72",
+      "bytes": 2827307
+    },
+    {
+      "run_id": "halfdrop-m09-s203-v1",
+      "file": "raw/halfdrop-m09-s203-v1/result.json",
+      "sha256": "42ad4a9496597335cef786a9f042b667e2f818319532b207f2109533ad3c5181",
+      "bytes": 2832173
+    },
+    {
+      "run_id": "halfdrop-m10-s201-v1",
+      "file": "raw/halfdrop-m10-s201-v1/result.json",
+      "sha256": "af7f5b359bac3279863d8ff5304183c8766f1455df81535a8a55001e2eb0c864",
+      "bytes": 2831710
+    },
+    {
+      "run_id": "halfdrop-m10-s202-v1",
+      "file": "raw/halfdrop-m10-s202-v1/result.json",
+      "sha256": "66427a1c29a8a054b0031abbccb1c6ef6a291d311dd42da25068a489fc9b9242",
+      "bytes": 2824243
+    },
+    {
+      "run_id": "halfdrop-m10-s203-v1",
+      "file": "raw/halfdrop-m10-s203-v1/result.json",
+      "sha256": "dbfa3607e1034b9f5c0fc220c604327e892c65372ce2b8ae11130b6c9d0996b5",
+      "bytes": 2833365
+    },
+    {
+      "run_id": "halfdrop-m11-s201-v1",
+      "file": "raw/halfdrop-m11-s201-v1/result.json",
+      "sha256": "8425656cb1c56f82079cd3911439a782e2a1ae2fbddb2c44b9316aeabe9920c7",
+      "bytes": 2808868
+    },
+    {
+      "run_id": "halfdrop-m11-s202-v1",
+      "file": "raw/halfdrop-m11-s202-v1/result.json",
+      "sha256": "23f37c9ca5a866e2ccbc4154c7021ad3a3432a031ed3a7d8b71df7dc8d9a8827",
+      "bytes": 2812178
+    },
+    {
+      "run_id": "halfdrop-m11-s203-v1",
+      "file": "raw/halfdrop-m11-s203-v1/result.json",
+      "sha256": "df33f2fb3501f7581a49636679be69fc2cb1cb1a9614da11366ddcd45de931af",
+      "bytes": 2816411
+    },
+    {
+      "run_id": "halfdrop-m12-s201-v1",
+      "file": "raw/halfdrop-m12-s201-v1/result.json",
+      "sha256": "c417ff3f4b423b631e5e3dd702b2289cc7998791cdd98fea3daadbafd0cb68a9",
+      "bytes": 2817233
+    },
+    {
+      "run_id": "halfdrop-m12-s202-v1",
+      "file": "raw/halfdrop-m12-s202-v1/result.json",
+      "sha256": "55c3733dcc0ad2a5e5c393f5d0ddb04a1f77c23b85b841babc364acac21023d2",
+      "bytes": 2827433
+    },
+    {
+      "run_id": "halfdrop-m12-s203-v1",
+      "file": "raw/halfdrop-m12-s203-v1/result.json",
+      "sha256": "8c9b1e81cf82be8678d0e502a91290bbadf14ade32226af24cb029cd435fef62",
+      "bytes": 2834334
+    },
+    {
+      "run_id": "halfdrop-m13-s201-v1",
+      "file": "raw/halfdrop-m13-s201-v1/result.json",
+      "sha256": "c6afa2de86e9a928de1089757d0d1fbbfff28595e24e795f9f84cb14fbc0213d",
+      "bytes": 2797701
+    },
+    {
+      "run_id": "halfdrop-m13-s202-v1",
+      "file": "raw/halfdrop-m13-s202-v1/result.json",
+      "sha256": "2d5fc51da829973df77c202f7e2375ddb48b45423f745fd2af1dddfaa8bdfd73",
+      "bytes": 2811105
+    },
+    {
+      "run_id": "halfdrop-m13-s203-v1",
+      "file": "raw/halfdrop-m13-s203-v1/result.json",
+      "sha256": "d416634a178ebe63c23bc63dbd0dd92d66dbe411f87b85f681b53b68cc359226",
+      "bytes": 2815332
+    },
+    {
+      "run_id": "halfdrop-m14-s201-v1",
+      "file": "raw/halfdrop-m14-s201-v1/result.json",
+      "sha256": "0dae350215b631128bff72e805806585efdba75e8d2485f8dcddf6ebcfb1cd41",
+      "bytes": 2811099
+    },
+    {
+      "run_id": "halfdrop-m14-s202-v1",
+      "file": "raw/halfdrop-m14-s202-v1/result.json",
+      "sha256": "de7090d12022fb867fe3cf724108f17db599f37f1cad0f94b7ba145955bc56f4",
+      "bytes": 2809721
+    },
+    {
+      "run_id": "halfdrop-m14-s203-v1",
+      "file": "raw/halfdrop-m14-s203-v1/result.json",
+      "sha256": "d4f0b63c5b0c2371a6aff13505f3a2c333e80c6fcbba26df4caac479691cbbd0",
+      "bytes": 2817554
+    },
+    {
+      "run_id": "halfdrop-m15-s201-v1",
+      "file": "raw/halfdrop-m15-s201-v1/result.json",
+      "sha256": "6492b2526da4224596d633d6cc190631b45d2c71c8b35885278f9fa6afda25bb",
+      "bytes": 2790569
+    },
+    {
+      "run_id": "halfdrop-m15-s202-v1",
+      "file": "raw/halfdrop-m15-s202-v1/result.json",
+      "sha256": "94f2fba83e0b6c75965c2394be2363e8f6b4f37a9b176b0b17b012dd7f1f71c6",
+      "bytes": 2801303
+    },
+    {
+      "run_id": "halfdrop-m15-s203-v1",
+      "file": "raw/halfdrop-m15-s203-v1/result.json",
+      "sha256": "422da8147ead0cfec91e3c19664f11976800093c4aba91cf20bb151401504c7f",
+      "bytes": 2802561
+    }
+  ],
+  "only_local_addition": "local_dispatch_elapsed_seconds",
+  "finished_unix": 1789004013.5236459
+}

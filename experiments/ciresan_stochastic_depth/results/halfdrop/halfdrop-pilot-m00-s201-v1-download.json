@@ -1,0 +1,59 @@
+{
+  "run_id": "halfdrop-pilot-m00-s201-v1",
+  "status": "complete",
+  "files": [
+    {
+      "file": "best.pt",
+      "sha256": "1d1fa22ab1266be5b0d33b01666f3bcd00385e46e56662a2193f943258c63851",
+      "bytes": 47894281,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/best.pt",
+      "status": "retained_on_volume"
+    },
+    {
+      "file": "checkpoint.pt",
+      "sha256": "1d1fa22ab1266be5b0d33b01666f3bcd00385e46e56662a2193f943258c63851",
+      "bytes": 47894281,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/checkpoint.pt",
+      "status": "retained_on_volume"
+    },
+    {
+      "file": "claimed.json",
+      "sha256": "48af120d9a5f4b12fc2b9086343174740d00b4386cabbcb1522e6faf25205230",
+      "bytes": 1519,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/claimed.json",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "final.pt",
+      "sha256": "cab62ed0c47c58bf48b791f7a00d247516f9d0b438345baecba6762ff6705d25",
+      "bytes": 47894299,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/final.pt",
+      "status": "retained_on_volume"
+    },
+    {
+      "file": "progress.json",
+      "sha256": "17ea8a921b55844de2cd3ded38f7575fa8480d79cf5369354d49c9c991e95a98",
+      "bytes": 2260,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/progress.json",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "telemetry.json",
+      "sha256": "f91eaae8fbb13b48679dd5f11d2ed9a74d72c274316278ac28920671a94ca2d9",
+      "bytes": 321215,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/telemetry.json",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "validation.json",
+      "sha256": "c84e31d1b8c968e681acefbb702862fb4e7d2e11236afd230d08aa055026644a",
+      "bytes": 330213,
+      "volume_path": "/runs/halfdrop-pilot-m00-s201-v1/validation.json",
+      "status": "downloaded_verified"
+    }
+  ],
+  "transport_finished_unix": 1789002988.034581,
+  "weights_downloaded": false,
+  "volume": "gradient-dissent-ciresan-20260909",
+  "environment": "gradient-dissent-ciresan"
+}

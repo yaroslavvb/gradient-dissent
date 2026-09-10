@@ -1,0 +1,20 @@
+{
+  "generated_utc": "2026-09-10T01:38:51.817512+00:00",
+  "source_analysis_sha256": "2b68e1eaf9519ebb0bb8f933264dca26832276d232dbf9884d1b7f6d6325ef75",
+  "outputs": {
+    "index.html": "0b3ff7c778ae37d66ce58a9161885952a1cf1b452c72dc81f21c313b60487e33",
+    "style.css": "3ed2123278b5a43c34b802ee810315bc24b2ffe52467ad697c42ff968e7b14dc",
+    "app.js": "862e528f75416cc59e9bc2534e8ce200096ccb0312231b21cc956e1430295822",
+    "data.js": "b7e4bda838ba8581cf993b5833ffc45e3ce25db6dbacbd19866d29143bb03e81",
+    "data.json": "4de4db3b1d11903a138cdb5f4a88a1c7eaa94cb964daef2b03fb9c2a6b62fcdf",
+    "report.md": "34bc0e6e7121becdd6eaae35bb09733e3f69b9f0228b45e26377de9197f4204f",
+    "gallery-s201-selected.json": "3740703f4195f6a5dc0cdf7339c114e784483d524f3495c95d01660253860651",
+    "gallery-s201-final.json": "13a132bda8338d45d21fd0765067e475335a09c7f80e78b02d31904ec451154a",
+    "gallery-s202-selected.json": "bd0d90e596fcc28c29691042bbe8064188c9da5975f14b7bb5e6c3f1831b6ee3",
+    "gallery-s202-final.json": "3b3289ec4f84310203e867f4ded31caae09b4b46af3d9608c7ea3496813c2873",
+    "gallery-s203-selected.json": "c6f98af3c7b9d9f4694ce8427525500060149fc0d6817f33b96a36ae02cdce5b",
+    "gallery-s203-final.json": "00ba00433f353b9593742ae6f56f1f10f413ef6b66f961f9f68fb05ebe31a1fe",
+    "accuracy-vs-drop-count.svg": "f911e5fefe9d156a153a318a7447f708379deecb63dd6489a40dca2171b45cba",
+    "accuracy-vs-drop-count.png": "a095a91bc84f724422afb7d624ac76ed7d9d7e9f3e2e07956c3ad18990e4526b"
+  }
+}

@@ -12,7 +12,7 @@
     "experiments/ciresan_stochastic_depth/results/full-depth/independent-verification.json": "8ff8c819176371fac61ac89fcef390c8905592ca8136fa27001c32afd9bf354c"
   },
   "outputs": {
-    "index.html": "4efc342540c1cf9735f71fdf41125b54a8f41a94d6e2d8339b1b3473395b8bfb",
+    "index.html": "c1d8615688c212467275c981e5bd0bf43ab657958810505da1967f720e6d91e4",
     "report.md": "f18305c5dbab5a919ae36c9804b64b45efd21e57592ffff9ae213a1a92fd315a",
     "data.json": "4aa100fc851ab1ad84ca19f5af7f991a2a2cb9c7ff1dd81698257549d287da61",
     "data.js": "6554e684c961894ec531746021dc26550d624084fa99742c71d6d1c8e805589a",
@@ -21,5 +21,6 @@
     "extended-data.json": "27473b06705d1d32398b10d14dfd9377b43def20f35a22ae62809ed56574dea5",
     "extended-data.js": "d63c1c7d139344e489d7e260cee63533546bbf7b5028f949962cd50cd4d4b4a2",
     "full-depth.js": "2d9e7504d8a85116d8401a11ab6428aba6f1af3cae0f8e053e76e9c55601a777"
-  }
+  },
+  "navigation_updated_utc": "2026-09-10T01:29:39.049816+00:00"
 }

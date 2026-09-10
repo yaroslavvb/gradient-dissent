@@ -1,0 +1,99 @@
+{
+  "queried_unix": 1789002644.6446688,
+  "metered_cost_usd": 5.0889913,
+  "environment": "gradient-dissent-ciresan",
+  "all_returned_apps_stopped": true,
+  "apps": [
+    {
+      "app_id": "ap-VLbosXNmtNgoNgEHTfTYic",
+      "description": "gradient-dissent-ciresan-full-depth",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 17:54:00-07:00",
+      "stopped_at": "2026-09-09 17:54:53-07:00"
+    },
+    {
+      "app_id": "ap-fRasL1PMWltnLB8KTxxpPk",
+      "description": "gradient-dissent-ciresan-full-depth",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 17:52:03-07:00",
+      "stopped_at": "2026-09-09 17:52:46-07:00"
+    },
+    {
+      "app_id": "ap-ZiLkzahzDvoMXsjolCh5uN",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:51:40-07:00",
+      "stopped_at": "2026-09-09 16:52:19-07:00"
+    },
+    {
+      "app_id": "ap-d0QwKNTHEBp0pOaxN0kw1X",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:51:09-07:00",
+      "stopped_at": "2026-09-09 16:51:42-07:00"
+    },
+    {
+      "app_id": "ap-hwGMCOliVDcZ685JvWHtKw",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:50:36-07:00",
+      "stopped_at": "2026-09-09 16:51:29-07:00"
+    },
+    {
+      "app_id": "ap-3FadyQDjCt3XSiewFSYkws",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:46:02-07:00",
+      "stopped_at": "2026-09-09 16:51:06-07:00"
+    },
+    {
+      "app_id": "ap-cDy8KB773QCLpZiMhpm5CN",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:44:06-07:00",
+      "stopped_at": "2026-09-09 16:45:49-07:00"
+    },
+    {
+      "app_id": "ap-oi62aGBOuWE8sp2ZuSLtgs",
+      "description": "gradient-dissent-ciresan-telemetry",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:40:26-07:00",
+      "stopped_at": "2026-09-09 16:42:08-07:00"
+    },
+    {
+      "app_id": "ap-yDh7fHvp8CZBGgCKCnQZja",
+      "description": "gradient-dissent-mnist-layerdrop-hypotheses",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:25:30-07:00",
+      "stopped_at": "2026-09-09 16:26:04-07:00"
+    },
+    {
+      "app_id": "ap-IGWIUS161JOWYTHkKTQfbO",
+      "description": "gradient-dissent-mnist-layerdrop-hypotheses",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 16:21:17-07:00",
+      "stopped_at": "2026-09-09 16:22:00-07:00"
+    }
+  ],
+  "pricing_url": "https://modal.com/pricing",
+  "gpu_url": "https://modal.com/docs/guide/gpu",
+  "price_checked_date": "2026-09-09",
+  "gpu": "A100-40GB",
+  "gpu_usd_per_second": 0.000583,
+  "cpu_limit_cores": 2,
+  "ram_limit_gib": 8,
+  "maximum_container_usd_per_second": 0.00062696,
+  "main_48_new_reserved_upper_usd": 9.3291648,
+  "one_qualification_call_upper_usd": 0.1943576,
+  "shared_ledger_reserved_upper_usd": 10.42981725
+}

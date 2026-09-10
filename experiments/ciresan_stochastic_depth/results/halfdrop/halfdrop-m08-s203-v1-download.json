@@ -1,0 +1,73 @@
+{
+  "run_id": "halfdrop-m08-s203-v1",
+  "status": "complete",
+  "files": [
+    {
+      "file": "best.pt",
+      "sha256": "c5a636c2f6bdbc62612f31ad5e2a578e4f54fe03a948cabe918b129cb7fb85f7",
+      "bytes": 47894281,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/best.pt",
+      "status": "retained_on_volume"
+    },
+    {
+      "file": "checkpoint.pt",
+      "sha256": "c5a636c2f6bdbc62612f31ad5e2a578e4f54fe03a948cabe918b129cb7fb85f7",
+      "bytes": 47894281,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/checkpoint.pt",
+      "status": "retained_on_volume"
+    },
+    {
+      "file": "claimed.json",
+      "sha256": "82b420c712a159bf08e472d75394e85736896e02b8feaf21b1dab3bc4096914b",
+      "bytes": 1519,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/claimed.json",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "final-test.npz",
+      "sha256": "576bccf4d51cbe311ff7d5e53ad01a0d12525ccc6dddc8671c268dc087bd6039",
+      "bytes": 1314649,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/final-test.npz",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "final.pt",
+      "sha256": "eb7dbcf5d264bcbaff0550d6500288aeb11d55497ce24a83fb109d2df30d99ab",
+      "bytes": 47894299,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/final.pt",
+      "status": "retained_on_volume"
+    },
+    {
+      "file": "progress.json",
+      "sha256": "4c9d934ee714f53dcd902777fe30d1319c59ed8e4f0508fb296575eb932f966a",
+      "bytes": 26937,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/progress.json",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "selected-test.npz",
+      "sha256": "59f1b5e296027b4c8c7550c8b3e4e342c73015caab0694836365cb704435f9ea",
+      "bytes": 1394318,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/selected-test.npz",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "telemetry.json",
+      "sha256": "01be1ebc12362706e5d0332841ea8127f6e3377e62c9e6b478e2972073f4d1be",
+      "bytes": 1387793,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/telemetry.json",
+      "status": "downloaded_verified"
+    },
+    {
+      "file": "validation.json",
+      "sha256": "9dc6a73cedc53b60500d098e6c7511a2df93eb9af65ddd3320ea801b807ac8a4",
+      "bytes": 1420400,
+      "volume_path": "/runs/halfdrop-m08-s203-v1/validation.json",
+      "status": "downloaded_verified"
+    }
+  ],
+  "transport_finished_unix": 1789003668.527383,
+  "weights_downloaded": false,
+  "volume": "gradient-dissent-ciresan-20260909",
+  "environment": "gradient-dissent-ciresan"
+}

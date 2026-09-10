@@ -1,0 +1,513 @@
+{
+  "complete": true,
+  "verified_unix": 1789004077.394806,
+  "run_count": 48,
+  "source_manifest_sha256": "106a4207be367d611259b439d5199444d8a035123baa64160d87d631c166a221",
+  "source_freeze_sha256": "aebaf02956d4d22e70e6ddc245ffd32a89d8e962357cb7c8a5bdbec147a0b459",
+  "downloaded_declared_files": 288,
+  "downloaded_declared_bytes": 264532393,
+  "authoritative_result_files": 48,
+  "authoritative_result_bytes": 135876987,
+  "prediction_npz_files": 96,
+  "weight_files_retained_on_volume": 144,
+  "test_prediction_arrays_evaluated": false,
+  "same_seed_initialization_order_and_raw_draw_hashes_exact": true,
+  "paired_seeds": [
+    201,
+    202,
+    203
+  ],
+  "timing_totals_seconds": {
+    "training_seconds": 2584.3422070950005,
+    "epoch_preparation_seconds": 17.483997056004917,
+    "graph_setup_seconds": 62.433749783999765,
+    "test_export_seconds": 41.819095154000124,
+    "total_run_seconds": 3058.2523966950002,
+    "local_dispatch_elapsed_seconds": 3267.8286559581757,
+    "telemetry_seconds": 53.56175971699766
+  },
+  "first_submission_to_last_local_result_seconds": 840.941929101944,
+  "timing_caveat": "Totals sum overlapping calls; they are not elapsed study wall time or invoice measurements. Training_seconds excludes telemetry, setup, and evaluation. Total_run_seconds is the trainer clock; local_dispatch_elapsed_seconds additionally includes dispatch/startup/return. Test-export_seconds is already included in total_run_seconds.",
+  "per_run_timing": [
+    {
+      "run_id": "halfdrop-m00-s201-v1",
+      "training_seconds": 66.34134581900001,
+      "epoch_preparation_seconds": 0.23161689199998037,
+      "graph_setup_seconds": 0.8103088099999995,
+      "test_export_seconds": 0.576343523999995,
+      "total_run_seconds": 73.260931681,
+      "local_dispatch_elapsed_seconds": 81.91729307174683,
+      "telemetry_seconds": 1.3050978799999902
+    },
+    {
+      "run_id": "halfdrop-m00-s202-v1",
+      "training_seconds": 66.10116902299997,
+      "epoch_preparation_seconds": 0.5457214089999898,
+      "graph_setup_seconds": 1.106794582000001,
+      "test_export_seconds": 1.6907414389999929,
+      "total_run_seconds": 85.03194103,
+      "local_dispatch_elapsed_seconds": 98.24214291572571,
+      "telemetry_seconds": 1.753569888999948
+    },
+    {
+      "run_id": "halfdrop-m00-s203-v1",
+      "training_seconds": 66.58188886200003,
+      "epoch_preparation_seconds": 0.5593502289999641,
+      "graph_setup_seconds": 1.174318025999999,
+      "test_export_seconds": 1.9312215619999904,
+      "total_run_seconds": 80.121054719,
+      "local_dispatch_elapsed_seconds": 95.52362203598022,
+      "telemetry_seconds": 1.841665281000008
+    },
+    {
+      "run_id": "halfdrop-m01-s201-v1",
+      "training_seconds": 54.868908251,
+      "epoch_preparation_seconds": 0.5678676459999892,
+      "graph_setup_seconds": 1.1043141790000002,
+      "test_export_seconds": 1.1755606010000008,
+      "total_run_seconds": 66.100532234,
+      "local_dispatch_elapsed_seconds": 80.71900415420532,
+      "telemetry_seconds": 1.6853055120000162
+    },
+    {
+      "run_id": "halfdrop-m01-s202-v1",
+      "training_seconds": 54.74604802700006,
+      "epoch_preparation_seconds": 0.46432486600001255,
+      "graph_setup_seconds": 3.8790431160000054,
+      "test_export_seconds": 0.9784895450000022,
+      "total_run_seconds": 68.31418875600001,
+      "local_dispatch_elapsed_seconds": 71.76608419418335,
+      "telemetry_seconds": 1.3749916609999815
+    },
+    {
+      "run_id": "halfdrop-m01-s203-v1",
+      "training_seconds": 55.011846399999925,
+      "epoch_preparation_seconds": 0.16020945600001824,
+      "graph_setup_seconds": 0.15218421800000215,
+      "test_export_seconds": 0.5398549880000019,
+      "total_run_seconds": 60.28384014699999,
+      "local_dispatch_elapsed_seconds": 62.656646966934204,
+      "telemetry_seconds": 0.89179971599998
+    },
+    {
+      "run_id": "halfdrop-m02-s201-v1",
+      "training_seconds": 59.54901689799999,
+      "epoch_preparation_seconds": 0.3934818019998261,
+      "graph_setup_seconds": 2.6587477829999955,
+      "test_export_seconds": 0.9206345019999844,
+      "total_run_seconds": 70.39515128400001,
+      "local_dispatch_elapsed_seconds": 73.61653113365173,
+      "telemetry_seconds": 1.1752483579999904
+    },
+    {
+      "run_id": "halfdrop-m02-s202-v1",
+      "training_seconds": 59.4525295240001,
+      "epoch_preparation_seconds": 0.3721472080001291,
+      "graph_setup_seconds": 2.2424884799999916,
+      "test_export_seconds": 1.0104855320000183,
+      "total_run_seconds": 71.02592130599999,
+      "local_dispatch_elapsed_seconds": 74.49868512153625,
+      "telemetry_seconds": 1.2314353380000256
+    },
+    {
+      "run_id": "halfdrop-m02-s203-v1",
+      "training_seconds": 59.82897559999989,
+      "epoch_preparation_seconds": 0.15926225100017177,
+      "graph_setup_seconds": 0.15656740099998956,
+      "test_export_seconds": 0.5536640939999984,
+      "total_run_seconds": 64.579761932,
+      "local_dispatch_elapsed_seconds": 66.91935896873474,
+      "telemetry_seconds": 0.8017651839998621
+    },
+    {
+      "run_id": "halfdrop-m03-s201-v1",
+      "training_seconds": 47.572166958000025,
+      "epoch_preparation_seconds": 0.38273870500006524,
+      "graph_setup_seconds": 1.7014847289999864,
+      "test_export_seconds": 0.8881657560000065,
+      "total_run_seconds": 58.03042471499998,
+      "local_dispatch_elapsed_seconds": 61.33954882621765,
+      "telemetry_seconds": 1.1334172990001434
+    },
+    {
+      "run_id": "halfdrop-m03-s202-v1",
+      "training_seconds": 47.58740812100001,
+      "epoch_preparation_seconds": 0.3562995020000983,
+      "graph_setup_seconds": 1.4879243269999733,
+      "test_export_seconds": 0.9788699449999854,
+      "total_run_seconds": 59.188628179999995,
+      "local_dispatch_elapsed_seconds": 64.35119318962097,
+      "telemetry_seconds": 1.1815138750000926
+    },
+    {
+      "run_id": "halfdrop-m03-s203-v1",
+      "training_seconds": 47.7802639139999,
+      "epoch_preparation_seconds": 0.3609281249998446,
+      "graph_setup_seconds": 2.469609695999992,
+      "test_export_seconds": 0.924662751999989,
+      "total_run_seconds": 59.423549741000016,
+      "local_dispatch_elapsed_seconds": 64.04530715942383,
+      "telemetry_seconds": 1.1925220019998903
+    },
+    {
+      "run_id": "halfdrop-m04-s201-v1",
+      "training_seconds": 62.115055928999936,
+      "epoch_preparation_seconds": 0.23741496899998538,
+      "graph_setup_seconds": 0.138827488000004,
+      "test_export_seconds": 0.5382532300000094,
+      "total_run_seconds": 67.16917277600001,
+      "local_dispatch_elapsed_seconds": 70.01967692375183,
+      "telemetry_seconds": 0.8043942270001025
+    },
+    {
+      "run_id": "halfdrop-m04-s202-v1",
+      "training_seconds": 61.79647525100003,
+      "epoch_preparation_seconds": 0.5728552440001806,
+      "graph_setup_seconds": 1.1161740439999903,
+      "test_export_seconds": 0.9994972180000445,
+      "total_run_seconds": 71.06322699200001,
+      "local_dispatch_elapsed_seconds": 75.13531398773193,
+      "telemetry_seconds": 1.0863314020000132
+    },
+    {
+      "run_id": "halfdrop-m04-s203-v1",
+      "training_seconds": 61.98327103799983,
+      "epoch_preparation_seconds": 0.526222076999602,
+      "graph_setup_seconds": 2.097682488000004,
+      "test_export_seconds": 0.8744187019999572,
+      "total_run_seconds": 72.575931338,
+      "local_dispatch_elapsed_seconds": 76.96614623069763,
+      "telemetry_seconds": 1.2313750250001476
+    },
+    {
+      "run_id": "halfdrop-m05-s201-v1",
+      "training_seconds": 50.344574734000105,
+      "epoch_preparation_seconds": 0.5213254980000102,
+      "graph_setup_seconds": 2.245868368999993,
+      "test_export_seconds": 0.8701834039999881,
+      "total_run_seconds": 62.21873382099997,
+      "local_dispatch_elapsed_seconds": 65.6271870136261,
+      "telemetry_seconds": 1.1479275459998917
+    },
+    {
+      "run_id": "halfdrop-m05-s202-v1",
+      "training_seconds": 50.47263661599999,
+      "epoch_preparation_seconds": 0.16958230700026888,
+      "graph_setup_seconds": 0.14414547400002675,
+      "test_export_seconds": 0.5155649939999876,
+      "total_run_seconds": 56.80342180600002,
+      "local_dispatch_elapsed_seconds": 59.81492900848389,
+      "telemetry_seconds": 0.794129097999928
+    },
+    {
+      "run_id": "halfdrop-m05-s203-v1",
+      "training_seconds": 50.3019368219999,
+      "epoch_preparation_seconds": 0.34002488600003744,
+      "graph_setup_seconds": 1.1025336690000245,
+      "test_export_seconds": 0.8992744690000336,
+      "total_run_seconds": 59.64529834800004,
+      "local_dispatch_elapsed_seconds": 63.16597080230713,
+      "telemetry_seconds": 1.1503449900000078
+    },
+    {
+      "run_id": "halfdrop-m06-s201-v1",
+      "training_seconds": 55.397640271000114,
+      "epoch_preparation_seconds": 0.3515569820001474,
+      "graph_setup_seconds": 0.9236022120000484,
+      "test_export_seconds": 0.876987229000008,
+      "total_run_seconds": 65.62496804199998,
+      "local_dispatch_elapsed_seconds": 69.15218186378479,
+      "telemetry_seconds": 1.072764027999881
+    },
+    {
+      "run_id": "halfdrop-m06-s202-v1",
+      "training_seconds": 55.244663925000395,
+      "epoch_preparation_seconds": 0.33979097700017746,
+      "graph_setup_seconds": 1.14468076899999,
+      "test_export_seconds": 0.9061025319999771,
+      "total_run_seconds": 66.09145239899999,
+      "local_dispatch_elapsed_seconds": 69.61670899391174,
+      "telemetry_seconds": 1.0565581310003154
+    },
+    {
+      "run_id": "halfdrop-m06-s203-v1",
+      "training_seconds": 55.61348070200023,
+      "epoch_preparation_seconds": 0.15206233100002464,
+      "graph_setup_seconds": 0.14178131099998836,
+      "test_export_seconds": 0.5046852490000333,
+      "total_run_seconds": 60.46300399200004,
+      "local_dispatch_elapsed_seconds": 62.669578075408936,
+      "telemetry_seconds": 0.787331809000591
+    },
+    {
+      "run_id": "halfdrop-m07-s201-v1",
+      "training_seconds": 43.416590314999894,
+      "epoch_preparation_seconds": 0.3320761930002618,
+      "graph_setup_seconds": 0.9795323719999942,
+      "test_export_seconds": 0.8713928309999801,
+      "total_run_seconds": 53.293745013000034,
+      "local_dispatch_elapsed_seconds": 56.57719111442566,
+      "telemetry_seconds": 1.067974109999568
+    },
+    {
+      "run_id": "halfdrop-m07-s202-v1",
+      "training_seconds": 43.47046993999999,
+      "epoch_preparation_seconds": 0.35041238300004807,
+      "graph_setup_seconds": 0.3604494260000024,
+      "test_export_seconds": 1.2424505559999943,
+      "total_run_seconds": 53.99304269700002,
+      "local_dispatch_elapsed_seconds": 60.268304109573364,
+      "telemetry_seconds": 1.090081054000109
+    },
+    {
+      "run_id": "halfdrop-m07-s203-v1",
+      "training_seconds": 43.55609895800001,
+      "epoch_preparation_seconds": 0.44404051200001504,
+      "graph_setup_seconds": 2.1592846820000204,
+      "test_export_seconds": 0.9662670239999898,
+      "total_run_seconds": 55.12475619500003,
+      "local_dispatch_elapsed_seconds": 58.754833936691284,
+      "telemetry_seconds": 1.1472404099998812
+    },
+    {
+      "run_id": "halfdrop-m08-s201-v1",
+      "training_seconds": 64.17964561900015,
+      "epoch_preparation_seconds": 0.2472058519999223,
+      "graph_setup_seconds": 0.11604017199999817,
+      "test_export_seconds": 0.5341562250000038,
+      "total_run_seconds": 69.8429332,
+      "local_dispatch_elapsed_seconds": 72.28091192245483,
+      "telemetry_seconds": 0.7931440479998173
+    },
+    {
+      "run_id": "halfdrop-m08-s202-v1",
+      "training_seconds": 63.90965220300018,
+      "epoch_preparation_seconds": 0.626599950000525,
+      "graph_setup_seconds": 0.6551775259999886,
+      "test_export_seconds": 0.9051433260000294,
+      "total_run_seconds": 73.768590002,
+      "local_dispatch_elapsed_seconds": 76.93987703323364,
+      "telemetry_seconds": 1.1274396710000474
+    },
+    {
+      "run_id": "halfdrop-m08-s203-v1",
+      "training_seconds": 63.888597411000035,
+      "epoch_preparation_seconds": 0.4794343670002945,
+      "graph_setup_seconds": 2.9290575569999646,
+      "test_export_seconds": 0.8738822400000004,
+      "total_run_seconds": 75.654805092,
+      "local_dispatch_elapsed_seconds": 79.09795379638672,
+      "telemetry_seconds": 1.248185851000187
+    },
+    {
+      "run_id": "halfdrop-m09-s201-v1",
+      "training_seconds": 52.5740628719995,
+      "epoch_preparation_seconds": 0.5080202000002032,
+      "graph_setup_seconds": 2.625433821999991,
+      "test_export_seconds": 0.8806622779999884,
+      "total_run_seconds": 65.278011424,
+      "local_dispatch_elapsed_seconds": 68.41875910758972,
+      "telemetry_seconds": 1.5649080930003834
+    },
+    {
+      "run_id": "halfdrop-m09-s202-v1",
+      "training_seconds": 52.58171577600035,
+      "epoch_preparation_seconds": 0.15352969499951996,
+      "graph_setup_seconds": 0.14406269299996666,
+      "test_export_seconds": 0.5075550779999958,
+      "total_run_seconds": 57.57950980900006,
+      "local_dispatch_elapsed_seconds": 60.51303195953369,
+      "telemetry_seconds": 0.7884818979998158
+    },
+    {
+      "run_id": "halfdrop-m09-s203-v1",
+      "training_seconds": 52.57505065999993,
+      "epoch_preparation_seconds": 0.39124118499995575,
+      "graph_setup_seconds": 1.5813025609999727,
+      "test_export_seconds": 0.8858775720000267,
+      "total_run_seconds": 63.65032592799997,
+      "local_dispatch_elapsed_seconds": 67.32102489471436,
+      "telemetry_seconds": 1.1710033479998856
+    },
+    {
+      "run_id": "halfdrop-m10-s201-v1",
+      "training_seconds": 57.46892948700031,
+      "epoch_preparation_seconds": 0.369811846000232,
+      "graph_setup_seconds": 2.614013505999992,
+      "test_export_seconds": 0.9624584329999379,
+      "total_run_seconds": 69.09951535000005,
+      "local_dispatch_elapsed_seconds": 73.31073427200317,
+      "telemetry_seconds": 1.2270918310000525
+    },
+    {
+      "run_id": "halfdrop-m10-s202-v1",
+      "training_seconds": 57.31093152500074,
+      "epoch_preparation_seconds": 0.35161366900013036,
+      "graph_setup_seconds": 2.6780245690000015,
+      "test_export_seconds": 0.8486736030000657,
+      "total_run_seconds": 69.56632129700006,
+      "local_dispatch_elapsed_seconds": 73.18094897270203,
+      "telemetry_seconds": 1.1512010440002314
+    },
+    {
+      "run_id": "halfdrop-m10-s203-v1",
+      "training_seconds": 57.65964804400073,
+      "epoch_preparation_seconds": 0.14335859400057416,
+      "graph_setup_seconds": 0.13365401900000506,
+      "test_export_seconds": 0.5139707829999907,
+      "total_run_seconds": 63.01581920599995,
+      "local_dispatch_elapsed_seconds": 65.89172983169556,
+      "telemetry_seconds": 0.7845336780003436
+    },
+    {
+      "run_id": "halfdrop-m11-s201-v1",
+      "training_seconds": 45.38082971099993,
+      "epoch_preparation_seconds": 0.3405524020001849,
+      "graph_setup_seconds": 1.1538364599999795,
+      "test_export_seconds": 1.0069901040000104,
+      "total_run_seconds": 55.00317386100005,
+      "local_dispatch_elapsed_seconds": 58.84205889701843,
+      "telemetry_seconds": 1.098231913000177
+    },
+    {
+      "run_id": "halfdrop-m11-s202-v1",
+      "training_seconds": 45.3400284420004,
+      "epoch_preparation_seconds": 0.355682168000385,
+      "graph_setup_seconds": 1.2548985879999464,
+      "test_export_seconds": 0.9569379079999862,
+      "total_run_seconds": 55.97259014400004,
+      "local_dispatch_elapsed_seconds": 59.64368200302124,
+      "telemetry_seconds": 1.1215482689990495
+    },
+    {
+      "run_id": "halfdrop-m11-s203-v1",
+      "training_seconds": 45.54092677900019,
+      "epoch_preparation_seconds": 0.3749884389997078,
+      "graph_setup_seconds": 1.7133959149999782,
+      "test_export_seconds": 0.995449323999992,
+      "total_run_seconds": 55.378643547000024,
+      "local_dispatch_elapsed_seconds": 59.109652042388916,
+      "telemetry_seconds": 1.0674515439998231
+    },
+    {
+      "run_id": "halfdrop-m12-s201-v1",
+      "training_seconds": 60.021850522000705,
+      "epoch_preparation_seconds": 0.15752633100009916,
+      "graph_setup_seconds": 0.16652021300001252,
+      "test_export_seconds": 0.511589502999982,
+      "total_run_seconds": 65.02849905400001,
+      "local_dispatch_elapsed_seconds": 67.43375611305237,
+      "telemetry_seconds": 0.7921581299995069
+    },
+    {
+      "run_id": "halfdrop-m12-s202-v1",
+      "training_seconds": 59.66952064099951,
+      "epoch_preparation_seconds": 0.4190322430000606,
+      "graph_setup_seconds": 1.7239022259999501,
+      "test_export_seconds": 0.9085129930000448,
+      "total_run_seconds": 70.45336985400002,
+      "local_dispatch_elapsed_seconds": 75.1857967376709,
+      "telemetry_seconds": 1.2959486989998368
+    },
+    {
+      "run_id": "halfdrop-m12-s203-v1",
+      "training_seconds": 59.79540952099978,
+      "epoch_preparation_seconds": 0.38363987699949575,
+      "graph_setup_seconds": 1.8597270999999864,
+      "test_export_seconds": 0.9169898000000103,
+      "total_run_seconds": 72.46940152399998,
+      "local_dispatch_elapsed_seconds": 76.69891023635864,
+      "telemetry_seconds": 1.105265260000806
+    },
+    {
+      "run_id": "halfdrop-m13-s201-v1",
+      "training_seconds": 48.08721137499879,
+      "epoch_preparation_seconds": 0.3632399140008147,
+      "graph_setup_seconds": 2.089763567000091,
+      "test_export_seconds": 0.9545981950000169,
+      "total_run_seconds": 60.58906060000004,
+      "local_dispatch_elapsed_seconds": 64.82333111763,
+      "telemetry_seconds": 1.222595655999271
+    },
+    {
+      "run_id": "halfdrop-m13-s202-v1",
+      "training_seconds": 48.126936881000574,
+      "epoch_preparation_seconds": 0.23015680000014527,
+      "graph_setup_seconds": 0.17147908000004008,
+      "test_export_seconds": 0.49215397500006475,
+      "total_run_seconds": 57.05606809199992,
+      "local_dispatch_elapsed_seconds": 59.64690589904785,
+      "telemetry_seconds": 0.7906689659995436
+    },
+    {
+      "run_id": "halfdrop-m13-s203-v1",
+      "training_seconds": 48.08111654400011,
+      "epoch_preparation_seconds": 0.5415402390002555,
+      "graph_setup_seconds": 1.2769064120000166,
+      "test_export_seconds": 0.9593343960000311,
+      "total_run_seconds": 60.49414000699994,
+      "local_dispatch_elapsed_seconds": 65.0717933177948,
+      "telemetry_seconds": 1.0563835189989277
+    },
+    {
+      "run_id": "halfdrop-m14-s201-v1",
+      "training_seconds": 53.045161904999304,
+      "epoch_preparation_seconds": 0.4520030790004057,
+      "graph_setup_seconds": 2.1903133239999306,
+      "test_export_seconds": 0.8411025550000204,
+      "total_run_seconds": 64.881918821,
+      "local_dispatch_elapsed_seconds": 68.46600079536438,
+      "telemetry_seconds": 1.1602417289999494
+    },
+    {
+      "run_id": "halfdrop-m14-s202-v1",
+      "training_seconds": 53.04565425699923,
+      "epoch_preparation_seconds": 0.5005986149998307,
+      "graph_setup_seconds": 1.0951837929999328,
+      "test_export_seconds": 0.8757861530000355,
+      "total_run_seconds": 63.86953414599998,
+      "local_dispatch_elapsed_seconds": 68.36934876441956,
+      "telemetry_seconds": 1.0714368179990288
+    },
+    {
+      "run_id": "halfdrop-m14-s203-v1",
+      "training_seconds": 53.26975178900011,
+      "epoch_preparation_seconds": 0.156756503000679,
+      "graph_setup_seconds": 0.11789287099998091,
+      "test_export_seconds": 0.4960369399999536,
+      "total_run_seconds": 58.35814020500004,
+      "local_dispatch_elapsed_seconds": 61.13548517227173,
+      "telemetry_seconds": 0.830509758999824
+    },
+    {
+      "run_id": "halfdrop-m15-s201-v1",
+      "training_seconds": 41.19655057600005,
+      "epoch_preparation_seconds": 0.3342474410006844,
+      "graph_setup_seconds": 1.234419985000045,
+      "test_export_seconds": 0.8617620069999248,
+      "total_run_seconds": 50.28421661100003,
+      "local_dispatch_elapsed_seconds": 53.768882036209106,
+      "telemetry_seconds": 1.0225707890009517
+    },
+    {
+      "run_id": "halfdrop-m15-s202-v1",
+      "training_seconds": 41.160668257999305,
+      "epoch_preparation_seconds": 0.3311973439999747,
+      "graph_setup_seconds": 0.8844142389999661,
+      "test_export_seconds": 1.0097348140000122,
+      "total_run_seconds": 50.207279365999966,
+      "local_dispatch_elapsed_seconds": 53.9329092502594,
+      "telemetry_seconds": 0.9977296840000918
+    },
+    {
+      "run_id": "halfdrop-m15-s203-v1",
+      "training_seconds": 41.29789439900014,
+      "epoch_preparation_seconds": 0.3807078529999899,
+      "graph_setup_seconds": 0.5259819350000043,
+      "test_export_seconds": 0.8859652710000319,
+      "total_run_seconds": 50.92785041100001,
+      "local_dispatch_elapsed_seconds": 55.38173198699951,
+      "telemetry_seconds": 1.0682456949997459
+    }
+  ]
+}

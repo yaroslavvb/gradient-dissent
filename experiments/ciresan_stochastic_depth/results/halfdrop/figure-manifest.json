@@ -1,0 +1,18 @@
+{
+  "analysis_sha256": "2b68e1eaf9519ebb0bb8f933264dca26832276d232dbf9884d1b7f6d6325ef75",
+  "plot_source_sha256": "b7400c05c5d662cc459a03129a729fb4251f89d49e6bbc93bb56d686851f867f",
+  "outputs": {
+    "svg": {
+      "file": "accuracy-vs-drop-count.svg",
+      "sha256": "f911e5fefe9d156a153a318a7447f708379deecb63dd6489a40dca2171b45cba",
+      "bytes": 129286
+    },
+    "png": {
+      "file": "accuracy-vs-drop-count.png",
+      "sha256": "a095a91bc84f724422afb7d624ac76ed7d9d7e9f3e2e07956c3ad18990e4526b",
+      "bytes": 259915
+    }
+  },
+  "confidence_intervals": "Three seed t intervals, df2; no multiple-comparison or validation-selection correction",
+  "inference": "All six affines at gain1; x axis counts training eligibility at p=.5"
+}
