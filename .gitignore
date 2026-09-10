@@ -7,6 +7,7 @@ tmp/
 research/sources/
 .env
 .env.*
+.budget.lock
 
 # Local PDF copy; canonical public PDF is committed under docs/significance.
 /output/

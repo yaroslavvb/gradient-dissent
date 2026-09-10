@@ -1,0 +1,36 @@
+{
+  "checked_unix": 1789001746.6814752,
+  "environment": "gradient-dissent-ciresan",
+  "all_returned_environment_apps_stopped": true,
+  "owned_apps_stopped": true,
+  "owned_apps": [
+    {
+      "app_id": "ap-VLbosXNmtNgoNgEHTfTYic",
+      "description": "gradient-dissent-ciresan-full-depth",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 17:54:00-07:00",
+      "stopped_at": "2026-09-09 17:54:53-07:00"
+    },
+    {
+      "app_id": "ap-fRasL1PMWltnLB8KTxxpPk",
+      "description": "gradient-dissent-ciresan-full-depth",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-09 17:52:03-07:00",
+      "stopped_at": "2026-09-09 17:52:46-07:00"
+    }
+  ],
+  "apps_list_count": 11,
+  "apps_list_scope": "Modal running, deployed and recently stopped apps",
+  "metered_total_usd": 5.0889913,
+  "metered_read_status": "available",
+  "metered_opening_usd": 5.00375173,
+  "metered_retry_opening_usd": 5.00375173,
+  "metered_increment_this_followup_usd": 0.08523956999999971,
+  "shared_absolute_cap_usd": 30,
+  "metered_stop_guard_usd": 24,
+  "shared_reserved_upper_usd": 10.42981725,
+  "new_reservations_v1_plus_v2_usd": 1.1661456,
+  "reservation_note": "Retains failed v1 and successful v2 worst-case reservations. Metering is a provider snapshot and may lag the final shutdown; reserved bound remains conservative."
+}

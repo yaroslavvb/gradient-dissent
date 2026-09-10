@@ -1,0 +1,18 @@
+{
+  "status": "failed_before_evaluator",
+  "app": {
+    "app_id": "ap-fRasL1PMWltnLB8KTxxpPk",
+    "description": "gradient-dissent-ciresan-full-depth",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-09 17:52:03-07:00",
+    "stopped_at": "2026-09-09 17:52:46-07:00"
+  },
+  "reservations_retained": true,
+  "reserved_usd": 0.5830728,
+  "wrapper_import_failure": "ModuleNotFoundError: telemetry_app",
+  "next_attempt": "v2",
+  "no_neural_training": true,
+  "no_scientific_results": true,
+  "recorded_unix": 1789001632.6406798
+}

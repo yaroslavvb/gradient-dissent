@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "frozen_unix": 1789001511.631974,
+  "manifest_sha256": "2a169279e26d86da9b5d29fdf6d0ada91922a7629280e758bbf5245afab86cd6",
+  "gallery_freeze_sha256": "b3d345cd78ad70064d2ba5a909181650f369df1d06dab54023378bac4543cb75",
+  "source_sha256": {
+    "full_depth_app.py": "863ba0d4aaae5e8daaa5d564890ecc33e2d0a2f0f1cee32b53c4d5a4f872ba84",
+    "layerdrop_hypotheses/FULL_DEPTH_PROTOCOL.md": "f9b1865f49b12e0f7ef5a90dba0732b64e0f95c0c14b4ebd6cd4a96e7406b5d4",
+    "layerdrop_hypotheses/audit.py": "36782558d6d6a2ad3c37228e4162ed3dc40a08169e54783dc93badfcd97d4068",
+    "layerdrop_hypotheses/full_depth.py": "a9947a496acfa9a303f94eaab0eaf00a93a4fad6dd6521559b5b00ee2fac4964",
+    "model_data.py": "d0a5c40f24bcbe7d97d73803604e21b503953771db306d2e05f188ad2e51a3dd",
+    "telemetry_app.py": "876674f6b653f73f42c7ae9727c7eadcd4a911f7c513e56c70b13d38f0159158"
+  },
+  "cpu_qualification": {
+    "passed": true,
+    "test_count": 13,
+    "evaluator_tests": 10,
+    "launcher_tests": 3,
+    "source_sha256": {
+      "test_full_depth_app.py": "460b258b5fcfbdcae0e9d21c1184cf3541bcaeeb2ed3eaf18930ea917629db2c",
+      "layerdrop_hypotheses/test_full_depth.py": "9ee55146bb3005d25e67159f324216df8a966fa57fab3b7fd2d470f5cbb35245"
+    },
+    "commands": [
+      ".venv/bin/python -m unittest discover -s experiments/ciresan_stochastic_depth -p test_full_depth_app.py -v",
+      ".venv/bin/python -m unittest discover -s experiments/ciresan_stochastic_depth/layerdrop_hypotheses -p test_full_depth.py -v"
+    ]
+  },
+  "resources": {
+    "jobs": 3,
+    "max_concurrent_containers": 3,
+    "gpu": "A100-40GB",
+    "cpus_request_and_limit": 2,
+    "memory_mib_request_and_limit": 8192,
+    "function_timeout_seconds": 180,
+    "startup_timeout_seconds": 90,
+    "scaledown_window_seconds": 2,
+    "retries": 0,
+    "training": false
+  },
+  "budget": {
+    "environment": "gradient-dissent-ciresan",
+    "shared_cap_usd": 30,
+    "metered_stop_guard_usd": 24,
+    "shared_ledger": "results/telemetry/budget-ledger.json",
+    "shared_ledger_sha256_before_dispatch": "5bd3db20c2eab99a28f1c8350d7783c43cd176c3dd74cb5dceb86644e333160d",
+    "new_reserved_upper_usd": 0.5830728,
+    "pricing_source": "https://modal.com/pricing",
+    "gpu_source": "https://modal.com/docs/guide/gpu",
+    "checked_date": "2026-09-09",
+    "reservation_note": "Existing reservations retained; source/protocol freeze occurs before dispatch; live opening meter is checked by launcher."
+  }
+}

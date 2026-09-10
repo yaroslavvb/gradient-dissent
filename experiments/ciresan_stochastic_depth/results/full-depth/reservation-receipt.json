@@ -1,0 +1,11 @@
+{
+  "shared_ledger": "results/telemetry/budget-ledger.json",
+  "shared_ledger_sha256_after_reservation": "8970d0fc376d1437c6df1cf10ef1148caeb06124767bbf72c8e43587a95b0981",
+  "reserved_upper_usd": 9.84674445,
+  "new_run_ids": [
+    "full-depth-s101-v1",
+    "full-depth-s102-v1",
+    "full-depth-s103-v1"
+  ],
+  "no_reservations_released": true
+}

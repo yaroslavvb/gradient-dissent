@@ -87,7 +87,7 @@
     const id=`${$('recipe').value}-${$('state').value}-s${$('seed').value}`;model=D.models.find(m=>m.id===id);
     if(!model)throw new Error('Missing planned checkpoint: '+id);
     $('method-note').textContent=methods[model.recipe];
-    $('model-note').textContent=`Saved weights: epoch ${model.epoch} · accuracy with all four branches kept: ${pct(model.dense_accuracy)}. Kept branches are not rescaled, and unit dropout is off during inference.`;
+    $('model-note').textContent=`Saved weights: epoch ${model.epoch} · full six-layer model accuracy: ${pct(model.dense_accuracy)}. Kept branches are not rescaled, and unit dropout is off during inference.`;
     $('mask-table').innerHTML='<caption>All 16 interventions for the selected checkpoint</caption><thead><tr><th>Mask</th><th>Kept</th><th>MACs</th><th>Accuracy</th><th>CE</th><th>Harmed</th><th>Repaired</th></tr></thead><tbody>'+model.masks.map(m=>`<tr><td>${bits(m.id)}</td><td>${m.retained}</td><td>${pct(m.cost)}</td><td>${pct(m.accuracy)}</td><td>${m.ce.toFixed(4)}</td><td>${pct(m.harm)}</td><td>${pct(m.repair)}</td></tr>`).join('')+'</tbody>';
     renderMask();
   }

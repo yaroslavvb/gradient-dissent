@@ -21,7 +21,7 @@
     "build:ciresan": "python3 scripts/build_ciresan_report.py --final && python3 scripts/build_ciresan_optimization.py",
     "check:ciresan": "node scripts/check_ciresan_report.cjs && node scripts/check_ciresan_optimization.cjs",
     "build:layerdrop": "python3 scripts/build_mnist_layerdrop_report.py",
-    "check:layerdrop": "node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_page.cjs"
+    "check:layerdrop": "node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_page.cjs && node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_full_depth_page.cjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1",

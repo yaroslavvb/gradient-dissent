@@ -1,0 +1,493 @@
+{
+  "status": "complete",
+  "downloaded_unix": 1789001742.866241,
+  "environment": "gradient-dissent-ciresan",
+  "volume": "gradient-dissent-ciresan-20260909",
+  "files": [
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "claimed.json",
+      "bytes": 6889,
+      "sha256": "ca351291e49006a80b0186fd0b088f3f163d405e5cc84a8e0d9aa18bbae30df4",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "plain-final-test.npz",
+      "bytes": 2503989,
+      "sha256": "37672553182fbd864419ed1163e93eca93e019772baf71ab6262e0236844cd4a",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "plain-final.json",
+      "bytes": 198706,
+      "sha256": "171009eb6b73ecd22e5811d8439765aa2b286718b5bac0cbe45ab611659865a9",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "plain-selected-test.npz",
+      "bytes": 2504679,
+      "sha256": "e4cb9658adc5c90948686da245ffcc1ee34173baabb03395d90566ebf0672686",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "plain-selected.json",
+      "bytes": 196766,
+      "sha256": "b3bef55bee46b8ae4b634e84182893c39cb1da14b39c0c40a465a9ad4132509e",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "progress.json",
+      "bytes": 1608,
+      "sha256": "148d98b588fcd85fc853fc64cc144c43f28b06b9571ba2b9d10d5c3c6fca2d5f",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual-final-test.npz",
+      "bytes": 2498620,
+      "sha256": "18f31030decedae68b478cc4ed6f1377986d99b7a7a748b953988946bfa84e37",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual-final.json",
+      "bytes": 220717,
+      "sha256": "d3a5e9173437a974f501aac1242ff0f4948c9a075c41ae5903856c4aa031b8a9",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual-selected-test.npz",
+      "bytes": 2513761,
+      "sha256": "c7ee6f351656079f9226118f3889430eb9cc93386197491d177c53dffa0d04e5",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual-selected.json",
+      "bytes": 220580,
+      "sha256": "00c184d460eb7aa203276311540a8d5fa6eefa698576ae16df5fa0a6dad9c9f2",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual_unit_dropout-final-test.npz",
+      "bytes": 2502135,
+      "sha256": "b01005dc480ce82801380cecf6f25d41c4b6007f16b5092a974b651aa8d76ece",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual_unit_dropout-final.json",
+      "bytes": 215409,
+      "sha256": "d09fea54bb2dc0e596c3f57e1920be44620e15c6abc59b117f75dc9ccad4dc6c",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual_unit_dropout-selected-test.npz",
+      "bytes": 2519637,
+      "sha256": "c51c83d4df47eb23c5941dd9e75838447e2291b343479c44989820f52fd9223c",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "residual_unit_dropout-selected.json",
+      "bytes": 212620,
+      "sha256": "8a6ca0bc60db33cc1708cd0186660883d49704d3b74b1c287deb96c5515ebcaa",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_annealed-final-test.npz",
+      "bytes": 2419547,
+      "sha256": "1f480ae74d96f8b451c87cdd1094a59a2bc289ad06afe852b8dd99da891823b9",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_annealed-final.json",
+      "bytes": 214141,
+      "sha256": "53707f151c43f6f6b2d4e53e8b59bed39aaa738dedc609b465c7fec9d7f27a56",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_annealed-selected-test.npz",
+      "bytes": 2516281,
+      "sha256": "2eb0ae41c5daf2df137151b13d98fedf90c2faa90a942da2594cb6a1def9a88f",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_annealed-selected.json",
+      "bytes": 211770,
+      "sha256": "56cd64ad17be34247c3c007a6beabd614dfffcdc4103992585714c9cee3a2666",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_constant-final-test.npz",
+      "bytes": 2441525,
+      "sha256": "a452ad789e745fbd3fa66d7338cd7bcd5a1c5a79627d02cbd2607a59567dddbd",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_constant-final.json",
+      "bytes": 209515,
+      "sha256": "23f523847fcacd086d2414c155e3ab75bfb19d4aba9fef6f237a9180d887d674",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_constant-selected-test.npz",
+      "bytes": 2516225,
+      "sha256": "78f1baa22bd17a4a7c1fbfc8b8bbc2677dd9a7370df8f54715be25542dd788ad",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "sd_constant-selected.json",
+      "bytes": 218144,
+      "sha256": "75e37f87dece12ee612c392c1abeea69c1b55db6cec25bbb6a8857049d99069e",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s101-v2",
+      "file": "result.json",
+      "bytes": 4063823,
+      "sha256": "64726629820996a2660c6f648be173eac0cfa55c951080edbc5327acf446200f",
+      "remote_declared_hash_matched": false
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "claimed.json",
+      "bytes": 6969,
+      "sha256": "83e27fd8e8056487db3384b62022e69721b07b032752bba85c9e10ae97ac5ab5",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "plain-final-test.npz",
+      "bytes": 2489987,
+      "sha256": "1ba46ac11f83cec146a673a5143305252bbf0260abf9007d4a251134e3111cda",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "plain-final.json",
+      "bytes": 196268,
+      "sha256": "9f3d4eb37f5c6516f8c9a9e41e47e9ceb0dfd4bb21f49501e3607c11f8ea3cb2",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "plain-selected-test.npz",
+      "bytes": 2513774,
+      "sha256": "eb6d28f6cfc8e07a47cb6aa450701df7720699a70642d571a6ee61620c2d3603",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "plain-selected.json",
+      "bytes": 198632,
+      "sha256": "2619ccdfefec9999746dae11ae52dfb631fe51749b61fe186ad47b053a98a9db",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "progress.json",
+      "bytes": 1602,
+      "sha256": "46898cd73b0d15b58d325104871ecf953e1594f09a459de9fc8de49e2a2c854e",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual-final-test.npz",
+      "bytes": 2497818,
+      "sha256": "c7a0c8c83ad33fb9c0d5966a8cc7b3a5371417957593c85b1eaeb64b786d18b8",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual-final.json",
+      "bytes": 218034,
+      "sha256": "fab8901876ef0d3525aa5a3b3e9ac98a856f15470c6a48a8a36f255a07b2308d",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual-selected-test.npz",
+      "bytes": 2513877,
+      "sha256": "23f6fbb18f31b048935056790d083d2795a65d0d17e304047cc87a52f14d6610",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual-selected.json",
+      "bytes": 218023,
+      "sha256": "3be9c1c7fe36901f40c6559da7c963f28471c152bf08872df4781a2d7e96a1bd",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual_unit_dropout-final-test.npz",
+      "bytes": 2489641,
+      "sha256": "9eb1eb1f941c71d28dfe6f654b45bfb099ec705b75c98c1eb415fad3eb298067",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual_unit_dropout-final.json",
+      "bytes": 210540,
+      "sha256": "3ef028b873c32e41cf0f5caa10f915202cd574c087af8aa26fd779657e32839a",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual_unit_dropout-selected-test.npz",
+      "bytes": 2512964,
+      "sha256": "3851d3ed78ad749e920807208e2f1b85b6387dd119657c1f52e2106e99b58f93",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "residual_unit_dropout-selected.json",
+      "bytes": 214047,
+      "sha256": "8f9fd033119c441497ebaae27f37f6175efa64d529a0e6c1f62f4f4b6d0d80a0",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_annealed-final-test.npz",
+      "bytes": 2413921,
+      "sha256": "0d29882bf6065967124db24a566a6104affb8433b3b7e6da44c4e26dfc92b0df",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_annealed-final.json",
+      "bytes": 216246,
+      "sha256": "d94015f1ead9bc668fbd1fdf1eb6f51b8c391d10cea01b66cd593b220a25cd61",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_annealed-selected-test.npz",
+      "bytes": 2507271,
+      "sha256": "1d8eb5265a9f6af8dac7104a8180f01933c0ec842a72cebebca7c48271457af4",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_annealed-selected.json",
+      "bytes": 218618,
+      "sha256": "5119b47dae6632931e7c8462817999db42f83c301132b3bf763226c6e8ff54b6",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_constant-final-test.npz",
+      "bytes": 2363830,
+      "sha256": "0d2a10aeaecc2c5aff7473b45ff015eb9d62dbefd230123b1860caec90831936",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_constant-final.json",
+      "bytes": 214034,
+      "sha256": "f2ee1a06ad09f87a153ae23364969cd1ec4c75f1d3a5fcc590f7c8e7b42256ca",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_constant-selected-test.npz",
+      "bytes": 2510314,
+      "sha256": "1c01b7d20f1272220a157c446d3ff77acc015b554754d43a1364d4912c344cc8",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "sd_constant-selected.json",
+      "bytes": 220352,
+      "sha256": "f2a537e6904a01609375187fe4431f85caa854848fda33fc1337dfcc852b7567",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s102-v2",
+      "file": "result.json",
+      "bytes": 4098167,
+      "sha256": "0bf43eab75db106ac452d73d97e7b47a026e16adc9969019ad0e10c9231c21ff",
+      "remote_declared_hash_matched": false
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "claimed.json",
+      "bytes": 7012,
+      "sha256": "7fcde31c20a2361b4f01d9b7942fc7ae91fbb237dec5454392b4240a51eb0708",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "plain-final-test.npz",
+      "bytes": 2497148,
+      "sha256": "3d46b3fc212226680fbf5dc787f26b1ed0489725b2fde76dee7d5cc87d898d84",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "plain-final.json",
+      "bytes": 199367,
+      "sha256": "f82cfbc70fa4d414641787b27a5405c87ed73340fce38793076e5c7c93289eae",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "plain-selected-test.npz",
+      "bytes": 2506106,
+      "sha256": "c2e8c834288f0d76c36bc93c80057738e4d9eaa6ed938096a29787932d970429",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "plain-selected.json",
+      "bytes": 195952,
+      "sha256": "0949e4c785580c126ca6042b31f808cc0b96647d17c6a39b2be0744d624cbb2b",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "progress.json",
+      "bytes": 1613,
+      "sha256": "8453aa8b79ce899d55503e48ef3febfd3c596a16f92f85ad860fcf1d1656e5e1",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual-final-test.npz",
+      "bytes": 2504267,
+      "sha256": "953a136b412ee079da2cc2f11d627d45e2da8464713cd108c73c7517dc1335ec",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual-final.json",
+      "bytes": 222350,
+      "sha256": "448914625e5afadad18e81f1d89c13f06748ed79808e4b9cb66b903473a80da4",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual-selected-test.npz",
+      "bytes": 2517576,
+      "sha256": "2ef70815a662dc632293bf0c91d010d0f1882e26645e951fde99d3d0b975f2bb",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual-selected.json",
+      "bytes": 221059,
+      "sha256": "415866fc66c5e09726894b3c2e8cc98ccb4e106235ec3e2c7573a0c098c72d5a",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual_unit_dropout-final-test.npz",
+      "bytes": 2510629,
+      "sha256": "2f9975e8d9b0b8a147e10538d8ea35e5f44629468e646f82af1c2503405b08cd",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual_unit_dropout-final.json",
+      "bytes": 214766,
+      "sha256": "6d467574c74b3b8a7d6913d847a8aa1d6ced677a437fc53cfee19123eb771fb5",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual_unit_dropout-selected-test.npz",
+      "bytes": 2523592,
+      "sha256": "5e23455337c325bf7454372de66958e476b281c99de4d1268630b97141b00cec",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "residual_unit_dropout-selected.json",
+      "bytes": 218335,
+      "sha256": "b758a49b54b805125761d1ec327abbd873e3adbda05d454eec305d28ea209f04",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_annealed-final-test.npz",
+      "bytes": 2479068,
+      "sha256": "0be025057d7a684142c20d9100d4b08e76bc13778b40245e666081ad8069022e",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_annealed-final.json",
+      "bytes": 214468,
+      "sha256": "ef307c5389c1f0cefdcbaa1b3c232f87a0874e717e352c79dde03359e1a2a5cc",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_annealed-selected-test.npz",
+      "bytes": 2523906,
+      "sha256": "3f077cde0c5faa11ca9178ad63bf07c7b523ee022178912244fdf2b7e1ba85ab",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_annealed-selected.json",
+      "bytes": 215429,
+      "sha256": "c5479781bcb6964135527b418b76c8e69eaa318f36c58c1b397756a7608f334b",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_constant-final-test.npz",
+      "bytes": 2427716,
+      "sha256": "db909eb8af76430336539cb511e6f34101f4ed4788bc279711d7eb26fa274d19",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_constant-final.json",
+      "bytes": 212876,
+      "sha256": "86b39ae31fbe0e2b42f0cfa1c82bfc0fcc41a94a6c3144e4d5c988a82bd2984c",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_constant-selected-test.npz",
+      "bytes": 2518922,
+      "sha256": "f620bb2bff9475d64825209d6d2b59c414761828b25f6bbaea7543be17012435",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "sd_constant-selected.json",
+      "bytes": 220741,
+      "sha256": "c193142aa7465a6b8bc0c4f392dc9d24e22e57b81b4cf8f3e80b08aea5c7b17c",
+      "remote_declared_hash_matched": true
+    },
+    {
+      "run_id": "full-depth-s103-v2",
+      "file": "result.json",
+      "bytes": 4113685,
+      "sha256": "9c0938ea8c3e62ce332e42e2d648f1435ab1a79c9a7047c45d911defc1b3d3c9",
+      "remote_declared_hash_matched": false
+    }
+  ],
+  "bytes": 93438599,
+  "note": "Files preserved exactly; remote result.json has no self-hash and is hashed locally; all declared artifacts match remote hashes."
+}

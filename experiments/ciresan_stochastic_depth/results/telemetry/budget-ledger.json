@@ -261,9 +261,75 @@
       "reserved_usd": 0.3824456,
       "created_unix": 1788997902.5003352,
       "spec_sha256": "96937cf89418b348223980cdde10927b8f4f7de153ebbaaedb3d73d1f77e6d5d"
+    },
+    {
+      "id": "full-depth-s101-v1",
+      "kind": "full-depth-inference",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100-40GB",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1789001526.8108459,
+      "spec_sha256": "38c49c8beeefc4f288b986f76a4f32c0497fd4f386b35c60b28d176d7ac4d280"
+    },
+    {
+      "id": "full-depth-s102-v1",
+      "kind": "full-depth-inference",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100-40GB",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1789001526.810997,
+      "spec_sha256": "d05adab125b7e45a57af2c23163dfc63215ada4ed0df6649ac7b7d595c5177ac"
+    },
+    {
+      "id": "full-depth-s103-v1",
+      "kind": "full-depth-inference",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100-40GB",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1789001526.8111339,
+      "spec_sha256": "10a73cec95e630e1f6ce8be490bab6c283478ba21f8cd73d50ef8121fa163f59"
+    },
+    {
+      "id": "full-depth-s101-v2",
+      "kind": "full-depth-inference",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100-40GB",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1789001643.693393,
+      "spec_sha256": "ddaf4184a2b57f30e626866349a9416d7b8008e3bc9890c42f9f6727608d6e6b"
+    },
+    {
+      "id": "full-depth-s102-v2",
+      "kind": "full-depth-inference",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100-40GB",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1789001643.693579,
+      "spec_sha256": "c95e3e176ef28435f4de5838756985e3dadc2ab92054af74517f18f70a96d38d"
+    },
+    {
+      "id": "full-depth-s103-v2",
+      "kind": "full-depth-inference",
+      "timeout_seconds": 180,
+      "startup_idle_allowance_seconds": 130,
+      "gpu": "A100-40GB",
+      "reserved_rate_usd_per_second": 0.00062696,
+      "reserved_usd": 0.1943576,
+      "created_unix": 1789001643.693665,
+      "spec_sha256": "42f66ef34a77a4b9f9b1d94e5404d571940183de51dbbac42fed9c80a8d0b162"
     }
   ],
   "opening_metered_usd": 4.07871245,
   "legacy_ledger_sha256": "e86fd5248a5adfd8831de25532e7efc25b9952d5cd02a7499941df74ac1442fc",
-  "reserved_upper_usd": 9.26367165
+  "reserved_upper_usd": 10.42981725
 }

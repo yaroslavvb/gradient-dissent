@@ -1,13 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Which digits can skip layers? · MNIST layer dropout</title><meta name="description" content="An exact 16-mask audit of stochastic depth on fully connected MNIST networks: class resilience, nonlinear interactions, and measured input-dependent routing."><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="style.css"><script defer src="data.js"></script><script defer src="app.js"></script></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Which digits can skip layers? · MNIST layer dropout</title><meta name="description" content="Explore all six learned MNIST layers, 64 removal masks, and random inference dropout. Separate classification accuracy from abstention and prediction coverage."><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="style.css"><script defer src="data.js"></script><script defer src="app.js"></script><script defer src="extended-data.js"></script><script defer src="full-depth.js"></script></head><body>
 <a class="skip" href="#main">Skip to report</a><header><a class="brand" href="../../">GRADIENT DISSENT</a><nav><a href="../conclusions/">Practical conclusions</a><a href="../">Training experiment</a><a href="../optimization/">A100 optimization</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses">Code &amp; protocol</a></nav></header>
 <main id="main"><p class="eyebrow">Fable’s hypotheses, tested · fully connected MNIST · September 9, 2026</p><h1>Which digits can<br><em>skip the computation?</em></h1><div id="findings"><p>Stochastic depth makes missing layers less damaging. At the validation-selected checkpoints, the fraction of nonconstant logit interaction energy in higher-order terms falls from <strong>13.31% to about 2.3%</strong>. At epoch 100, keeping two of four body branches still gives <strong>98.34–98.35% accuracy</strong>.</p><p>A fixed reduced network is fast. This image-dependent router adds enough grouping overhead to become slower than the full network, despite using fewer nominal MACs.</p></div>
-<div class="stats"><div><strong>16</strong><span>All 4-branch on/off combinations</span></div><div><strong>30</strong><span>Checkpoint states, three seeds</span></div><div><strong>10,000</strong><span>Test digits per state</span></div><div><strong>5</strong><span>Hypotheses fixed before the audit</span></div></div>
-<p class="note">We reuse frozen checkpoints from the optimized training codebase. No neural retraining. Selected checkpoints are primary; epoch 100 is secondary. The dataset and seeds have been used before, so these results are exploratory. “Two branches kept” averages all six ways to retain two optional branches; the feature layer and classifier always remain.</p>
-<section class="explorer" aria-labelledby="explore-title"><h2 id="explore-title">Skip a middle branch. Follow a real digit.</h2>
-<p><strong>The four switches remove only middle branches.</strong> The learned feature layer (“stem”) and classifier (“head”) always remain.</p>
+<div class="stats"><div><strong>64</strong><span>All 6-layer switch combinations</span></div><div><strong>30</strong><span>Checkpoint states, three seeds</span></div><div><strong>10,000</strong><span>Test digits per state</span></div><div><strong>5</strong><span>Original four-branch hypotheses</span></div></div>
+<p class="note">We reuse frozen checkpoints from the optimized training codebase. No neural retraining. Selected checkpoints are primary; epoch 100 is secondary. The dataset and seeds have been used before, so these results are exploratory. In the original report, “two branches kept” averages all six ways to retain two middle branches, with the feature layer and classifier still present.</p>
+<section class="explorer" aria-labelledby="explore-title"><h2 id="explore-title">Drop any learned layer. Follow a real digit.</h2>
+<p><strong>Now including the feature layer and classifier: all six learned layers, all 64 switch combinations.</strong> The original four-branch comparison is still available. All controls below change inference on saved weights.</p>
 <div class="controls"><label>Training method<select id="recipe" aria-describedby="method-note" title="How the saved weights were trained. Changing this selects an existing model; it does not retrain it."><option value="sd_constant">SD · fixed drop rates</option><option value="sd_annealed">SD · drop rates decay to zero</option><option value="residual">Residual · no dropout</option><option value="residual_unit_dropout">Residual · unit dropout</option><option value="plain">Plain MLP · forced crop bypass</option></select></label><label>Checkpoint<select id="state" title="Saved weights: the primary checkpoint has the lowest validation cross-entropy; the secondary checkpoint is the end of epoch 100."><option value="selected">Lowest validation loss · primary</option><option value="final">Epoch 100 · secondary</option></select></label><label>Training seed<select id="seed" title="An independent training repeat: the seed controls initialization, data order and dropout randomness."><option>101</option><option>102</option><option>103</option></select></label></div>
 <p id="method-note" class="method-note" aria-live="polite"></p><p class="note">SD = stochastic depth: randomly skipping whole branches. <strong>Across layers:</strong> later branches have higher drop rates. <strong>Across training:</strong> decaying drop rates mean increasing active depth. No recipe increases dropout over time.</p>
 <p id="model-note" class="note"></p>
+<div class="controls scope-controls"><label>Layers you can drop<select id="layer-scope"><option value="full">All 6 learned layers · extended</option><option value="body">4 middle branches · original</option></select></label><label>Drop during inference<select id="inference-mode"><option value="fixed">Fixed selection · same mask for every image</option><option value="random">Random · a new mask per prediction</option></select></label></div>
+<p id="extended-status" class="note" aria-live="polite"></p>
+<div id="full-explorer" hidden>
+<p id="full-help" class="method-note"></p>
+<div class="mask-controls full-mask-controls" id="full-mask-controls"></div>
+<div id="random-controls" hidden><label class="drop-slider" for="drop-probability">Chance of dropping each eligible layer <strong id="drop-probability-value">50%</strong><input id="drop-probability" type="range" min="0" max="100" value="50" step="1" aria-describedby="random-help"></label><p id="random-help" class="note">Each eligible layer is dropped independently for each input. Kept layers have gain one. Scores below are exact expected results over all masks, not an ensemble of averaged predictions.</p></div>
+<div class="animation-toolbar"><button id="full-keep" type="button">Keep all 6</button><button id="full-drop" type="button">Drop all 6</button><button id="full-head-only" type="button">Classifier only</button><button id="full-draw" type="button" hidden>Draw one random mask</button><button id="full-play" type="button" aria-pressed="false">Animate removing layers</button></div>
+<p id="full-mask-status" aria-live="polite"></p><div id="full-explanation" class="remaining-note" aria-live="polite"></div>
+<div class="network-scroll"><svg id="full-network" viewBox="0 0 1000 200" role="img" aria-label="Six learned layers and their inference bypasses"></svg></div>
+<div class="full-scores" aria-live="polite"><div><strong id="full-correct"></strong><span>Correct outputs / all inputs</span></div><div><strong id="full-coverage"></strong><span>Inputs receiving a prediction</span></div><div><strong id="full-accuracy"></strong><span>Accuracy among predictions</span></div><div><strong id="full-cost"></strong><span>Counted affine work</span></div></div>
+<p class="note"><strong>Why not 0% accuracy?</strong> Without a classifier we emit no digit: 0% coverage and 0% correct outputs; accuracy is undefined. A model that still guesses digits can average roughly 10% by chance. Removing more layers need not hurt every image or decrease accuracy monotonically.</p>
+<div class="example-focus full-example"><canvas id="full-digit" width="140" height="140" aria-label="Selected MNIST digit"></canvas><div><label for="full-example-select">Follow a measured test example</label><select id="full-example-select"></select><p id="full-prediction" class="prediction" aria-live="polite"></p><p id="full-example-note" class="note"></p></div></div>
+<div class="chart-heading"><h3 id="full-chart-title"></h3><p id="full-chart-subtitle"></p></div><svg id="full-chart" viewBox="0 0 1000 340" role="img"></svg><div class="legend" id="full-chart-legend"></div><p id="full-chart-note" class="note"></p>
+<h3>Per-digit results for this inference policy</h3><div class="table-wrap"><table id="full-class-table"></table></div>
+<details><summary>All 64 fixed-mask results</summary><div class="table-wrap"><table id="full-mask-table"></table></div></details>
+<p class="note">The feature layer (“stem”) normally learns 784 → 2,500 features. Dropping it inserts normalized pixels followed by zeros. A dropped middle branch keeps the first coordinates needed by the next layer. Dropping the classifier (“head”) abstains immediately and skips all affine work. Only middle-branch dropout was used during SD training; dropping either endpoint is an exploratory intervention.</p>
+</div>
+<div id="body-explorer">
 <p id="mask-help" class="note"><strong>Inference only:</strong> checked = compute the branch; unchecked = bypass its learned transformation and keep the first features needed by the next layer (“crop”). Weights stay fixed.</p>
 <div class="mask-controls" id="mask-controls" aria-describedby="mask-help"></div><div class="animation-toolbar"><button id="play" type="button" aria-pressed="false" title="Cycle the 16 fixed branch combinations on these saved weights; no training occurs.">Play all 16 masks</button><button id="restore" type="button" title="Restore the four optional branches. The feature layer and classifier are always active.">Keep all 4 branches</button><span id="mask-status" aria-live="polite"></span></div>
 <div id="remaining-note" class="remaining-note" aria-live="polite"></div>
@@ -17,20 +35,160 @@
 <div class="chart-heading"><h3>Every mask has its own cost</h3><p>Click a point to inspect its mask</p></div><svg id="frontier" viewBox="0 0 1000 330" role="img" aria-label="Accuracy versus nominal affine compute for all16 masks"></svg><p class="note">One point = one fixed mask on 10,000 images. MACs exclude routing, indexing, activations and memory. Later branches are cheaper: dropping a 5M-MAC branch differs from dropping a 0.5M-MAC branch.</p>
 <details><summary>Accessible mask results</summary><div class="table-wrap"><table id="mask-table"></table></div></details>
 <h3>Which digits lose accuracy?</h3><div class="table-wrap"><table id="class-table"><caption>Each column is one mask; each row is one true digit. Cell values are test accuracy.</caption></table></div><p class="note">Mask bits run shallow → deep; 1 means kept. Digit identity is used for analysis, never supplied to the router. Raw class differences can reflect confidence; the report below also matches full-model margin.</p>
-<div class="controls"><label>Inspect digit<select id="class"><option value="all">All digits</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></label><label>Two-branch resilience<select id="category"><option value="all">All categories</option><option value="preserved">Preserved by all six masks</option><option value="mixed">Some masks succeed</option><option value="lost">All six masks fail</option></select></label></div><div id="gallery" class="gallery"></div><p class="note">Examples follow a fixed selection rule: among full-model-correct test images, take the first two original test indices per digit in each category. Categories use all six masks retaining two branches. Missing categories are left empty. Click a digit to follow its predictions above.</p></section>
+<div class="controls"><label>Inspect digit<select id="class"><option value="all">All digits</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></label><label>Two-branch resilience<select id="category"><option value="all">All categories</option><option value="preserved">Preserved by all six masks</option><option value="mixed">Some masks succeed</option><option value="lost">All six masks fail</option></select></label></div><div id="gallery" class="gallery"></div><p class="note">Examples follow a fixed selection rule: among full-model-correct test images, take the first two original test indices per digit in each category. Categories use all six masks retaining two branches. Missing categories are left empty. Click a digit to follow its predictions above.</p></div></section>
 <section id="verdicts"><h2>Five hypotheses. Five different answers.</h2><div class="verdict-grid"><div><p class="badge">H1 · partly supported</p><h3>Training with omissions buys tolerance</h3><p>Decreasing SD reduces selected-checkpoint deletion loss by 0.0588 nats versus residual training; the three-seed interval excludes zero. Constant SD has the same direction, with an interval crossing zero.</p></div><div><p class="badge">H2 · unresolved</p><h3>There is no stable “easy digit” rule</h3><p>Digit 1’s apparent advantage weakens after margin adjustment. All primary adjusted intervals include zero; final decreasing SD reverses the ordering.</p></div><div><p class="badge">H3 · local support</p><h3>Direction predicts more than size</h3><p>At selected checkpoints, gradient-based sensitivity tracks damage better than increment norm or angle. Final-checkpoint rank correlations deteriorate; finite-difference Gaussian controls are numerically unresolved.</p></div><div><p class="badge">H4 · supported, with limits</p><h3>Layer effects become more additive</h3><p>Exact binary-mask interactions fall sharply under SD. Real fractional-gain interpolation still has error, so this does not establish an affine network or an “if and only if” theorem.</p></div><div><p class="badge">H5 · no practical win here</p><h3>The cheap router is not cheap enough</h3><p>Only 4 of 9 primary routers keep the test error increase within 0.2 percentage points. All nine run 2.07–3.25× slower than full inference with this implementation.</p></div></div></section><section class="theory"><h2>What survives Fable’s argument?</h2><p>Stochastic depth trains the model to cope with missing computation. That is a useful operational idea. A residual addition alone does not guarantee interchangeable layers: <code>h + (A − I)h = Ah</code> can rotate or completely change the representation.</p><div class="theory-grid"><div><h3>Measure the deleted direction</h3><p>A small residual norm helps only relative to the downstream decision boundary. We test the actual post-ReLU change, its downstream gradient, and norm-matched random directions.</p></div><div><h3>Separate logits from loss</h3><p>Cross-entropy can create interactions even when logits are additive. We measure both spectra and actually evaluate fractional layer gains, rather than treating exact interpolation of binary corners as proof of linear behavior.</p></div><div><h3>Distinguish training and deletion</h3><p>During training, a surviving SD branch is divided by its survival probability. This audit deletes branches at inference while keeping surviving gains at one. Those subnetworks have different scales.</p></div></div><p>These networks taper from 2500 to 500 hidden units. A bypass crops coordinates; it is not an equal-width identity or a clean ODE time step. Removing layers also changes the amount of computation, unlike merely using a coarser discretization of the same time horizon.</p><p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/fable-layerdrop-audit.md">Read the mathematical audit and numerical counterexamples</a> · <a href="https://arxiv.org/abs/1603.09382">Original stochastic-depth paper</a> · <a href="https://arxiv.org/abs/1605.06431">Residual networks as ensembles</a></p></section>
 <details class="audit" open><summary>Complete experimental report, uncertainty and reproducibility</summary><article id="full-report"><h1>What makes a layer droppable? An exact-mask MNIST test of the Fable hypotheses</h1>
 <p><strong>Completed exploratory checkpoint audit, 9 September 2026.</strong> We evaluated every combination of four removable branches in 30 existing checkpoint states, then fitted and froze inexpensive image-based routing policies before opening their test outcomes. No neural networks were retrained for this audit.</p>
 <p>The evidence supports a specific claim: stochastic-depth training can create functional redundancy in these tapered residual MLPs. At the primary, validation-selected checkpoint, decreasing SD reduced deletion-induced cross-entropy by <strong>0.0588 nats</strong> relative to residual-dense training, with a three-seed paired 95% interval of <strong>[−0.1036, −0.0140]</strong>. The higher-order fraction of centered-logit mask interactions fell from <strong>13.31% to 2.33%</strong>. Neither result establishes better full-model accuracy.</p>
 <p>The broader story is less favorable. The apparent advantage of digit 1 over digits 4 and 9 became uncertain after margin adjustment. Direct gradient predictions ranked deletion damage well at selected checkpoints, but their ranking deteriorated at the final checkpoint and the finite-difference directional probes had substantial numerical error. A shallow input router saved nominal MACs, yet exceeded its test error tolerance in five of nine primary cases and ran slower than dense inference. These distinctions matter when translating an appealing geometric explanation into an actual inference policy.</p>
 <h2>Reading the controls</h2>
-<p><strong>All boxes unchecked does not remove the whole network.</strong> Only the four middle affine branches are skipped. The learned feature layer (stem) still maps 784 pixels to 2,500 ReLU features; crop bypasses retain the first 500, and the learned classifier maps them to ten digit scores. This remains a trained one-hidden-layer predictor, using <strong>16.42% of the counted affine work</strong>. Ten percent is the expectation for uniform random guessing, not for this remaining trained network.</p>
+<p><strong>The layer-scope selector now offers all six learned layers or the original four middle branches.</strong> In the original scope, unchecking everything still leaves the learned feature layer (stem) and classifier (head). The stem maps 784 pixels to 2,500 ReLU features; crops retain the first 500, and the classifier produces ten digit scores. This trained shallow predictor uses <strong>16.42% of the counted affine work</strong>. In the extended scope, dropping the stem inserts an untrained zero-padded pixel representation. Dropping the classifier means <strong>no prediction</strong>: coverage and correct outputs fall to zero, while classification accuracy is undefined. Uniform random guessing would average 10%, not zero.</p>
 <p><strong>SD means stochastic depth: randomly skipping whole branches during training.</strong> “Constant SD” uses fixed drop probabilities of <strong>10%, 20%, 30%, 40%</strong>, from the first to last branch. “Decreasing SD” starts at <strong>20%, 40%, 60%, 80%</strong> and reduces them linearly to zero by epoch 100. Its average number of active middle branches therefore <strong>increases from two to four</strong>. Both recipes drop later branches more often; “decreasing” refers to drop probability over training, not to the number of active layers. No recipe that increases dropout over time was tested here.</p>
-<p>The method selector chooses already-trained weights. The checkboxes then choose a fixed <strong>inference mask</strong>, without retraining or random sampling. Retained branches use gain one (no rescaling). A validation-selected checkpoint can occur before the decreasing schedule reaches zero.</p>
+<p>The method selector chooses already-trained weights. <strong>Fixed inference</strong> uses the checked layers for every image. <strong>Random inference</strong> makes checked layers eligible for independent dropout at the slider's probability; unchecked layers always remain. Its scores are exact expectations over single mask draws, not a prediction ensemble. Retained branches use gain one (no rescaling), and neither mode retrains the model. A validation-selected checkpoint can occur before the decreasing training schedule reaches zero.</p>
+<h2>Six-layer inference follow-up: the learned input representation matters</h2>
+<p>The extended explorer adds two switches: the learned feature layer and the classifier. It enumerates <strong>64 settings on the same 30 frozen checkpoint states</strong>, using all 10,000 official test images. No network was trained or checkpoint selected again. Every original four-branch mask is reproduced exactly. This remains exploratory analysis of an already reused test set.</p>
+<p>Six mask bits read <strong>stem → branch 1 → branch 2 → branch 3 → branch 4 → classifier</strong>. <code>111111</code> keeps everything; <code>100001</code> keeps only learned features and the classifier; <code>000001</code> keeps only the classifier; <code>000000</code> abstains. These are displayed bit strings, not conventional most-significant-bit-first binary notation.</p>
+<p>Dropping a layer must specify what replaces it. Removing the stem inserts normalized pixels followed by zeros to reach 2,500 coordinates. Removing a middle branch retains the first coordinates needed by the next layer, followed by ReLU. Removing the classifier emits no digit and exits before any affine computation. Only middle branches were eligible for stochastic depth during training: endpoint deletion tests an untrained intervention.</p>
+<h3>Measured classification outcomes</h3>
+<p>Each entry below is a mean over three training seeds. All four columns retain the classifier, emit a prediction for every image, and therefore have 100% coverage. “Stem removed” retains all four body branches. “Classifier only” passes padded/cropped pixels directly to the saved classifier; it is not a newly trained linear MNIST model.</p>
+<table>
+<thead>
+<tr>
+<th>Training method</th>
+<th>Checkpoint</th>
+<th style="text-align: right;">All 6 layers</th>
+<th style="text-align: right;">Stem removed</th>
+<th style="text-align: right;">All 4 body branches removed</th>
+<th style="text-align: right;">Classifier only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residual, no dropout</td>
+<td>Selected</td>
+<td style="text-align: right;">98.373%</td>
+<td style="text-align: right;">12.373%</td>
+<td style="text-align: right;">93.507%</td>
+<td style="text-align: right;">14.583%</td>
+</tr>
+<tr>
+<td>SD, fixed drop rates</td>
+<td>Selected</td>
+<td style="text-align: right;">97.803%</td>
+<td style="text-align: right;">12.163%</td>
+<td style="text-align: right;">95.370%</td>
+<td style="text-align: right;">14.470%</td>
+</tr>
+<tr>
+<td>SD, drop rates decay to zero</td>
+<td>Selected</td>
+<td style="text-align: right;">97.997%</td>
+<td style="text-align: right;">12.277%</td>
+<td style="text-align: right;">96.323%</td>
+<td style="text-align: right;">13.903%</td>
+</tr>
+<tr>
+<td>Residual + unit dropout</td>
+<td>Selected</td>
+<td style="text-align: right;">98.330%</td>
+<td style="text-align: right;">11.137%</td>
+<td style="text-align: right;">91.173%</td>
+<td style="text-align: right;">15.387%</td>
+</tr>
+<tr>
+<td>Plain MLP</td>
+<td>Selected</td>
+<td style="text-align: right;">97.913%</td>
+<td style="text-align: right;">10.937%</td>
+<td style="text-align: right;">12.373%</td>
+<td style="text-align: right;">16.020%</td>
+</tr>
+<tr>
+<td>Residual, no dropout</td>
+<td>Epoch 100</td>
+<td style="text-align: right;">98.400%</td>
+<td style="text-align: right;">11.970%</td>
+<td style="text-align: right;">93.163%</td>
+<td style="text-align: right;">14.553%</td>
+</tr>
+<tr>
+<td>SD, fixed drop rates</td>
+<td>Epoch 100</td>
+<td style="text-align: right;">98.443%</td>
+<td style="text-align: right;">11.743%</td>
+<td style="text-align: right;">97.310%</td>
+<td style="text-align: right;">14.600%</td>
+</tr>
+<tr>
+<td>SD, drop rates decay to zero</td>
+<td>Epoch 100</td>
+<td style="text-align: right;">98.510%</td>
+<td style="text-align: right;">11.103%</td>
+<td style="text-align: right;">97.460%</td>
+<td style="text-align: right;">13.680%</td>
+</tr>
+<tr>
+<td>Residual + unit dropout</td>
+<td>Epoch 100</td>
+<td style="text-align: right;">98.507%</td>
+<td style="text-align: right;">11.293%</td>
+<td style="text-align: right;">89.007%</td>
+<td style="text-align: right;">16.000%</td>
+</tr>
+<tr>
+<td>Plain MLP</td>
+<td>Epoch 100</td>
+<td style="text-align: right;">98.573%</td>
+<td style="text-align: right;">10.007%</td>
+<td style="text-align: right;">10.983%</td>
+<td style="text-align: right;">16.553%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tolerance to missing middle computation does not imply tolerance to missing learned input features.</strong> In the selected SD checkpoints, dropping all four middle branches retains 95–96% accuracy, while removing the stem alone leaves about 12%. The zero-padded replacement changes the representation drastically. This establishes dependence on the learned stem under this replacement, not a theorem that every possible alternative stem must fail.</p>
+<p>“Classifier only” spans <strong>9.48–20.97%</strong> across the 30 individual checkpoint states. It still processes image-dependent coordinates with learned classifier weights and biases; it is not uniform random guessing. Removing more layers need not lower accuracy monotonically: for some checkpoints, the classifier-only intervention is more accurate than keeping all four branches after removing the stem. Neither intervention preserves useful MNIST quality.</p>
+<h3>What zero means when all layers are dropped</h3>
+<p>With no classifier there are no ten class scores to compare. The policy <strong>abstains</strong>. We report three distinct quantities:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th style="text-align: right;">All layers dropped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Correct-output rate</td>
+<td>Correct predictions / all test inputs</td>
+<td style="text-align: right;">0%</td>
+</tr>
+<tr>
+<td>Prediction coverage</td>
+<td>Inputs receiving any digit prediction / all inputs</td>
+<td style="text-align: right;">0%</td>
+</tr>
+<tr>
+<td>Classification accuracy</td>
+<td>Correct predictions / emitted predictions</td>
+<td style="text-align: right;">Undefined (0/0)</td>
+</tr>
+</tbody>
+</table>
+<p>All 32 settings with the classifier absent implement this same abstention policy. They add no classification measurements and should not be read as 32 independent failures. Cross-entropy is also undefined. A hypothetical network forced to guess a digit after removing all computation would instead have a guess-dependent accuracy; uniform random guessing averages 10%. Forcing the displayed classification accuracy to zero would misdescribe that experiment.</p>
+<h3>Random dropout during inference</h3>
+<p>Choose the layers eligible for dropout and set a shared probability <code>p</code>. Each eligible layer is dropped independently for each input. Ineligible layers stay present. A mask with <code>d</code> dropped and <code>k</code> kept eligible layers has probability <code>p^d (1−p)^k</code>; masks dropping an ineligible layer have probability zero. The page sums the measured outcomes of all masks with these weights. Its plots are <strong>exact expected single-draw scores</strong>, not a Monte Carlo estimate and not an ensemble formed by averaging logits or probabilities. “Draw one random mask” shows one example outcome; changing that draw does not change the aggregate scores.</p>
+<p>If the classifier is eligible, coverage is exactly <code>1−p</code>. Correct-output rate is coverage times accuracy conditional on a prediction. At <code>p=1</code>, coverage and correct outputs are zero and conditional accuracy is undefined. If only the four middle branches are eligible, coverage remains 100% even at <code>p=1</code>: the trained shallow predictor remains. Checking no eligible layers makes the policy identical to full inference at every slider position.</p>
+<p>Surviving branches use gain one. We did not evaluate inverse-survival rescaling at inference. The computed curve is therefore a deletion policy on saved weights, not a replay of the scaled stochastic-depth training network. Expected MAC counts are arithmetic counts only: this follow-up did not measure the overhead or latency of a per-image random-mask implementation.</p>
+<h3>Verification and reproducibility</h3>
+<p>The three successful A100 jobs evaluate 32 classifier-present masks per checkpoint. Every full-mask forward matches the saved model's ordinary forward bitwise. The 16 embedded original masks reproduce all <strong>4.8 million</strong> archived test predictions exactly; labels, dense error indices, checkpoint hashes and dataset hashes also agree. Mean cross-entropy agreement uses the original absolute tolerance of 0.00003. The 1,408 previously selected gallery entries remain unchanged; no new examples were selected based on this follow-up.</p>
+<p>The extended JSON contains 1,920 mask records, including the explicit abstention settings, plus per-digit metrics and frozen-gallery predictions. NPZ sidecars preserve all per-image predictions and losses; abstention uses prediction −1 and undefined loss. These masks and images do not increase the number of independent training seeds.</p>
+<p>The three successful jobs ran in parallel on <strong>A100-SXM4-40GB</strong> GPUs and took approximately <strong>22–34 seconds each</strong> inside the evaluator. An earlier wrapper-import failure was fixed before the evaluator ran, and both attempts' reservations and records are retained. The closing provider meter increased by <strong>$0.08524</strong> for this follow-up, to <strong>$5.08899</strong> in the shared MNIST environment. Both apps were stopped with zero tasks. The conservative shared reservation bound, including the failed attempt, is <strong>$10.42982</strong>, below the original $30 cap and the $24 stop guard. Metering is a provider snapshot, not a final invoice. <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/full-depth/budget-closing.json">Closing cost and shutdown receipt</a>.</p>
+<p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/FULL_DEPTH_PROTOCOL.md">Six-layer protocol</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/full_depth.py">Evaluator</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/full-depth">Frozen specifications and raw results</a> · <a href="https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/hypotheses/extended-data.json">Extended explorer data</a></p>
 <h2>What was tested</h2>
 <p>The <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">frozen protocol</a> specifies five tests: deletion resilience, class differences after margin adjustment, directional sensitivity, mask interactions, and adaptive routing. The starting checkpoints come from the <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/ciresan-stochastic-depth.md">controlled stochastic-depth study</a>, with seeds 101–103. Residual dense, constant SD, and decreasing SD supply the central 18 checkpoint states: three recipes × three seeds × two endpoints. Residual plus unit dropout supplies six secondary states; six plain-MLP states supply a deliberately disruptive surgery diagnostic.</p>
 <p>The <strong>primary endpoint</strong> is the checkpoint selected by validation cross-entropy. Epoch 100 is a separately reported <strong>secondary endpoint</strong>. These are repeated measurements of the same training runs, not six independent seeds. Each interval below uses three seed-level estimates or same-seed differences, Student's t with two degrees of freedom. Masks and test images are not counted as independent model replications. The intervals are descriptive, unadjusted for the many reported comparisons, and can be wide; an interval including zero does not establish equivalence.</p>
-<p>The network has widths 784→2500→2000→1500→1000→500→10 and 11,972,510 parameters. Its four eligible middle transitions have a prefix-crop shortcut followed by ReLU. The learned stem and classifier remain compulsory. Cropping loses coordinates and widths change, so this architecture is not an invertible, equal-dimensional flow. The main models use normalized inputs and linear output logits; original raw-input/ReLU-output fidelity runs are outside this audit.</p>
+<p>The network has widths 784→2500→2000→1500→1000→500→10 and 11,972,510 parameters. Its four eligible middle transitions have a prefix-crop shortcut followed by ReLU. The learned stem and classifier remain compulsory in this original four-branch audit; the separately reported six-layer follow-up removes that restriction. Cropping loses coordinates and widths change, so this architecture is not an invertible, equal-dimensional flow. The main models use normalized inputs and linear output logits; original raw-input/ReLU-output fidelity runs are outside this audit.</p>
 <p>A four-bit integer identifies the retained branches, shallowest first: mask 15 keeps all four and mask 0 removes all four. Retained branches have gain <strong>one at inference</strong>. SD training used inverse-survival gains, so an unscaled deletion network is not exactly the corresponding conditional training network. The primary deletion panel is the six masks retaining exactly two branches: 3, 5, 6, 9, 10, and 12, equally weighted. Half the eligible branches does not mean half the network or half the work.</p>
 <p>Nominal affine MACs are <code>1,965,000 + 5,000,000*b0 + 3,000,000*b1 + 1,500,000*b2 + 500,000*b3</code>, versus 11,965,000 for the full model. The primary panel averages 58.21% of full affine MACs. Biases, ReLU, memory traffic, routing, and indexing are outside that count.</p>
 <p>The official MNIST test set and these seeds were already used in earlier experiments, including <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/ciresan-optimization.md">test-targeted baseline optimization</a>. The original validation set also selected learning rates and checkpoints. The new policy split and frozen choices protect this particular routing comparison from direct test fitting; they cannot make the overall investigation an untouched confirmatory evaluation.</p>
@@ -780,7 +938,7 @@
 <p>Across the nine per-model medians, dense inference takes <strong>4.83 ms</strong>, static masks <strong>3.45 ms</strong>, and image-dependent routing <strong>13.59 ms</strong>. The router is <strong>2.07–3.25× slower</strong> than dense inference on every model. Static masks are <strong>1.19–1.93× faster</strong>, at the accuracy/cost points shown above. These masks were selected using validation; several exceed the empirical 0.2pp error tolerance on test, so speed is not an unconditional quality-preservation claim.</p>
 <p>All nine CPU/GPU routing decisions and all 36 method/checkpoint prediction vectors match the exact-mask functional references. Observed numerical disagreement count is zero. Each raw timing pass is retained. These three repetitions on one assigned GPU do not constitute an independent hardware benchmark or a tuned lower bound on routing overhead. A fused or coarse-bucket router could behave differently; that remains untested.</p>
 <p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypothesis-routing-v1.json">Raw timing run</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/routing-summary.json">Compact timing summary</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/routing_benchmark.py">Timing implementation</a></p>
-<h2>Compute cost and execution</h2>
+<h2>Original four-branch audit: compute cost and execution</h2>
 <table>
 <thead>
 <tr>
@@ -825,4 +983,4 @@ node experiments/ciresan_stochastic_depth/layerdrop_hypotheses/test_page.cjs
 </code></pre>
 <p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">Frozen experimental protocol</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/audit-freeze.json">Pre-audit hashes/specifications</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/policy-manifest.json">Frozen policies</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/analysis.json">Full analysis</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/independent-check.json">Independent verification</a></p>
 <p><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/research/fable-layerdrop-audit.md">Fable’s argument: mathematical audit</a> · <a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/results/hypotheses/theory-counterexamples.json">Executed counterexamples</a></p></article></details>
-<footer><a href="report.md">Download experimental report</a><a href="data.json">Explorer data</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/hypotheses">Raw predictions, policies &amp; audit results</a><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">Frozen protocol</a></footer></main></body></html>
+<footer><a href="report.md">Download experimental report</a><a href="data.json">Original explorer data</a><a href="extended-data.json">64-mask inference data</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/full-depth">Six-layer audit records</a><a href="https://github.com/yaroslavvb/gradient-dissent/tree/main/experiments/ciresan_stochastic_depth/results/hypotheses">Raw predictions, policies &amp; audit results</a><a href="https://github.com/yaroslavvb/gradient-dissent/blob/main/experiments/ciresan_stochastic_depth/layerdrop_hypotheses/PROTOCOL.md">Frozen protocol</a></footer></main></body></html>

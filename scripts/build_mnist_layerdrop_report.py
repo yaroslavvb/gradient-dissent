@@ -5,6 +5,7 @@ import json
 import statistics
 from datetime import datetime, timezone
 import markdown
+from build_mnist_full_depth_data import build as build_extended_data
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'docs/ciresan-stochastic-depth/hypotheses'
@@ -13,6 +14,11 @@ GIT='https://github.com/yaroslavvb/gradient-dissent/blob/main/'
 EXP=GIT+'experiments/ciresan_stochastic_depth/'
 
 def main():
+    extended=build_extended_data()
+    encoded=json.dumps(extended,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+    OUT.mkdir(parents=True,exist_ok=True)
+    (OUT/'extended-data.json').write_text(encoded+'\n')
+    (OUT/'extended-data.js').write_text('window.HYPOTHESIS_EXTENDED = '+encoded+';\n')
     analysis=json.loads((RAW/'analysis.json').read_text())
     assert analysis['verification']['passed'] and analysis['verification']['state_count']==30
     timing=json.loads((RAW/'routing-summary.json').read_text())
@@ -21,6 +27,8 @@ def main():
     ledger=json.loads((RAW.parent/'budget-ledger.json').read_text())
     assert ledger['reserved_upper_usd']<24
     source=(ROOT/'research/mnist-layerdrop-hypotheses.md').read_text()
+    extension=(ROOT/'research/mnist-full-depth-inference.md').read_text()
+    source=source.replace('## What was tested', extension+'\n\n## What was tested', 1)
     extra=['','## Measured A100 latency: static masks win this implementation','',
            'The nine primary selected-checkpoint models were timed on one **NVIDIA A100-SXM4-40GB**, using PyTorch 2.14.0+cu130, CUDA 13.0, FP32 tensors with TF32-enabled `high` matmul precision. The full 10,000-image test set is already on the GPU. Batch size is 2,048; every method receives two warmup batches, then three synchronized whole-test passes in rotating order. The table uses the median of all three passes, in **milliseconds per 10,000 images**. It is throughput timing, not single-image or cold-start latency.','',
            'The input-dependent implementation includes average pooling, the decision tree, sorting, GPU-to-CPU mask counts, per-group gathers, genuine skipped affine calls and output scattering. The random comparator includes grouping but has preassigned masks. Checkpoint loading, initial host-to-device data transfer, fitting/calibration and verification are outside these inference timers. No compilation or graph-capture cost is hidden.','',
@@ -33,7 +41,7 @@ def main():
     extra+=['',f"Across the nine per-model medians, dense inference takes **{med['dense']:.2f} ms**, static masks **{med['static']:.2f} ms**, and image-dependent routing **{med['routed']:.2f} ms**. The router is **{slow[0]:.2f}–{slow[1]:.2f}× slower** than dense inference on every model. Static masks are **{speed[0]:.2f}–{speed[1]:.2f}× faster**, at the accuracy/cost points shown above. These masks were selected using validation; several exceed the empirical 0.2pp error tolerance on test, so speed is not an unconditional quality-preservation claim.",'',
            'All nine CPU/GPU routing decisions and all 36 method/checkpoint prediction vectors match the exact-mask functional references. Observed numerical disagreement count is zero. Each raw timing pass is retained. These three repetitions on one assigned GPU do not constitute an independent hardware benchmark or a tuned lower bound on routing overhead. A fused or coarse-bucket router could behave differently; that remains untested.','',
            f"[Raw timing run]({EXP}results/hypothesis-routing-v1.json) · [Compact timing summary]({EXP}results/hypotheses/routing-summary.json) · [Timing implementation]({EXP}layerdrop_hypotheses/routing_benchmark.py)",'',
-           '## Compute cost and execution','']
+           '## Original four-branch audit: compute cost and execution','']
     jobs=[json.loads((RAW.parent/f'hypothesis-audit-s{s}-v1.json').read_text()) for s in (101,102,103)]
     extra+=['| Audit seed | GPU | Function execution seconds | Dispatch to result seconds |','|---|---|---:|---:|']
     for j in jobs:
@@ -58,8 +66,8 @@ def main():
     page=template.replace('<!-- FINDINGS -->',findings).replace('<!-- VERDICTS -->',verdicts).replace('<!-- REPORT -->',markdown.markdown(report,extensions=['tables','fenced_code']))
     (OUT/'index.html').write_text(page)
     manifest={'generated_utc':datetime.now(timezone.utc).isoformat(),'policy_manifest_sha256':analysis['verification']['policy_manifest_sha256'],
-              'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'research/mnist-layerdrop-hypotheses.md',RAW/'analysis.json',RAW/'routing-summary.json',RAW/'billing-latest.json']},
-              'outputs':{name:hashlib.sha256((OUT/name).read_bytes()).hexdigest() for name in ['index.html','report.md','data.json','data.js','app.js','style.css']}}
+              'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'research/mnist-layerdrop-hypotheses.md',ROOT/'research/mnist-full-depth-inference.md',ROOT/'scripts/build_mnist_full_depth_data.py',RAW/'analysis.json',RAW/'routing-summary.json',RAW/'billing-latest.json',RAW.parent/'full-depth/budget-closing.json',RAW.parent/'full-depth/independent-verification.json']},
+              'outputs':{name:hashlib.sha256((OUT/name).read_bytes()).hexdigest() for name in ['index.html','report.md','data.json','data.js','app.js','style.css','extended-data.json','extended-data.js','full-depth.js']}}
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('Built MNIST layer-drop report from verified frozen results.')
 
