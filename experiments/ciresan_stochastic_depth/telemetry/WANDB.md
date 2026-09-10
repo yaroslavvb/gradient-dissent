@@ -50,10 +50,10 @@ python -m unittest experiments.ciresan_stochastic_depth.telemetry.test_wandb_exp
 
 `upload_wandb.py` prepares `results/telemetry/wandb-upload-manifest.json`, an 18-entry registry whose `verified_wandb_url` fields start as null. It also copies frozen validation-selected and final test endpoints, target-reaching timestamps where available, and measured training/run/telemetry times into an explicit scientific summary. These additions do not change the existing history hashes or content-derived IDs. There is no new checkpoint or hyperparameter selection.
 
-After the user has authenticated locally, the upload command is:
+The repository-root uv environment now includes W&B. Restore it with `uv sync --locked`, then authenticate locally with `uv run wandb login --cloud --verify`. After authentication, the upload command is:
 
 ```sh
-experiments/.venv/bin/python experiments/ciresan_stochastic_depth/telemetry/upload_wandb.py --upload
+uv run python experiments/ciresan_stochastic_depth/telemetry/upload_wandb.py --upload
 ```
 
 The driver verifies existing runs before writing. A complete matching run is reused; a conflicting run is refused; an active partial run is left alone. A non-active partial run can resume only after its config and contiguous metric/clock prefix match the exact source. Each worker has a 180-second wall limit and each source gets at most three attempts per invocation. Uncertain writes are read back under the same ID before retries. An interrupted driver lock requires inspection of the process before removal; do not run competing upload drivers.

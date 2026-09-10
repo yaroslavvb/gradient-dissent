@@ -33,6 +33,25 @@ Local exact enumeration confirms the shared-mask counterexample. A CPU execution
 - `experiments/`: scripts, pinned dependencies, raw CSV/JSON, uncertainty estimates, and verification records.
 - `scripts/`: paper fetch, static report build, math rendering, and report checks.
 
+## Python environment and W&B login
+
+The repository-root uv environment includes W&B, PyTorch, Modal, NumPy, SciPy, scikit-learn, Markdown, and Matplotlib for the Ciresan experiments and reports. Python 3.14 is selected by `.python-version`; `uv.lock` fixes the dependency versions. Create or restore `.venv` from the repository root with:
+
+```bash
+uv sync --locked
+uv run wandb login --cloud --verify
+```
+
+Alternatively, activate it with `source .venv/bin/activate`, then run `wandb login --cloud --verify`. Enter your credentials in the local login prompt. The environment directory is ignored by Git; its configuration and lockfile are tracked. The remote A100 images retain their separately pinned Python/CUDA dependencies.
+
+After login, upload the completed Ciresan results with:
+
+```bash
+uv run python experiments/ciresan_stochastic_depth/telemetry/upload_wandb.py --upload
+```
+
+This imports saved metrics and verifies the run links without launching training. See the [W&B export guide](experiments/ciresan_stochastic_depth/telemetry/WANDB.md) for provenance and timing semantics.
+
 ## Build and view
 
 ```bash
