@@ -26,7 +26,8 @@
     "check:halfdrop": "node experiments/ciresan_stochastic_depth/halfdrop/test_page.cjs",
     "build:browser": "python3 scripts/build_browser_lab.py",
     "check:browser": "node scripts/browser-lab/test-engine.mjs && node scripts/browser-lab/test-dataset.cjs && node scripts/browser-lab/test-page.cjs",
-    "check:browser:gpu": "node scripts/browser-lab/test-engine.mjs --gpu && node scripts/browser-lab/test-worker.mjs"
+    "check:browser:gpu": "node scripts/browser-lab/test-engine.mjs --gpu && node scripts/browser-lab/test-worker.mjs",
+    "check:slides": "node --check docs/slides/app.js && node scripts/check_slides.cjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1",

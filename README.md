@@ -4,6 +4,7 @@ An in-depth, critical review of **Don't Drop Dropout: Optimizing Layer Sparsity 
 
 - [Interactive report and 16-chapter slide view](https://yaroslavvb.github.io/gradient-dissent/)
 - [How layer dropout works](https://yaroslavvb.github.io/gradient-dissent/dropout-animation/): animated per-sequence paths, shared attention/FFN masks, inverse-survival scaling, depth/time scheduling, and fixed inference modes.
+- [Interactive slides: the talk](https://yaroslavvb.github.io/gradient-dissent/slides/): thirteen slides walking the paper end to end — background, the four knobs (1/p scaling, per-sequence masks, depth distribution at matched FLOPs, decreasing schedule), elastic depth, the hero runs, the recipe, and the caveats — with live charts computed from the paper's formulas and its Table 5 numbers.
 - [Stochastic depth after 2016](https://yaroslavvb.github.io/gradient-dissent/stochastic-depth-history/): the original authors, successful vision/speech applications, language-model descendants, and a critical novelty comparison with the new paper.
 - [Ciresan-width MNIST on A100](https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/optimization/): 98.63% in all three confirmation runs, median 5.61 seconds of training and 15.59 seconds from invocation to score; kernel-only acceleration, explicit recipe changes, and all failed attempts.
 - [Practical Ciresan conclusions](https://yaroslavvb.github.io/gradient-dissent/ciresan-stochastic-depth/conclusions/): tested stochastic-depth recipes, deletion robustness, digit effects, and all 18 verified [W&B runs](https://wandb.ai/yaroslavvb/gradient-dissent); [curated W&B plots](https://wandb.ai/yaroslavvb/gradient-dissent/reports/Ciresan-MNIST:-measured-training-curves-·-2026-09-09--VmlldzoxNzkwNDAzNA==).
@@ -78,6 +79,8 @@ Review date: 9 September 2026. The full 27-page PDF, including appendices, was r
 Reported paper values, independent derivations, synthetic simulations, and measured toy results are labeled separately. The repository includes original plots and analysis, not redistributed paper figures. Vendored KaTeX assets retain their MIT license. Reproducing timing will yield different numbers on different machines; the saved run includes exact environment metadata.
 
 The significance overview uses the verified saved A100 summary: `npm run build:significance` and `npm run check:significance`. It performs no training.
+
+The slide deck is authored in `docs/slides/` (`index.html`, `style.css`, `app.js`; no build step). Run `npm run check:slides` to verify the formulas (matched-mean distributions, recipe average p_max/4, 1/p scaling, weight-read fractions), navigation, every control, and local links.
 
 The standalone dropout animation is authored in `docs/dropout-animation/`. Run `npm run check:dropout` to check the exact schedule, sampling/scaling, inference settings, and interactive controls. Its four sequences and twelve blocks are schematic; it performs no training or paid calls.
 

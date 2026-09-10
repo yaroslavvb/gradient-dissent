@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Interactive slides on Don't Drop Dropout (Cerebras, arXiv:2609.05275): the four layer-dropout knobs, elastic depth, the hero runs, the recipe, and the caveats.">
+  <meta name="color-scheme" content="light dark">
+  <title>Don't Drop Dropout · slides · Gradient dissent</title>
+  <link rel="stylesheet" href="style.css"><script defer src="app.js"></script>
+</head>
+<body>
+<a class="sr-only" href="#deck">Skip to slides</a>
+<header><a class="brand" href="../">GRADIENT DISSENT <span>/ SLIDES</span></a><nav aria-label="Deck actions"><a href="../dropout-animation/">How dropout works</a><a href="../">Full review</a><a href="https://arxiv.org/abs/2609.05275">arXiv ↗</a><button id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button></nav></header>
+<div id="progress" role="presentation"></div>
+<nav id="toc" hidden aria-label="Slide list"><ol id="toc-list"></ol></nav>
+
+<main id="deck" aria-live="polite">
+
+<section class="slide title" data-title="Title">
+  <p class="eyebrow">Cerebras · arXiv:2609.05275 · posted week 36, 2026 · nine authors</p>
+  <h1>Don't Drop<br>Dropout.</h1>
+  <p class="lead">Randomly skipping whole transformer blocks during pre-training should come back into language-model recipes: configured right, it saves up to a quarter of training compute at similar loss and leaves a model that can run with fewer layers at inference.</p>
+  <div class="byline"><div><strong>Mostafa Elhoushi</strong><span>first author · also first author of LayerSkip (2024)</span></div><div><strong>Joel Hestness</strong><span>senior author · Cerebras</span></div></div>
+  <p class="hint">→ / space / swipe to advance · <kbd>o</kbd> for contents · <kbd>f</kbd> fullscreen. Every chart is computed live from the paper's stated formulas; charts marked <em>schematic</em> show shape, not the paper's data.</p>
+</section>
+
+<section class="slide" data-title="Background">
+  <p class="eyebrow">Background</p>
+  <h2>Stochastic depth, 2016: skip a block, let the residual carry the stream.</h2>
+  <div class="split">
+    <div>
+      <p>During training each residual block is skipped at random with some probability; the residual connection passes the stream through untouched. At inference, every block runs.</p>
+      <p>Two things make this interesting for language models:</p>
+      <ol class="checks">
+        <li><strong>Structured sparsity.</strong> Unlike neuron-level dropout, skipping a block removes real compute instead of zeroing numbers inside a dense kernel.</li>
+        <li><strong>No block is load-bearing.</strong> A model trained with blocks randomly missing learns not to depend on any single one — exactly what early exit, layer skipping and self-speculative decoding need.</li>
+      </ol>
+      <p class="muted small">Dropout of all kinds left pre-training recipes because single-epoch training on huge data doesn't overfit and activation dropout hurt. The authors' thesis: layer dropout was thrown out with it, and the reported degradations came from bad configurations, not anything fundamental.</p>
+    </div>
+    <figure class="figure">
+      <svg id="block-figure" viewBox="0 0 420 250" role="img" aria-labelledby="block-title"><title id="block-title">One residual block: kept or skipped</title></svg>
+      <div class="row"><button id="block-sample" class="primary">↻ Sample this block</button><span id="block-status" class="small"></span></div>
+      <figcaption>Press sample: with drop probability 40% the branch either runs (scaled by 1/0.6) or the identity carries the stream.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Setup">
+  <p class="eyebrow">The setup</p>
+  <h2>~2,400 runs on CS-3 systems, four knobs.</h2>
+  <div class="stats"><div class="stat"><strong>271M → 8.2B</strong><span>decoder-only transformers, Cerebras's Celerity family</span></div><div class="stat"><strong>20 TPP</strong><span>tokens per parameter for most runs — the compute-optimal ratio</span></div><div class="stat"><strong>~2,400</strong><span>training runs, most of them small hyperparameter sweeps</span></div></div>
+  <div class="knobs">
+    <a href="#/4"><span>01</span><strong>Scaling factor</strong>how a surviving block is rescaled</a>
+    <a href="#/5"><span>02</span><strong>Granularity</strong>whole block or sub-block; per batch or per sequence</a>
+    <a href="#/6"><span>03</span><strong>Distribution across depth</strong>which layers get dropped how often</a>
+    <a href="#/7"><span>04</span><strong>Schedule over time</strong>how the rate changes through training</a>
+  </div>
+</section>
+
+<section class="slide" data-title="Knob 1 · scaling">
+  <p class="eyebrow">Knob 1 · the scaling factor</p>
+  <h2>Scale a surviving block by 1 / keep-probability — because that is what CompleteP already says.</h2>
+  <div class="split wide-left">
+    <div>
+      <p>When a block survives, its output can be scaled up to compensate for the times it is absent, and codebases disagree on how. The paper's first finding: <strong>1/p is the right choice</strong>. CompleteP scales each residual branch by 1/depth; a model with dropout has a smaller <em>effective</em> depth, so scaling surviving branches by 1/p keeps residual-stream updates the right size.</p>
+      <p class="result">Payoff: the optimal learning rate, batch size and weight decay stay put across dropout rates — tune once, transfer. Verified with coordinate checks and sweeps on the smallest model.</p>
+      <div class="controls"><div class="control"><label for="keep">Keep probability p<output id="keep-value">0.60</output></label><input type="range" id="keep" min="10" max="100" value="60"></div><div class="control"><label for="depth">Layers L<output id="depth-value">32</output></label><input type="range" id="depth" min="8" max="64" value="32" step="4"></div></div>
+      <div class="formula" id="scale-formula"></div>
+    </div>
+    <figure class="figure"><svg id="scale-chart" viewBox="0 0 460 280" role="img" aria-labelledby="scale-title"><title id="scale-title">Effective depth and survivor scale against keep probability</title></svg><figcaption>Effective depth p·L shrinks linearly; the survivor scale 1/p grows so that the residual update size stays where CompleteP put it. Computed, not measured.</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Knob 2 · granularity">
+  <p class="eyebrow">Knob 2 · granularity</p>
+  <h2>Drop whole blocks, and decide per sequence — not per batch.</h2>
+  <div class="split">
+    <div>
+      <p><strong>Whole block vs sub-block.</strong> Dropping attention and feed-forward together beats dropping them independently in their tables — by a few thousandths of a nat.</p>
+      <p><strong>Per sequence vs per batch.</strong> Per sequence is clearly better: <span class="result">2–5 percentage points of loss</span> at the same rate. Per batch means an entire step either has the layer or doesn't, which is very noisy. The two classic implementations — the original stochastic-depth code and fairseq's LayerDrop — are per batch, so this alone may explain some of the old bad results.</p>
+      <div class="controls"><div class="control seg-control"><label>Mask granularity</label><div class="seg" role="group" aria-label="Mask granularity"><button data-gran="sequence" aria-pressed="true">Per sequence</button><button data-gran="batch" aria-pressed="false">Per batch</button></div></div><div class="control"><label for="gran-rate">Drop rate<output id="gran-rate-value">30%</output></label><input type="range" id="gran-rate" min="0" max="80" value="30"></div><div class="control"><button id="gran-sample">↻ New step</button></div></div>
+      <p class="small" id="gran-summary"></p>
+    </div>
+    <figure class="figure"><svg id="gran-chart" viewBox="0 0 460 300" role="img" aria-labelledby="gran-title"><title id="gran-title">Which of eight sequences run which of twelve blocks in one training step</title></svg><figcaption>One training step, eight sequences × twelve blocks. Filled = block runs, hollow = identity bypass. The last column is the active depth each sequence saw. Sampled masks, not a trained model.</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Knob 3 · depth">
+  <p class="eyebrow">Knob 3 · distribution across depth</p>
+  <h2>At equal FLOPs, non-uniform beats uniform; protect the early layers.</h2>
+  <div class="split">
+    <div>
+      <p>Three shapes: <strong>uniform</strong>, the same rate everywhere; <strong>increasing</strong>, from zero at the first layer linearly up to a maximum at the last; <strong>alternating</strong>, where only every other layer is ever dropped.</p>
+      <p>Compared at equal FLOPs savings, non-uniform wins. Alternating is best at the smallest size, increasing is best at the larger sizes, and they recommend increasing as models scale. Increasing is in fact the 2016 default: lean on the late layers.</p>
+      <div class="controls"><div class="control"><label for="savings">Block-FLOPs saved (matched across shapes)<output id="savings-value">20%</output></label><input type="range" id="savings" min="0" max="45" value="20"></div><div class="control"><label for="dist-depth">Layers<output id="dist-depth-value">16</output></label><input type="range" id="dist-depth" min="8" max="32" value="16" step="2"></div></div>
+      <p class="small" id="dist-summary"></p>
+    </div>
+    <figure class="figure"><svg id="dist-chart" viewBox="0 0 460 300" role="img" aria-labelledby="dist-title"><title id="dist-title">Per-layer drop probability for uniform, increasing and alternating distributions at matched mean</title></svg><figcaption>Per-layer drop probability; each shape has the same mean, i.e. the same expected block-FLOPs saved. Hover a bar for its value.</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Knob 4 · time">
+  <p class="eyebrow">Knob 4 · schedule over time — the headline</p>
+  <h2>Decrease the rate to zero over training. Increasing it was backwards.</h2>
+  <div class="split">
+    <div>
+      <p>Constant, increasing from zero, or decreasing from the maximum to zero by the end. <strong>Decreasing wins at every size</strong> and increasing is clearly worst: at 20% savings, increasing costs <span class="caution">6–7% loss</span> versus <span class="result">1.5–3% for decreasing</span>.</p>
+      <p>Increasing across depth + decreasing across time, at 5% savings, puts the 900M model <strong>0.002 nats below</strong> the dense baseline — which they call the first time anyone has beaten dense with fewer training FLOPs.</p>
+      <p class="muted small">Their reading: a decreasing schedule is <em>stochastic model growing</em>, a curriculum — the network starts at a fraction of its effective depth and grows into it. Note the reversal: LayerSkip (same first author) and Progressive Layer Dropping before it both <em>increased</em> dropout over time.</p>
+      <div class="controls"><div class="control seg-control"><label>Schedule</label><div class="seg" role="group" aria-label="Schedule over time"><button data-sched="constant" aria-pressed="false">Constant</button><button data-sched="increasing" aria-pressed="false">Increasing</button><button data-sched="decreasing" aria-pressed="true">Decreasing</button></div></div><div class="control"><label for="pmax"><span>Maximum rate p<sub>max</sub></span><output id="pmax-value">0.80</output></label><input type="range" id="pmax" min="0" max="99" value="80"></div><div class="control"><label for="progress-t">Training progress<output id="progress-t-value">0%</output></label><input type="range" id="progress-t" min="0" max="100" value="0"></div></div>
+      <p class="small" id="sched-summary"></p>
+    </div>
+    <figure class="figure"><svg id="sched-chart" viewBox="0 0 460 330" role="img" aria-labelledby="sched-title"><title id="sched-title">Drop rate of the last layer over training, and the depth-by-time grid of the recipe</title></svg><figcaption>Top: the last layer's drop rate through training for the chosen schedule. Bottom: the depth × time grid under the recipe (increasing in depth × chosen schedule); darker = dropped more often. The marker is the current progress.</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Elastic depth">
+  <p class="eyebrow">Inference · “elastic depth”</p>
+  <h2>A dense model breaks the moment one layer is missing. A dropout-trained model bends.</h2>
+  <div class="split">
+    <div>
+      <ul class="bullets">
+        <li><strong>Static early exit</strong> (first layers, then the unembedding): dense loss blows up after a single dropped layer; dropout-trained models degrade gradually, higher rates giving flatter curves.</li>
+        <li><strong>Interior skipping</strong>: alternating is the best distribution; increasing is best for early exit — so the two benefits trade off.</li>
+        <li><strong>Frozen model + small early-exit adapters</strong> (Balcony-style): dropout-trained models start ahead and stay ahead.</li>
+        <li><strong>Self-speculative decoding</strong> — a subset of the model's own layers drafts, the full model verifies: 1.2–1.4× at the small sizes, where dense gets essentially nothing, because in a dense model no cheap subset is a good drafter.</li>
+      </ul>
+    </div>
+    <figure class="figure"><svg id="elastic-chart" viewBox="0 0 460 320" role="img" aria-labelledby="elastic-title"><title id="elastic-title">Measured losses at reduced depth for the 3.9B and 8.2B models</title></svg><figcaption><strong>Measured</strong> (Table 5): validation loss at full depth versus with layers removed, dense against dropout-trained. Hover a bar for the number.</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Hero runs">
+  <p class="eyebrow">Scaling · the hero runs</p>
+  <h2>Rates far beyond anything used before — the last layer skipped 80–99% of the time at the start.</h2>
+  <div class="split wide-left">
+    <div class="table-wrap"><table id="hero-table"><thead><tr><th>Model</th><th class="num">p<sub>max</sub></th><th class="num">Block FLOPs saved</th><th class="num">Dense loss</th><th class="num">Dropout loss</th><th>Verdict</th></tr></thead><tbody>
+      <tr><td>1.8B</td><td class="num">0.60</td><td class="num">15%</td><td class="num">1.849</td><td class="num">1.836</td><td class="good">slightly better than dense</td></tr>
+      <tr><td>3.9B</td><td class="num">0.80</td><td class="num">20%</td><td class="num">1.732</td><td class="num">1.745</td><td class="bad">slightly worse, ~0.75%</td></tr>
+      <tr><td>8.2B</td><td class="num">0.99</td><td class="num">25%</td><td class="num muted">— none</td><td class="num">1.663</td><td class="caution">no dense baseline at all</td></tr>
+    </tbody></table>
+    <p class="small">All three: increasing across depth, decreasing across time, 20 TPP. On the 500M model a tokens-per-parameter sweep from 2 to 64 finds the dropout–dense gap shrinks as data grows. Self-speculative decoding: <strong>1.54×</strong> for the 3.9B dropout model vs 1.02× dense; <strong>1.55×</strong> for 8.2B.</p></div>
+    <div>
+      <div class="controls"><div class="control"><label for="hero-pmax"><span>Try a p<sub>max</sub></span><output id="hero-pmax-value">0.99</output></label><input type="range" id="hero-pmax" min="0" max="99" value="99"></div></div>
+      <div class="stats two"><div class="stat"><strong id="hero-last">99%</strong><span>of sequences skip the last layer at step 0</span></div><div class="stat"><strong id="hero-saved">24.75%</strong><span>average block FLOPs saved over the run (p<sub>max</sub>/4 under the recipe)</span></div></div>
+      <p class="small" id="hero-note"></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-title="The recipe">
+  <p class="eyebrow">The recipe</p>
+  <h2>Five settings.</h2>
+  <ol class="checks big">
+    <li><strong>Scale surviving blocks by 1 / keep-probability.</strong> It matches CompleteP, so learning rate, batch size and weight decay transfer across rates.</li>
+    <li><strong>Drop whole blocks</strong> — attention and feed-forward together.</li>
+    <li><strong>Decide per sequence</strong>, never per batch.</li>
+    <li><strong>Rate increasing linearly with depth</strong>: zero at the first layer, maximum at the last.</li>
+    <li><strong>Rate decreasing linearly to zero over training</strong>, with larger maximum rates for larger models — 0.6 at 1.8B, 0.8 at 3.9B, 0.99 at 8.2B.</li>
+  </ol>
+</section>
+
+<section class="slide" data-title="Caveats · noise">
+  <p class="eyebrow">Caveats, quickly · 1 of 2</p>
+  <h2>No seeds, no error bars, anywhere.</h2>
+  <div class="split wide-left">
+    <div class="table-wrap"><table class="compact" id="noise-table"><thead><tr><th>Result</th><th class="num">Size of the effect</th><th>Runs per cell</th><th>Survives seed noise?</th></tr></thead><tbody>
+      <tr><td>Per sequence beats per batch</td><td class="num">2–5% loss</td><td>1</td><td class="good">yes — large</td></tr>
+      <tr><td>Decreasing beats increasing schedule</td><td class="num">~4 pts of loss at 20% savings</td><td>1</td><td class="good">yes — large</td></tr>
+      <tr><td>Whole block beats sub-block</td><td class="num">a few mnats</td><td>1</td><td class="bad">unproven</td></tr>
+      <tr><td>Non-uniform beats uniform in depth</td><td class="num">2–10 mnats</td><td>1</td><td class="bad">unproven</td></tr>
+      <tr><td>Beats the dense baseline</td><td class="num">2 mnats (900M); worse at 500M</td><td>1</td><td class="bad">unproven, and overstated</td></tr>
+    </tbody></table></div>
+    <div>
+      <p>The whole-block result, the distribution result and the beat-the-baseline result all rest on gaps of 2–10 thousandths of a nat at one run each — seed noise at these sizes.</p>
+      <p>The “first time” claim is wrong historically: the original stochastic-depth abstract already claimed better accuracy in less time. And their own table shows the 500M dropout model a hair <em>worse</em> than dense.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-title="Caveats · accounting">
+  <p class="eyebrow">Caveats, quickly · 2 of 2</p>
+  <h2>What “25% faster” is counting.</h2>
+  <div class="split">
+    <ul class="bullets">
+      <li><strong>The 8.2B run has no dense baseline</strong>, so the headline “25% at preserved accuracy” is asserted, not shown.</li>
+      <li><strong>The loss-vs-FLOPs figure</strong> compares a finished dropout run against an <em>unfinished</em> dense run whose learning rate hasn't decayed. The fair comparison is a separate shorter dense run or a shallower dense model; they do neither.</li>
+      <li><strong>FLOPs, never wall clock</strong> — and non-embedding FLOPs at that; at the smallest size most parameters are embedding matrices for a 128k-token vocabulary.</li>
+      <li><strong>The decreasing schedule is early dropout</strong> — the 2023 “Dropout Reduces Underfitting” idea applied to layers — and it isn't cited. Since they call it stochastic model growing, the missing baseline is <em>deterministic</em> growing: train shallow, then stack.</li>
+      <li>The abstract and introduction disagree on model range and token count; the train-loss percentages in their first table don't match their own numbers.</li>
+    </ul>
+    <figure class="figure"><svg id="bytes-chart" viewBox="0 0 460 260" role="img" aria-labelledby="bytes-title"><title id="bytes-title">Fraction of a layer's weights read per step: FLOPs versus bytes</title></svg>
+      <div class="controls"><div class="control"><label for="bytes-rate">Drop rate of this layer<output id="bytes-rate-value">50%</output></label><input type="range" id="bytes-rate" min="0" max="95" value="50"></div><div class="control"><label for="bytes-seqs">Sequences per step<output id="bytes-seqs-value">8</output></label><input type="range" id="bytes-seqs" min="1" max="64" value="8"></div></div>
+      <figcaption id="bytes-caption">For our purposes the accounting is FLOPs, not bytes moved: the preferred per-sequence variant still streams every layer's weights every step, because a layer is read whenever <em>any</em> sequence keeps it.</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" data-title="Verdict">
+  <p class="eyebrow">Verdict</p>
+  <h2>What's durable, and what isn't.</h2>
+  <div class="split">
+    <div class="verdict good"><p class="tag measured">Durable</p><ul class="bullets"><li>A principled scaling rule (1/p, from CompleteP) that makes hyperparameters transfer across dropout rates.</li><li>Per sequence beats per batch.</li><li>Increasing-in-time schedules are bad; decreasing ones are good.</li><li>A multi-billion-parameter model can train with its last layer active 1% of the time and still work.</li></ul></div>
+    <div class="verdict warn"><p class="tag critique">Not established</p><ul class="bullets"><li>That dropout beats dense at equal compute.</li><li>That the elasticity is more than <em>not collapsing</em>: a 3.9B model with half its layers skipped (loss 2.13) scores about like a 500M dense model.</li><li>Anything about wall clock or energy: the whole accounting is FLOPs. The per-sequence variant they prefer streams every layer's weights every step.</li></ul></div>
+  </div>
+  <div class="linkrow"><a href="../">Full critical review →</a><a href="../dropout-animation/">Animated per-sequence paths →</a><a href="../stochastic-depth-history/">Stochastic depth since 2016 →</a><a href="https://arxiv.org/pdf/2609.05275v1">Paper PDF ↗</a></div>
+</section>
+
+</main>
+<div class="deck-controls"><button id="prev-slide" aria-label="Previous slide">← Prev</button><span id="slide-counter">1 / 14</span><button id="next-slide" aria-label="Next slide">Next →</button></div>
+<div id="tooltip" role="tooltip" hidden></div>
+</body>
+</html>
